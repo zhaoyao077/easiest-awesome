@@ -1,0 +1,2906 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+/* roboto-300 - latin */
+/* roboto-300italic - latin */
+/* roboto-regular - latin */
+/* roboto-italic - latin */
+/* roboto-500 - latin */
+/* roboto-500italic - latin */
+/* roboto-700 - latin */
+/* roboto-700italic - latin */
+/* roboto-900 - latin */
+/* roboto-900italic - latin */
+/* sorucecodepro-400 - latin */
+@font-face {
+     font-family: 'Source Code Pro';
+     font-style: normal;
+     font-weight: 400;
+     src: local('Source Code Pro'), local('SourceCodePro-Regular'),
+     url('file:///C://Users//ARmi//AppData//Roaming//Typora/themes/gitbook/SourceCodePro-Regular.ttf') format('truetype');
+}@import "";
+
+/*by 16soundsofsilence, yes this code is an absolute mess*/
+
+:root {
+    --bg-color: white;
+    --side-bar-bg-color: #f5f7f9;
+    --control-text-color: #3b454e;
+    --primary-color: #3884ff;
+    --primary-btn-border-color: #3884ff;
+    --active-file-bg-color: #e6ecf1;
+    --active-file-text-color: inherit;
+    --active-file-border-color: #3884ff;
+    --item-hover-text-color: #242a31;
+    --item-hover-bg-color: #f5f7f9;
+    --window-border: 1px solid #e6ecf1;
+    --select-text-font-color: white;
+    --select-text-bg-color: #1968e6;
+
+    --md-char-color: #9daab6;
+    --heading-char-color: #9daab6;
+    --meta-content-color: #3884ff;
+
+    --borders: #e6ecf1;
+    --table-border-color: #e6ecf1;
+    --boxes: #f5f7f9;
+    --boxes-darker: #d8e0e7;
+    --boxes-darker2: #bac2c9;
+    --boxes-darkest: #9daab6;
+    --drag-placeholder-color: #d8e0e7;
+
+    --text-color: #3b454e;
+    --heading-text-color: #242a31;
+    --light-text-color: #9daab6;
+    --light-text-color-darker: #74818d;
+    --codeboxes: #183055;
+    --codeboxes-lighter: #1c375f;
+    --rawblock-edit-panel-bd: transparent;
+
+    --primary-color-darkest: #001f50;
+    --primary-color-darker2: #00307c;
+    --primary-color-darker: #1968e6;
+    --focus-ring-color: #3884ff;
+
+    --danger-color: rgb(255, 70, 66);
+
+    --node-fill: #ececff;
+    --node-border: #ccccff;
+    --cluster-fill: #ffffde;
+    --cluster-border: #aaaa33;
+    --note-fill: #fff5ad;
+    --note-border: #aaaa33;
+
+    /*****************************/
+
+    --font-family: "Roboto", sans-serif;
+    --code-font-family: "Source Code Pro";
+    --monospace: "Source Code Pro";
+}
+
+html,
+.form-control,
+.modal {
+    font-size: 16px;
+}
+
+kbd {
+    font-family: var(--font-family);
+}
+
+body {
+    background: var(--bg-color);
+    font-family: var(--font-family);
+    font-weight: 400;
+    color: #3b454e;
+    line-height: 1.6rem;
+    height: 100%;
+}
+
+#write {
+    font-size: 0.95rem;
+    max-width: 850px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    padding: 30px;
+    padding-bottom: 100px;
+    position: static;
+    width: 100%;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+    margin-top: 30px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none !important;
+    transition-duration: 0.2s;
+    transition-property: color;
+}
+
+a:hover {
+    color: var(--primary-color-darker);
+}
+
+mark a,
+mark .md-content.md-url {
+    color: var(--primary-color-darker2);
+}
+
+mark a:hover {
+    color: var(--primary-color-darkest);
+}
+
+.ty-preferences a {
+    color: var(--primary-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    color: var(--heading-text-color);
+    cursor: text;
+}
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.2rem;
+    border-bottom: solid 1px var(--borders);
+}
+
+h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h6 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#write > h1.md-focus:before,
+#write > h2.md-focus:before,
+#write > h3.md-focus:before,
+#write > h4.md-focus:before,
+#write > h5.md-focus:before,
+#write > h6.md-focus:before {
+    color: var(--light-text-color);
+    border: none;
+    position: absolute;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0px;
+    line-height: 1;
+}
+
+#write > h1.md-focus:before {
+    content: "h1";
+    top: 1.15rem;
+    left: -1.75rem;
+}
+
+#write > h2.md-focus:before {
+    content: "h2";
+    top: 0.75rem;
+    left: -1.75rem;
+}
+
+#write > h3.md-focus:before {
+    content: "h3";
+    top: 0.575rem;
+    left: -1.75rem;
+}
+
+#write > h4.md-focus:before {
+    content: "h4";
+    top: 0.4rem;
+    left: -1.75rem;
+}
+
+#write > h5.md-focus:before {
+    content: "h5";
+    top: 0.25rem;
+    left: -1.75rem;
+}
+
+#write > h6.md-focus:before {
+    content: "h6";
+    top: 0.25rem;
+    left: -1.75rem;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+blockquote h1,
+blockquote h2,
+blockquote h3,
+blockquote h4,
+blockquote h5,
+blockquote h6 {
+    margin-top: 0rem;
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl {
+    margin: 0.5rem 0rem 1.5rem 0rem;
+}
+
+li > ol,
+li > ul {
+    margin: 0 0;
+}
+
+hr {
+    height: 1px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: var(--borders);
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+
+ul,
+ol {
+    padding-left: 30px;
+}
+
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+
+.md-blockmeta {
+    color: var(--md-char-color);
+}
+
+mark {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.2rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/*BLOCKQUOTE*/
+
+blockquote {
+    width: 100%;
+    background-color: var(--boxes);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0.3rem;
+    padding: 1rem;
+    border-right: 4px solid var(--boxes); /* removes arc with tiny blue color from top-right and bottom-right corner */
+}
+
+blockquote blockquote {
+    padding-right: 0;
+}
+
+/*TABLE*/
+
+table {
+    font-size: 0.875rem;
+    padding: 0;
+    margin: 1.5rem 0;
+    word-break: initial;
+}
+
+table tr {
+    border-top: 1px solid var(--borders);
+    border-bottom: 1px solid var(--borders);
+    margin: 0;
+    padding: 0;
+}
+
+table tr.md-end-block {
+    border-top: none;
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}
+
+table tr th {
+    font-weight: bold;
+    border: none;
+    border-bottom: solid 2px var(--borders);
+    margin: 0;
+    padding: 10px 16px;
+    transition-duration: 0.3s;
+    transition-property: background-color;
+}
+
+table tr td {
+    border: none;
+    margin: 0;
+    padding: 10px 16px;
+    transition-duration: 0.3s;
+    transition-property: background-color;
+}
+
+#write table tr td:hover,
+#write table tr th:hover {
+    background-color: var(--boxes);
+}
+
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+/*OTHER TABLE THINGS*/
+
+.ty-table-edit {
+    background-color: var(--boxes);
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    box-shadow: none;
+    transform: translateY(2.5rem);
+    transition-duration: 0.3s;
+    transition-property: opacity;
+}
+
+.ty-table-edit + .md-table {
+    margin-top: 3rem;
+}
+
+.ty-table-edit:active,
+.ty-table-edit:focus {
+    box-shadow: none;
+}
+
+.popover,
+.popover:active,
+.popover:focus {
+    border: solid 1px var(--borders);
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+    border-radius: 0.3rem;
+}
+
+.popover .arrow {
+    border-bottom-color: var(--borders);
+}
+
+.md-grid-board a {
+    background-color: transparent;
+    border-color: var(--borders);
+    border-radius: 2px;
+}
+
+.md-grid-board .md-grid-ext {
+    background-color: var(--borders);
+    border-radius: 2px;
+}
+
+.md-grid-board tr[row="1"] .md-grid-ext {
+    background: none;
+    border-radius: 6px;
+}
+
+.md-grid-board tr[row="1"] .md-grid-ext a {
+    background-color: var(--boxes-darker2);
+    border-color: var(--boxes-darker2);
+}
+
+.md-grid-board tr[row="1"] td {
+    background-color: var(--bg-color);
+    border-color: var(--borders);
+}
+
+.md-grid-board a.md-active,
+.md-grid-board a:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.md-grid-board tr[row="1"] a.md-active,
+.md-grid-board tr[row="1"] a:hover {
+    background-color: var(--primary-color-darker);
+    border-color: var(--primary-color-darker);
+}
+
+#md-grid-width,
+#md-grid-height {
+    border-radius: 0.3rem;
+    border-color: var(--borders);
+    transition-duration: 0.3s;
+    transition-property: border-color;
+}
+
+#md-grid-width:focus,
+#md-grid-height:focus {
+    border-radius: 0.3rem;
+    border-color: var(--primary-color);
+}
+
+/*CODE*/
+
+.CodeMirror {
+    padding: 1rem;
+    font-family: var(--code-font-family);
+}
+
+.cm-s-inner .CodeMirror-gutters {
+    background-color: none;
+    border-right: none;
+    border-radius: 0px;
+    color: white;
+    height: 100%;
+}
+
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+    border-left: solid 2px var(--light-text-color-darker);
+}
+
+.CodeMirror.cm-s-typora-default .CodeMirror-activeline-background {
+    background-color: var(--codeboxes-lighter);
+}
+
+.cm-s-inner .CodeMirror-cursor {
+    color: white;
+    border-left: solid 1px white;
+}
+
+.CodeMirror-linenumber {
+    color: var(--bg-color);
+    opacity: 0.6;
+}
+
+.cm-s-inner .CodeMirror-line::selection,
+.cm-s-inner .CodeMirror-line::-moz-selection,
+.cm-s-inner .CodeMirror-line > span::selection,
+.cm-s-inner .CodeMirror-line > span::-moz-selection,
+.cm-s-inner .CodeMirror-line > span > span::selection,
+.cm-s-inner .CodeMirror-line > span > span::-moz-selection {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.cm-error {
+    color: var(--danger-color);
+}
+
+.cm-s-inner span.cm-comment,
+.cm-s-typora-default span.cm-comment,
+.cm-s-typora-default span.cm-code {
+    color: #9daab6;
+}
+
+.cm-s-inner span.cm-string,
+.cm-s-inner span.cm-string-2 {
+    color: #71a7ff;
+}
+
+.cm-s-inner span.cm-number {
+    color: #ff9d3d;
+}
+
+.cm-s-inner span.cm-variable,
+.cm-s-inner span.cm-variable-2 {
+    color: white;
+}
+
+.cm-s-inner span.cm-def {
+    color: white;
+}
+
+.cm-s-inner span.cm-operator {
+    color: #ff9d3d;
+}
+
+.cm-s-inner span.cm-keyword {
+    color: #61e3a5;
+}
+
+.cm-s-inner span.cm-atom {
+    color: #bd93f9;
+}
+
+.cm-s-inner span.cm-meta {
+    color: #f8f8f2;
+}
+
+.cm-s-inner span.cm-link,
+.cm-s-typora-default .cm-link {
+    color: var(--primary-color);
+}
+
+.cm-s-inner span.cm-tag,
+.cm-s-inner .cm-header {
+    color: #b4f6d6;
+}
+
+.cm-s-inner span.cm-attribute {
+    color: #ff9d3d;
+}
+
+.cm-s-inner span.cm-qualifier,
+.cm-s-inner span.cm-type,
+.cm-s-inner span.cm-variable-3 {
+    color: #82ee9d;
+}
+
+.cm-s-inner span.cm-property {
+    color: #ffd6ad;
+}
+
+.cm-s-inner span.cm-builtin {
+    color: #8ffaaa;
+}
+
+.md-fences.md-focus .cm-s-inner .CodeMirror-activeline-background {
+    background: none;
+}
+
+.cm-s-inner .CodeMirror-selected,
+.cm-s-inner .CodeMirror-selectedtext {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.cm-s-inner .cm-search-hit.CodeMirror-selected, .cm-s-inner .cm-search-hit.CodeMirror-selectedtext {
+    background: var(--select-text-bg-color)!important;
+} /* removes black background from code search selected */
+
+.cm-s-typora-default .cm-header,
+.cm-s-typora-default .cm-property {
+    color: white;
+    font-weight: 400;
+}
+
+.md-fences .code-tooltip {
+    box-shadow: rgba(116, 129, 141, 0.08) 0px 2px 6px 0px;
+    border: solid 1px var(--borders);
+    border-radius: 0.3rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    width: 15rem;
+    height: 2.5rem;
+    bottom: -3rem;
+    padding: 0.1875rem;
+}
+
+.md-fences .code-tooltip .ty-input {
+    border: solid 1px var(--borders);
+    height: 2rem;
+    line-height: 2rem;
+    margin: 0rem;
+    padding-left: 0.5rem !important;
+    text-align: left;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    transition-duration: 0.3s;
+    transition-property: border;
+}
+
+.md-fences .code-tooltip .ty-input:focus {
+    border-color: var(--primary-color);
+}
+
+.html-for-mac .ty-cm-lang-input:empty:after {
+    left: 0.5rem;
+}
+
+.autoComplt-list li,
+.fences-auto-suggest li {
+    font-weight: 500;
+    transition-duration: 0.3s;
+    transition-property: background-color, color;
+}
+
+.autoComplt-list li.active,
+.fences-auto-suggest li:hover {
+    background-color: var(--boxes);
+    color: var(--primary-color);
+}
+
+.md-fences,
+tt {
+    border-radius: 0.3rem;
+    color: white;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+    background-color: var(--borders);
+    font-size: 0.9rem;
+    border-radius: 0.2rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.md-fences div.CodeMirror-cursor,
+#typora-source div.CodeMirror-cursor {
+    border-left: solid 1px white;
+}
+
+.md-fences {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    background-color: var(--codeboxes);
+}
+
+#typora-source {
+    background-color: var(--codeboxes);
+    color: white;
+    font-size: 0.9rem;
+}
+
+/*DIAGRAMS*/
+
+.md-diagram-panel {
+    color: var(--text-color);
+    border: solid 1px var(--borders);
+    border-radius: 0.3rem;
+}
+
+.md-diagram-panel text,
+.md-diagram-panel .label {
+    color: var(--text-color);
+}
+
+.md-diagram-panel text {
+    fill: var(--text-color) !important /*required*/;
+}
+
+.md-diagram-panel-error {
+    color: var(--danger-color);
+}
+
+/*CHECKBOXES*/
+
+.md-task-list-item > input:before,
+input[type="checkbox"]:before {
+    border-radius: 0.2rem;
+    margin-top: -0.08rem;
+    margin-left: -0.1rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--borders);
+    content: " ";
+    display: block;
+    transition-duration: 0.3s;
+    transition-property: background-color;
+}
+
+.md-task-list-item:hover > input:before,
+input[type="checkbox"]:hover:before {
+    background-color: var(--boxes-darker);
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before,
+input[type="checkbox"]:checked:before {
+    background-color: var(--primary-color);
+}
+
+.md-task-list-item:hover > input:checked:before,
+.md-task-list-item:hover > input[checked]:before,
+input[type="checkbox"]:hover:checked:before {
+    background-color: var(--primary-color-darker);
+}
+
+.md-task-list-item > input:after,
+.md-task-list-item > input:after,
+input[type="checkbox"]:after {
+    transform: rotate(-45deg);
+    position: absolute;
+    border: 2px solid white;
+    border-top: 0;
+    border-right: 0;
+    top: 0.16rem;
+    left: 0.1rem;
+    width: 0.6rem;
+    height: 0.375rem;
+    content: " ";
+    opacity: 0;
+    transition-duration: 0.3s;
+    transition-property: opacity;
+}
+
+.md-task-list-item > input:checked:after,
+.md-task-list-item > input[checked]:after,
+input[type="checkbox"]:checked:after {
+    opacity: 1;
+}
+
+.ty-preferences input[type="checkbox"]:before {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.ty-preferences input[type="checkbox"]:after {
+    width: 0.5rem;
+    height: 0.32rem;
+    top: 0.19rem;
+    left: 0.14rem;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+#write pre.md-meta-block {
+    padding: 1rem;
+    line-height: 1.45;
+    background-color: var(--boxes);
+    border: 0;
+    border-radius: 0.3rem;
+    color: var(--text-color);
+    border-left: solid 4px var(--boxes-darkest);
+}
+
+#write pre.md-meta-block:empty:before {
+    color: var(--light-text-color);
+}
+
+.md-image > .md-meta {
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: var(--md-char-color);
+    opacity: 1;
+}
+
+/*TOC*/
+
+.md-toc {
+    margin: 1.5rem 0rem;
+}
+
+.md-toc:focus .md-toc-content {
+    border: none;
+}
+
+#write div.md-toc-tooltip {
+    background-color: var(--boxes);
+    line-height: 1.6rem;
+    padding: 0.3rem 0.75rem;
+    border-top: none;
+    border-radius: 0.3rem;
+}
+
+.md-toc.md-focus {
+    margin-top: 4.5rem;
+}
+
+#write div.md-toc-tooltip + .md-toc-content {
+    padding-top: 1rem;
+}
+
+.md-delete-toc {
+    padding: 0px;
+}
+
+/*MATH*/
+
+.md-rawblock-container {
+    padding: 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.md-rawblock:hover .md-rawblock-container {
+    background-color: var(--boxes);
+}
+
+.md-rawblock:active .md-rawblock-container {
+    background-color: var(--boxes-darker);
+}
+
+.MathJax_SVG:focus {
+    outline: none;
+}
+
+.md-rawblock-panel,
+.md-rawblock-control:not(.md-rawblock-tooltip) {
+    border-radius: 0.3rem;
+    background-color: var(--boxes);
+}
+
+.md-rawblock-panel .code-tooltip {
+    box-shadow: none;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.md-rawblock-panel .CodeMirror-linenumber {
+    color: var(--light-text-color);
+    opacity: 1;
+}
+
+.md-rawblock-panel .CodeMirror div.CodeMirror-cursor {
+    border-left: solid 1px var(--text-color);
+}
+
+.md-mathblock-panel .md-mathjax-preview,
+.mathjax-candidate {
+    border-top: solid 1px var(--borders);
+}
+
+.md-rawblock-after,
+.md-rawblock-before {
+    cursor: default;
+    color: var(--light-text-color);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.md-rawblock-tooltip-name {
+    font-size: 13px;
+    color: var(--light-text-color);
+    opacity: 1;
+}
+
+.md-rawblock-on-edit > .md-rawblock-tooltip {
+    padding-right: 0px;
+}
+
+.md-rawblock-input span.cm-tag {
+    color: #0bb6ad;
+}
+
+.md-rawblock-input span.cm-atom,
+.md-inline-math script {
+    color: #b61ed4;
+}
+
+.md-rawblock-input span.cm-number {
+    color: #ec7200;
+}
+
+.md-rawblock-input span.cm-keyword {
+    color: #156db6;
+}
+
+.md-rawblock-input span.cm-bracket {
+    color: var(--light-text-color);
+}
+
+#math-inline-preview.code-tooltip {
+    border-radius: 0.3rem;
+    background-color: var(--bg-color);
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+    color: var(--text-color);
+    opacity: 1;
+}
+
+#math-inline-preview.code-tooltip .code-tooltip-content {
+    border: solid 1px var(--borders);
+}
+
+#math-inline-preview.code-tooltip .md-arrow:after {
+    background-color: var(--bg-color);
+    border: solid 1px var(--borders);
+    box-shadow: none;
+}
+
+/*FOOTER*/
+
+footer.ty-footer {
+    border: none;
+}
+
+.footer-item {
+    opacity: 1 !important;
+    color: var(--light-text-color);
+    transition: 0.3s;
+}
+
+.footer-item:hover {
+    color: var(--light-text-color-darker) !important;
+}
+
+#outline-btn:hover {
+    color: var(--light-text-color-darker) !important;
+}
+
+/*SIDEBAR*/
+
+#typora-sidebar {
+    border-right: solid 1px var(--borders);
+}
+
+.info-panel-tab {
+    opacity: 1;
+}
+
+.info-panel-tab-border {
+    color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.sidebar-tab {
+    text-transform: capitalize;
+    color: var(--light-text-color);
+}
+
+#ty-sidebar-search-back-btn {
+    margin: auto;
+}
+
+.ty-show-outline-filter #file-library-search,
+.ty-show-search #file-library-search {
+    height: 4rem;
+}
+
+#file-library-search-input {
+    height: 2rem;
+}
+
+#file-library-search-panel input {
+    margin-top: 8px !important;
+}
+
+.ty-sidebar-search-panel .searchpanel-search-option-btn,
+#ty-sidebar-search-tabs .searchpanel-search-option-btn {
+    top: 15px;
+}
+
+#typora-sidebar #filesearch-case-ion-btn,
+#typora-sidebar #filesearch-word-ion-btn {
+    background: none;
+    margin-top: 0.45rem;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+#typora-sidebar #filesearch-case-ion-btn:hover,
+#typora-sidebar #filesearch-word-ion-btn:hover {
+    color: var(--primary-color);
+}
+
+/*sidebar loading*/
+
+#typora-sidebar #sidebar-loading-template {
+    padding: 0px;
+}
+
+#typora-sidebar #sidebar-loading-template .typora-search-spinner {
+    opacity: 1;
+    color: var(--light-text-color-darker);
+}
+
+#typora-sidebar #sidebar-loading-template .typora-quick-open-info {
+    color: var(--light-text-color-darker);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/*sidebar outline*/
+
+#close-outline-filter-btn {
+    top: 15px;
+    opacity: 1;
+    color: var(--light-text-color) !important;
+}
+
+#close-outline-filter-btn:hover {
+    color: var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+#close-outline-filter-btn:active {
+    background-color: transparent !important;
+}
+
+#outline-content {
+    padding-right: 0px;
+    line-height: 1rem;
+}
+
+.outline-item {
+    display: flex;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.outline-item .outline-label {
+    display: block;
+    width: 100%;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-right: solid 2px transparent;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--light-text-color-darker);
+}
+
+.outline-item:hover {
+    background: none;
+}
+
+.outline-item:hover .outline-label {
+    color: var(--primary-color);
+}
+
+.outline-label:hover {
+    text-decoration: none;
+}
+
+.outline-active.outline-label {
+    border-right: solid 2px var(--primary-color);
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.outline-expander {
+    padding-top: 0.4rem;
+    padding-right: 0.5rem;
+}
+
+#toc-dropmenu .outline-label {
+    line-height: 1rem;
+}
+
+#toc .outline-title {
+    margin-top: 9px;
+    font-size: 1rem;
+    font-weight: 500;
+    user-select: none;
+}
+
+#pin-outline-btn {
+    padding: 14px 18px 0px 0px;
+}
+
+/*sidebar file-list and search results*/
+
+#file-library-list[data-state="complete"] #sidebar-loading-template {
+    padding: 0rem;
+}
+
+#typora-sidebar .file-list-item,
+.ty-search-item {
+    border: none;
+    padding: 1rem;
+}
+
+body.html-for-mac #typora-sidebar .file-list-item,
+body.html-for-mac .ty-search-item {
+    transition-duration: 0.3s !important;
+    transition-property: background-color, border, color, height !important;
+}
+
+#typora-sidebar .file-list-item:hover,
+.ty-search-item:hover {
+    background: var(--borders);
+}
+
+#typora-sidebar .ty-search-item-line {
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    margin-left: 24px;
+}
+
+body.o #typora-sidebar .ty-search-item-line {
+    transition-duration: 0.2s;
+}
+
+#typora-sidebar .ty-search-item-line * {
+    opacity: 1;
+}
+
+#typora-sidebar .ty-search-item .ty-search-item-line:hover,
+#typora-sidebar .ty-search-item-line.active {
+    background-color: var(--select-text-bg-color);
+    color: white;
+} /* makes easier identifying which searched item is active in the sidebar */
+
+#typora-sidebar .file-list-item-file-name {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 0rem;
+    line-height: 1.8rem;
+    float: right;
+}
+
+#typora-sidebar .file-list-item-file-ext-part {
+    font-weight: 800;
+    opacity: 0.5;
+}
+
+#typora-sidebar .file-list-item-parent-loc,
+#typora-sidebar .file-list-item-time {
+    font-family: var(--font-family);
+    font-weight: 400;
+    opacity: 0.5;
+    display: block;
+}
+
+#typora-sidebar .file-list-item-summary {
+    float: left;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+#typora-sidebar .file-list-item-count {
+    font-size: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.2rem;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+    line-height: 1.25rem;
+    position: relative;
+    top: 0.3rem;
+}
+
+#typora-sidebar input.file-list-item-file-name {
+    margin: 0.5rem 0rem 0.5rem 0.7rem;
+    padding: 0.4rem !important;
+    line-height: 1rem;
+    float: right;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    background-color: white !important;
+}
+
+#typora-sidebar .file-list-item.file-library-file-node {
+    border: none;
+}
+
+#typora-sidebar .file-tree-node.active .file-node-background,
+#typora-sidebar .file-list-item.active,
+#typora-sidebar .ty-search-item.active {
+    background-color: white;
+    outline: 1px solid var(--borders);
+    border: none;
+    color: var(--primary-color) !important;
+}
+
+#typora-sidebar .file-tree-node.active .file-node-content {
+    color: var(--primary-color) !important;
+}
+
+#typora-sidebar .file-tree-node {
+    padding: 0rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-left: 0.8rem;
+}
+
+#typora-sidebar .file-tree-node .file-node-content {
+    padding: 0rem;
+    line-height: 2.2rem;
+    height: 2.2rem;
+    background: none;
+    margin-bottom: 0px;
+}
+
+#typora-sidebar .file-tree-node .file-node-background {
+    padding: 0rem;
+    height: 2.2rem;
+}
+
+#typora-sidebar .file-tree-node .file-node-icon {
+    margin-right: 0.5rem;
+}
+
+#typora-sidebar .file-tree-node .file-node-icon.fa-file-text-o {
+    margin-top: 0.33rem;
+}
+
+#typora-sidebar .file-tree-node .file-node-icon.fa-folder {
+    margin-top: 0.36rem;
+}
+
+#typora-sidebar .file-tree-node .fa-caret-down,
+#typora-sidebar .file-tree-node .fa-caret-right {
+    position: relative;
+    top: 5px;
+}
+
+#typora-sidebar .file-tree-node .file-tree-rename-input {
+    height: 2.2rem;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0rem;
+    padding-left: 0rem;
+}
+
+#typora-sidebar .ty-search-item-collapse-icon {
+    top: 9px;
+}
+
+/*no left border*/
+#typora-sidebar .file-tree-node.active > .file-node-background {
+    border: none;
+}
+
+/*no dotted highlighting*/
+.file-library-node:not(.file-node-root):focus > .file-node-content {
+    outline: none;
+}
+
+#typora-sidebar #sidebar-files-menu {
+    border: solid 1px var(--borders);
+    border-radius: 0.3rem;
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+}
+
+#typora-sidebar #ty-sidebar-footer {
+    background-color: var(--bg-color);
+    border-top: solid 1px var(--borders);
+    font-weight: 500;
+}
+
+#typora-sidebar #ty-sidebar-footer li {
+    transition-duration: 0.2s;
+    transition-property: background-color, color;
+}
+
+#typora-sidebar
+    #ty-sidebar-footer
+    li:not(.file-sort-item):not(:first-child):not(.empty-menu-group):not(.folder-menu-group):hover {
+    color: var(--primary-color);
+    background-color: var(--boxes);
+}
+
+#typora-sidebar
+    #ty-sidebar-footer
+    .file-action-item.file-sort-item
+    > span:first-of-type {
+    line-height: 2rem;
+}
+
+/*cursor*/
+.file-node-content:hover {
+    cursor: pointer;
+}
+
+body.html-for-mac
+    .file-tree-node:not(.file-node-root):not(.file-node-expanded)
+    .file-node-background {
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.file-tree-node:not(.file-node-root):not(.file-node-expanded):hover
+    .file-node-background {
+    background-color: var(--borders);
+}
+
+#typora-sidebar .sidebar-footer-item {
+    transition-duration: 0.2s;
+    transition-property: background-color, color;
+    font-weight: 700;
+}
+
+#typora-sidebar .sidebar-footer-item:hover {
+    color: var(--primary-color);
+    background-color: var(--boxes);
+}
+
+#typora-quick-open {
+    background-color: white;
+    border: 1px solid var(--borders);
+    border-radius: 0.3rem;
+    padding: 0rem;
+    box-shadow: rgba(116, 129, 141, 0.15) 0px 3px 16px 0px;
+    overflow: hidden;
+}
+
+#typora-quick-open-input {
+    margin-right: 20px;
+}
+
+#typora-quick-open-input .input {
+    box-shadow: none !important /*required*/;
+    border: none !important /*required*/;
+    font-weight: 400 !important /*required*/;
+    margin: 0.5rem;
+    margin-left: 0.8rem;
+}
+
+.typora-quick-open-item {
+    background-color: white;
+    border: none;
+    font-weight: 500;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.typora-quick-open-item:hover {
+    background-color: var(--boxes);
+    color: var(--primary-color);
+}
+
+.typora-quick-open-item.active {
+    background-color: var(--boxes);
+    border: none;
+}
+
+.typora-quick-open-item-path {
+    opacity: 1;
+    color: var(--light-text-color);
+}
+
+.typora-quick-open-item:hover .typora-quick-open-item-path {
+    opacity: 0.7;
+    color: var(--primary-color);
+}
+
+.ty-quick-open-category-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 1;
+    color: var(--light-text-color);
+    line-height: 32px;
+    padding-top: 6px;
+    height: 32px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+.md-lang {
+    color: var(--primary-color);
+}
+
+/*NOTIFICATION*/
+
+#md-notification {
+    border-bottom: solid 1px var(--borders);
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+}
+
+#md-notifcation .btn {
+    border: 0;
+}
+
+/*PREFERENCES*/
+
+.ty-preferences {
+    font-family: var(--font-family);
+}
+
+.ty-preferences .window-header {
+    justify-content: space-between;
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+    border-bottom: solid 1px var(--borders);
+}
+
+.ty-preferences .window-header-content {
+    background-color: white;
+    margin: 0rem;
+}
+
+.ty-preferences .window-header h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0rem;
+    margin-left: 1rem;
+}
+
+.unibody-window .ty-preferences .window-header h2 {
+    margin-left: 1rem !important;
+}
+
+.ty-preferences .window-header-back {
+    margin-left: 1.2rem;
+}
+
+.ty-preferences .window-header-back .icon {
+    border-right: none;
+}
+
+/*preferences sidebar*/
+.ty-preferences .window-content {
+    background-color: white;
+}
+
+.ty-preferences .nav-group-item {
+    color: var(--text-color);
+    height: 2.5rem;
+    line-height: 2.6rem;
+    font-weight: 500;
+    padding: 0px 0px 0px 2rem;
+    font-size: 1rem;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.ty-preferences .nav-group-item:hover {
+    background-color: var(--borders);
+    border-radius: 0px;
+}
+
+.ty-preferences .nav-group-item.active {
+    border-radius: 0rem;
+    border: none;
+    outline: 1px solid var(--borders);
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.ty-preferences .pane-sm {
+    background: var(--boxes);
+    flex-basis: 240px;
+    flex-grow: 0;
+    justify-content: center;
+    border-right: 1px solid var(--borders);
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.ty-preferences .pane-sm .list-group {
+    width: 100%;
+    max-width: 30rem;
+}
+
+.ty-preferences .list-group-header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ty-preferences .list-group-header div {
+    width: 100%;
+    margin-right: 18px;
+    margin-left: 18px;
+}
+
+.ty-preferences .pane-sm .search-input {
+    margin: 0rem !important;
+    width: 100%;
+    font-size: 1rem !important;
+    height: 2.75rem;
+}
+
+.ty-preferences .pane-sm .search-input:active,
+.ty-preferences .pane-sm .search-input:focus {
+    border: solid 1px var(--primary-color) !important;
+    outline: none;
+}
+
+/*preferences main*/
+.ty-preferences .panel-header {
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+/*preferences stuff*/
+.ty-preferences .dropdown-menu > li,
+.dropdown-item {
+    font-weight: 500;
+    font-size: 1rem;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+
+.ty-preferences .dropdown-menu .active,
+.ty-preferences .dropdown-menu li:hover,
+.dropdown-item:hover {
+    background-color: var(--boxes);
+    color: var(--primary-color);
+}
+
+#ty-spell-check-dict-missing-secondary-btn:hover {
+    color: var(--primary-color) !important;
+}
+
+.header-close .icon {
+    border: none !important;
+}
+
+/*preferences export*/
+
+.export-detail {
+    background-color: transparent !important /*required*/;
+}
+
+.export-items-list .separator {
+    margin: 0.4rem;
+    border-top: 1px solid var(--borders);
+}
+
+.export-items-list-control {
+    background-color: var(--boxes) !important /*required*/;
+}
+
+.export-item {
+    padding: 0.4rem !important /*required*/;
+    color: var(--light-text-color-darker);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.export-item.active {
+    background-color: transparent !important /*required*/;
+    color: var(--primary-color);
+    font-weight: 500 !important /*required*/;
+}
+
+/*DROPDOWN*/
+
+.dropdown-menu:not(.megamenu-menu-list),
+.auto-suggest-container {
+    background-color: var(--bg-color);
+    border: solid 1px var(--borders) !important;
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+    user-select: none;
+}
+
+.dropdown-menu > li > a,
+.auto-suggest-container li {
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > li > a:hover,
+.menu-style-btn.active,
+.context-menu.dropdown-menu > .active > a,
+.context-menu.dropdown-menu > li > a:hover,
+.auto-suggest-container li:hover,
+.auto-suggest-container li.active {
+    color: var(--primary-color);
+    background-color: var(--boxes);
+}
+
+.menu-style-btn {
+    color: var(--text-color);
+    border: none;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+
+.menu-style-btn:hover {
+    color: var(--primary-color);
+    background-color: var(--boxes);
+    border: none;
+}
+
+header .menu-style-btn:hover {
+    background-color: transparent;
+}
+
+.menu-item-container {
+    padding: 0 12px 0 4px;
+}
+
+.menu-item-container a.menu-style-btn {
+    padding: 0.3rem 0.6rem;
+    margin: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: var(--borders);
+    opacity: 1;
+}
+
+/*BUTTON*/
+
+.btn,
+button {
+    border: none !important;
+    border-radius: 0.3rem !important;
+    color: var(--text-color) !important;
+    transition-duration: 0.2s;
+    transition-property: all;
+    font-size: 0.9rem !important;
+    font-weight: 500;
+    outline: none;
+}
+
+.btn-default {
+    border: none !important;
+    border-radius: 0.3rem !important;
+    background-color: var(--boxes) !important;
+}
+
+.btn:hover,
+.button-hover {
+    border: none;
+    border-radius: 0.3rem;
+    background-color: var(--borders) !important;
+    color: var(--text-color);
+}
+
+button:active,
+button.active,
+.btn:active,
+.btn-default:active {
+    border: none;
+    border-radius: 0.3rem;
+    background-color: var(--boxes-darker) !important;
+    box-shadow: none;
+    outline: none;
+    color: var(--text-color);
+}
+
+.btn:focus {
+    border: none !important;
+    outline: none !important;
+    background-color: var(--boxes-darker);
+}
+
+.btn-primary {
+    border: none;
+    border-radius: 0.3rem;
+    background-color: var(--primary-color);
+    color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: white;
+    background-color: var(--primary-color-darker) !important;
+}
+
+.btn.dropdown-toggle-split,
+.btn.dropdown-toggle-split:hover {
+    border-radius: 0rem 0.3rem 0.3rem 0rem !important;
+}
+
+#ty-spell-check-dict-missing-primary-btn {
+    border-radius: 0.3rem 0rem 0rem 0.3rem !important;
+}
+
+.open > .dropdown-toggle.btn-primary {
+    background-color: var(--primary-color);
+    border-color: transparent;
+}
+
+/*GHOST BUTTON*/
+
+.window-header button,
+#close-sidebar-menu-btn,
+.html-for-mac .sidebar-tab-btn,
+.label-hint,
+.ty-table-edit .btn,
+.zoom-hint-button,
+.md-rawblock-tooltip-btn,
+.md-delete-toc,
+#md-searchpanel .input-group-addon.btn,
+#pin-outline-btn,
+.icon-button {
+    background-color: transparent !important;
+    color: var(--light-text-color) !important;
+    opacity: 1 !important;
+    transition-duration: 0.2s;
+    transition-property: color;
+}
+
+.window-header button:hover,
+.window-header button:focus,
+#close-sidebar-menu-btn:hover,
+#close-sidebar-menu-btn:focus,
+.html-for-mac .sidebar-tab-btn:hover,
+.html-for-mac .sidebar-tab-btn:focus,
+.label-hint:hover,
+.label-hint:focus,
+.ty-table-edit .btn:hover,
+.ty-table-edit .btn:focus,
+.zoom-hint-button:hover,
+.zoom-hint-button:focus,
+.md-rawblock-tooltip-btn:hover,
+.md-rawblock-tooltip-btn:focus,
+.md-delete-toc:hover,
+.md-delete-toc:focus,
+#md-searchpanel .input-group-addon.btn:hover,
+#md-searchpanel .input-group-addon.btn:focus,
+#pin-outline-btn:hover,
+#pin-outline-btn:focus,
+.icon-button:hover,
+.icon-button:focus {
+    color: var(--primary-color) !important;
+    background: none !important;
+}
+
+.ty-table-edit .btn.active {
+    color: var(--primary-color) !important;
+    box-shadow: none;
+}
+
+/*IMAGE BUTTON*/
+
+.md-image-btn {
+    background-color: var(--boxes);
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.md-image-btn:before {
+    color: var(--text-color);
+    transition-duration: 0.2s;
+    transition-property: color;
+}
+
+.md-image-btn:hover {
+    background-color: var(--borders);
+}
+
+.md-image-btn:hover:before {
+    color: var(--primary-color);
+}
+
+.md-image-input-src-btn {
+    border-radius: 0.3rem 0rem 0rem 0.3rem !important;
+}
+
+.md-image-pick-file-btn {
+    border-left: none;
+    border-radius: 0rem 0.3rem 0.3rem 0rem !important;
+}
+
+/*SEARCH-INPUTS*/
+
+.search-input,
+.search,
+.form-control,
+#file-library-search-input {
+    background-color: transparent !important;
+    border-radius: 0.3rem !important;
+    border: solid 1px var(--boxes-darker) !important;
+    box-shadow: none !important;
+    color: var(---heading-text-color) !important;
+    font-size: 0.9rem !important;
+    font-weight: 400;
+    padding: 0.7rem !important;
+    height: 2rem;
+    transition-duration: 0.2s;
+    transition-property: border, box-shadow;
+}
+
+.search-input:hover,
+.search:hover,
+.form-control:hover,
+#file-library-search-input:hover {
+    border: solid 1px var(--boxes-darker2) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+.search-input:focus,
+.search:focus,
+.form-control:focus,
+#file-library-search-input:focus {
+    background-color: transparent !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+    color: var(--heading-text-color) !important;
+    font-size: 0.9rem !important;
+    padding: 0.7rem !important;
+}
+
+.search-input::placeholder,
+.search::placeholder,
+.form-control::placeholder,
+#file-library-search-input::placeholder {
+    color: var(--light-text-color-darker) !important;
+}
+
+.clear-btn-icon {
+    top: 9px !important /*required*/;
+    right: 9px !important /*required*/;
+}
+
+.content tr.search-hit,
+.search-hit,
+.md-search-hit,
+/*.md-search-hit.md-search-select,*/
+.md-search-select,
+.ty-file-search-match-text {
+    background-color: var(--boxes-darkest);
+    color: white;
+    padding: 0.2rem 0.1rem;
+    border-radius: 0.2rem;
+}
+
+.md-search-hit.md-search-select {
+    background-color: var(--select-text-bg-color);
+} /* distinguishes text search selected from text search matched */
+
+/*ZOOM HINT*/
+
+#zoom-hint {
+    border-radius: 0.3rem;
+    border: solid 1px var(--borders);
+    user-select: none;
+    box-shadow: rgba(116, 129, 141, 0.08) 0px 2px 6px 0px;
+}
+
+#zoom-hint #zoom-hint-reset {
+    border-left: none;
+    font-weight: 600;
+}
+
+/*SEARCHPANEL*/
+
+#md-searchpanel {
+    border-bottom: 1px solid var(--borders);
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+    max-height: 46px;
+}
+
+.mac-seamless-mode #md-searchpanel {
+    max-height: 70px;
+}
+
+#md-searchpanel.searchpanel-replace-mode {
+    max-height: 84px;
+}
+
+.mac-seamless-mode #md-searchpanel.searchpanel-replace-mode {
+    max-height: 108px;
+}
+
+#md-searchpanel input {
+    height: 2rem;
+    margin: 0rem !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+}
+
+#md-searchpanel .input-group-addon {
+    height: 2rem;
+}
+
+#md-searchpanel .input-group-addon.close-btn {
+    padding-left: 8px;
+}
+
+.unibody-window #md-searchpanel .btn {
+    line-height: 2rem;
+}
+
+.searchpanel-search-option-btn {
+    top: 9px;
+    border: none;
+    color: var(--light-text-color-darker) !important /*required*/;
+    transition-duration: 0.3s;
+}
+
+.searchpanel-search-option-btn:hover {
+    color: var(--primary-color) !important /*required*/;
+    background-color: transparent !important /*required*/;
+}
+
+.searchpanel-search-option-btn.select,
+.searchpanel-search-option-btn.active {
+    color: white !important;
+    background-color: var(--primary-color) !important;
+}
+
+#searchpanel-regexp-option-btn {
+    right: 57px;
+}
+
+#searchpanel-case-option-btn {
+    right: 33px;
+}
+
+#searchpanel-word-option-btn {
+    right: 9px;
+}
+
+#searchpanel-word-option-btn,
+#searchpanel-case-option-btn {
+    background: none;
+}
+
+#md-searchpanel .btn:not(.close-btn):hover {
+    box-shadow: none;
+}
+
+/*SELECT*/
+/*TEXT INPUT*/
+/*NUMBER INPUT*/
+
+/* the input #md-grid-height doesn't have a type attached for some reason and needs to be adressed seperately */
+
+html select,
+html input[type="text"],
+html input[type="number"],
+#md-grid-height {
+    background-color: var(--bg-color) !important;
+    border-radius: 0.3rem !important;
+    border: solid 1px var(--boxes-darker) !important;
+    box-shadow: none !important;
+    color: var(--text-color) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    padding: 0.3rem !important;
+    height: 2.1rem !important;
+    transition-duration: 0.2s;
+    transition-property: border;
+}
+
+select {
+    cursor: pointer !important;
+}
+
+input[type="text"],
+input[type="number"],
+#md-grid-height {
+    cursor: text;
+}
+
+html select:hover,
+html input[type="text"]:hover,
+html input[type="number"]:hover,
+#md-grid-height:hover {
+    background-color: var(--bg-color) !important;
+    border-radius: 0.3rem !important;
+    border-color: var(--boxes-darker2) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+    color: var(--text-color) !important;
+    font-size: 0.9rem !important;
+}
+
+html select:focus,
+html input[type="text"]:focus,
+html input[type="number"]:focus,
+#md-grid-height:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+#md-grid-height::placeholder {
+    color: var(--light-text-color-darker) !important;
+}
+
+input[disabled],
+input[disabled]:hover,
+input[disabled]:focus {
+    cursor: not-allowed;
+}
+
+/*TEXTAREA*/
+
+textarea {
+    background-color: transparent;
+    border: solid 1px var(--boxes-darker);
+    border-radius: 0.3rem;
+    transition-duration: 0.2s;
+}
+
+textarea:hover {
+    border-color: var(--boxes-darker2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    outline: none;
+}
+
+/*MODAL*/
+
+.modal-header,
+#common-dialog .modal-header {
+    border-bottom: solid 1px var(--borders);
+    padding-bottom: 15px;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    user-select: none;
+}
+
+.modal-body {
+    font-size: 0.9rem;
+    color: var(--light-text-color-darker);
+    user-select: none;
+}
+
+.modal-content {
+    box-shadow: rgba(116, 129, 141, 0.15) 0px 3px 10px 0px;
+    border: solid 1px var(--boxes-darker);
+    border-radius: 0.3rem;
+}
+
+.modal-footer {
+    border-top: solid 1px var(--borders);
+}
+
+.modal-open .modal.fade.in {
+    background: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/*LANGS*/
+
+.ty-spell-check-panel-item {
+    font-weight: 500;
+    transition-duration: 0.2s;
+    transition-property: background-color, color;
+}
+
+.ty-spell-check-panel-item:hover {
+    color: var(--primary-color);
+    background-color: var(--boxes);
+}
+
+.ty-spell-check-panel-item.ty-active {
+    background-color: var(--boxes);
+}
+
+/*TOOLTIP*/
+
+.ty-tooltip {
+    background-color: var(--bg-color) !important;
+    border-radius: 0.3rem !important;
+    border: 1px solid var(--borders) !important;
+    -webkit-filter: none !important;
+    filter: none;
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+}
+
+/*FOOTER*/
+
+.footer-item:hover {
+    background-color: var(--boxes) !important;
+}
+
+#footer-word-count-info {
+    padding: 4px 0;
+}
+
+.footer-word-count-info-line {
+    padding: 0.25rem;
+    line-height: 1.6rem;
+}
+
+#footer-word-count-info tr {
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+
+#footer-word-count-info tr td:nth-child(1) {
+    padding: 0rem;
+    padding-right: 1rem;
+}
+
+#footer-word-count-info .ty-footer-word-count-all tr:hover {
+    color: var(--primary-color) !important;
+    background-color: var(--boxes) !important;
+}
+
+/*MEGAMENU*/
+
+.megamenu-menu {
+    box-shadow: none;
+    background-color: var(--boxes);
+    border-right: 1px solid var(--borders);
+}
+
+.megamenu-opened .megamenu-menu {
+    left: 0px;
+}
+
+#megamenu-content {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+#megamenu-menu-list {
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+}
+
+#megamenu-menu-list li a {
+    color: var(--text-color);
+    height: 2rem;
+    line-height: 1.8rem;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+#megamenu-menu-list li a:hover {
+    background-color: var(--borders);
+}
+
+#megamenu-menu-list li a.active {
+    color: var(--primary-color);
+    background-color: white;
+    outline: solid 1px var(--borders);
+}
+
+#megamenu-menu-list .divider {
+    background-color: var(--borders);
+    margin: 16px 0 0 0;
+}
+
+.megamenu-menu-list .saved #m-saved {
+    cursor: default;
+}
+
+.megamenu-menu-list .saved #m-saved .fa {
+    color: var(--primary-color);
+}
+
+.megamenu-menu-list .saved #m-saved:hover {
+    background-color: transparent;
+}
+
+.megamenu-menu-list #m-close:hover {
+    color: var(--danger-color);
+}
+
+.megamenu-menu-header {
+    border-bottom: solid 1px var(--borders);
+    margin-bottom: 1.2rem;
+    height: 74px;
+    transition-duration: 0.3s;
+}
+
+.megamenu-menu-header:hover {
+    background-color: var(--borders);
+}
+
+.megamenu-menu-header #megamenu-menu-header-title {
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 16px;
+    left: 56px;
+    top: 24px;
+}
+
+#megamenu-back-btn {
+    color: var(--text-color);
+    font-size: 16px;
+    left: 24px;
+    top: 24px;
+}
+
+.megamenu-opened header {
+    background-color: var(--bg-color);
+    background-image: none;
+}
+
+.megamenu-content {
+    background-color: var(--bg-color);
+    background-image: none;
+}
+
+.megamenu-menu-panel:not(:first-of-type) {
+    margin-top: 2rem;
+}
+
+.megamenu-menu-panel h1 {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin: 1rem 0rem 0.4rem 0rem;
+}
+
+.megamenu-menu-panel h2 {
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin: 1rem 0rem 0.4rem 0rem;
+}
+
+/*recent files*/
+
+#recent-file-panel tbody tr {
+    font-weight: 600;
+    transition-duration: 0.4s;
+}
+
+#recent-file-panel tbody tr:hover,
+.megamenu-menu-panel tbody tr:hover td:nth-child(1) {
+    color: var(--primary-color);
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: var(--boxes);
+}
+
+/*about help*/
+
+.about-content-slogon {
+    color: var(--light-text-color);
+}
+
+/*for the god himself*/
+.about-content-slogon span {
+    color: var(--primary-color) !important;
+}
+
+#about-content tbody tr {
+    font-weight: 500;
+    transition-duration: 0.4s;
+}
+
+#about-content tbody tr:hover {
+    color: var(--primary-color);
+    background-color: var(--boxes) !important /*required important*/;
+}
+
+.long-btn {
+    margin-bottom: 12px;
+    margin-left: 2px;
+    box-shadow: rgba(116, 129, 141, 0.1) 2px 2px 6px;
+    background-color: white;
+    border: 1px solid var(--borders);
+    border-radius: 0.3rem;
+    padding: 1rem;
+
+    font-weight: 700;
+    font-size: 1rem;
+
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.long-btn:hover {
+    background-color: var(--primary-color);
+    border: 1px solid transparent;
+    color: white !important /*important required*/;
+    box-shadow: rgba(116, 129, 141, 0.1) 2px 2px 6px,
+        rgba(56, 132, 255, 0.2) 0px 0px 10px;
+}
+
+#m-import-local:hover .preference-item-hint {
+    color: white;
+    opacity: 0.7;
+}
+
+#recent-file-panel-action-btn {
+    height: 34px;
+    border: none;
+    background-color: var(--boxes);
+}
+
+#theme-preview-grid {
+    max-width: none;
+    padding: 1.5rem;
+    background-color: var(--boxes);
+    border-radius: 0rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1.5rem;
+}
+
+.theme-preview-div {
+    border: none;
+    border-radius: 0.4rem;
+    box-shadow: rgba(116, 129, 141, 0.1) 0px 0px 15px;
+    margin: 0rem;
+    transition-duration: 0.3s;
+}
+
+.theme-preview-div:hover {
+    box-shadow: rgba(116, 129, 141, 0.5) 3px 8px 15px;
+    cursor: pointer;
+    transform: rotate3d(1, -0.2, 0.2, 15deg);
+}
+
+.theme-preview-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.4rem;
+}
+
+.theme-preview-content html {
+    width: 100%;
+    height: 100%;
+}
+
+.theme-preview-div.active .fa {
+    color: var(--primary-color);
+    bottom: 4px;
+    left: 4px;
+}
+
+.theme-preview-div .fa-check-circle:before {
+    background-color: var(--bg-color);
+    padding: 0px 2px;
+    border-radius: 1rem;
+}
+
+.megamenu-menu-panel tbody tr {
+    border-radius: 0.3rem;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.megamenu-menu-panel tbody tr:hover {
+    background-color: var(--borders) !important /*required important*/;
+}
+
+/*MIN MAX CLOSE*/
+#w-min,
+#w-max,
+#w-restore,
+#w-close {
+    border-radius: 0px !important;
+    font-size: 10px !important;
+    width: 46px !important;
+    height: 29px !important;
+}
+
+.btn.toolbar-icon svg,
+.btn.toolbar-icon .ty-icon {
+    position: relative;
+    top: 2px;
+}
+
+#w-close.btn.toolbar-icon .ty-icon {
+    left: 1px;
+}
+
+#w-close:hover {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+}
+
+/*EXTRA STUFF*/
+
+a[type="page-link"] {
+    display: block;
+    background-color: white;
+    box-shadow: rgba(116, 129, 141, 0.2) 0px 3px 8px 0px;
+    border: 1px solid var(--borders);
+    border-radius: 0.3rem;
+    padding: 1rem;
+
+    font-weight: 600;
+
+    transition-duration: 0.2s;
+    transition-property: border, box-shadow;
+}
+
+a[type="page-link"]:hover {
+    box-shadow: rgba(116, 129, 161, 0.1) 0px 3px 8px 0px;
+    border: 1px solid var(--primary-color);
+}
+
+p[type="description"] {
+    color: var(--light-text-color);
+}
+
+/*kbd*/
+
+kbd {
+    font-family: var(--font-family);
+}
+
+
+
+</style><title>head2</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><p><span>Merged to master and branch-3.4.</span>
+<span>Merging to master/3.4</span>
+<span>merged into master/3.4</span>
+<span>merged into master/3.4.  Thank you @ulysses-you</span>
+<span>cc @HyukjinKwon @ueshin</span>
+<span>close this one in favor of </span><a href='https://github.com/apache/spark/pull/40006' target='_blank' class='url'>https://github.com/apache/spark/pull/40006</a>
+<span>late </span><font color=red><strong><span>LGTM</span></strong></font>
+<span>cc @JoshRosen  @liuzqt</span>
+<span>We&#39;re closing this PR because it hasn&#39;t been updated in a while. This isn&#39;t a judgement on the merit of the PR in any way. It&#39;s just a way of keeping the PR queue manageable.</span><br><span>If you&#39;d like to revive this PR, please reopen it and ask a committer to remove the Stale tag!</span>
+<span>@HeartSaVioR , @HyukjinKwon , @SandishKumarHN PTAL. I would like to get this fix asap to make it into 3.4.x in OSS and 12.2 RC cut in DBR.</span>
+<span>cc: @gengliangwang</span>
+<font color=red><strong><span>Thanks</span></strong></font><span>, merging to master/3.4</span>
+<code>DataFrame.drop</code><span> in PySpark seems problematic when there are duplicated column names, let me address it first.</span>
+<span>@zhengruifeng what is the current problem with drop?</span></p><blockquote><p><span>@zhengruifeng what is the current problem with drop?</span><br><br><span>existing implement in Python Client follows the behavior in PySpark that always convert column name to column, then it has this problem https://issues.apache.org/jira/browse/SPARK-42444</span><br>
+<span>cc @hvanhovell @HyukjinKwon @xinrong-meng @amaliujia</span>
+<span>cc @HyukjinKwon @xinrong-meng would you mind taking a look at this one?</span>
+<span>cc @srowen, @dongjoon-hyun, @gengliangwang, @wangyum</span>
+<span>cc @gengliangwang FYI</span>
+<span>I did a quick </span><font color=red><strong><span>test</span></strong></font><span> and the UI looks ok. Also I tried git grep and all the old version </span><code>1.10.25</code><span> is gone.</span><br><span>@peter-toth </span><font color=red><strong><span>Thanks</span></strong></font><span> for the work. Merging to master.</span>
+<font color=red><strong><span>LGTM</span></strong></font><span> if the UI works</span><br><br><span>I played a bit with the UI while making this PR and it looked ok to me.</span><br><br><span>Actually, I&#39;m not sure that anything from our </span><font color=red><strong><span>customization</span></strong></font><span>s in </span><code>core/src/main/resources/org/apache/spark/ui/static/webui-dataTables.css</code><span> is still needed after this version update, but I removed only the up/dpwn arrows related part that caused issues...</span><br><span>E.g. the executor </span><span>&quot;</span><span>show ... entries</span><span>&quot;</span><span> box (https://github.com/apache/spark/pull/36226#issuecomment-1100810575) looked ok without this last fix: https://github.com/apache/spark/pull/36226/files#diff-e96c8dc10974b7da0c5dd4f675702462124b66c4bf2f7a0682f2ec1482a2eee3</span>
+<span>I did a quick </span><font color=red><strong><span>test</span></strong></font><span> and the UI looks ok. Also I tried git grep and all the old version </span><code>1.10.25</code><span> is gone. @peter-toth </span><font color=red><strong><span>Thanks</span></strong></font><span> for the work. Merging to master.</span><br><br><font color=red><strong><span>Thanks</span></strong></font><span> everyone for the </span><font color=red><strong><span>review</span></strong></font><span>!</span>
+<span>cc @zhengruifeng IIRC there were some open questions to support storage level in Connect?</span>
+<span>@HyukjinKwon can you please </span><font color=red><strong><span>check</span></strong></font><span> if it looks Ok?</span>
+<span>@HyukjinKwon @amaliujia can you please </span><font color=red><strong><span>review</span></strong></font><span>? </span><br><span>If you think implementation of StorageLevel is not right I will close and can open a new one for the param only (when there&#39;s alternative implementation is </span><font color=red><strong><span>available</span></strong></font><span>). The problem is you cant just add something to PySpark without touching Connect. I guess it&#39;s intentional.</span>
+<span>Closing as no traction</span>
+<span>Sorry for late responses. We should better have this </span><font color=red><strong><span>feature</span></strong></font><span> parity. But I need to </span><font color=red><strong><span>check</span></strong></font><span> w/ the concern about storage level (raised internally). I will ping the guy to comment here.</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @HyukjinKwon</span>
+<span>Hi @khalidmammadov, now that </span><code>Catalog</code><span> in Scala client including protobuf definition has been implemented at #40438, do you want to continue working on this?</span><br><span>Otherwise, I can take this over.</span><br><font color=red><strong><span>Thanks</span></strong></font><span>.</span>
+<span>Hi, thanks for letting me know. I will look at it</span><br><br><span>On Mon, 3 Apr 2023, 21:15 Takuya UESHIN, </span><em><strong><span>@</span></strong></em><span>.</span><strong><span>*&gt; wrote:</span><br><br><span>&gt; Hi @khalidmammadov </span><a href='https://github.com/khalidmammadov' target='_blank' class='url'>https://github.com/khalidmammadov</a><span>, now that Catalog</span><br><span>&gt; in Scala client including protobuf definition has been implemented, do you</span><br><span>&gt; want to continue working on this?</span><br><span>&gt; Otherwise, I can take this over.</span><br><span>&gt; </span><font color=red><strong><span>Thanks</span></strong></font><span>.</span><br><span>&gt;</span><br><span>&gt; —</span><br><span>&gt; Reply to this email directly, view it on GitHub</span><br><span>&gt; </span><a href='https://github.com/apache/spark/pull/40015#issuecomment-1494921787' target='_blank' class='url'>https://github.com/apache/spark/pull/40015#issuecomment-1494921787</a><span>, or</span><br><span>&gt; unsubscribe</span><br><span>&gt; </span><a href='https://github.com/notifications/unsubscribe-auth/ACYJ3NHUQOOWBY4SFT7D3XDW7MVVDANCNFSM6AAAAAAU3TDHCU' target='_blank' class='url'>https://github.com/notifications/unsubscribe-auth/ACYJ3NHUQOOWBY4SFT7D3XDW7MVVDANCNFSM6AAAAAAU3TDHCU</a><br><span>&gt; .</span><br><span>&gt; You are receiving this because you were mentioned.Message ID:</span><br><span>&gt; *</span></strong><span>@</span><em><strong><span>.</span></strong></em><span>&gt;</span><br><span>&gt;</span><br>
+<span>The build was failing due to https://github.com/apache/spark/pull/40674 and now </span><font color=red><strong><font color=blue><span>fix</span></strong></font><span>ed</span></strong></font><span> by https://github.com/apache/spark/pull/40681</span><br><br><span>Rebased.</span>
+<font color=red><strong><span>Thanks</span></strong></font><span>! merging to master.</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @ueshin!</span>
+<span>cc @cloud-fan</span>
+<span>thanks, merging to master/3.4! (</span><code>multiTransform</code><span> is a to-be-released developer API)</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @cloud-fan for the </span><font color=red><strong><span>review</span></strong></font><span>!</span>
+<span>Maybe @gengliangwang ?</span>
+<span>cc @zhenlineo</span>
+<span>For the </span><font color=red><strong><span>review</span></strong></font><span>ers. This is a mostly mechanical PR; the size is large but the complexity is low. All implemented </span><font color=red><strong><span>documentation</span></strong></font><span> and function signatures were copies from Dataset.</span>
+<span>merging this!</span>
+<span>Sorry about getting back and forth about the schema inference. I am trying to tell a good story about the timestamp without time zone. This should be the final version before 3.4.0 release.</span>
+<span>@cloud-fan</span>
+<span>Let&#39;s do this kind of </span><font color=red><strong><span>clean</span></strong></font><span>ing when we touch the codes around here next time.</span>
+<span>Merged to master.</span>
+<span>@zhenlineo can you make the PR description a bit more descriptive?</span>
+<span>Oh and can you add the ticket to the title?</span>
+<span>So it is ok to not have e2e </span><font color=red><strong><span>test</span></strong></font><span>s for read API (similarly for the write side)?</span>
+<font color=red><strong><span>LGTM</span></strong></font><br><br><span>Looks like you only need </span><code>./build/mvn -Pscala-2.12 scalafmt:format -Dscalafmt.skip=false -Dscalafmt.validateOnly=false -Dscalafmt.changedOnly=false -pl connector/connect/common -pl connector/connect/server -pl connector/connect/client/jvm</code><span> to fix the style.</span>
+<span>merging.</span>
+<span>FYI, bunch of Scala 2.13 </span><font color=red><strong><span>test</span></strong></font><span>s fail (https://github.com/apache/spark/actions/runs/4187249065/jobs/7256849374#step:9:19944) should be </span><font color=red><strong><font color=blue><span>fix</span></strong></font><span>ed</span></strong></font><span> before cutting RC cc @xinrong-meng</span>
+<span>Hi, @hvanhovell .</span><br><span>Since we are close to RC1 cut, could you </span><font color=red><strong><span>test</span></strong></font><span> Scala 2.13 before merging your PR, please?</span><br><span>If there is the best person to do that, it&#39;s you, @hvanhovell . </span><font color=red><strong><span>:)</span></strong></font>
+<span>Thank you @HyukjinKwon @dongjoon-hyun</span>
+<span>No, it was broken since Spark 3.3.0.</span>
+<span>cc @HyukjinKwon and @viirya Note that I don&#39;t think this is a blocker for 3.3.2 RC1 vote.</span><br><br><span>Hmm, I think you will back port it to branch-3.3? But we don&#39;t need to cut RC2 for it? Do you mean that?</span>
+<span>Yes, I&#39;ll land this after your release, @viirya .</span>
+<span>Thank you, @viirya . Let me open this until Tomorrow. </span><font color=red><strong><span>:)</span></strong></font>
+<span>Also, cc @xinrong-meng</span>
+<span>Thank you, @viirya and @HyukjinKwon .</span><br><br><span>For the record, Apache Spark 3.3.2 RC1 vote passed. This patch will be delivered via Spark 3.4.0/3.3.3.</span><br><span>- https://lists.apache.org/thread/krnpf0tv1jdxy6dlssho1cn7ckfjwk2m</span>
+<span>Attaching screenshots of the updated pages.</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1160</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>getting_started-install rst</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/218973521-6206edc3-abc5-481b-8c90-183fe0d82b7b.png</span><span>&quot;</span><span>&gt;</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1160</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>getting_started-quickstart_df ipynb</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/218973623-1d9e4e02-0b4a-42fa-aa87-b5dda72e64bc.png</span><span>&quot;</span><span>&gt;</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1160</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>reference-pyspark streaming rst</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/218973697-be6f786b-7c90-4bfb-a86f-1b870987a2b7.png</span><span>&quot;</span><span>&gt;</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1160</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>user_guide-index rst</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/218973758-e2d9b81a-63f9-43b0-8f72-1fb96f594ed7.png</span><span>&quot;</span><span>&gt;</span><br>
+<span>Late </span><font color=red><strong><span>LGTM</span></strong></font><span>, thank you @allanf-db !</span>
+<span>@haoyanzhang It is better to create a separate branch per every PR:</span><br><span>&lt;img width=</span><span>&quot;</span><span>700</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>Screenshot 2023-02-16 at 12 54 49</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/1580697/219332108-0c909f7d-907c-46c3-b290-b70029675ea1.png</span><span>&quot;</span><span>&gt;</span><br><br><span>see </span><span>&quot;</span><span>Pull request</span><span>&quot;</span><span> at https://spark.apache.org/contributing.html</span>
+<span>@haoyanzhang Do you have an account at OSS JIRA: https://issues.apache.org/jira ? If not, I&#39;ll create it for you.</span>
+<span>@haoyanzhang It is better to create a separate branch per every PR: &lt;img alt=</span><span>&quot;</span><span>Screenshot 2023-02-16 at 12 54 49</span><span>&quot;</span><span> width=</span><span>&quot;</span><span>700</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/1580697/219332108-0c909f7d-907c-46c3-b290-b70029675ea1.png</span><span>&quot;</span><span>&gt;</span><br><span>&gt; </span><br><span>&gt; see </span><span>&quot;</span><span>Pull request</span><span>&quot;</span><span> at https://spark.apache.org/contributing.html</span><br><br><span>got it,  will do it next time</span>
+<span>@haoyanzhang Do you have an account at OSS JIRA: https://issues.apache.org/jira ? If not, I&#39;ll create it for you.</span><br><br><span>I have one, thanks</span>
+<span>+1, </span><font color=red><strong><span>LGTM</span></strong></font><span>. Merging to master.</span><br><span>Thank you, @haoyanzhang and @HyukjinKwon for </span><font color=red><strong><span>review</span></strong></font><span>.</span>
+<span>@haoyanzhang Congratulations with the first </span><font color=red><strong><span>contribution</span></strong></font><span> to Apache Spark!</span>
+<span>cc @HyukjinKwon</span>
+<span>Thank you, @yaooqinn , @HyukjinKwon , @LuciferYang .</span>
+<span>So now we can </span><font color=red><strong><span>upgrade</span></strong></font><span> guava?</span>
+<span>Not yet, @bjornjorgensen ~ </span><font color=red><strong><span>:)</span></strong></font><span> Please hold on any significant </span><font color=red><strong><span>c</span><font color=blue><span>hang</span></strong></font><span>es</span></strong></font><span> until Apache Spark 3.4 is released. We still need to backport many bug fixes during Apache Spark 3.4 RC period. Here I just removed the broken CI which no one will take care.</span>
+<span>I remember Guava </span><font color=red><strong><span>upgrade</span></strong></font><span> is also blocked by Hive .. IIRC ..</span>
+<span>cc @olaky</span>
+<font color=red><strong><span>Thanks</span></strong></font><span>, this is a helpful clarification</span>
+<span>@cloud-fan @olaky Added more clarifications, let me know WDYT! </span><font color=red><strong><span>Thanks</span></strong></font>
+<font color=red><strong><span>Thanks</span></strong></font><span>! updated</span>
+<span>cc @cloud-fan Fixed the style, and passed all </span><font color=red><strong><span>check</span></strong></font><span>s, thanks!</span>
+<span>thanks, merging to master/3.4!</span>
+<span>cc @juliuszsompolski @cloud-fan FYI</span>
+<span>kindly ping @HyukjinKwon @HyukjinKwon</span>
+<span>thanks, merged to master and 3.4</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> for fixing this. Merged to master and branch-3.4.</span>
+<span>cc @zhenlineo we discussed this today</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> for looking into this. We should definitely fix the leak. I would probably do the same:</span><br><span>When we close the session, we go through all buffers and close them. The Result and </span><font color=red><strong><span>clean</span></strong></font><span>er also holds some resources.</span>
+<span>We can also just </span><font color=red><strong><span>clean</span></strong></font><span>-up the results. Part of the problem is that the E2E </span><font color=red><strong><span>test</span></strong></font><span> does not close results. I am not sure if there are similar issues on the server side.</span>
+<span>Will submit a PR shortly.</span>
+<span>@hvanhovell What about this? https://github.com/apache/spark/compare/master...zhenlineo:spark:allocator-memleak?expand=1 when a session is closed, we force to close all buffers.</span>
+<span>Let me close this one, thanks @hvanhovell @zhenlineo</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @wangyum @dongjoon-hyun</span>
+<span>@srielau could you take a look, pls?</span>
+<span>Also, I&#39;d like to share some </span><font color=red><strong><span>performance</span></strong></font><span> measurements from my local machine, using JMH:</span><br><span>code example:</span><br><code>java&lt;br&gt;...&lt;br&gt;    @Benchmark&lt;br&gt;    public void convert_branch_master(Blackhole bh) {&lt;br&gt;        // Convert to unsigned&lt;br&gt;        for (int i = -10_000; i &lt; 10_000; i++) {&lt;br&gt;            UTF8String convert = NumberConverter&lt;br&gt;                    .convert(UTF8String.fromString(String.&lt;font color=red&gt;&lt;strong&gt;value&lt;/strong&gt;&lt;/font&gt;Of(i)).getBytes(), 10, 16);&lt;br&gt;            bh.consume(convert);&lt;br&gt;        }&lt;br&gt;&lt;br&gt;        // Convert to signed&lt;br&gt;        for (int i = -10_000; i &lt; 10_000; i++) {&lt;br&gt;            UTF8String convert = NumberConverter&lt;br&gt;                    .convert(UTF8String.fromString(String.&lt;font color=red&gt;&lt;strong&gt;value&lt;/strong&gt;&lt;/font&gt;Of(i)).getBytes(), 10, -16);&lt;br&gt;            bh.consume(convert);&lt;br&gt;        }&lt;br&gt;    }&lt;br&gt;...&lt;br&gt;&lt;br&gt;// the same code for SPARK-42399 branch&lt;br&gt;</code><br><br><span>With Java 8, current PR even </span><font color=red><strong><span>speed</span></strong></font><span>s up the </span><font color=red><strong><span>performance</span></strong></font><span>:</span><br><code>java&lt;br&gt;# JMH version: 1.36&lt;br&gt;# VM version: JDK 1.8.0_362, OpenJDK 64-Bit Server VM, 25.362-b00&lt;br&gt;# VM invoker: /usr/local/Cellar/openjdk@8/1.8.0+362/libexec/openjdk.jdk/Contents/Home/jre/bin/java&lt;br&gt;# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)&lt;br&gt;# Warmup: 5 iterations, 10 s each&lt;br&gt;# Measurement: 5 iterations, 10 s each&lt;br&gt;# Timeout: 10 min per iteration&lt;br&gt;# Threads: 1 thread, will synchronize iterations&lt;br&gt;# Benchmark mode: Average time, time/op&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Benchmark                                           Mode  Cnt   Score   Error  Units&lt;br&gt;NumberConverterBenchmark.convert_branch_master      avgt   10  30.458 ± 1.638  ms/op&lt;br&gt;NumberConverterBenchmark.convert_branch_spark42399  avgt   10  22.857 ± 0.421  ms/op&lt;br&gt;&lt;br&gt;</code><br><br><span>With Java 11, implementation from master branch works more then 2 times </span><font color=red><strong><span>fast</span></strong></font><span>er than the same implementation with Java 8!</span><br><span>But there is not a big gap in </span><font color=red><strong><span>performance</span></strong></font><span> difference between master branch implementation and implementation from current branch. </span><br><code>java&lt;br&gt;# JMH version: 1.36&lt;br&gt;# VM version: JDK 11.0.16.1, OpenJDK 64-Bit Server VM, 11.0.16.1+0&lt;br&gt;# VM invoker: /usr/local/Cellar/openjdk@11/11.0.16.1/libexec/openjdk.jdk/Contents/Home/bin/java&lt;br&gt;# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)&lt;br&gt;# Warmup: 5 iterations, 10 s each&lt;br&gt;# Measurement: 5 iterations, 10 s each&lt;br&gt;# Timeout: 10 min per iteration&lt;br&gt;# Threads: 1 thread, will synchronize iterations&lt;br&gt;# Benchmark mode: Average time, time/op&lt;br&gt;&lt;br&gt;Benchmark                                           Mode  Cnt   Score   Error  Units&lt;br&gt;NumberConverterBenchmark.convert_branch_master      avgt   10  14.453 ± 1.082  ms/op&lt;br&gt;NumberConverterBenchmark.convert_branch_spark42399  avgt   10  17.956 ± 0.489  ms/op&lt;br&gt;&lt;br&gt;</code><br><br><span>With Java 17, implementation from master branch works more then 3 times </span><font color=red><strong><span>fast</span></strong></font><span>er than the same implementation with Java 8 and ~ 2 times </span><font color=red><strong><span>fast</span></strong></font><span>er then the same implementation with Java 11!</span><br><span>And here is a significant difference between master branch implementation and current branch (master branch is ~2x times </span><font color=red><strong><span>fast</span></strong></font><span>er...). </span><br><code>java&lt;br&gt;# JMH version: 1.36&lt;br&gt;# VM version: JDK 17.0.4.1, OpenJDK 64-Bit Server VM, 17.0.4.1+1&lt;br&gt;# VM invoker: /usr/local/Cellar/openjdk@17/17.0.4.1_1/libexec/openjdk.jdk/Contents/Home/bin/java&lt;br&gt;# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)&lt;br&gt;# Warmup: 5 iterations, 10 s each&lt;br&gt;# Measurement: 5 iterations, 10 s each&lt;br&gt;# Timeout: 10 min per iteration&lt;br&gt;# Threads: 1 thread, will synchronize iterations&lt;br&gt;# Benchmark mode: Average time, time/op&lt;br&gt;&lt;br&gt;Benchmark                                           Mode  Cnt   Score   Error  Units&lt;br&gt;NumberConverterBenchmark.convert_branch_master      avgt   10   8.410 ± 0.161  ms/op&lt;br&gt;NumberConverterBenchmark.convert_branch_spark42399  avgt   10  18.162 ± 0.036  ms/op&lt;br&gt;</code>
+<span>@hvanhovell</span>
+<span>cc @sadikovi @HyukjinKwon</span>
+<span>We discussed before and decided to keep prefersDate similar to a decimal config cc @HyukjinKwon</span>
+<span>Hmm, I take a quick </span><font color=red><strong><span>check</span></strong></font><span>, do you mean the json option </span><code>prefersDecimal</code><span>?  It is inconsistent with other JSON data source options either https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/json/JSONOptions.scala#L240 ... Users can make mistakes since they are used to data source options without </span><code>s</code><span> on the verb.</span><br><br><span>Shall we support </span><code>preferDecimal</code><span> and </span><code>prefersDecimal</code><span> in JSON, and use </span><code>prefer</code><span> in the new options of Spark 3.4?</span>
+<span>im fine w/ that</span>
+<span>I am curious why did we not do it from the beginning?</span>
+<span>I am curious why did we not do it from the beginning?</span><br><br><span>I didn&#39;t join the </span><font color=red><strong><span>discussion</span></strong></font><span>, but let&#39;s make the naming consistent before it is too late. There is only one exception </span><code>prefersDecimal</code><span> now.</span><br><br>
+<span>CC @HyukjinKwon @zhengruifeng</span>
+<span>Attaching screenshots of the updated Migration Guides page and the new version </span><font color=red><strong><span>upgrade</span></strong></font><span> sub-page.</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1340</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>pyspark_migration_guides_doc_page</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/219209282-27bea6e8-beb5-4336-a6c1-7e91a011a225.png</span><span>&quot;</span><span>&gt;</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1340</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>pyspark_migration_guide</span><em><font color=red><strong><span>upgrade</span></strong></font></em><span>doc_page</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/112507318/219209350-bdbf18e4-e77b-414e-a19d-8e431fb2a60a.png</span><span>&quot;</span><span>&gt;</span><br>
+<span>Yeah, let&#39;s close. I don&#39;t think this is an issue.</span>
+<span>Thank you, @HyukjinKwon and @rithwik-db .</span>
+<span>cc @zhenlineo @LuciferYang</span>
+<span>https://github.com/apache/spark/blob/7ee8a32077b09cb847b6ac41cdc5067cf7bd83e9/connector/connect/client/jvm/src/</span><font color=red><strong><span>test</span></strong></font><span>/scala/org/apache/spark/sql/connect/client/util/RemoteSparkSession.scala#L155-L159</span><br><br><span>should we remove this </span><code>try catch</code><span>? This may cover up some problems, but this may be another pr</span><br><br>
+<span>According to your comment, is it okay for me to merge, @LuciferYang ?</span>
+<span>According to your comment, is it okay for me to merge, @LuciferYang ?</span><br><br><span>ok to merge ~</span>
+<font color=red><strong><span>Thanks</span></strong></font><span>, @LuciferYang . Merged to master/3.4.</span><br><span>Thank you, @hvanhovell , @HyukjinKwon , @LuciferYang .</span>
+<span>thanks for the </span><font color=red><strong><span>review</span></strong></font><span>, merging to master/3.4!</span>
+<span>Interestingly, it passed locally while GitHub Action jobs keep failing.</span><br><code>&lt;br&gt;$ build/sbt \&quot;sql/&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;Only *.OrcSourceV1Suite -- -z SPARK-11412\&quot;&lt;br&gt;...&lt;br&gt;[info] All &lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;s passed.&lt;br&gt;[&lt;font color=red&gt;&lt;strong&gt;success&lt;/strong&gt;&lt;/font&gt;] Total time: 23 s, completed Feb 20, 2023, 12:54:28 PM&lt;br&gt;</code>
+<span>Since this happens in GitHub Action currently, I made a WIP PR for further </span><font color=red><strong><span>investigation</span></strong></font><span>. If it&#39;s valid, I&#39;ll convert it to the official PR separately from this PR.</span><br><span>- https://github.com/apache/spark/pull/40095</span>
+<span>I closed my PR because the failure seems to happen more earlier than this commit.</span>
+<span>Note for the </span><font color=red><strong><span>review</span></strong></font><span>er. I still want to add a couple of </span><font color=red><strong><span>test</span></strong></font><span>s for duplicate functions.</span>
+<span>@dongjoon-hyun I will fix those today. I do think we should have a </span><font color=red><strong><span>discussion</span></strong></font><span> about this. Currently we have both maven and scala-2.13 that are not </span><font color=red><strong><span>test</span></strong></font><span>ed during CI. That seems wrong if both are apparently supported. The mental overhead of </span><font color=red><strong><span>test</span></strong></font><span>ing these manually is very high.</span>
+<span>As for blocking other </span><font color=red><strong><span>community</span></strong></font><span> members severely, the same applies to the lack of </span><font color=red><strong><span>test</span></strong></font><span>ing of scala-2.13.</span>
+<span>Fix for 2.13 has merged. I am going to hold this off until https://github.com/apache/spark/pull/40056 is merged.</span>
+<span>merging</span>
+<span>thanks all</span>
+<span>Some info I searched about it: https://docs.docker.com/build/at</span><font color=red><strong><span>test</span></strong></font><span>ations/slsa-provenance/.</span>
+<span>Thank you. The affected versions are the future releases (3.4.0/3.3.3/3.2.4) instead of the released version.</span>
+<span>K8s Integration Tests passed. Merged to master/3.4/3.3/3.2.</span>
+<span>cc @wangyum @srowen FYI</span>
+<span>Could you </span><font color=red><strong><span>test</span></strong></font><span> against hadoop-2?</span>
+<span>Could you </span><font color=red><strong><span>test</span></strong></font><span> against hadoop-2?</span><br><br><span>Do same </span><font color=red><strong><span>check</span></strong></font><span> with -Phadoop-2</span><br><br><strong><span>Maven</span></strong><span> </span><br><br><code>&lt;br&gt;build/mvn &lt;font color=red&gt;&lt;strong&gt;clean&lt;/strong&gt;&lt;/font&gt;&lt;br&gt;build/mvn &lt;font color=red&gt;&lt;strong&gt;clean&lt;/strong&gt;&lt;/font&gt; install -DskipTestes -pl resource-managers/yarn -am -Pyarn -Phadoop-2&lt;br&gt;build/mvn -D&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;=none -DwildcardSuites=org.apache.spark.deploy.yarn.YarnClusterSuite -pl resource-managers/yarn &lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt; -Pyarn -Phadoop-2&lt;br&gt;build/mvn &lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt; -pl resource-managers/yarn -Pyarn -D&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;.exclude.tags=org.apache.spark.tags.ExtendedLevelDBTest  -Phadoop-2&lt;br&gt;</code><br><br><strong><span>SBT</span></strong><br><br><code>&lt;br&gt;build/sbt &lt;font color=red&gt;&lt;strong&gt;clean&lt;/strong&gt;&lt;/font&gt; yarn/&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt; -Pyarn -D&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;.exclude.tags=org.apache.spark.tags.ExtendedLevelDBTest -Phadoop-2&lt;br&gt;</code><br><br><br><span>All </span><font color=red><strong><span>test</span></strong></font><span>s passed.</span><br><br>
+<span>Merged to master</span>
+<span>Merged to master. </span><font color=red><strong><span>Thanks</span></strong></font><span> @LuciferYang</span>
+<span>Thank you, @LuciferYang and @huaxingao !</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @huaxingao @dongjoon-hyun</span>
+<span>@nija-at can you file a ticket in the JIRA (or ask me to do it), and add that to the title?</span>
+<span>Can you also do this for the scala client?</span>
+<span>Actually. Please open a JIRA and add JIRA id to the PR title along with module names (example: </span><code>[SPARK-xxxx][CONNECT][PYTHON]) accept user_agent in spark connect&#39;s connection string</code><span>)</span>
+<span>@hvanhovell </span><br><br><span>&gt; can you file a ticket in the JIRA (or ask me to do it), and add that to the title?</span><br><br><span>Done.</span><br><br><span>&gt; Can you also do this for the scala client?</span><br><br><span>I&#39;ll do that as a separate change</span><br>
+<span>@dongjoon-hyun this time I have </span><font color=red><strong><span>test</span></strong></font><span>ed 2.13.</span>
+<span>Merging.</span>
+<span>Thank you so much, @hvanhovell and @cloud-fan !</span>
+<span>For the </span><font color=red><strong><span>review</span></strong></font><span>s, I have manually </span><font color=red><strong><span>test</span></strong></font><span>ed this with 2.13.</span>
+<span>Alright merging this.</span>
+<span>For the </span><font color=red><strong><span>review</span></strong></font><span>s, I have manually </span><font color=red><strong><span>test</span></strong></font><span>ed this with 2.13.</span><br><br><span>Thank you so much, @hvanhovell !</span>
+<span>Merged to master/3.4 for Apache Spark 3.4.0. Thank you, @huaxingao and @viirya .</span><br><br><span>cc @MaxGekk since he filed SPARK-39859 originally.</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> @dongjoon-hyun @viirya</span>
+<span>cc @dongjoon-hyun @HyukjinKwon</span>
+<span>Merged to master for Apache Spark 3.5. Thank you, @sadikovi and @HyukjinKwon .</span>
+<span>cc @viirya</span>
+<span>Thank you, @viirya !</span>
+<span>The </span><font color=red><strong><span>test</span></strong></font><span>s passed in the GitHub Action. Merged to master</span><br><img src="https://user-images.githubusercontent.com/9700541/219601614-e84bf609-e8fd-4a0b-80b8-0afa5f41b457.png" referrerpolicy="no-referrer" alt="Screenshot 2023-02-17 at 1 08 13 AM"><br><br><span>Merged to master/3.4.</span>
+<span>It seems more complicated than I thought, I think we can simplify it in this way</span><br><br><span>In client:</span><br><code>&lt;br&gt;    def sql(self, sqlQuery: str, args: Optional[Dict[str, str]] = None) -&gt; \&quot;DataFrame\&quot;:&lt;br&gt;        df = DataFrame.withPlan(SQL(sqlQuery, args), self)&lt;br&gt;        print(df.schema)   &lt;- eagerly analyze the plan&lt;br&gt;        return df&lt;br&gt;</code><br><br><span>In connect planner:</span><br><code>&lt;br&gt;  private def transformSql(sql: proto.SQL): LogicalPlan = {&lt;br&gt;    // scalastyle:off println&lt;br&gt;    println(s\&quot;invoke transformSql $sql\&quot;)&lt;br&gt;    session&lt;br&gt;      .sql(sql.getQuery, sql.getArgsMap.asScala.toMap)    &lt;- directly invoke the spark session api&lt;br&gt;      .logicalPlan&lt;br&gt;  }&lt;br&gt;</code><br><br><br><span>bin/pyspark --remote </span><span>&quot;</span><span>local[*]</span><span>&quot;</span><br><code>&lt;br&gt;&gt;&gt;&gt; spark.sql(\&quot;set spark.sql.adaptive.enabled=false\&quot;)&lt;br&gt;invoke transformSql query: \&quot;set spark.sql.adaptive.enabled=false\&quot;&lt;br&gt;&lt;br&gt;StructType([StructField(&#39;key&#39;, StringType(), False), StructField(&#39;&lt;font color=red&gt;&lt;strong&gt;value&lt;/strong&gt;&lt;/font&gt;&#39;, StringType(), False)])&lt;br&gt;DataFrame[key: string, &lt;font color=red&gt;&lt;strong&gt;value&lt;/strong&gt;&lt;/font&gt;: string]&lt;br&gt;</code>
+<span>@cloud-fan @boneanxs could you please take a look if you find a time?</span>
+<span>@Yikf can you provide a </span><font color=red><strong><span>test</span></strong></font><span> case, or at least the error stacktrace you hit in your environment?</span>
+<span>@cloud-fan This case is the error that Apache kyuubi encountered when upgrading from spark 3.3.1 to 3.3.2, can see this </span><a href='https://github.com/apache/kyuubi/actions/runs/4192366930/jobs/7268919556#step:6:2611'><span>link</span></a><span> to find the error stacktrace.</span>
+<span>updated, verified w/ kyuubi on spark 3.3.2 and all </span><font color=red><strong><span>test</span></strong></font><span>s passed</span><br><code>&lt;br&gt;build/mvn &lt;font color=red&gt;&lt;strong&gt;clean&lt;/strong&gt;&lt;/font&gt; &lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt; -pl :kyuubi-spark-connector-hive_2.12 -am -Pspark-3.3 -Dspark.version=3.3.2&lt;br&gt;</code>
+<span>kindly ping @cloud-fan , @boneanxs Any suggestions?</span>
+<span>I have not followed the </span><font color=red><strong><span>c</span><font color=blue><span>hang</span></strong></font><span>es</span></strong></font><span> in this part of the code too much in a while - but this </span><font color=red><strong><span>specific</span></strong></font><span> PR will result in a different </span><code>jobId</code><span> each time the class is deserialized - I would expect that to cause issues with output formats ?</span>
+<span>@mridulm </span><font color=red><strong><span>Thanks</span></strong></font><span> your </span><font color=red><strong><span>review</span></strong></font><span>, this is a nice question for me, </span><code>JobId</code><span> maybe is different when each time the class is deserialized.</span><br><br><span>How about this idea that </span><code>SparkHadoopWriterUtils.createJobTrackerID</code><span> to generate an ID for a job tracker, and the job tracker is </span><font color=red><strong><span>unique</span></strong></font><span>, JobId is constructed using a </span><font color=red><strong><span>unique</span></strong></font><span> tackerid when the class is deserialized.</span>
+<span>@Yikf Agree - we only specify two parts for the </span><code>JobID</code><span> - the </span><code>String jtIdentifier</code><span> and </span><code>int id</code><span>.</span><br><span>We can persist those in the class - and make jobId a </span><code>transient lazy val</code><span> which recreates it each time.</span><br><br><span>Something like this instead:</span><br><br><code>&lt;br&gt;&lt;br&gt;  private[this] val jobIdParts: (String, Int) = {&lt;br&gt;    val id = SparkHadoopWriterUtils.createJobID(new Date, 0)&lt;br&gt;    (id.getJtIdentifier, id.getId)&lt;br&gt;  }&lt;br&gt;&lt;br&gt;  @transient private lazy val jobId = new JobID(jobIdParts._1, jobIdParts._2)&lt;br&gt;</code><br><br><span>Thoughts ?</span><br>
+<span>@mridulm Nice suggestion, and we can simplify to as follow since </span><code>int id</code><span> is </span><font color=red><strong><span>unique</span></strong></font><span>.</span><br><br><code>scala&lt;br&gt;  private[this] val jobTrackerID = SparkHadoopWriterUtils.createJobTrackerID(new Date)&lt;br&gt;  @transient private lazy val jobId = new JobID(jobTrackerID, 0)&lt;br&gt;</code>
+<span>Hi, @cloud-fan . SPARK-41448 landed to master/3.3/3.2 and this is merge this to master/3.4 only. I&#39;m wondering if we are planning backporting to branch-3.3 and 3.2.</span><br><span>- https://github.com/apache/spark/pull/38980#issuecomment-1346229161</span><br>
+<span>Also, cc @sunchao</span>
+<span>@Yikf can you help to open a backport PR for 3.2/3.3? </span><font color=red><strong><span>Thanks</span></strong></font><span>!</span>
+<span>@Yikf can you help to open a backport PR for 3.2/3.3? </span><font color=red><strong><span>Thanks</span></strong></font><span>!</span><br><br><span>Sure</span>
+<span>cc @dongjoon-hyun</span>
+<span>I make another one build with maven 3.8.7 + cyclonedx-maven-plugin  2.7.4 https://github.com/LuciferYang/spark/actions/runs/4205904014/jobs/7298678641</span><br><br><span>&lt;img width=</span><span>&quot;</span><span>1074</span><span>&quot;</span><span> alt=</span><span>&quot;</span><span>image</span><span>&quot;</span><span> src=</span><span>&quot;</span><span>https://user-images.githubusercontent.com/1475305/219719321-dc1e6aa3-1a21-4e93-92ce-60cee921493b.png</span><span>&quot;</span><span>&gt;</span><br>
+<span>I mean in our GitHub Action repo. We are using CycloneDX 2.7.3, aren&#39;t we?</span><br><br><span>&gt; I make another one build with maven 3.8.7 + cyclonedx-maven-plugin 2.7.4 https://github.com/LuciferYang/spark/actions/runs/4205904014/jobs/7298678641</span>
+<span>Yes, we use CycloneDX 2.7.3. So I should not explain that 2.7.4 has such issue in the pr description, because it does not affect Spark now, am I right?</span>
+<span>Please let me explain my intention more:</span><br><br><span>1. First of all, I want to update maven to 3.9.0(keep use CycloneDX 2.7.3), then I found the following error:</span><br><br><code>&lt;br&gt;[ERROR] An error occurred attempting to read POM&lt;br&gt;org.codehaus.plexus.util.xml.pull.XmlPullParserException: UTF-8 BOM plus xml decl of ISO-8859-1 is incompatible (position: START_DOCUMENT seen &lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;ISO-8859-1\&quot;... @1:42) &lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDeclWithVersion (MXParser.java:3423)&lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDecl (MXParser.java:3345)&lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.parsePI (MXParser.java:3197)&lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.parseProlog (MXParser.java:1828)&lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl (MXParser.java:1757)&lt;br&gt;    at org.codehaus.plexus.util.xml.pull.MXParser.next (MXParser.java:1375)&lt;br&gt;    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:3940)&lt;br&gt;    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:612)&lt;br&gt;    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:627)&lt;br&gt;    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:759)&lt;br&gt;    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:746)&lt;br&gt;    at org.cyclonedx.maven.BaseCycloneDxMojo.retrieveParentProject (BaseCycloneDxMojo.java:694)&lt;br&gt;    at org.cyclonedx.maven.BaseCycloneDxMojo.getClosestMetadata (BaseCycloneDxMojo.java:524)&lt;br&gt;    at org.cyclonedx.maven.BaseCycloneDxMojo.convert (BaseCycloneDxMojo.java:481)&lt;br&gt;    at org.cyclonedx.maven.CycloneDxMojo.execute (CycloneDxMojo.java:70)&lt;br&gt;    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:330)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:213)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:175)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:76)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:163)&lt;br&gt;    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)&lt;br&gt;    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:160)&lt;br&gt;    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)&lt;br&gt;    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)&lt;br&gt;    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)&lt;br&gt;    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)&lt;br&gt;    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:260)&lt;br&gt;    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:172)&lt;br&gt;    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:100)&lt;br&gt;    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:821)&lt;br&gt;    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:270)&lt;br&gt;    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)&lt;br&gt;    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)&lt;br&gt;    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)&lt;br&gt;    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)&lt;br&gt;    at java.lang.reflect.Method.invoke (Method.java:498)&lt;br&gt;    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)&lt;br&gt;    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)&lt;br&gt;    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)&lt;br&gt;    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)&lt;br&gt;</code><br><br><span>I think We should see similar errors here: https://github.com/LuciferYang/spark/actions/runs/4206035140/jobs/7299042843 later</span><br><br><span>2. then I want to </span><font color=red><strong><span>test</span></strong></font><span> maven 3.9.0 + CycloneDX 2.7.4 couple of days ago, but there an error same as  </span><code>maven 3.8.7 + cyclonedx-maven-plugin 2.7.4</code><span>,  I think we should see it here: https://github.com/LuciferYang/spark/runs/11424487074 later</span><br><br><span>3. then I </span><font color=red><strong><span>test</span></strong></font><span> maven 3.9.0 + CycloneDX 2.7.5 today, there is no above issues(we can </span><font color=red><strong><span>check</span></strong></font><span> https://github.com/LuciferYang/spark/runs/11424568023 later).</span><br><br><span>So If I want to </span><font color=red><strong><span>upgrade</span></strong></font><span> Spark to use maven 3.9.0, I must </span><font color=red><strong><span>upgrade</span></strong></font><span> cyclonedx-maven-plugin to 2.7.5, I should </span><font color=red><strong><span>upgrade</span></strong></font><span> them in one or two pr? </span><br>
+<span>I&#39;m trying to assess the issue. So, those combination issue is not the AS-IS Apache Spark issue in both master/branch-3.4, right?</span><br><br><span>FYI, Cyclone plugin 2.7.4 issue is a known one. When I started SBOM works, 2.7.4 was the las</span><font color=red><strong><span>test</span></strong></font><span> but was unusable across multiple ASF projects. That was the main reason I chose 2.7.3 instead of the la</span><font color=red><strong><span>test</span></strong></font><span> at that time. I&#39;m not quite sure if 2.7.5 is </span><font color=red><strong><span>stable</span></strong></font><span> enough.</span><br><br><span>Anyway, we can apply this PR on </span><code>master</code><span> branch for Apache Spark 3.5.0 only separately from the Maven issue. Maven is also another big issues always.</span>
+<span>Yeah, Spark 3.4.0 does not need this pr.</span><br><br>
+<span>If you don&#39;t mind, please allow me one or two days. I&#39;ll </span><font color=red><strong><span>check</span></strong></font><span> this during weekend~ Thank you for your patience always.</span>
+<span>@dongjoon-hyun found a new issue related to 2.7.5: https://github.com/CycloneDX/cyclonedx-maven-plugin/issues/284</span><br><br><br>
+<span>Got it. Thank you for informing.</span>
+<span>I think we should wait for 2.7.6 or higher to </span><font color=red><strong><span>test</span></strong></font><span> </span><font color=red><strong><span>usability</span></strong></font><span>, then we can reuse this jira. I will close this pr first, thanks @dongjoon-hyun</span>
+<span>+1 for your decision, @LuciferYang . Thank you for letting me know before I started my work~ </span><font color=red><strong><span>:)</span></strong></font>
+<span>I&#39;m hitting this when trying to build hadoop having updated maven via homebrew so as to get spark to work.  joy.</span>
+<span>This PR is superseded by https://github.com/apache/spark/pull/40726 .</span>
+<span>I think we should better file a JIRA.</span>
+<span>Discussed this with @grundprinzip. Apparently the retries are kept so long intentionally. The fix here needs to occur differently. Closing this PR for now.</span>
+<span>cc @HyukjinKwon mind taking a look when you find some time?</span>
+<font color=red><strong><span>Thanks</span></strong></font><span>, @HyukjinKwon !</span>
+<span>Late </span><font color=red><strong><span>LGTM</span></strong></font>
+<span>wait https://github.com/apache/spark/pull/40065</span>
+<span>Need to wait for a </span><font color=red><strong><span>stable</span></strong></font><span> CycloneDX version, close this first</span><br>
+<span>Addressed comments. @LuciferYang </span><br><span>And gentle ping @wangyum @sunchao: could you also take a look?</span>
+<span>Add a conf </span><code>spark.sql.hive.dropPartitionByName.enabled</code><span> and two </span><font color=red><strong><span>test</span></strong></font><span>s. cc: @sunchao</span>
+<span>Merged to master, thanks!</span>
+<span>Thank youso much, @wecharyu, @sunchao and all!</span>
+<span>I need to update golden files in this PR.</span>
+<span>When you have some time, could you </span><font color=red><strong><span>review</span></strong></font><span> this, @viirya ? I want to merge this to proceed the further </span><font color=red><strong><span>investigation</span></strong></font><span>s.</span>
+<span>Thank you so much always for your help, @viirya !</span><br><span>Merged to master for Apache Spark 3.5.</span>
+<span>Some </span><font color=red><strong><span>test</span></strong></font><span>s always fail with </span><br><code>&lt;br&gt;112 did not equal 104 Invalid stopIndex of a query context. Actual:SQLQueryContext(Some(1),Some(15),Some(15),Some(112),Some(select id from hive.`/home/runner/work/oss-spark/oss-spark/target/tmp/spark-9ff647b3-c1b5-449d-ae54-19a7f3baff9d`),None,None)&lt;br&gt;</code><br><span>Length of string </span><span>&quot;</span><span>select id from hive.</span><code>/home/runner/work/oss-spark/oss-spark/target/tmp/spark-9ff647b3-c1b5-449d-ae54-19a7f3baff9d</code><span>&quot;</span><span> is 113, so the last index is 112.</span><br><br><span>I guess that&#39;s because my folder name is </span><code>oss-spark</code><span>. The two </span><code>oss-</code><span> contains 8 chars, that&#39;s equal to 112 - 104.</span><br><br><span>https://github.com/WweiL/oss-spark/actions/runs/4235566927/jobs/7359363624</span><br><br><span>So I changed the </span><a href='https://github.com/apache/spark/blob/b36d1484c1a090a33d9add056730128b9ba5729f/sql/hive/src/&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;/scala/org/apache/spark/sql/hive/execution/SQLQuerySuite.scala#L1410'><span>hard-coded length here</span></a><span> to a variable-length one.</span><br><br><span>@MaxGekk @srielau @itholic I found that this is related to the PR (https://github.com/apache/spark/pull/39977) you pushed / </span><font color=red><strong><span>review</span></strong></font><span>ed. Can you guys also take a look? </span><font color=red><strong><span>Thanks</span></strong></font><span>!</span>
+<font color=red><strong><span>Thanks</span></strong></font><span> for catching out, @WweiL !</span>
+<span>@cloud-fan Can you merge this to master when you get a chance? Thank you!</span>
+<span>thanks, merging to master!</span>
+<span>Was this merged only to Spark 3.5 (master branch)? The JIRA ticket is not properly marked for fix version as well as status, and we need to make it clear to determine the version range to apply SPARK-42572.</span>
+<span>Was this merged only to Spark 3.5 (master branch)? The JIRA ticket is not properly marked for fix version as well as status, and we need to make it clear to determine the version range to apply </span><a href='https://issues.apache.org/jira/browse/SPARK-42572'><span>SPARK-42572</span></a><span>.</span><br><br><span>Yes this was only merged to master. I&#39;ve updated the version in SPARK-42572. BTW is there a way to quickly decide what&#39;s the version of the current master branch? I thought it was 3.4...</span>
+<span>Sorry I seem to look at different JIRA ticket. SPARK-42484 contains the </span><font color=red><strong><font color=blue><span>fix</span></strong></font><span>ed</span></strong></font><span> version, 3.5.0. That said, SPARK-42572 only needs to be applied to master branch.</span>
+<span>The kub </span><font color=red><strong><span>test</span></strong></font><span> is not related to this PR, I believe:</span><br><code>&lt;br&gt;[info] org.apache.spark.deploy.k8s.integration&lt;font color=red&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/font&gt;.KubernetesSuite *** ABORTED *** (27 minutes, 35 seconds)&lt;br&gt;[info]   io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: POST at: https://192.168.49.2:8443/api/v1/namespaces. Message: object is being deleted: namespaces \&quot;spark-e7de0ffd81044f09afb2693a0e227a43\&quot; already exists. Received status: &lt;br&gt;</code>
+<span>+1, </span><font color=red><strong><span>LGTM</span></strong></font><span>. Merging to master/3.4.</span><br><span>Thank you, @gengliangwang.</span>
+<span>Move </span><code>SaveMode</code><span> to catalyst module is a break change, need add </span><code>ProblemFilters</code><span> to </span><code>MimaExcludes</code>
+<span>Move </span><code>SaveMode</code><span> to catalyst module is a break change, need add </span><code>ProblemFilters</code><span> to </span><code>MimaExcludes</code><br><br><span>I think we shouldn&#39;t make such breaking change?</span></p><blockquote><p><span>Move </span><code>SaveMode</code><span> to catalyst module is a break change, need add </span><code>ProblemFilters</code><span> to </span><code>MimaExcludes</code><br><span>&gt; </span><br><span>&gt; I think we shouldn&#39;t make such breaking change?</span><br><br><span>best to avoid</span>
+<span>Depends on </span><a href='https://github.com/apache/spark/pull/40109' target='_blank' class='url'>https://github.com/apache/spark/pull/40109</a><span> to get the correct error message for </span><code>create</code><span>.</span>
+<span>Sorry late </span><font color=red><strong><span>LGTM</span></strong></font>
+<span>Before we try to use multiple task schedulers, why not fix the </span><font color=red><strong><span>parallel</span></strong></font><span>ism issues in the existing one. Moving from a locking everywhere approach, to an event loop should yield quite a throughput </span><font color=red><strong><span>improvement</span></strong></font><span>.</span></p></blockquote></blockquote></div></div>
+</body>
+</html>
