@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1517370683",
+    "html_url": "https://github.com/apache/spark/pull/40895#issuecomment-1517370683",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40895",
+    "id": 1517370683,
+    "node_id": "IC_kwDOAQXtWs5acT07",
+    "user": {
+      "login": "bogao007",
+      "id": 109614351,
+      "node_id": "U_kgDOBoiVDw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/109614351?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/bogao007",
+      "html_url": "https://github.com/bogao007",
+      "followers_url": "https://api.github.com/users/bogao007/followers",
+      "following_url": "https://api.github.com/users/bogao007/following{/other_user}",
+      "gists_url": "https://api.github.com/users/bogao007/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/bogao007/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/bogao007/subscriptions",
+      "organizations_url": "https://api.github.com/users/bogao007/orgs",
+      "repos_url": "https://api.github.com/users/bogao007/repos",
+      "events_url": "https://api.github.com/users/bogao007/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/bogao007/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-21T07:08:50Z",
+    "updated_at": "2023-04-21T07:08:50Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "Conflict with https://github.com/apache/spark/pull/40892, will close this PR",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1517370683/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

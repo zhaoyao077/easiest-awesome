@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40661",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40661/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40661/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40661/events",
+  "html_url": "https://github.com/apache/spark/pull/40661",
+  "id": 1653751287,
+  "node_id": "PR_kwDOAQXtWs5NlBZO",
+  "number": 40661,
+  "title": "[SPARK-43025][SQL] Eliminate Union if filters have the same child plan",
+  "user": {
+    "login": "beliefer",
+    "id": 8486025,
+    "node_id": "MDQ6VXNlcjg0ODYwMjU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8486025?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/beliefer",
+    "html_url": "https://github.com/beliefer",
+    "followers_url": "https://api.github.com/users/beliefer/followers",
+    "following_url": "https://api.github.com/users/beliefer/following{/other_user}",
+    "gists_url": "https://api.github.com/users/beliefer/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/beliefer/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/beliefer/subscriptions",
+    "organizations_url": "https://api.github.com/users/beliefer/orgs",
+    "repos_url": "https://api.github.com/users/beliefer/repos",
+    "events_url": "https://api.github.com/users/beliefer/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/beliefer/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-04-04T12:00:11Z",
+  "updated_at": "2023-05-05T10:36:48Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40661",
+    "html_url": "https://github.com/apache/spark/pull/40661",
+    "diff_url": "https://github.com/apache/spark/pull/40661.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40661.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThere are a lot of SQL with union multiple subquery with filter in user scenarios. Take an example,\r\n**q1**\r\n```\r\nSELECT\r\nss_item_sk,\r\nss_ticket_number,\r\nss_customer_sk\r\nFROM store_sales\r\nLEFT OUTER JOIN store_returns\r\nON (sr_item_sk = ss_item_sk AND sr_ticket_number = ss_ticket_number)\r\nWHERE sr_return_amt > 10000\r\nUNION ALL\r\nSELECT\r\nss_item_sk,\r\nss_ticket_number,\r\nss_customer_sk\r\nFROM store_sales\r\nLEFT OUTER JOIN store_returns\r\nON (sr_item_sk = ss_item_sk AND sr_ticket_number = ss_ticket_number)\r\nWHERE sr_return_amt < 1000\r\n```\r\nIn fact, we can simplify this SQL as\r\n```\r\nSELECT\r\nss_item_sk,\r\nss_ticket_number,\r\nss_customer_sk\r\nFROM store_sales\r\nLEFT OUTER JOIN store_returns\r\nON (sr_item_sk = ss_item_sk AND sr_ticket_number = ss_ticket_number)\r\nWHERE sr_return_amt > 10000 OR sr_return_amt < 1000\r\n```\r\n**q2**\r\n```\r\nSELECT\r\n  ss_item_sk,\r\n  ss_ticket_number,\r\n  ss_customer_sk\r\nFROM store_sales\r\nWHERE ss_ext_discount_amt > 1000\r\nUNION ALL\r\nSELECT\r\n  ss_item_sk,\r\n  ss_ticket_number,\r\n  ss_customer_sk\r\nFROM store_sales\r\nWHERE ss_ext_discount_amt < 100\r\n```\r\nIn fact, we can simplify this SQL as\r\n```\r\nSELECT\r\n  ss_item_sk,\r\n  ss_ticket_number,\r\n  ss_customer_sk\r\nFROM store_sales\r\nWHERE ss_ext_discount_amt > 1000 OR ss_ext_discount_amt < 100\r\n```\r\n\r\nThis PR optimizes `Union` operators if the children exists at least two `Filter` by:\r\n1. Eliminate `Union` operators if all the children are `Filter` and all the child of these `Filter`s are same. We just need merging the predicates into one single predicate by connecting these `Filter`s with `Or`.\r\n2. Combines multiple `Filter` operators into one if all the child of these `Filter`s are same. We just need merging the predicates into one single predicate by connecting these `Filter`s with `Or` too.\r\n\r\n### Why are the changes needed?\r\nSimply the SQL plan and improve the performance.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n'No'.\r\nNew feature and just update the inner implementation.\r\n\r\n\r\n### How was this patch tested?\r\nNew test cases.\r\nThe micro benchmark for q1 and q2.\r\nBefore this PR\r\n```\r\nJava HotSpot(TM) 64-Bit Server VM 1.8.0_311-b11 on Mac OS X 10.16\r\nIntel(R) Core(TM) i7-9750H CPU @ 2.60GHz\r\nTPCDS Snappy:                             Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nq1                                               51569          52030         653          0.6        1627.9       1.0X\r\n\r\nJava HotSpot(TM) 64-Bit Server VM 1.8.0_311-b11 on Mac OS X 10.16\r\nIntel(R) Core(TM) i7-9750H CPU @ 2.60GHz\r\nTPCDS Snappy:                             Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nq2                                                4255           4287          45          6.8         147.7       1.0X\r\n```\r\nAfter this PR\r\n```\r\nJava HotSpot(TM) 64-Bit Server VM 1.8.0_311-b11 on Mac OS X 10.16\r\nIntel(R) Core(TM) i7-9750H CPU @ 2.60GHz\r\nTPCDS Snappy:                             Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nq1.                                              46806          47462         929          0.7        1477.5       1.0X\r\n\r\nJava HotSpot(TM) 64-Bit Server VM 1.8.0_311-b11 on Mac OS X 10.16\r\nIntel(R) Core(TM) i7-9750H CPU @ 2.60GHz\r\nTPCDS Snappy:                             Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nq2.                                                2655           2674          28         10.8          92.2       1.0X\r\n\r\n```\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40661/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40661/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

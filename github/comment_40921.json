@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1521229465",
+    "html_url": "https://github.com/apache/spark/pull/40921#issuecomment-1521229465",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40921",
+    "id": 1521229465,
+    "node_id": "IC_kwDOAQXtWs5arB6Z",
+    "user": {
+      "login": "mridulm",
+      "id": 1591700,
+      "node_id": "MDQ6VXNlcjE1OTE3MDA=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1591700?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mridulm",
+      "html_url": "https://github.com/mridulm",
+      "followers_url": "https://api.github.com/users/mridulm/followers",
+      "following_url": "https://api.github.com/users/mridulm/following{/other_user}",
+      "gists_url": "https://api.github.com/users/mridulm/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/mridulm/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/mridulm/subscriptions",
+      "organizations_url": "https://api.github.com/users/mridulm/orgs",
+      "repos_url": "https://api.github.com/users/mridulm/repos",
+      "events_url": "https://api.github.com/users/mridulm/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/mridulm/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-25T06:38:13Z",
+    "updated_at": "2023-04-25T06:38:13Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "+CC @otterc ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1521229465/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

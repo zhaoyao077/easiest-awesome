@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40909",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40909/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40909/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40909/events",
+  "html_url": "https://github.com/apache/spark/pull/40909",
+  "id": 1679327742,
+  "node_id": "PR_kwDOAQXtWs5O55ty",
+  "number": 40909,
+  "title": "[SPARK-42411] [Kubernetes] Add support for istio with strict mtls",
+  "user": {
+    "login": "puneetguptanitj",
+    "id": 3784871,
+    "node_id": "MDQ6VXNlcjM3ODQ4NzE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3784871?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/puneetguptanitj",
+    "html_url": "https://github.com/puneetguptanitj",
+    "followers_url": "https://api.github.com/users/puneetguptanitj/followers",
+    "following_url": "https://api.github.com/users/puneetguptanitj/following{/other_user}",
+    "gists_url": "https://api.github.com/users/puneetguptanitj/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/puneetguptanitj/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/puneetguptanitj/subscriptions",
+    "organizations_url": "https://api.github.com/users/puneetguptanitj/orgs",
+    "repos_url": "https://api.github.com/users/puneetguptanitj/repos",
+    "events_url": "https://api.github.com/users/puneetguptanitj/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/puneetguptanitj/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-22T04:33:01Z",
+  "updated_at": "2023-05-05T01:01:13Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40909",
+    "html_url": "https://github.com/apache/spark/pull/40909",
+    "diff_url": "https://github.com/apache/spark/pull/40909.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40909.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nFollowing describes the changes made, all changes are behind respective configuration properties\r\n\r\n1. Followed the same model as driver to create svc records for executors as well. The lifecycle of the SVC record is tied to executor lifecycle. While registering with drivers, executors now supply their SVC hostname. **Controlled by a new configuration (added as part of this PR): `spark.kubernetes.executor.service`**\r\n    \r\n![exec_service](https://user-images.githubusercontent.com/3784871/233761856-f135c726-9c90-4a44-bcac-84ce97f09b9d.png)\r\n    \r\n2. Allowed drivers and executors to bind to all IPs. **Controlled by existing properties `spark.driver.bindAddress` and `spark.executor.bindAddress`. This PR makes `0.0.0.0` a permissible value**\r\n    \r\n![bind_address](https://user-images.githubusercontent.com/3784871/233761913-f763a0f0-bccf-4743-871c-f982b93cf7ba.png)\r\n    \r\n3. Added support for providing\r\n    1. pre start script: that would be run before driver/executor JVM gets started. This script can do any setup e.g. waiting for istio-proxy sidecar to be up.\r\n    2. post stop script: that would be run after driver/executor JVM completes. This script can do any cleanup example in our case it makes a REST call to shutdown sidecar.These scripts are not part of the PR because the onus of providing any specialized cleanup would lie with the client. In our case it is provided by Proton. **Controlled by new configurations (added as part of this PR): `spark.kubernetes.post.stop.script`, `spark.kubernetes.pre.start.script` which when set will be executed before and after the driver/executor JVM**\r\n\r\n![sidecar_termination](https://user-images.githubusercontent.com/3784871/233762111-9251aa14-87a7-4339-8549-45b4ae1e06dc.png)\r\n\r\n### Why are the changes needed?\r\n\r\nSpark allows using Kubernetes as the resource scheduler however off the shelf does not work with Kubernetes cluster using Istio service mesh in strict MTLS mode because:\r\n\r\n1. For Istio to work, it needs to know the network identity of all possible network paths. Currently network identity (through a K8s service record) is created only for the driver pod but not for executors.\r\n2. Istio adds a istio-proxy sidecar to every pod and this sidecar handles all pod to pod networking. However the sidecar binds to Pod IP and then sends ingress traffic to localhost (if PILOT_ENABLE_INBOUND_PASSTHROUGH is set to false). Therefore for ingress traffic to correctly reach application processes (like driver and executor JVMs), the processes need to bind to all IPs and not just Pod IP, as otherwise, traffic routed to localhost by the sidecar would not reach the application processes. Off the shelf Spark allows driver and executors to only bind to Pod IP and therefore does not work with Istio.\r\n3. Unlike the Istio sidecar, driver/executor containers in the pod can finish. In which case a pod would enter NotReady state (as driver/executor containers can complete) while sidecar would continue to run. Therefore once the driver/executor containers are done, they need to signal to the istio sidecar as well to terminate.\r\n\r\n### Does this PR introduce *any* user-facing change?\r\n\r\nYes, it adds configs that can be used to run on an K8s cluster using Istio service mesh, with strict MTLS.\r\n\r\n### How was this patch tested?\r\n\r\n- Added new unit tests\r\n- Tested on a strict MTLS Istio Kubernetes cluster.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40909/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40909/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

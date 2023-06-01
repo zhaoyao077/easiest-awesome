@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1509546979",
+    "html_url": "https://github.com/apache/spark/pull/40799#issuecomment-1509546979",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40799",
+    "id": 1509546979,
+    "node_id": "IC_kwDOAQXtWs5Z-dvj",
+    "user": {
+      "login": "yigress",
+      "id": 104102129,
+      "node_id": "U_kgDOBjR48Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/104102129?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/yigress",
+      "html_url": "https://github.com/yigress",
+      "followers_url": "https://api.github.com/users/yigress/followers",
+      "following_url": "https://api.github.com/users/yigress/following{/other_user}",
+      "gists_url": "https://api.github.com/users/yigress/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/yigress/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/yigress/subscriptions",
+      "organizations_url": "https://api.github.com/users/yigress/orgs",
+      "repos_url": "https://api.github.com/users/yigress/repos",
+      "events_url": "https://api.github.com/users/yigress/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/yigress/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-15T05:43:29Z",
+    "updated_at": "2023-04-15T05:43:29Z",
+    "author_association": "NONE",
+    "body": "@cloud-fan can you help review this? thank you!",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1509546979/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

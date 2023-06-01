@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41315",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41315/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41315/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41315/events",
+  "html_url": "https://github.com/apache/spark/pull/41315",
+  "id": 1725969152,
+  "node_id": "PR_kwDOAQXtWs5RWlbq",
+  "number": 41315,
+  "title": "[SPARK-43755][CONNECT] Move execution out of SparkExecutePlanStreamHandler and to a different thread",
+  "user": {
+    "login": "juliuszsompolski",
+    "id": 25019163,
+    "node_id": "MDQ6VXNlcjI1MDE5MTYz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/25019163?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/juliuszsompolski",
+    "html_url": "https://github.com/juliuszsompolski",
+    "followers_url": "https://api.github.com/users/juliuszsompolski/followers",
+    "following_url": "https://api.github.com/users/juliuszsompolski/following{/other_user}",
+    "gists_url": "https://api.github.com/users/juliuszsompolski/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/juliuszsompolski/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/juliuszsompolski/subscriptions",
+    "organizations_url": "https://api.github.com/users/juliuszsompolski/orgs",
+    "repos_url": "https://api.github.com/users/juliuszsompolski/repos",
+    "events_url": "https://api.github.com/users/juliuszsompolski/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/juliuszsompolski/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-05-25T14:43:16Z",
+  "updated_at": "2023-05-26T16:52:18Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41315",
+    "html_url": "https://github.com/apache/spark/pull/41315",
+    "diff_url": "https://github.com/apache/spark/pull/41315.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41315.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\n* Move code related to execution from being done directly in the GRPC callback in SparkConnextStreamHandler, to it's own classes.\r\n* `ExecutionHolder` (renamed from `ExecutePlanHolder`) launches the execution in it's own thread.\r\n* The execution returns responses via `ExecutePlanResponseObserver`\r\n* The actual execution code is refactored into `SparkConnectPlanExecution`\r\n\r\nThis allows to improve query interruption, by making `interrupt` method interrupt the execution thread. This makes `interrupt` work also when no Spark Jobs are running.\r\n\r\nThe refactoring further opens the possibilities of detaching query execution from a single RPC execution. Right now `ExecutionHolder` is waiting for the execution thread to finish, and `ExecutePlanResponseObserver` is forwarding the responses directly to the RPC observer.\r\n\r\nIn a followup, we can design different modes of execution, e.g.\r\n`ExecutePlanResponseObserver` buffering the responses. A client which lost connection could then reconnect and ask for the stream to be retransmitted.\r\n* `ExecutionHolder` returning the operationId to the client directly, and then client requesting results in separate RPCs, with more control over the response stream, instead of having it just pushed to it.\r\n\r\n### Why are the changes needed?\r\n\r\n* Improve the working of `interrupt`\r\n* Refactoring that opens up possibilities of detaching query execution from a single RPC.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo\r\n\r\n### How was this patch tested?\r\n\r\nExisting Spark Connect CI covers the execution.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41315/reactions",
+    "total_count": 1,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 1
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41315/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

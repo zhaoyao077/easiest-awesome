@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40461",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40461/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40461/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40461/events",
+  "html_url": "https://github.com/apache/spark/pull/40461",
+  "id": 1628605756,
+  "node_id": "PR_kwDOAQXtWs5MRQlZ",
+  "number": 40461,
+  "title": "[SPARK-42831][SQL] Show result expressions in AggregateExec",
+  "user": {
+    "login": "wankunde",
+    "id": 3626747,
+    "node_id": "MDQ6VXNlcjM2MjY3NDc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3626747?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wankunde",
+    "html_url": "https://github.com/wankunde",
+    "followers_url": "https://api.github.com/users/wankunde/followers",
+    "following_url": "https://api.github.com/users/wankunde/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wankunde/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wankunde/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wankunde/subscriptions",
+    "organizations_url": "https://api.github.com/users/wankunde/orgs",
+    "repos_url": "https://api.github.com/users/wankunde/repos",
+    "events_url": "https://api.github.com/users/wankunde/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wankunde/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-03-17T03:00:47Z",
+  "updated_at": "2023-04-07T10:03:19Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40461",
+    "html_url": "https://github.com/apache/spark/pull/40461",
+    "diff_url": "https://github.com/apache/spark/pull/40461.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40461.patch",
+    "merged_at": null
+  },
+  "body": "<!--\r\nThanks for sending a pull request!  Here are some tips for you:\r\n  1. If this is your first time, please read our contributor guidelines: https://spark.apache.org/contributing.html\r\n  2. Ensure you have added or run the appropriate tests for your PR: https://spark.apache.org/developer-tools.html\r\n  3. If the PR is unfinished, add '[WIP]' in your PR title, e.g., '[WIP][SPARK-XXXX] Your PR title ...'.\r\n  4. Be sure to keep the PR description updated to reflect all changes.\r\n  5. Please write your PR title to summarize what this PR proposes.\r\n  6. If possible, provide a concise example to reproduce the issue for a faster review.\r\n  7. If you want to add a new configuration, please read the guideline first for naming configurations in\r\n     'core/src/main/scala/org/apache/spark/internal/config/ConfigEntry.scala'.\r\n  8. If you want to add or modify an error type or message, please read the guideline first in\r\n     'core/src/main/resources/error/README.md'.\r\n-->\r\n\r\n### What changes were proposed in this pull request?\r\n\r\nIf the result expressions in AggregateExec are not empty, we should display them. Or we will get confused because some important expressions do not show up in the DAG.\r\n\r\n\r\n### Why are the changes needed?\r\n\r\nFor example, the plan for query `SELECT sum(p) from values(cast(23.4 as decimal(7,2))) t(p)` was incorrect because the result expression `MakeDecimal(sum(UnscaledValue(p#0))#1L,17,2) AS sum(p)#2` is not displayed\r\n\r\nBefore\r\n\r\n```\r\n== Physical Plan ==\r\nAdaptiveSparkPlan isFinalPlan=false\r\n+- HashAggregate(keys=[], functions=[sum(UnscaledValue(p#0))], output=[sum(p)#2])\r\n   +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=11]\r\n      +- HashAggregate(keys=[], functions=[partial_sum(UnscaledValue(p#0))], output=[sum#5L])\r\n         +- LocalTableScan [p#0]\r\n```\r\nAfter\r\n\r\n```\r\n== Physical Plan ==     \r\nAdaptiveSparkPlan isFinalPlan=false\r\n+- HashAggregate(keys=[], functions=[sum(UnscaledValue(p#0))], results=[MakeDecimal(sum(UnscaledValue(p#0))#1L,17,2) AS sum(p)#2], output=[sum(p)#2])\r\n   +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=38]\r\n      +- HashAggregate(keys=[], functions=[partial_sum(UnscaledValue(p#0))], results=[sum#13L], output=[sum#13L])\r\n         +- LocalTableScan [p#0]\r\n```\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\n\r\nLocal test\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40461/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40461/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41257",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41257/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41257/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41257/events",
+  "html_url": "https://github.com/apache/spark/pull/41257",
+  "id": 1719540728,
+  "node_id": "PR_kwDOAQXtWs5RAnQQ",
+  "number": 41257,
+  "title": "[SPARK-43657][K8S]: reuse config map for executor when running on k8s-cluster mode",
+  "user": {
+    "login": "advancedxy",
+    "id": 807537,
+    "node_id": "MDQ6VXNlcjgwNzUzNw==",
+    "avatar_url": "https://avatars.githubusercontent.com/u/807537?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/advancedxy",
+    "html_url": "https://github.com/advancedxy",
+    "followers_url": "https://api.github.com/users/advancedxy/followers",
+    "following_url": "https://api.github.com/users/advancedxy/following{/other_user}",
+    "gists_url": "https://api.github.com/users/advancedxy/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/advancedxy/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/advancedxy/subscriptions",
+    "organizations_url": "https://api.github.com/users/advancedxy/orgs",
+    "repos_url": "https://api.github.com/users/advancedxy/repos",
+    "events_url": "https://api.github.com/users/advancedxy/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/advancedxy/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 3,
+  "created_at": "2023-05-22T11:59:21Z",
+  "updated_at": "2023-05-29T03:11:11Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41257",
+    "html_url": "https://github.com/apache/spark/pull/41257",
+    "diff_url": "https://github.com/apache/spark/pull/41257.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41257.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n1. reuse SPARK_CONF_DIR config map for executor pods when the cm is already created for driver pod\r\n2. deprecated `spark.kubernetes.executor.disableConfigMap` as it may not be needed any more\r\n3. create config map for executor when running on k8s-client only\r\n\r\n### Why are the changes needed?\r\n1. avoid unnecessary config map creation and reduce overhead to K8S\r\n2. code optimize to avoid unnecessary disk file scan to create spark conf config map\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes.  `spark.kubernetes.executor.disableConfigMap` is deprecated and may not be necessary.\r\n\r\n### How was this patch tested?\r\nAdded UTs.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41257/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41257/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

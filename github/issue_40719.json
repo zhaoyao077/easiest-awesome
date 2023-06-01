@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40719",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40719/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40719/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40719/events",
+  "html_url": "https://github.com/apache/spark/pull/40719",
+  "id": 1660173949,
+  "node_id": "PR_kwDOAQXtWs5N5w_z",
+  "number": 40719,
+  "title": "[WIP]Speed up parquet reading with Java Vector API",
+  "user": {
+    "login": "jiangjiguang",
+    "id": 12368495,
+    "node_id": "MDQ6VXNlcjEyMzY4NDk1",
+    "avatar_url": "https://avatars.githubusercontent.com/u/12368495?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/jiangjiguang",
+    "html_url": "https://github.com/jiangjiguang",
+    "followers_url": "https://api.github.com/users/jiangjiguang/followers",
+    "following_url": "https://api.github.com/users/jiangjiguang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/jiangjiguang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/jiangjiguang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/jiangjiguang/subscriptions",
+    "organizations_url": "https://api.github.com/users/jiangjiguang/orgs",
+    "repos_url": "https://api.github.com/users/jiangjiguang/repos",
+    "events_url": "https://api.github.com/users/jiangjiguang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/jiangjiguang/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 3,
+  "created_at": "2023-04-10T03:26:11Z",
+  "updated_at": "2023-04-11T14:06:05Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40719",
+    "html_url": "https://github.com/apache/spark/pull/40719",
+    "diff_url": "https://github.com/apache/spark/pull/40719.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40719.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nParquet has supported vector read speed up with this PR https://github.com/apache/parquet-mr/pull/1011\r\nThe performance gain is 4x ~ 8x according to the parquet microbenchmark\r\nTPC-H(SF100) Q6 has 11% performance increase with Apache Spark integrating parquet vector optimization\r\n\r\n### Why are the changes needed?\r\nThis PR used to support parquet vector optimization\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nAdd configuration spark.sql.parquet.vector512.read.enabled, If true and CPU contains avx512vbmi & avx512_vbmi2 instruction set, parquet decodes using Java Vector API. For Intel CPU, Ice Lake or newer contains the required instruction set.\r\n\r\n### How was this patch tested?\r\nFor the test case, there are some problems to fix:\r\n1. It is necessary to Parquet-mr community release new java version to use the parquet vector optimization.\r\n2. Parquet Vector optimization does not release default, so users have to build parquet with mvn clean install -P vector-plugins manually to get the parquet-encoding-vector-{VERSION}.jar and put it on the {SPARK_HOME}/jars path\r\n3. github doesn't support select runners with specific instruction set. So it is impossible (a self-hosted runner can do it) to verify the optimization on github runners machine.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40719/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40719/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

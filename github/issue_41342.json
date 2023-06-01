@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41342",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41342/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41342/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41342/events",
+  "html_url": "https://github.com/apache/spark/pull/41342",
+  "id": 1728730203,
+  "node_id": "PR_kwDOAQXtWs5Rf75S",
+  "number": 41342,
+  "title": "[WIP][SPARK-43829][CONNECT] Improve SparkConnectPlanner by reuse Dataset and avoid construct new Dataset",
+  "user": {
+    "login": "beliefer",
+    "id": 8486025,
+    "node_id": "MDQ6VXNlcjg0ODYwMjU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8486025?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/beliefer",
+    "html_url": "https://github.com/beliefer",
+    "followers_url": "https://api.github.com/users/beliefer/followers",
+    "following_url": "https://api.github.com/users/beliefer/following{/other_user}",
+    "gists_url": "https://api.github.com/users/beliefer/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/beliefer/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/beliefer/subscriptions",
+    "organizations_url": "https://api.github.com/users/beliefer/orgs",
+    "repos_url": "https://api.github.com/users/beliefer/repos",
+    "events_url": "https://api.github.com/users/beliefer/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/beliefer/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-27T13:37:08Z",
+  "updated_at": "2023-05-28T06:27:48Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41342",
+    "html_url": "https://github.com/apache/spark/pull/41342",
+    "diff_url": "https://github.com/apache/spark/pull/41342.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41342.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nCurrently, `SparkConnectPlanner.transformRelation` always return the `LogicalPlan` of `Dataset`.\r\nThe `SparkConnectStreamHandler.handlePlan` constructs a new `Dataset` for it.\r\nSometimes, `SparkConnectStreamHandler.handlePlan` could reuse the `Dataset` created by `SparkConnectPlanner.transformRelation`.\r\n\r\nThis PR creates a common method `transformRelationAsDataset` could be reused in many places.\r\n\r\n\r\n### Why are the changes needed?\r\nImprove `SparkConnectPlanner` by reuse `Dataset` and avoid construct new `Dataset`.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n'No'.\r\nJust update inner implementation.\r\n\r\n\r\n### How was this patch tested?\r\nExists test cases.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41342/reactions",
+    "total_count": 1,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 1
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41342/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

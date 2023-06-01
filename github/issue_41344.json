@@ -1,0 +1,244 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41344",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41344/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41344/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41344/events",
+  "html_url": "https://github.com/apache/spark/pull/41344",
+  "id": 1729115738,
+  "node_id": "PR_kwDOAQXtWs5RhPdP",
+  "number": 41344,
+  "title": "[SPARK-43836][BUILD] Make Scala 2.13 as default in Spark 3.5",
+  "user": {
+    "login": "dongjoon-hyun",
+    "id": 9700541,
+    "node_id": "MDQ6VXNlcjk3MDA1NDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9700541?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dongjoon-hyun",
+    "html_url": "https://github.com/dongjoon-hyun",
+    "followers_url": "https://api.github.com/users/dongjoon-hyun/followers",
+    "following_url": "https://api.github.com/users/dongjoon-hyun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dongjoon-hyun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dongjoon-hyun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dongjoon-hyun/subscriptions",
+    "organizations_url": "https://api.github.com/users/dongjoon-hyun/orgs",
+    "repos_url": "https://api.github.com/users/dongjoon-hyun/repos",
+    "events_url": "https://api.github.com/users/dongjoon-hyun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dongjoon-hyun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1405803268,
+      "node_id": "MDU6TGFiZWwxNDA1ODAzMjY4",
+      "url": "https://api.github.com/repos/apache/spark/labels/MLLIB",
+      "name": "MLLIB",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406587328,
+      "node_id": "MDU6TGFiZWwxNDA2NTg3MzI4",
+      "url": "https://api.github.com/repos/apache/spark/labels/STRUCTURED%20STREAMING",
+      "name": "STRUCTURED STREAMING",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406607243,
+      "node_id": "MDU6TGFiZWwxNDA2NjA3MjQz",
+      "url": "https://api.github.com/repos/apache/spark/labels/GRAPHX",
+      "name": "GRAPHX",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406625202,
+      "node_id": "MDU6TGFiZWwxNDA2NjI1MjAy",
+      "url": "https://api.github.com/repos/apache/spark/labels/MESOS",
+      "name": "MESOS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406628559,
+      "node_id": "MDU6TGFiZWwxNDA2NjI4NTU5",
+      "url": "https://api.github.com/repos/apache/spark/labels/SPARK%20SHELL",
+      "name": "SPARK SHELL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1427970157,
+      "node_id": "MDU6TGFiZWwxNDI3OTcwMTU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/YARN",
+      "name": "YARN",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1496047285,
+      "node_id": "MDU6TGFiZWwxNDk2MDQ3Mjg1",
+      "url": "https://api.github.com/repos/apache/spark/labels/EXAMPLES",
+      "name": "EXAMPLES",
+      "color": "ededed",
+      "default": false,
+      "description": ""
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982110661,
+      "node_id": "MDU6TGFiZWwxOTgyMTEwNjYx",
+      "url": "https://api.github.com/repos/apache/spark/labels/INFRA",
+      "name": "INFRA",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1984378631,
+      "node_id": "MDU6TGFiZWwxOTg0Mzc4NjMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DSTREAM",
+      "name": "DSTREAM",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1988040187,
+      "node_id": "MDU6TGFiZWwxOTg4MDQwMTg3",
+      "url": "https://api.github.com/repos/apache/spark/labels/AVRO",
+      "name": "AVRO",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4654282764,
+      "node_id": "LA_kwDOAQXtWs8AAAABFWq4DA",
+      "url": "https://api.github.com/repos/apache/spark/labels/PROTOBUF",
+      "name": "PROTOBUF",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "closed",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 7,
+  "created_at": "2023-05-28T02:55:16Z",
+  "updated_at": "2023-05-29T00:56:33Z",
+  "closed_at": "2023-05-28T18:22:00Z",
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41344",
+    "html_url": "https://github.com/apache/spark/pull/41344",
+    "diff_url": "https://github.com/apache/spark/pull/41344.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41344.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR aims to make Scala 2.13 the default Scala version in Apache Spark 3.5.\r\n\r\n### Why are the changes needed?\r\n\r\nThe current releases of Scala community are `Scala 3.2.2` and `Scala 2.13.10`.\r\n\r\n- https://scala-lang.org/download/all.html\r\n \r\nAlthough the Apache Spark community has been using Scala 2.12 by default since Apache Spark 3.0 and Scala community will release Scala 2.12.18 for Java 21 support, we had better focus on `Scala 2.13+` more from Apache Spark 3.5 timeline to adopt Scala community's activity.\r\n\r\nSince SPARK-25075 added Scala 2.13 at Apache Spark 3.2.0, the Apache Spark community has been using it as a second Scala version. This PR aims to switch only the default Scala version from 2.12 to 2.13. Apache Spark will support both Scala 2.12 and 2.13 still.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nYes, but we still have Scala 2.12.\r\n\r\n### How was this patch tested?\r\n\r\nPass the CIs.",
+  "closed_by": {
+    "login": "dongjoon-hyun",
+    "id": 9700541,
+    "node_id": "MDQ6VXNlcjk3MDA1NDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9700541?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dongjoon-hyun",
+    "html_url": "https://github.com/dongjoon-hyun",
+    "followers_url": "https://api.github.com/users/dongjoon-hyun/followers",
+    "following_url": "https://api.github.com/users/dongjoon-hyun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dongjoon-hyun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dongjoon-hyun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dongjoon-hyun/subscriptions",
+    "organizations_url": "https://api.github.com/users/dongjoon-hyun/orgs",
+    "repos_url": "https://api.github.com/users/dongjoon-hyun/repos",
+    "events_url": "https://api.github.com/users/dongjoon-hyun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dongjoon-hyun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41344/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41344/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41099",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41099/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41099/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41099/events",
+  "html_url": "https://github.com/apache/spark/pull/41099",
+  "id": 1701427009,
+  "node_id": "PR_kwDOAQXtWs5QD_nN",
+  "number": 41099,
+  "title": "[SPARK-43421][SS] Implement Changelog based Checkpointing for RocksDB State Store Provider",
+  "user": {
+    "login": "chaoqin-li1123",
+    "id": 55518381,
+    "node_id": "MDQ6VXNlcjU1NTE4Mzgx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/55518381?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/chaoqin-li1123",
+    "html_url": "https://github.com/chaoqin-li1123",
+    "followers_url": "https://api.github.com/users/chaoqin-li1123/followers",
+    "following_url": "https://api.github.com/users/chaoqin-li1123/following{/other_user}",
+    "gists_url": "https://api.github.com/users/chaoqin-li1123/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/chaoqin-li1123/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/chaoqin-li1123/subscriptions",
+    "organizations_url": "https://api.github.com/users/chaoqin-li1123/orgs",
+    "repos_url": "https://api.github.com/users/chaoqin-li1123/repos",
+    "events_url": "https://api.github.com/users/chaoqin-li1123/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/chaoqin-li1123/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406587328,
+      "node_id": "MDU6TGFiZWwxNDA2NTg3MzI4",
+      "url": "https://api.github.com/repos/apache/spark/labels/STRUCTURED%20STREAMING",
+      "name": "STRUCTURED STREAMING",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-05-09T06:25:45Z",
+  "updated_at": "2023-05-26T06:31:30Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41099",
+    "html_url": "https://github.com/apache/spark/pull/41099",
+    "diff_url": "https://github.com/apache/spark/pull/41099.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41099.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nIn order to reduce the checkpoint duration and end to end latency, we propose Changelog Based Checkpointing for RocksDB State Store Provider. Below is the mechanism.\r\n1. Changelog checkpoint: Upon each put() delete() call to local rocksdb instance, log the operation to a changelog file. During the state change commit,  sync the compressed change log of the current batch to DFS as checkpointDir/{version}.delta.\r\n2. Version reconstruction: For version j, find latest snapshot i.zip such that i <= j, load snapshot i, and replay i+1.delta ~ j.delta. This is used in loading the initial state as well as creating the latest version snapshot. Note: If a query is shutdown without exception, there won’t be changelog replay during query restart because a maintenance task is executed before the state store instance is unloaded.\r\n3. Background snapshot: A maintenance thread in executors will launch maintenance tasks periodically. Inside the maintenance task, sync the latest RocksDB local snapshot to DFS as checkpointDir/{version}.zip. Snapshot enables faster failure recovery and allows old versions to be purged.\r\n4. Garbage collection: Inside the maintenance task, delete snapshot and delta files from DFS for versions that is out of retention range(default retained version number is 100)\r\n\r\n\r\n### Why are the changes needed?\r\nWe have identified state checkpointing latency as one of the major performance bottlenecks for stateful streaming queries. Currently, RocksDB state store pauses the RocksDB instances to upload a snapshot to the cloud when committing a batch, which is heavy weight and has unpredictable performance.\r\nWith changelog based checkpointing, we allow the RocksDB instance to run uninterruptibly, which improves RocksDB operation performance. This also dramatically reduces the commit time and batch duration because we are uploading a smaller amount of data during state commit. With this change, stateful query with RocksDB state store will have lower and more predictable latency.\r\n\r\n### How was this patch tested?\r\nAdd unit test for changelog checkpointing utility.\r\nAdd unit test and integration test that check backward compatibility with existing checkpoint.\r\nEnable RocksDB state store unit test and stateful streaming query integration test to run with changelog checkpointing enabled.\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41099/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41099/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

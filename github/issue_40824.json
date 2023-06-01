@@ -1,0 +1,108 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40824",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40824/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40824/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40824/events",
+  "html_url": "https://github.com/apache/spark/pull/40824",
+  "id": 1671254159,
+  "node_id": "PR_kwDOAQXtWs5Oez2X",
+  "number": 40824,
+  "title": "[SPARK-32064][SQL] Support temporary table",
+  "user": {
+    "login": "wankunde",
+    "id": 3626747,
+    "node_id": "MDQ6VXNlcjM2MjY3NDc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3626747?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wankunde",
+    "html_url": "https://github.com/wankunde",
+    "followers_url": "https://api.github.com/users/wankunde/followers",
+    "following_url": "https://api.github.com/users/wankunde/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wankunde/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wankunde/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wankunde/subscriptions",
+    "organizations_url": "https://api.github.com/users/wankunde/orgs",
+    "repos_url": "https://api.github.com/users/wankunde/repos",
+    "events_url": "https://api.github.com/users/wankunde/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wankunde/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406587328,
+      "node_id": "MDU6TGFiZWwxNDA2NTg3MzI4",
+      "url": "https://api.github.com/repos/apache/spark/labels/STRUCTURED%20STREAMING",
+      "name": "STRUCTURED STREAMING",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-04-17T14:00:11Z",
+  "updated_at": "2023-04-21T09:43:53Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40824",
+    "html_url": "https://github.com/apache/spark/pull/40824",
+    "diff_url": "https://github.com/apache/spark/pull/40824.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40824.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nMany databases and data warehouse SQL engines support temporary tables. A temporary table, as its named implied, is a short-lived table that its life will be only for current session. \r\n\r\n* [Hive Temporary Table](https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.0.1/using-hiveql/content/hive_create_a_hive_temporary_table.html)\r\n* [Teradata Volatile Table](https://docs.teradata.com/reader/rgAb27O_xRmMVc_aQq2VGw/mpJF1z_vSlpMbZYxFmRJfA) \r\n* [PostgreSQL Temporary Table](https://www.postgresql.org/docs/12/sql-createtable.html)\r\n\r\nIn Spark, there is no temporary table. the DDL “CREATE TEMPORARY TABLE AS SELECT” will create a temporary view. A temporary view is totally different with a temporary table.\r\n\r\n### Why are the changes needed?\r\nA temporary view is just a VIEW. It doesn’t materialize data in storage. So it has below shortage:\r\n\r\n1. View will not give improved performance. Materialize intermediate data in temporary tables for a complex query will accurate queries, especially in an ETL pipeline.\r\n2. View which calls other views can cause severe performance issues. Even, executing a very complex view may fail in Spark.\r\n3. Temporary view has no database namespace. In some complex ETL pipelines or data warehouse applications, without database prefix is not convenient. It needs some tables which only used in current session.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNO\r\n\r\n### How was this patch tested?\r\nAdd unit tests.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40824/reactions",
+    "total_count": 2,
+    "+1": 2,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40824/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

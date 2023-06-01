@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40925",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40925/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40925/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40925/events",
+  "html_url": "https://github.com/apache/spark/pull/40925",
+  "id": 1681110454,
+  "node_id": "PR_kwDOAQXtWs5O_qC7",
+  "number": 40925,
+  "title": "[SPARK-43246][BUILD] Ignore `privateClasses` and `privateMembers` from connect mima check as default",
+  "user": {
+    "login": "LuciferYang",
+    "id": 1475305,
+    "node_id": "MDQ6VXNlcjE0NzUzMDU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1475305?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/LuciferYang",
+    "html_url": "https://github.com/LuciferYang",
+    "followers_url": "https://api.github.com/users/LuciferYang/followers",
+    "following_url": "https://api.github.com/users/LuciferYang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/LuciferYang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/LuciferYang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/LuciferYang/subscriptions",
+    "organizations_url": "https://api.github.com/users/LuciferYang/orgs",
+    "repos_url": "https://api.github.com/users/LuciferYang/repos",
+    "events_url": "https://api.github.com/users/LuciferYang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/LuciferYang/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 4,
+  "created_at": "2023-04-24T12:02:21Z",
+  "updated_at": "2023-05-19T10:09:39Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40925",
+    "html_url": "https://github.com/apache/spark/pull/40925",
+    "diff_url": "https://github.com/apache/spark/pull/40925.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40925.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThe main change of this pr as follows:\r\n\r\n1. Like `dev/mima`, use `GenerateMIMAIgnore` to generate `.generated-mima-member-excludes` and `.generated-mima-class-excludes`\r\n2. Make `CheckConnectJvmClientCompatibility` use `.generated-mima-member-excludes` and `.generated-mima-class-excludes` as default `ProblemFilters` to excludes `privateClasses` and `privateMembers` from mima check result.\r\n3. Ignore the `ProblemFilters` add by https://github.com/apache/spark/pull/40898\r\n\r\n\r\n### Why are the changes needed?\r\nIgnore privateClasses and privateMembers from connect mima check as default\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\n`CheckConnectJvmClientCompatibility` should pass",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40925/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40925/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

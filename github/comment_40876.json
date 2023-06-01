@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1516562943",
+    "html_url": "https://github.com/apache/spark/pull/40876#issuecomment-1516562943",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40876",
+    "id": 1516562943,
+    "node_id": "IC_kwDOAQXtWs5aZOn_",
+    "user": {
+      "login": "LuciferYang",
+      "id": 1475305,
+      "node_id": "MDQ6VXNlcjE0NzUzMDU=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1475305?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/LuciferYang",
+      "html_url": "https://github.com/LuciferYang",
+      "followers_url": "https://api.github.com/users/LuciferYang/followers",
+      "following_url": "https://api.github.com/users/LuciferYang/following{/other_user}",
+      "gists_url": "https://api.github.com/users/LuciferYang/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/LuciferYang/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/LuciferYang/subscriptions",
+      "organizations_url": "https://api.github.com/users/LuciferYang/orgs",
+      "repos_url": "https://api.github.com/users/LuciferYang/repos",
+      "events_url": "https://api.github.com/users/LuciferYang/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/LuciferYang/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-20T15:47:18Z",
+    "updated_at": "2023-04-20T15:47:18Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "dup with https://github.com/apache/spark/pull/40860, closed",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1516562943/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

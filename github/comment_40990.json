@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1527324475",
+    "html_url": "https://github.com/apache/spark/pull/40990#issuecomment-1527324475",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40990",
+    "id": 1527324475,
+    "node_id": "IC_kwDOAQXtWs5bCR87",
+    "user": {
+      "login": "ulysses-you",
+      "id": 12025282,
+      "node_id": "MDQ6VXNlcjEyMDI1Mjgy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12025282?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ulysses-you",
+      "html_url": "https://github.com/ulysses-you",
+      "followers_url": "https://api.github.com/users/ulysses-you/followers",
+      "following_url": "https://api.github.com/users/ulysses-you/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ulysses-you/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ulysses-you/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ulysses-you/subscriptions",
+      "organizations_url": "https://api.github.com/users/ulysses-you/orgs",
+      "repos_url": "https://api.github.com/users/ulysses-you/repos",
+      "events_url": "https://api.github.com/users/ulysses-you/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ulysses-you/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-28T10:12:20Z",
+    "updated_at": "2023-04-28T10:12:20Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "cc @cloud-fan @viirya if you have time to review, thank you",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1527324475/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

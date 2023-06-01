@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41203",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41203/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41203/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41203/events",
+  "html_url": "https://github.com/apache/spark/pull/41203",
+  "id": 1714266817,
+  "node_id": "PR_kwDOAQXtWs5Qu_85",
+  "number": 41203,
+  "title": "[SPARK-16484][SQL] Update hll function type checks to also check for non-foldable inputs",
+  "user": {
+    "login": "RyanBerti",
+    "id": 17288675,
+    "node_id": "MDQ6VXNlcjE3Mjg4Njc1",
+    "avatar_url": "https://avatars.githubusercontent.com/u/17288675?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/RyanBerti",
+    "html_url": "https://github.com/RyanBerti",
+    "followers_url": "https://api.github.com/users/RyanBerti/followers",
+    "following_url": "https://api.github.com/users/RyanBerti/following{/other_user}",
+    "gists_url": "https://api.github.com/users/RyanBerti/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/RyanBerti/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/RyanBerti/subscriptions",
+    "organizations_url": "https://api.github.com/users/RyanBerti/orgs",
+    "repos_url": "https://api.github.com/users/RyanBerti/repos",
+    "events_url": "https://api.github.com/users/RyanBerti/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/RyanBerti/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-05-17T16:31:53Z",
+  "updated_at": "2023-05-27T09:50:17Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41203",
+    "html_url": "https://github.com/apache/spark/pull/41203",
+    "diff_url": "https://github.com/apache/spark/pull/41203.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41203.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThis PR fixes a null pointer thrown when non-foldable values are provided to the lgConfigK or allowDifferentLgConfigK arguments of the hll_sketch_agg, hll_union_agg, or hll_union functions.\r\n\r\n\r\n### Why are the changes needed?\r\nWe should be handling this error gracefully, rather than throwing a null pointer exception.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nThis PR introduces two new error messages, replacing what would be null pointer exceptions.\r\n\r\n\r\n### How was this patch tested?\r\nThree new negative test cases have been added to the 'SPARK-16484: hll_*_agg + hll_union negative tests' test of the DataframeAggregateSuite.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41203/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41203/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

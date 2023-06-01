@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41163",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41163/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41163/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41163/events",
+  "html_url": "https://github.com/apache/spark/pull/41163",
+  "id": 1708776481,
+  "node_id": "PR_kwDOAQXtWs5Qck4G",
+  "number": 41163,
+  "title": "[SPARK-43475][SQL] Generalize expression lineage logic to enable optimizations",
+  "user": {
+    "login": "rkkorlapati-db",
+    "id": 104112126,
+    "node_id": "U_kgDOBjSf_g",
+    "avatar_url": "https://avatars.githubusercontent.com/u/104112126?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/rkkorlapati-db",
+    "html_url": "https://github.com/rkkorlapati-db",
+    "followers_url": "https://api.github.com/users/rkkorlapati-db/followers",
+    "following_url": "https://api.github.com/users/rkkorlapati-db/following{/other_user}",
+    "gists_url": "https://api.github.com/users/rkkorlapati-db/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/rkkorlapati-db/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/rkkorlapati-db/subscriptions",
+    "organizations_url": "https://api.github.com/users/rkkorlapati-db/orgs",
+    "repos_url": "https://api.github.com/users/rkkorlapati-db/repos",
+    "events_url": "https://api.github.com/users/rkkorlapati-db/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/rkkorlapati-db/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-14T00:32:05Z",
+  "updated_at": "2023-05-15T03:19:34Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41163",
+    "html_url": "https://github.com/apache/spark/pull/41163",
+    "diff_url": "https://github.com/apache/spark/pull/41163.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41163.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nAllow expression lineage through partial aggregation (AggregatePart) and Window operators. This enables optimizations such as DFP, bloom filters to trace down expression lineage and do necessary optimizations.\r\n\r\nAlso, enhanced the logic to accept the following additional parameters to be able to customize lineage logic.\r\n\r\nnoLineageOnNullPaddingSide: If true, lineage is not tracked down through the null padding side of the outer joins.\r\n\r\nstopAtSubPlan: If specified, lineage tracking stops at this specified operator.\r\n\r\nCode changes include delegating the core logic to findExpressionAndTrackLineageDownBase() and the current signature findExpressionAndTrackLineageDown() would become wrapper to avoid changes to the existing callers.\r\n\r\n### Why are the changes needed?\r\nTo support optimizations such as bloom filters, DFP, etc. which depend on the expression lineage.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nUnit tested\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41163/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41163/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

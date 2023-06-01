@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40949",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40949/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40949/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40949/events",
+  "html_url": "https://github.com/apache/spark/pull/40949",
+  "id": 1683576940,
+  "node_id": "PR_kwDOAQXtWs5PH_sT",
+  "number": 40949,
+  "title": "[DRAFT][SPARK-23607][CORE] Use HDFS extended attributes to store application summary information in SHS",
+  "user": {
+    "login": "thejdeep",
+    "id": 1708757,
+    "node_id": "MDQ6VXNlcjE3MDg3NTc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1708757?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/thejdeep",
+    "html_url": "https://github.com/thejdeep",
+    "followers_url": "https://api.github.com/users/thejdeep/followers",
+    "following_url": "https://api.github.com/users/thejdeep/following{/other_user}",
+    "gists_url": "https://api.github.com/users/thejdeep/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/thejdeep/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/thejdeep/subscriptions",
+    "organizations_url": "https://api.github.com/users/thejdeep/orgs",
+    "repos_url": "https://api.github.com/users/thejdeep/repos",
+    "events_url": "https://api.github.com/users/thejdeep/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/thejdeep/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-25T17:34:25Z",
+  "updated_at": "2023-04-29T06:49:03Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40949",
+    "html_url": "https://github.com/apache/spark/pull/40949",
+    "diff_url": "https://github.com/apache/spark/pull/40949.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40949.patch",
+    "merged_at": null
+  },
+  "body": " ### What changes were proposed in this pull request?\r\nPreviously, #34829 was raised which was auto closed due to staleness. This is a rework of that by addressing comments raised.\r\n\r\n This PR seeks to improve the performance of serving the application list in History Server by storing the required information of the application as part of HDFS extended attributes instead of parsing the log file each time.\r\n\r\n ### Why are the changes needed?\r\n\r\n Improves the performance of the History Server listing page\r\n\r\nBelow is the comparison of the  time taken to complete `mergeApplicationListing` call [in FsHistoryProvider](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/history/FsHistoryProvider.scala#L584) that is called for every log file that is updated in the event log directory : \r\n\r\n| Event log size  | Extended Attributes disabled (in ms) | Extended Attributes enabled (in ms) |\r\n| ------------- | ------------- | ------------- |\r\n| 122MB  | 1340 | 137  |\r\n| 10.2MB  | 866 | 135  |\r\n| 5.5MB  | 645  | 136 |\r\n|  0.6MB | 505 | 134 |\r\n| 0.8MB  | 525 | 137  |\r\n\r\nAs we can see in the comparison above, irrespective of the event log size, the time to build the application listing for the app remains the same. This is hugely beneficial in clusters that have very large event log sizes.\r\n\r\n ### Does this PR introduce _any_ user-facing change?\r\n\r\n No.\r\n\r\n ### How was this patch tested?\r\n Will add unit tests",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40949/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40949/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

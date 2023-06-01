@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41173",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41173/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41173/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41173/events",
+  "html_url": "https://github.com/apache/spark/pull/41173",
+  "id": 1710402121,
+  "node_id": "PR_kwDOAQXtWs5Qh8HF",
+  "number": 41173,
+  "title": "[SPARK-43510][YARN] Fix YarnAllocator internal state when adding running executor after processing completed containers",
+  "user": {
+    "login": "manuzhang",
+    "id": 1191767,
+    "node_id": "MDQ6VXNlcjExOTE3Njc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1191767?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/manuzhang",
+    "html_url": "https://github.com/manuzhang",
+    "followers_url": "https://api.github.com/users/manuzhang/followers",
+    "following_url": "https://api.github.com/users/manuzhang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/manuzhang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/manuzhang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/manuzhang/subscriptions",
+    "organizations_url": "https://api.github.com/users/manuzhang/orgs",
+    "repos_url": "https://api.github.com/users/manuzhang/repos",
+    "events_url": "https://api.github.com/users/manuzhang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/manuzhang/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1427970157,
+      "node_id": "MDU6TGFiZWwxNDI3OTcwMTU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/YARN",
+      "name": "YARN",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 7,
+  "created_at": "2023-05-15T16:07:23Z",
+  "updated_at": "2023-05-25T12:00:32Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41173",
+    "html_url": "https://github.com/apache/spark/pull/41173",
+    "diff_url": "https://github.com/apache/spark/pull/41173.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41173.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nKeep track of completed container ids in YarnAllocator and don't update internal state of a container if it's already completed.\r\n\r\n\r\n### Why are the changes needed?\r\nYarnAllocator updates internal state adding running executors after executor launch in a separate thread. That can happen after the containers are already completed (e.g. preempted) and processed by YarnAllocator. Then YarnAllocator mistakenly thinks there are still running executors which are already lost. As a result, application hangs without any running executors.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n\r\n### How was this patch tested?\r\nAdded UT.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41173/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41173/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1504258604",
+    "html_url": "https://github.com/apache/spark/pull/40745#issuecomment-1504258604",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40745",
+    "id": 1504258604,
+    "node_id": "IC_kwDOAQXtWs5ZqSos",
+    "user": {
+      "login": "zhenlineo",
+      "id": 4190164,
+      "node_id": "MDQ6VXNlcjQxOTAxNjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4190164?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zhenlineo",
+      "html_url": "https://github.com/zhenlineo",
+      "followers_url": "https://api.github.com/users/zhenlineo/followers",
+      "following_url": "https://api.github.com/users/zhenlineo/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zhenlineo/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zhenlineo/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zhenlineo/subscriptions",
+      "organizations_url": "https://api.github.com/users/zhenlineo/orgs",
+      "repos_url": "https://api.github.com/users/zhenlineo/repos",
+      "events_url": "https://api.github.com/users/zhenlineo/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zhenlineo/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-11T23:26:10Z",
+    "updated_at": "2023-04-13T00:09:44Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "~I would give the ssh repl a try too. Maybe starting the repl this way do not need the tyy?\r\nhttps://github.com/com-lihaoyi/Ammonite/issues/276#issuecomment-267302917\r\nAlso see http://ammonite.io/api/sshd/ammonite/sshd/SshdRepl.html~",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1504258604/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41052",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41052/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41052/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41052/events",
+  "html_url": "https://github.com/apache/spark/pull/41052",
+  "id": 1696853347,
+  "node_id": "PR_kwDOAQXtWs5P0qfJ",
+  "number": 41052,
+  "title": "[SPARK-43380][SQL] Fix Avro data type conversion issues to avoid producing incorrect results",
+  "user": {
+    "login": "zeruibao",
+    "id": 125398515,
+    "node_id": "U_kgDOB3lt8w",
+    "avatar_url": "https://avatars.githubusercontent.com/u/125398515?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zeruibao",
+    "html_url": "https://github.com/zeruibao",
+    "followers_url": "https://api.github.com/users/zeruibao/followers",
+    "following_url": "https://api.github.com/users/zeruibao/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zeruibao/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zeruibao/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zeruibao/subscriptions",
+    "organizations_url": "https://api.github.com/users/zeruibao/orgs",
+    "repos_url": "https://api.github.com/users/zeruibao/repos",
+    "events_url": "https://api.github.com/users/zeruibao/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zeruibao/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1988040187,
+      "node_id": "MDU6TGFiZWwxOTg4MDQwMTg3",
+      "url": "https://api.github.com/repos/apache/spark/labels/AVRO",
+      "name": "AVRO",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 8,
+  "created_at": "2023-05-05T00:21:54Z",
+  "updated_at": "2023-05-26T20:03:08Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41052",
+    "html_url": "https://github.com/apache/spark/pull/41052",
+    "diff_url": "https://github.com/apache/spark/pull/41052.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41052.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nWe introduce the SQLConf `spark.sql.legacy.avro.allowReadingWithIncompatibleSchema` to prevent reading interval types as date or timestamp types to avoid getting corrupt dates as well as reading decimal types with incorrect precision.\r\n\r\n\r\n### Why are the changes needed?\r\nWe found the following issues with open source Avro:\r\n\r\n- Interval types can be read as date or timestamp types that would lead to wildly different results\r\n   For example, `Duration.ofDays(1).plusSeconds(1)` will be read as `1972-09-27`, which is weird.\r\n- Decimal types can be read with lower precision, that leads to data being read as `null` instead of suggesting that a wider decimal format should be provided\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nNew unit test\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41052/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41052/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

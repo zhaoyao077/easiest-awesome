@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40178",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40178/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40178/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40178/events",
+  "html_url": "https://github.com/apache/spark/pull/40178",
+  "id": 1600140339,
+  "node_id": "PR_kwDOAQXtWs5KxwIR",
+  "number": 40178,
+  "title": "[MINOR][DOCS] Remove `Jenkins` from web page.",
+  "user": {
+    "login": "bjornjorgensen",
+    "id": 47577197,
+    "node_id": "MDQ6VXNlcjQ3NTc3MTk3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/47577197?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/bjornjorgensen",
+    "html_url": "https://github.com/bjornjorgensen",
+    "followers_url": "https://api.github.com/users/bjornjorgensen/followers",
+    "following_url": "https://api.github.com/users/bjornjorgensen/following{/other_user}",
+    "gists_url": "https://api.github.com/users/bjornjorgensen/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/bjornjorgensen/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/bjornjorgensen/subscriptions",
+    "organizations_url": "https://api.github.com/users/bjornjorgensen/orgs",
+    "repos_url": "https://api.github.com/users/bjornjorgensen/repos",
+    "events_url": "https://api.github.com/users/bjornjorgensen/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/bjornjorgensen/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-02-26T17:47:54Z",
+  "updated_at": "2023-02-27T20:10:36Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40178",
+    "html_url": "https://github.com/apache/spark/pull/40178",
+    "diff_url": "https://github.com/apache/spark/pull/40178.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40178.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nRemove Jenkins from building-spark web page.\r\n\r\n### Why are the changes needed?\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nNo need.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40178/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40178/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

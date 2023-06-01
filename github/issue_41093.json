@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41093",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41093/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41093/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41093/events",
+  "html_url": "https://github.com/apache/spark/pull/41093",
+  "id": 1700842510,
+  "node_id": "PR_kwDOAQXtWs5QCBOz",
+  "number": 41093,
+  "title": "Update build_and_test.yml",
+  "user": {
+    "login": "neshkeev",
+    "id": 4223091,
+    "node_id": "MDQ6VXNlcjQyMjMwOTE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/4223091?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/neshkeev",
+    "html_url": "https://github.com/neshkeev",
+    "followers_url": "https://api.github.com/users/neshkeev/followers",
+    "following_url": "https://api.github.com/users/neshkeev/following{/other_user}",
+    "gists_url": "https://api.github.com/users/neshkeev/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/neshkeev/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/neshkeev/subscriptions",
+    "organizations_url": "https://api.github.com/users/neshkeev/orgs",
+    "repos_url": "https://api.github.com/users/neshkeev/repos",
+    "events_url": "https://api.github.com/users/neshkeev/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/neshkeev/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1982110661,
+      "node_id": "MDU6TGFiZWwxOTgyMTEwNjYx",
+      "url": "https://api.github.com/repos/apache/spark/labels/INFRA",
+      "name": "INFRA",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-08T19:58:36Z",
+  "updated_at": "2023-05-08T19:58:48Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41093",
+    "html_url": "https://github.com/apache/spark/pull/41093",
+    "diff_url": "https://github.com/apache/spark/pull/41093.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41093.patch",
+    "merged_at": null
+  },
+  "body": "Remove the dot since GitHub treats it as a part of the PR's url.\r\n\r\n[Example](https://github.com/apache/spark/actions/runs/4914465788/jobs/8775809819#step:7:5)",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41093/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41093/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

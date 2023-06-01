@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41031",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41031/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41031/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41031/events",
+  "html_url": "https://github.com/apache/spark/pull/41031",
+  "id": 1693473554,
+  "node_id": "PR_kwDOAQXtWs5PpGAA",
+  "number": 41031,
+  "title": "[SPARK-43353][PYTHON] Migrate remaining session errors into error class",
+  "user": {
+    "login": "itholic",
+    "id": 44108233,
+    "node_id": "MDQ6VXNlcjQ0MTA4MjMz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/44108233?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/itholic",
+    "html_url": "https://github.com/itholic",
+    "followers_url": "https://api.github.com/users/itholic/followers",
+    "following_url": "https://api.github.com/users/itholic/following{/other_user}",
+    "gists_url": "https://api.github.com/users/itholic/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/itholic/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/itholic/subscriptions",
+    "organizations_url": "https://api.github.com/users/itholic/orgs",
+    "repos_url": "https://api.github.com/users/itholic/repos",
+    "events_url": "https://api.github.com/users/itholic/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/itholic/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982260031,
+      "node_id": "MDU6TGFiZWwxOTgyMjYwMDMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/PYTHON",
+      "name": "PYTHON",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-03T06:19:22Z",
+  "updated_at": "2023-05-23T01:26:10Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41031",
+    "html_url": "https://github.com/apache/spark/pull/41031",
+    "diff_url": "https://github.com/apache/spark/pull/41031.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41031.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR proposes to migrate remaining Spark session errors into error class\r\n\r\n\r\n### Why are the changes needed?\r\n\r\nTo leverage PySpark error framework.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo API changes.\r\n\r\n\r\n### How was this patch tested?\r\n\r\nThe existing CI should pass.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41031/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41031/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

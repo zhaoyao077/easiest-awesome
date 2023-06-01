@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41196",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41196/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41196/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41196/events",
+  "html_url": "https://github.com/apache/spark/pull/41196",
+  "id": 1713385930,
+  "node_id": "PR_kwDOAQXtWs5Qr-cq",
+  "number": 41196,
+  "title": "[SPARK-43505][K8S] support env variables substitution and executor library path",
+  "user": {
+    "login": "advancedxy",
+    "id": 807537,
+    "node_id": "MDQ6VXNlcjgwNzUzNw==",
+    "avatar_url": "https://avatars.githubusercontent.com/u/807537?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/advancedxy",
+    "html_url": "https://github.com/advancedxy",
+    "followers_url": "https://api.github.com/users/advancedxy/followers",
+    "following_url": "https://api.github.com/users/advancedxy/following{/other_user}",
+    "gists_url": "https://api.github.com/users/advancedxy/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/advancedxy/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/advancedxy/subscriptions",
+    "organizations_url": "https://api.github.com/users/advancedxy/orgs",
+    "repos_url": "https://api.github.com/users/advancedxy/repos",
+    "events_url": "https://api.github.com/users/advancedxy/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/advancedxy/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-17T08:20:42Z",
+  "updated_at": "2023-05-18T08:03:38Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41196",
+    "html_url": "https://github.com/apache/spark/pull/41196",
+    "diff_url": "https://github.com/apache/spark/pull/41196.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41196.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n1. add a new feature step to handle special environment variables, such as `PATH=/usr/bin:$PATH`\r\n   * pull these special env variables and reorder them in a new config map\r\n   * mount the config map in driver and/or executor's container\r\n   * export these env variables by leverage sh/bash's `.` capability in the `entrypoint.sh`\r\n   * update original container's env list with special envs excluded\r\n2. support `spark.executor.exraLibraryPath` on K8S by leveraging the new feature step\r\n3. update `spark-rbac.yaml` to including more permissions, which was found when add integration tests.\r\n\r\n### Why are the changes needed?\r\n1. support `spark.executor.extraLibraryPath` on k8s\r\n2. feature parity with spark on yarn. Spark on yarn handles this environment variables that need to be substituted correctly.\r\n3. K8S itself cannot substitute variables in the container spec, we have to do some extra work at the entrypoint.sh\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes. Before this PR, for spark running on K8S, `spark.executor.extraLibraryPath` doesn't take effect and cannot support \r\nvariable substitution.\r\n\r\n### How was this patch tested?\r\n1. added new UTs\r\n2. added new integration test\r\n3. [WIP] verifing in the real prod cluster.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41196/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41196/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

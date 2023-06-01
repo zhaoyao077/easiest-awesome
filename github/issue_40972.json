@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40972",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40972/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40972/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40972/events",
+  "html_url": "https://github.com/apache/spark/pull/40972",
+  "id": 1686041690,
+  "node_id": "PR_kwDOAQXtWs5PQQv4",
+  "number": 40972,
+  "title": "[SPARK-43301][CORE][SHUFFLE] BlockStoreClient getHostLocalDirs RPC supports IOException retry",
+  "user": {
+    "login": "cxzl25",
+    "id": 3898450,
+    "node_id": "MDQ6VXNlcjM4OTg0NTA=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3898450?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/cxzl25",
+    "html_url": "https://github.com/cxzl25",
+    "followers_url": "https://api.github.com/users/cxzl25/followers",
+    "following_url": "https://api.github.com/users/cxzl25/following{/other_user}",
+    "gists_url": "https://api.github.com/users/cxzl25/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/cxzl25/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/cxzl25/subscriptions",
+    "organizations_url": "https://api.github.com/users/cxzl25/orgs",
+    "repos_url": "https://api.github.com/users/cxzl25/repos",
+    "events_url": "https://api.github.com/users/cxzl25/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/cxzl25/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 3,
+  "created_at": "2023-04-27T03:47:39Z",
+  "updated_at": "2023-05-23T13:35:24Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40972",
+    "html_url": "https://github.com/apache/spark/pull/40972",
+    "diff_url": "https://github.com/apache/spark/pull/40972.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40972.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nUse `CompletableFuture` to implement retry logic, and retry operations are performed asynchronously.\r\n\r\n### Why are the changes needed?\r\n`BlockStoreClient#getHostLocalDirs` RPC did not retry when `IOexception` occurred, and then `FetchFailedException` was thrown.\r\n\r\n```java\r\n23/04/24 01:24:55,158 [shuffle-client-7-1] WARN ExternalBlockStoreClient: Error while trying to get the host local dirs for [148]\r\n23/04/24 01:24:55,158 [shuffle-client-7-1] ERROR ShuffleBlockFetcherIterator: Error occurred while fetching host local blocks\r\njava.io.IOException: Connection reset by peer\r\n\tat sun.nio.ch.FileDispatcherImpl.read0(Native Method)\r\n\tat sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:39)\r\n\tat sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)\r\n\tat sun.nio.ch.IOUtil.read(IOUtil.java:192)\r\n\tat sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)\r\n\tat io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:253)\r\n\tat io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)\r\n\tat io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)\r\n\tat io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)\r\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)\r\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)\r\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\r\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\r\n\tat java.lang.Thread.run(Thread.java:745) \r\n```\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\nlocal test / add UT\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40972/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40972/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

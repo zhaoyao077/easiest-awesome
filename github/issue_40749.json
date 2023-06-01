@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40749",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40749/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40749/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40749/events",
+  "html_url": "https://github.com/apache/spark/pull/40749",
+  "id": 1663407640,
+  "node_id": "PR_kwDOAQXtWs5OEplc",
+  "number": 40749,
+  "title": "[SPARK-43100][CORE] Mismatch of field name in log event writer and parser for push shuffle metrics",
+  "user": {
+    "login": "zhouyejoe",
+    "id": 8699921,
+    "node_id": "MDQ6VXNlcjg2OTk5MjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8699921?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zhouyejoe",
+    "html_url": "https://github.com/zhouyejoe",
+    "followers_url": "https://api.github.com/users/zhouyejoe/followers",
+    "following_url": "https://api.github.com/users/zhouyejoe/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zhouyejoe/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zhouyejoe/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zhouyejoe/subscriptions",
+    "organizations_url": "https://api.github.com/users/zhouyejoe/orgs",
+    "repos_url": "https://api.github.com/users/zhouyejoe/repos",
+    "events_url": "https://api.github.com/users/zhouyejoe/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zhouyejoe/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-12T00:04:04Z",
+  "updated_at": "2023-04-13T10:58:29Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40749",
+    "html_url": "https://github.com/apache/spark/pull/40749",
+    "diff_url": "https://github.com/apache/spark/pull/40749.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40749.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nFor push based shuffle metrics, when writting out the event to log file, the field name is [\"Push Based Shuffle\"](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/util/JsonProtocol.scala#L548).\r\nBut when parsing it out in SHS, the expected field name is [\"Shuffle Push Read Metrics\"](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/util/JsonProtocol.scala#L1264). This mismatch makes all the push shuffle metrics 0 from SHS rest calls.\r\n\r\n### Why are the changes needed?\r\nWithout this change, all the push shuffle metrics will not be rendered correctly through SHS rest calls.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nLaunched Spark-shell application in Yarn client mode in our cluster, get the log file to local, and started a local Spark History Server to parse the log file. The metrics are shown correctly after this patch.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40749/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40749/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

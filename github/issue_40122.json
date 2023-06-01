@@ -1,0 +1,108 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40122",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40122/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40122/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40122/events",
+  "html_url": "https://github.com/apache/spark/pull/40122",
+  "id": 1594906210,
+  "node_id": "PR_kwDOAQXtWs5KgO6N",
+  "number": 40122,
+  "title": "[SPARK-42349][PYTHON] Support pandas cogroup with multiple df",
+  "user": {
+    "login": "santosh-d3vpl3x",
+    "id": 3813695,
+    "node_id": "MDQ6VXNlcjM4MTM2OTU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3813695?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/santosh-d3vpl3x",
+    "html_url": "https://github.com/santosh-d3vpl3x",
+    "followers_url": "https://api.github.com/users/santosh-d3vpl3x/followers",
+    "following_url": "https://api.github.com/users/santosh-d3vpl3x/following{/other_user}",
+    "gists_url": "https://api.github.com/users/santosh-d3vpl3x/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/santosh-d3vpl3x/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/santosh-d3vpl3x/subscriptions",
+    "organizations_url": "https://api.github.com/users/santosh-d3vpl3x/orgs",
+    "repos_url": "https://api.github.com/users/santosh-d3vpl3x/repos",
+    "events_url": "https://api.github.com/users/santosh-d3vpl3x/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/santosh-d3vpl3x/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406587328,
+      "node_id": "MDU6TGFiZWwxNDA2NTg3MzI4",
+      "url": "https://api.github.com/repos/apache/spark/labels/STRUCTURED%20STREAMING",
+      "name": "STRUCTURED STREAMING",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982260031,
+      "node_id": "MDU6TGFiZWwxOTgyMjYwMDMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/PYTHON",
+      "name": "PYTHON",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 4,
+  "created_at": "2023-02-22T11:06:59Z",
+  "updated_at": "2023-03-14T14:03:57Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40122",
+    "html_url": "https://github.com/apache/spark/pull/40122",
+    "diff_url": "https://github.com/apache/spark/pull/40122.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40122.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nAlternative approach to #39902. This PR removes conditional presence of first arg as grouping key and makes it mandatory. @EnricoMi suggested this could be one potential approach. This approach doubles down on \"Explicit better than implicit\" and that leads to reduction in cognitive overload.\r\n\r\nAll the remaining details remain more or less the same. Note: this is a breaking change to this experimental API.\r\n\r\nPandas cogroup UDF with applyInPandas currently support two dataframes. This is already very useful but limits us both API wise and efficiency wise when we have to use multiple DFs with cogroup.applyInPandas. The PR here is to support multiple DFs in cogroup.\r\n\r\n```python\r\ndf1 = spark.createDataFrame(\r\n    [(20000101, 1, 1.0), (20000101, 2, 2.0), (20000102, 1, 3.0), (20000102, 2, 4.0)],\r\n    (\"time\", \"id\", \"v1\"))\r\ndf2 = spark.createDataFrame(\r\n    [(20000101, 1, \"x\"), (20000101, 2, \"y\")],\r\n    (\"time\", \"id\", \"v2\"))\r\ndf3 = spark.createDataFrame(\r\n    [(20000101, 1, \"asd\"), (20000101, 2, \"d\")],\r\n    (\"time\", \"id\", \"v3\"))\r\ndf4 = spark.createDataFrame(\r\n    [(20000101, 1, \"v\"), (20000101, 2, \"g\")],\r\n    (\"time\", \"id\", \"v4\"))\r\ndef asof_join(key, df1, df2, df3, df4):\r\n    df12 = pd.merge_asof(df1, df2, on=\"time\", by=\"id\")\r\n    df123 = pd.merge_asof(df12, df3, on=\"time\", by=\"id\")\r\n    df1234 = pd.merge_asof(df123, df4, on=\"time\", by=\"id\")\r\n    return df1234\r\ndf1.groupby(\"id\").cogroup(df2.groupby(\"id\"), df3.groupby(\"id\"), df4.groupby(\"id\")).applyInPandas(\r\n    asof_join, schema=\"time int, id int, v1 double, v2 string, v3 string, v4 string\"\r\n).show()\r\n\r\n+--------+---+---+---+---+---+\r\n|    time| id| v1| v2| v3| v4|\r\n+--------+---+---+---+---+---+\r\n|20000101|  1|1.0|  x|asd|  v|\r\n|20000102|  1|3.0|  x|asd|  v|\r\n|20000101|  2|2.0|  y|  d|  g|\r\n|20000102|  2|4.0|  y|  d|  g|\r\n+--------+---+---+---+---+---+\r\n```\r\n<img width=\"527\" alt=\"image\" src=\"https://user-images.githubusercontent.com/3813695/221379159-f30925b0-76e4-4465-85c9-03054e2a7e31.png\">\r\n\r\n### Why are the changes needed?\r\nCurrently pyspark support `cogroup.applyInPandas` with only 2 dataframes. The improvement request is to support multiple dataframes with variable arity. We have cases where we want to pass multiple(20 to 30) data frames to `cogroup.applyInPandas` function which then are used to either combine them together for further processing in spark or emit excel files or combined graphs. Workarounds are possible but they are very inefficient and error-prone.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nThe previous experimental implementation is awkward. The UDF can accept either 2 or 3 args. If 2 args are passed in the UDF then UDF receives 2 cogrouped DFs, if 3 args are passed then UDF receives 2 cogrouped DFs with grouping key as the first arg. he previous API is limiting and has implications on new proposed change. There is no clear way of distinguishing whether 3 args are for 3 DFs or 2 DFs + 1 grouping key. \r\nThis change removes this behaviour. In this change, we always pass key as first arg to the UDF. \r\nBreaking change:\r\n```python\r\ndef test_udf(df1, df2):\r\n    return df1\r\n\r\ndf1.groupby(\"id\").cogroup(df2.groupby(\"id\")).applyInPandas(\r\n    test_udf, \"time int, id int, v1 double\").show()\r\n\r\n```\r\nBEFORE:\r\n```\r\n+--------+---+---+\r\n|    time| id| v1|\r\n+--------+---+---+\r\n|20000101|  1|1.0|\r\n|20000102|  1|3.0|\r\n|20000101|  2|2.0|\r\n|20000102|  2|4.0|\r\n+--------+---+---+\r\n```\r\nAFTER:\r\n```\r\nTraceback (most recent call last):\r\n  File \"previous.py\", line 64, in <module>\r\n    df1.groupby(\"id\").cogroup(df2.groupby(\"id\")).applyInPandas(\r\n  File \"/workspace/spark/python/lib/pyspark.zip/pyspark/sql/pandas/group_ops.py\", line 459, in applyInPandas\r\n  File \"/workspace/spark/python/lib/pyspark.zip/pyspark/sql/pandas/functions.py\", line 387, in pandas_udf\r\n  File \"/workspace/spark/python/lib/pyspark.zip/pyspark/sql/pandas/functions.py\", line 452, in _create_pandas_udf\r\nValueError: Invalid function: the function in cogroup.applyInPandas must contain vararg or must take three or more argument with key being first\r\n```\r\nTo make it work, change the UDF:\r\n```python\r\ndef test_udf(key, df1, df2):\r\n    return df1\r\n\r\ndf1.groupby(\"id\").cogroup(df2.groupby(\"id\")).applyInPandas(\r\n    test_udf, \"time int, id int, v1 double\").show()\r\n```\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40122/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40122/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

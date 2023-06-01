@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40930",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40930/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40930/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40930/events",
+  "html_url": "https://github.com/apache/spark/pull/40930",
+  "id": 1681503511,
+  "node_id": "PR_kwDOAQXtWs5PBAZM",
+  "number": 40930,
+  "title": "[DO NOT MERGE] File constant metadata extractors split",
+  "user": {
+    "login": "ryan-johnson-databricks",
+    "id": 79601771,
+    "node_id": "MDQ6VXNlcjc5NjAxNzcx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/79601771?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/ryan-johnson-databricks",
+    "html_url": "https://github.com/ryan-johnson-databricks",
+    "followers_url": "https://api.github.com/users/ryan-johnson-databricks/followers",
+    "following_url": "https://api.github.com/users/ryan-johnson-databricks/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ryan-johnson-databricks/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/ryan-johnson-databricks/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ryan-johnson-databricks/subscriptions",
+    "organizations_url": "https://api.github.com/users/ryan-johnson-databricks/orgs",
+    "repos_url": "https://api.github.com/users/ryan-johnson-databricks/repos",
+    "events_url": "https://api.github.com/users/ryan-johnson-databricks/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/ryan-johnson-databricks/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-24T15:07:32Z",
+  "updated_at": "2023-04-24T15:07:49Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40930",
+    "html_url": "https://github.com/apache/spark/pull/40930",
+    "diff_url": "https://github.com/apache/spark/pull/40930.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40930.patch",
+    "merged_at": null
+  },
+  "body": "<!--\r\nThanks for sending a pull request!  Here are some tips for you:\r\n  1. If this is your first time, please read our contributor guidelines: https://spark.apache.org/contributing.html\r\n  2. Ensure you have added or run the appropriate tests for your PR: https://spark.apache.org/developer-tools.html\r\n  3. If the PR is unfinished, add '[WIP]' in your PR title, e.g., '[WIP][SPARK-XXXX] Your PR title ...'.\r\n  4. Be sure to keep the PR description updated to reflect all changes.\r\n  5. Please write your PR title to summarize what this PR proposes.\r\n  6. If possible, provide a concise example to reproduce the issue for a faster review.\r\n  7. If you want to add a new configuration, please read the guideline first for naming configurations in\r\n     'core/src/main/scala/org/apache/spark/internal/config/ConfigEntry.scala'.\r\n  8. If you want to add or modify an error type or message, please read the guideline first in\r\n     'core/src/main/resources/error/README.md'.\r\n-->\r\n\r\n### What changes were proposed in this pull request?\r\n\r\nExperimental PR in response to https://github.com/apache/spark/pull/40885#discussion_r1174277575, so that reviewers can visualize the difference between the two approaches discussed there. NOT FOR MERGE -- If this approach is chosen, I will update the other PR accordingly. \r\n\r\nOnly the last commit differs from the other PR.\r\n\r\n### Why are the changes needed?\r\n\r\nN/A\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo\r\n\r\n### How was this patch tested?\r\n\r\nN/A",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40930/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40930/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

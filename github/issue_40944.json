@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40944",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40944/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40944/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40944/events",
+  "html_url": "https://github.com/apache/spark/pull/40944",
+  "id": 1682960096,
+  "node_id": "PR_kwDOAQXtWs5PF6T1",
+  "number": 40944,
+  "title": "[SPARK-40708][SQL][WIP] Auto update partition statistics based on write metrics",
+  "user": {
+    "login": "jackylee-ch",
+    "id": 10897625,
+    "node_id": "MDQ6VXNlcjEwODk3NjI1",
+    "avatar_url": "https://avatars.githubusercontent.com/u/10897625?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/jackylee-ch",
+    "html_url": "https://github.com/jackylee-ch",
+    "followers_url": "https://api.github.com/users/jackylee-ch/followers",
+    "following_url": "https://api.github.com/users/jackylee-ch/following{/other_user}",
+    "gists_url": "https://api.github.com/users/jackylee-ch/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/jackylee-ch/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/jackylee-ch/subscriptions",
+    "organizations_url": "https://api.github.com/users/jackylee-ch/orgs",
+    "repos_url": "https://api.github.com/users/jackylee-ch/repos",
+    "events_url": "https://api.github.com/users/jackylee-ch/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/jackylee-ch/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-04-25T11:13:23Z",
+  "updated_at": "2023-04-27T06:17:37Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40944",
+    "html_url": "https://github.com/apache/spark/pull/40944",
+    "diff_url": "https://github.com/apache/spark/pull/40944.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40944.patch",
+    "merged_at": null
+  },
+  "body": "What changes were proposed in this pull request?\r\nSupport collect partition statistics while task running and auto update partition statistics in catalog.\r\n\r\nDoes this PR introduce any user-facing change?\r\nNo\r\n\r\nHow was this patch tested?\r\nunit tests and some added tests.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40944/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40944/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

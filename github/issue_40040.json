@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40040",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40040/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40040/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40040/events",
+  "html_url": "https://github.com/apache/spark/pull/40040",
+  "id": 1586161193,
+  "node_id": "PR_kwDOAQXtWs5KDNpN",
+  "number": 40040,
+  "title": "[SPARK-42399] [SQL] Support big numbers for conv function (get rid of overflow)",
+  "user": {
+    "login": "NarekDW",
+    "id": 24260474,
+    "node_id": "MDQ6VXNlcjI0MjYwNDc0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/24260474?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/NarekDW",
+    "html_url": "https://github.com/NarekDW",
+    "followers_url": "https://api.github.com/users/NarekDW/followers",
+    "following_url": "https://api.github.com/users/NarekDW/following{/other_user}",
+    "gists_url": "https://api.github.com/users/NarekDW/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/NarekDW/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/NarekDW/subscriptions",
+    "organizations_url": "https://api.github.com/users/NarekDW/orgs",
+    "repos_url": "https://api.github.com/users/NarekDW/repos",
+    "events_url": "https://api.github.com/users/NarekDW/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/NarekDW/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-02-15T16:25:24Z",
+  "updated_at": "2023-02-26T21:01:36Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40040",
+    "html_url": "https://github.com/apache/spark/pull/40040",
+    "diff_url": "https://github.com/apache/spark/pull/40040.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40040.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThis PR proposes to use `BigInt` instead of `Long` datatype for  conversion of numbers between different radixes, because of this we will get rid of overflows.\r\nThis change allows to convert big numbers, like:\r\n```\r\nspark-sql> SELECT CONV(SUBSTRING('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 3), 16, 10);\r\n```\r\nwill give correct result:\r\n`115792089237316195423570985008687907853269984665640564039457584007913129639935`\r\n\r\n**P.S. According to the NumberConverterBenchmark it work faster with Java 8 and slower with Java 11 and 17.\r\nYou can check benchmark results.**\r\n\r\n\r\n### Why are the changes needed?\r\nChanges allow to convert big numbers among different radixes.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nUsers could convert big values by using `conv` function, without an overflow.\r\n\r\n### How was this patch tested?\r\nBy existing tests + an additional test cases were added to:\r\n`sql/catalyst/src/test/scala/org/apache/spark/sql/catalyst/expressions/MathExpressionsSuite.scala`\r\n`sql/catalyst/src/test/scala/org/apache/spark/sql/catalyst/util/NumberConverterSuite.scala`",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40040/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40040/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

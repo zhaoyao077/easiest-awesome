@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1432886862",
+    "html_url": "https://github.com/apache/spark/pull/40018#issuecomment-1432886862",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40018",
+    "id": 1432886862,
+    "node_id": "IC_kwDOAQXtWs5VaB5O",
+    "user": {
+      "login": "LorenzoMartini",
+      "id": 18014953,
+      "node_id": "MDQ6VXNlcjE4MDE0OTUz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18014953?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/LorenzoMartini",
+      "html_url": "https://github.com/LorenzoMartini",
+      "followers_url": "https://api.github.com/users/LorenzoMartini/followers",
+      "following_url": "https://api.github.com/users/LorenzoMartini/following{/other_user}",
+      "gists_url": "https://api.github.com/users/LorenzoMartini/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/LorenzoMartini/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/LorenzoMartini/subscriptions",
+      "organizations_url": "https://api.github.com/users/LorenzoMartini/orgs",
+      "repos_url": "https://api.github.com/users/LorenzoMartini/repos",
+      "events_url": "https://api.github.com/users/LorenzoMartini/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/LorenzoMartini/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-02-16T10:46:55Z",
+    "updated_at": "2023-02-16T10:46:55Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "Maybe @gengliangwang ?",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1432886862/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

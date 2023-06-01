@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41340",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41340/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41340/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41340/events",
+  "html_url": "https://github.com/apache/spark/pull/41340",
+  "id": 1728463832,
+  "node_id": "PR_kwDOAQXtWs5RfCGG",
+  "number": 41340,
+  "title": "[WIP] Remove some dependency in pom",
+  "user": {
+    "login": "panbingkun",
+    "id": 15246973,
+    "node_id": "MDQ6VXNlcjE1MjQ2OTcz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/15246973?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/panbingkun",
+    "html_url": "https://github.com/panbingkun",
+    "followers_url": "https://api.github.com/users/panbingkun/followers",
+    "following_url": "https://api.github.com/users/panbingkun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/panbingkun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/panbingkun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/panbingkun/subscriptions",
+    "organizations_url": "https://api.github.com/users/panbingkun/orgs",
+    "repos_url": "https://api.github.com/users/panbingkun/repos",
+    "events_url": "https://api.github.com/users/panbingkun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/panbingkun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-27T05:10:55Z",
+  "updated_at": "2023-05-28T02:35:33Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41340",
+    "html_url": "https://github.com/apache/spark/pull/41340",
+    "diff_url": "https://github.com/apache/spark/pull/41340.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41340.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\n\r\n### Why are the changes needed?\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nPass GA.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41340/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41340/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

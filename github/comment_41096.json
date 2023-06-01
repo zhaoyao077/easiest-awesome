@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1539083069",
+    "html_url": "https://github.com/apache/spark/pull/41096#issuecomment-1539083069",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/41096",
+    "id": 1539083069,
+    "node_id": "IC_kwDOAQXtWs5bvIs9",
+    "user": {
+      "login": "WweiL",
+      "id": 10248890,
+      "node_id": "MDQ6VXNlcjEwMjQ4ODkw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10248890?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/WweiL",
+      "html_url": "https://github.com/WweiL",
+      "followers_url": "https://api.github.com/users/WweiL/followers",
+      "following_url": "https://api.github.com/users/WweiL/following{/other_user}",
+      "gists_url": "https://api.github.com/users/WweiL/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/WweiL/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/WweiL/subscriptions",
+      "organizations_url": "https://api.github.com/users/WweiL/orgs",
+      "repos_url": "https://api.github.com/users/WweiL/repos",
+      "events_url": "https://api.github.com/users/WweiL/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/WweiL/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-05-08T21:31:56Z",
+    "updated_at": "2023-05-08T21:44:14Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "@rangadi @pengzhon-db ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1539083069/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

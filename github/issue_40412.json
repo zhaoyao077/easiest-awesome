@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40412",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40412/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40412/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40412/events",
+  "html_url": "https://github.com/apache/spark/pull/40412",
+  "id": 1623067374,
+  "node_id": "PR_kwDOAQXtWs5L-gwM",
+  "number": 40412,
+  "title": "[SPARK-42784] should still create subDir when the number of subDir in merge dir is less than conf",
+  "user": {
+    "login": "Stove-hust",
+    "id": 52523908,
+    "node_id": "MDQ6VXNlcjUyNTIzOTA4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/52523908?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Stove-hust",
+    "html_url": "https://github.com/Stove-hust",
+    "followers_url": "https://api.github.com/users/Stove-hust/followers",
+    "following_url": "https://api.github.com/users/Stove-hust/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Stove-hust/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Stove-hust/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Stove-hust/subscriptions",
+    "organizations_url": "https://api.github.com/users/Stove-hust/orgs",
+    "repos_url": "https://api.github.com/users/Stove-hust/repos",
+    "events_url": "https://api.github.com/users/Stove-hust/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Stove-hust/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 10,
+  "created_at": "2023-03-14T09:25:14Z",
+  "updated_at": "2023-05-29T01:25:49Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40412",
+    "html_url": "https://github.com/apache/spark/pull/40412",
+    "diff_url": "https://github.com/apache/spark/pull/40412.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40412.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nFixed a minor issue with diskBlockManager after push-based shuffle is enabled\r\n\r\n\r\n### Why are the changes needed?\r\nthis bug will affect the efficiency of push based shuffle\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\nUnit test\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40412/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40412/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

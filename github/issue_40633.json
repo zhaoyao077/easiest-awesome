@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40633",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40633/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40633/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40633/events",
+  "html_url": "https://github.com/apache/spark/pull/40633",
+  "id": 1650339156,
+  "node_id": "PR_kwDOAQXtWs5NZxrk",
+  "number": 40633,
+  "title": "[SPARK-43000][SQL] Do not cast to double type in `PromoteStrings`",
+  "user": {
+    "login": "wangyum",
+    "id": 5399861,
+    "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wangyum",
+    "html_url": "https://github.com/wangyum",
+    "followers_url": "https://api.github.com/users/wangyum/followers",
+    "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+    "organizations_url": "https://api.github.com/users/wangyum/orgs",
+    "repos_url": "https://api.github.com/users/wangyum/repos",
+    "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wangyum/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-04-01T07:09:09Z",
+  "updated_at": "2023-04-04T02:40:08Z",
+  "closed_at": null,
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40633",
+    "html_url": "https://github.com/apache/spark/pull/40633",
+    "diff_url": "https://github.com/apache/spark/pull/40633.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40633.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR updates `PromoteStrings` to not cast to double type when one side is `AnsiIntervalType` in `BinaryArithmetic`.\r\n\r\n\r\n### Why are the changes needed?\r\n\r\n1. It's already handled by `ImplicitTypeCasts`.\r\n2. The error message is incorrect. For example:\r\n   ```sql\r\n    select '2' / interval 2 second;\r\n   ```\r\n   The error message is:  the left and right operands of the binary operator have incompatible types (\"DOUBLE\" and \"INTERVAL SECOND\").\r\n   It should be:  the left and right operands of the binary operator have incompatible types (\"STRING\" and \"INTERVAL SECOND\").\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nUpdate existing unit tests.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40633/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40633/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

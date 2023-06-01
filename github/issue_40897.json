@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40897",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40897/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40897/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40897/events",
+  "html_url": "https://github.com/apache/spark/pull/40897",
+  "id": 1678140768,
+  "node_id": "PR_kwDOAQXtWs5O16GC",
+  "number": 40897,
+  "title": "[SPARK-43228][SQL] Join keys also match PartitioningCollection in CoalesceBucketsInJoin",
+  "user": {
+    "login": "wangyum",
+    "id": 5399861,
+    "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wangyum",
+    "html_url": "https://github.com/wangyum",
+    "followers_url": "https://api.github.com/users/wangyum/followers",
+    "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+    "organizations_url": "https://api.github.com/users/wangyum/orgs",
+    "repos_url": "https://api.github.com/users/wangyum/repos",
+    "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wangyum/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-21T08:47:47Z",
+  "updated_at": "2023-04-21T11:52:12Z",
+  "closed_at": null,
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40897",
+    "html_url": "https://github.com/apache/spark/pull/40897",
+    "diff_url": "https://github.com/apache/spark/pull/40897.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40897.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR updates `CoalesceBucketsInJoin.satisfiesOutputPartitioning` to support matching `PartitioningCollection`. A common case is that we add an alias on the join key. For example:\r\n```sql\r\nSELECT *\r\nFROM   (SELECT /*+ BROADCAST(t3) */ t1.i AS t1i, t1.j AS t1j, t3.*\r\n        FROM   t1 JOIN t3 ON t1.i = t3.i AND t1.j = t3.j) t\r\n       JOIN t2 ON t.t1i = t2.i AND t.t1j = t2.j\r\n```\r\nThe left side outputPartitioning is:\r\n```\r\n(hashpartitioning(t1i#41, t1j#42, 8) or hashpartitioning(i#46, t1j#42, 8) or hashpartitioning(t1i#41, j#47, 8) or hashpartitioning(i#46, j#47, 8))\r\n```\r\n\r\n### Why are the changes needed?\r\n\r\nEnhance `CoalesceBucketsInJoin` to support more cases.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nUnit test.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40897/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40897/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

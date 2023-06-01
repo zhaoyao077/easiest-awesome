@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41067",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41067/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41067/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41067/events",
+  "html_url": "https://github.com/apache/spark/pull/41067",
+  "id": 1697610068,
+  "node_id": "PR_kwDOAQXtWs5P3O6L",
+  "number": 41067,
+  "title": "[SPARK-43496][KUBERNETES] Add configuration for pod memory limits",
+  "user": {
+    "login": "yerenkow",
+    "id": 1080762,
+    "node_id": "MDQ6VXNlcjEwODA3NjI=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1080762?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/yerenkow",
+    "html_url": "https://github.com/yerenkow",
+    "followers_url": "https://api.github.com/users/yerenkow/followers",
+    "following_url": "https://api.github.com/users/yerenkow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/yerenkow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/yerenkow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/yerenkow/subscriptions",
+    "organizations_url": "https://api.github.com/users/yerenkow/orgs",
+    "repos_url": "https://api.github.com/users/yerenkow/repos",
+    "events_url": "https://api.github.com/users/yerenkow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/yerenkow/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-05-05T13:18:23Z",
+  "updated_at": "2023-05-24T16:12:05Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41067",
+    "html_url": "https://github.com/apache/spark/pull/41067",
+    "diff_url": "https://github.com/apache/spark/pull/41067.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41067.patch",
+    "merged_at": null
+  },
+  "body": "\r\n### What changes were proposed in this pull request?\r\nAdding dedicated configuration for specifying driver/executor memory limits.\r\n\r\n\r\n### Why are the changes needed?\r\nSeparate mem limit for the pod might be needed if sprak JVM launches extrernal processes.\r\nAlso, this could be useful in heterogenous loads when some pods may use more memory for bursty operations.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nWithout using new configurations - no\r\n\r\n\r\n### How was this patch tested?\r\nUnit tested\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41067/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41067/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41090",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41090/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41090/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41090/events",
+  "html_url": "https://github.com/apache/spark/pull/41090",
+  "id": 1699792536,
+  "node_id": "PR_kwDOAQXtWs5P-cRv",
+  "number": 41090,
+  "title": "[SPARK-43406][SQL] enable spark sql to drop multiple partitions in on…",
+  "user": {
+    "login": "chenruotao",
+    "id": 20615138,
+    "node_id": "MDQ6VXNlcjIwNjE1MTM4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/20615138?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/chenruotao",
+    "html_url": "https://github.com/chenruotao",
+    "followers_url": "https://api.github.com/users/chenruotao/followers",
+    "following_url": "https://api.github.com/users/chenruotao/following{/other_user}",
+    "gists_url": "https://api.github.com/users/chenruotao/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/chenruotao/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/chenruotao/subscriptions",
+    "organizations_url": "https://api.github.com/users/chenruotao/orgs",
+    "repos_url": "https://api.github.com/users/chenruotao/repos",
+    "events_url": "https://api.github.com/users/chenruotao/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/chenruotao/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-08T08:31:58Z",
+  "updated_at": "2023-05-08T09:13:26Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41090",
+    "html_url": "https://github.com/apache/spark/pull/41090",
+    "diff_url": "https://github.com/apache/spark/pull/41090.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41090.patch",
+    "merged_at": null
+  },
+  "body": "Now spark sql cannot drop multiple partitions in one call, so I fix it\r\n\r\nWith this patch we can drop multiple partitions like this : \r\n\r\nalter table test.table_partition drop partition(dt<='2023-04-02', dt>='2023-03-31')\r\n\r\nthis is my test demo with hms\r\n\r\n1、insert five data into partitioned table test.table_partition\r\ninsert into table test.table_partition partition(dt='2023-03-30') values('chenruotao','100');\r\ninsert into table test.table_partition partition(dt='2023-03-31') values('chenruotao','100');\r\ninsert into table test.table_partition partition(dt='2023-04-01') values('chenruotao','100');\r\ninsert into table test.table_partition partition(dt='2023-04-02') values('chenruotao','100');\r\ninsert into table test.table_partition partition(dt='2023-04-03') values('chenruotao','100');\r\n<img width=\"420\" alt=\"image\" src=\"https://user-images.githubusercontent.com/20615138/236775512-d54fa998-7f0b-40d9-ae30-7c2de6e7facc.png\">\r\n2、execute sql to  drop multiple partitions：\r\nalter table test.table_partition drop partition(dt<='2023-04-02', dt>='2023-03-31');\r\n<img width=\"394\" alt=\"image\" src=\"https://user-images.githubusercontent.com/20615138/236775777-2ba14634-0a87-4fee-a819-38774273fb1e.png\">\r\n3、execute sql to  drop one partitions：\r\nalter table test.table_partition drop partition(dt='2023-03-30');\r\n<img width=\"321\" alt=\"image\" src=\"https://user-images.githubusercontent.com/20615138/236775891-ea53f3fb-e670-4cdc-8765-45d56d5d156e.png\">\r\n\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41090/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41090/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

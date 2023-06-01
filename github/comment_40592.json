@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1491064274",
+    "html_url": "https://github.com/apache/spark/pull/40592#issuecomment-1491064274",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40592",
+    "id": 1491064274,
+    "node_id": "IC_kwDOAQXtWs5Y39XS",
+    "user": {
+      "login": "gengliangwang",
+      "id": 1097932,
+      "node_id": "MDQ6VXNlcjEwOTc5MzI=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1097932?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gengliangwang",
+      "html_url": "https://github.com/gengliangwang",
+      "followers_url": "https://api.github.com/users/gengliangwang/followers",
+      "following_url": "https://api.github.com/users/gengliangwang/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gengliangwang/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gengliangwang/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gengliangwang/subscriptions",
+      "organizations_url": "https://api.github.com/users/gengliangwang/orgs",
+      "repos_url": "https://api.github.com/users/gengliangwang/repos",
+      "events_url": "https://api.github.com/users/gengliangwang/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gengliangwang/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-30T22:47:37Z",
+    "updated_at": "2023-03-30T22:47:37Z",
+    "author_association": "MEMBER",
+    "body": "Merging to master/3.4/3.3/3.2",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1491064274/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

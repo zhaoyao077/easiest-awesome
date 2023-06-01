@@ -1,0 +1,108 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40954",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40954/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40954/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40954/events",
+  "html_url": "https://github.com/apache/spark/pull/40954",
+  "id": 1684221850,
+  "node_id": "PR_kwDOAQXtWs5PKJsm",
+  "number": 40954,
+  "title": "[PYSPARK] [CONNECT] [ML] PySpark UDF supports python package dependencies",
+  "user": {
+    "login": "WeichenXu123",
+    "id": 19235986,
+    "node_id": "MDQ6VXNlcjE5MjM1OTg2",
+    "avatar_url": "https://avatars.githubusercontent.com/u/19235986?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/WeichenXu123",
+    "html_url": "https://github.com/WeichenXu123",
+    "followers_url": "https://api.github.com/users/WeichenXu123/followers",
+    "following_url": "https://api.github.com/users/WeichenXu123/following{/other_user}",
+    "gists_url": "https://api.github.com/users/WeichenXu123/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/WeichenXu123/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/WeichenXu123/subscriptions",
+    "organizations_url": "https://api.github.com/users/WeichenXu123/orgs",
+    "repos_url": "https://api.github.com/users/WeichenXu123/repos",
+    "events_url": "https://api.github.com/users/WeichenXu123/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/WeichenXu123/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982260031,
+      "node_id": "MDU6TGFiZWwxOTgyMjYwMDMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/PYTHON",
+      "name": "PYTHON",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-26T03:56:50Z",
+  "updated_at": "2023-05-04T07:19:51Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40954",
+    "html_url": "https://github.com/apache/spark/pull/40954",
+    "diff_url": "https://github.com/apache/spark/pull/40954.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40954.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\n#### Make the pyspark UDF support annotating python dependencies and when executing UDF, the UDF worker creates a new python environment with provided python dependencies.\r\n\r\n - Supported spark mode: spark connect model / legacy mode\r\n - Supported UDF type: All kinds of pyspark UDFs\r\n    - SQL_BATCHED_UDF\r\n    - SQL_SCALAR_PANDAS_UDF\r\n    - SQL_GROUPED_MAP_PANDAS_UDF\r\n    - SQL_GROUPED_AGG_PANDAS_UDF\r\n    - SQL_WINDOW_AGG_PANDAS_UDF\r\n    - SQL_SCALAR_PANDAS_ITER_UDF\r\n    - SQL_MAP_PANDAS_ITER_UDF\r\n    - SQL_COGROUPED_MAP_PANDAS_UDF\r\n    - SQL_MAP_ARROW_ITER_UDF\r\n    - SQL_GROUPED_MAP_PANDAS_UDF_WITH_STATE\r\n\r\n\r\n#### Implementation sketch\r\n - Before starting the pyspark UDF worker process, the python environment with provided python packages is created, and pyspark UDF worker process is spawned using the provided python environment instead of default configured pyspark python. \r\n - Using `virtualenv` to create a python environment based on current python environment that pyspark uses, then using `pip install` to install provided python packages.\r\n - If user configures a NFS directory that is accessible by all spark nodes (readable/writable to spark driver, readable to all spark workers), then it prepares the python environment in driver side, otherwise it creates the python environment in spark worker side.\r\n - The python environment is cached in spark driver or worker side (depending on NFS directory enabled or not), we uses SHA1 over sorted pip requirements list as the python environment caching key.\r\n\r\n#### TODOs\r\n - For chained UDF functions, if they have different pip_requirements settings, we need to split them into separate PythonRunners\r\n - In frontend, the PR currently only supports annotating `pip_requirements` for `pandas_udf`, but for other types of UDFs, and for `mapInPandas` / `mapInArrow` the `pip_requirements` argument haven't been added.\r\n - Supports annotating python version for pyspark UDF, and in UDF execution, downloading python using provided python version and creating python environment using provided python version.\r\n - Using file lock during python environment creation, to avoid race conditions.\r\n - Unit tests\r\n\r\n### Why are the changes needed?\r\n\r\n - For spark connect case, the client python environment is very likely to be different with pyspark server side python environment, this causes user's UDF function execution failure in pyspark server side.\r\n - Some machine learning third-party library (e.g. MLflow) requires pyspark UDF supporting  dependencies, because in ML cases, we need to run model inference by pyspark UDF in the exactly the same python environment that trains the model. Currently MLflow supports it by creating a child python process in pyspark UDF worker, and redirecting all UDF input data to the child python process to run model inference, this way it causes significant overhead, if pyspark UDF support builtin python dependency management then we don't need such poorly performing approach.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n```\r\n\r\n@pandas_udf(\"string\", pip_requirements=...)\r\n\r\n```\r\n\r\n`pip_requirements` argument means either an iterable of pip requirement strings (e.g. ``[\"scikit-learn\", \"-r /path/to/req2.txt\", \"-c /path/to/constraints.txt\"]``) or the string path to a pip requirements file path on the local filesystem (e.g. ``\"/path/to/requirements.txt\"``) represents the pip requirements for the python UDF.\r\n\r\n\r\n### How was this patch tested?\r\n\r\nUnit tests to be added.\r\n\r\nManually tests:\r\n\r\n```\r\nimport pandas as pd\r\nfrom pyspark.sql.functions import pandas_udf\r\n\r\nsc.setLogLevel(\"INFO\")\r\n\r\n@pandas_udf(\"string\", pip_requirements=[\"PyYAML==6.0\"])\r\ndef to_upper(s: pd.Series) -> pd.Series:\r\n    import yaml\r\n    return s.str.upper() + f\"yaml-version: {yaml.__version__}\"\r\n\r\ndf = spark.createDataFrame([(\"John Doe\",)], (\"name\",))\r\ndf.select(to_upper(\"name\")).show(truncate=False)\r\n```\r\n\r\nRun above code in spark legacy mode or spark connect mode.\r\n\r\n\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40954/reactions",
+    "total_count": 1,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 1,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40954/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

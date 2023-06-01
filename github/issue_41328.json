@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41328",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41328/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41328/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41328/events",
+  "html_url": "https://github.com/apache/spark/pull/41328",
+  "id": 1727084602,
+  "node_id": "PR_kwDOAQXtWs5RaXv9",
+  "number": 41328,
+  "title": "[WIP][SPARK-40586][CONNECT] Decouple plan transformation and validation on server side",
+  "user": {
+    "login": "beliefer",
+    "id": 8486025,
+    "node_id": "MDQ6VXNlcjg0ODYwMjU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8486025?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/beliefer",
+    "html_url": "https://github.com/beliefer",
+    "followers_url": "https://api.github.com/users/beliefer/followers",
+    "following_url": "https://api.github.com/users/beliefer/following{/other_user}",
+    "gists_url": "https://api.github.com/users/beliefer/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/beliefer/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/beliefer/subscriptions",
+    "organizations_url": "https://api.github.com/users/beliefer/orgs",
+    "repos_url": "https://api.github.com/users/beliefer/repos",
+    "events_url": "https://api.github.com/users/beliefer/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/beliefer/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-05-26T07:41:22Z",
+  "updated_at": "2023-05-27T20:19:27Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41328",
+    "html_url": "https://github.com/apache/spark/pull/41328",
+    "diff_url": "https://github.com/apache/spark/pull/41328.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41328.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nProject connect, from some perspectives, can be thought as replacing the SQL parser to generate a parsed (but the difference that is unresolved) plan, then the plan is passed to the analyzer. This means that connect should also do validation on the proto as there are many in-validate parser cases that analyzer does not expect to see, which potentially could cause problems if connect only pass through the proto (of course have it translated) to analyzer.\r\nMeanwhile I think this is a good idea to decouple the validation and transformation so that we have two stages:\r\nstage 1: proto validation. For example validate if necessary fields are populated or not.\r\nstage 2: transformation, which convert the proto to a plan with assumption that the plan is valid parsed version of the plan.\r\n\r\nThis PR checks before transformation through a simple proxy pattern.\r\n\r\nBecause there are a lot of job to do, this PR only given an example(e.g. `checkReadRel`). So that acilitate communication and discussion.\r\n\r\n### Why are the changes needed?\r\nDecouple plan transformation and validation on server side\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n'No'.\r\nJust update the inner implementation.\r\n\r\n\r\n### How was this patch tested?\r\nExists test cases.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41328/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41328/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

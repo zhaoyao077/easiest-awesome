@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1522534258",
+    "html_url": "https://github.com/apache/spark/pull/40884#issuecomment-1522534258",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40884",
+    "id": 1522534258,
+    "node_id": "IC_kwDOAQXtWs5awAdy",
+    "user": {
+      "login": "srielau",
+      "id": 3514644,
+      "node_id": "MDQ6VXNlcjM1MTQ2NDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3514644?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/srielau",
+      "html_url": "https://github.com/srielau",
+      "followers_url": "https://api.github.com/users/srielau/followers",
+      "following_url": "https://api.github.com/users/srielau/following{/other_user}",
+      "gists_url": "https://api.github.com/users/srielau/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/srielau/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/srielau/subscriptions",
+      "organizations_url": "https://api.github.com/users/srielau/orgs",
+      "repos_url": "https://api.github.com/users/srielau/repos",
+      "events_url": "https://api.github.com/users/srielau/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/srielau/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-04-25T23:16:12Z",
+    "updated_at": "2023-04-25T23:20:47Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "@cloud-fan How are docs done? Attach them to the same PR?\r\nThe only central place I can see to add this feature is:\r\nhttps://spark.apache.org/docs/latest/sql-ref-identifier.html\r\n\r\nOr we could go into each supported section (e.g. create table) and spell out that identifier() is supported.  ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1522534258/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

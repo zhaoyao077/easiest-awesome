@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40128",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40128/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40128/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40128/events",
+  "html_url": "https://github.com/apache/spark/pull/40128",
+  "id": 1595722300,
+  "node_id": "PR_kwDOAQXtWs5Ki-Oj",
+  "number": 40128,
+  "title": "[SPARK-42466][K8S]: Cleanup k8s upload directory when job terminates",
+  "user": {
+    "login": "shrprasa",
+    "id": 109815907,
+    "node_id": "U_kgDOBouoYw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/109815907?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/shrprasa",
+    "html_url": "https://github.com/shrprasa",
+    "followers_url": "https://api.github.com/users/shrprasa/followers",
+    "following_url": "https://api.github.com/users/shrprasa/following{/other_user}",
+    "gists_url": "https://api.github.com/users/shrprasa/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/shrprasa/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/shrprasa/subscriptions",
+    "organizations_url": "https://api.github.com/users/shrprasa/orgs",
+    "repos_url": "https://api.github.com/users/shrprasa/repos",
+    "events_url": "https://api.github.com/users/shrprasa/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/shrprasa/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605057,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDU3",
+      "url": "https://api.github.com/repos/apache/spark/labels/KUBERNETES",
+      "name": "KUBERNETES",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 16,
+  "created_at": "2023-02-22T19:40:51Z",
+  "updated_at": "2023-05-03T07:47:04Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40128",
+    "html_url": "https://github.com/apache/spark/pull/40128",
+    "diff_url": "https://github.com/apache/spark/pull/40128.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40128.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n1. Instead of creating multiple sub directories in k8s upload directory (spark.kubernetes.file.upload.path) for each file to be uploaded, create a single subdirectory to be used for all file uploads of a specific application. This directory will be named using the spark application id.\r\n2. Delete the sub directory and it's content when job terminates\r\n\r\n### Why are the changes needed?\r\nThe change is required to cleanup the files and directories which are created under the k8s upload path to prevent space getting full. without this change, user needs to manually clean up these files.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes, Users submitting spark on k8s job, won't need to manually cleanup the files under upload directory.\r\n\r\n### How was this patch tested?\r\nThrough git action and manually by running jobs in local k8s cluster.\r\nAlso, added unit test for testing the change in behaviour of sub directory creation under upload path.\r\n\r\nSome logs for verification:\r\n\r\n23/02/22 18:41:16 INFO SparkContext: Successfully stopped SparkContext\r\n23/02/22 18:41:16 INFO ShutdownHookManager: Shutdown hook called\r\n23/02/22 18:41:16 INFO ShutdownHookManager: Deleting directory /spark-local2/spark-f58ecb91-0bb6-4b10-a372-405f69780c15\r\n23/02/22 18:41:16 INFO ShutdownHookManager: Deleting directory /tmp/spark-c10b27ca-fe68-4382-913f-4a535833f64e\r\n23/02/22 18:41:16 INFO ShutdownHookManager: Deleting directory /spark-local1/spark-8c4ef9d8-7688-4f51-b587-16dee1d264c7\r\n23/02/22 18:41:16 INFO UploadDirManager: Shutdown hook called\r\n23/02/22 18:41:17 INFO UploadDirManager: Upload dir deleted successfully.: hdfs://****:8020/user/*****/k8s/spark-upload-spark-b6609808729a49e9b6f53f20ed50d05b\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40128/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40128/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

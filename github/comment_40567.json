@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1487823925",
+    "html_url": "https://github.com/apache/spark/pull/40567#issuecomment-1487823925",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40567",
+    "id": 1487823925,
+    "node_id": "IC_kwDOAQXtWs5YrmQ1",
+    "user": {
+      "login": "zhmin",
+      "id": 10149923,
+      "node_id": "MDQ6VXNlcjEwMTQ5OTIz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10149923?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zhmin",
+      "html_url": "https://github.com/zhmin",
+      "followers_url": "https://api.github.com/users/zhmin/followers",
+      "following_url": "https://api.github.com/users/zhmin/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zhmin/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zhmin/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zhmin/subscriptions",
+      "organizations_url": "https://api.github.com/users/zhmin/orgs",
+      "repos_url": "https://api.github.com/users/zhmin/repos",
+      "events_url": "https://api.github.com/users/zhmin/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zhmin/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-29T01:34:07Z",
+    "updated_at": "2023-03-29T01:34:07Z",
+    "author_association": "NONE",
+    "body": "cc @dongjoon-hyun @cloud-fan @viirya @yaooqinn thank you",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1487823925/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

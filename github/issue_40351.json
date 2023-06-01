@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40351",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40351/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40351/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40351/events",
+  "html_url": "https://github.com/apache/spark/pull/40351",
+  "id": 1616769416,
+  "node_id": "PR_kwDOAQXtWs5LpoVj",
+  "number": 40351,
+  "title": "[SPARK-42727][CORE] Fix can't executing spark commands in the root directory when local mode is specified",
+  "user": {
+    "login": "huangxiaopingRD",
+    "id": 35296098,
+    "node_id": "MDQ6VXNlcjM1Mjk2MDk4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/35296098?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/huangxiaopingRD",
+    "html_url": "https://github.com/huangxiaopingRD",
+    "followers_url": "https://api.github.com/users/huangxiaopingRD/followers",
+    "following_url": "https://api.github.com/users/huangxiaopingRD/following{/other_user}",
+    "gists_url": "https://api.github.com/users/huangxiaopingRD/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/huangxiaopingRD/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/huangxiaopingRD/subscriptions",
+    "organizations_url": "https://api.github.com/users/huangxiaopingRD/orgs",
+    "repos_url": "https://api.github.com/users/huangxiaopingRD/repos",
+    "events_url": "https://api.github.com/users/huangxiaopingRD/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/huangxiaopingRD/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-03-09T09:18:00Z",
+  "updated_at": "2023-03-24T07:00:43Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40351",
+    "html_url": "https://github.com/apache/spark/pull/40351",
+    "diff_url": "https://github.com/apache/spark/pull/40351.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40351.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nSpecial treatment for the root directory when split `userClassPath`\r\n\r\n### Why are the changes needed?\r\nI found that executing the spark command in the \"/\" directory will report an error. The reason is that `userClassPath` is split according to \"/\"\r\n\r\n**Method to reproduce the issue:**\r\n\r\n<img width=\"631\" alt=\"image\" src=\"https://user-images.githubusercontent.com/35296098/223975469-18a3dd6a-7fc4-40c4-b6c1-7c9e62e8f48d.png\">\r\n\r\n**Exception information：**\r\n```\r\n23/03/09 17:10:53 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.\r\n23/03/09 17:10:53 ERROR SparkContext: Error initializing SparkContext.\r\njava.util.NoSuchElementException: next on empty iterator\r\n\tat scala.collection.Iterator$$anon$2.next(Iterator.scala:41)\r\n\tat scala.collection.Iterator$$anon$2.next(Iterator.scala:39)\r\n\tat scala.collection.IndexedSeqLike$Elements.next(IndexedSeqLike.scala:63)\r\n\tat scala.collection.IterableLike.head(IterableLike.scala:109)\r\n\tat scala.collection.IterableLike.head$(IterableLike.scala:108)\r\n\tat scala.collection.mutable.ArrayOps$ofRef.scala$collection$IndexedSeqOptimized$$super$head(ArrayOps.scala:198)\r\n\tat scala.collection.IndexedSeqOptimized.head(IndexedSeqOptimized.scala:129)\r\n\tat scala.collection.IndexedSeqOptimized.head$(IndexedSeqOptimized.scala:129)\r\n\tat scala.collection.mutable.ArrayOps$ofRef.head(ArrayOps.scala:198)\r\n\tat scala.collection.TraversableLike.last(TraversableLike.scala:519)\r\n\tat scala.collection.TraversableLike.last$(TraversableLike.scala:518)\r\n\tat scala.collection.mutable.ArrayOps$ofRef.scala$collection$IndexedSeqOptimized$$super$last(ArrayOps.scala:198)\r\n\tat scala.collection.IndexedSeqOptimized.last(IndexedSeqOptimized.scala:135)\r\n\tat scala.collection.IndexedSeqOptimized.last$(IndexedSeqOptimized.scala:135)\r\n\tat scala.collection.mutable.ArrayOps$ofRef.last(ArrayOps.scala:198)\r\n\tat org.apache.spark.executor.Executor.$anonfun$createClassLoader$1(Executor.scala:869)\r\n\tat org.apache.spark.executor.Executor.$anonfun$createClassLoader$1$adapted(Executor.scala:868)\r\n\tat scala.collection.immutable.List.foreach(List.scala:392)\r\n\tat org.apache.spark.executor.Executor.createClassLoader(Executor.scala:868)\r\n\tat org.apache.spark.executor.Executor.<init>(Executor.scala:159)\r\n\tat org.apache.spark.scheduler.local.LocalEndpoint.<init>(LocalSchedulerBackend.scala:64)\r\n\tat org.apache.spark.scheduler.local.LocalSchedulerBackend.start(LocalSchedulerBackend.scala:132)\r\n\tat org.apache.spark.scheduler.TaskSchedulerImpl.start(TaskSchedulerImpl.scala:220)\r\n\tat org.apache.spark.SparkContext.<init>(SparkContext.scala:595)\r\n\tat org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2681)\r\n\tat org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:949)\r\n\tat scala.Option.getOrElse(Option.scala:189)\r\n\tat org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:943)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLEnv$.init(SparkSQLEnv.scala:52)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.<init>(SparkSQLCLIDriver.scala:334)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver$.main(SparkSQLCLIDriver.scala:166)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.main(SparkSQLCLIDriver.scala)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)\r\n\tat org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:958)\r\n\tat org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)\r\n\tat org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)\r\n\tat org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)\r\n\tat org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1046)\r\n\tat org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1055)\r\n\tat org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)\r\n23/03/09 17:10:53 ERROR Utils: Uncaught exception in thread main\r\njava.lang.NullPointerException\r\n\tat org.apache.spark.scheduler.local.LocalSchedulerBackend.org$apache$spark$scheduler$local$LocalSchedulerBackend$$stop(LocalSchedulerBackend.scala:173)\r\n\tat org.apache.spark.scheduler.local.LocalSchedulerBackend.stop(LocalSchedulerBackend.scala:144)\r\n\tat org.apache.spark.scheduler.TaskSchedulerImpl.stop(TaskSchedulerImpl.scala:881)\r\n\tat org.apache.spark.scheduler.DAGScheduler.stop(DAGScheduler.scala:2371)\r\n\tat org.apache.spark.SparkContext.$anonfun$stop$12(SparkContext.scala:2078)\r\n\tat org.apache.spark.util.Utils$.tryLogNonFatalError(Utils.scala:1489)\r\n\tat org.apache.spark.SparkContext.stop(SparkContext.scala:2078)\r\n\tat org.apache.spark.SparkContext.<init>(SparkContext.scala:674)\r\n\tat org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2681)\r\n\tat org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:949)\r\n\tat scala.Option.getOrElse(Option.scala:189)\r\n\tat org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:943)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLEnv$.init(SparkSQLEnv.scala:52)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.<init>(SparkSQLCLIDriver.scala:334)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver$.main(SparkSQLCLIDriver.scala:166)\r\n\tat org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver.main(SparkSQLCLIDriver.scala)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)\r\n\tat org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:958)\r\n\tat org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)\r\n\tat org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)\r\n\tat org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)\r\n\tat org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1046)\r\n\tat org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1055)\r\n\tat org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)\r\n```\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40351/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40351/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

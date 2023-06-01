@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1469019263",
+    "html_url": "https://github.com/apache/spark/pull/40419#issuecomment-1469019263",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40419",
+    "id": 1469019263,
+    "node_id": "IC_kwDOAQXtWs5Xj3R_",
+    "user": {
+      "login": "wangyum",
+      "id": 5399861,
+      "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/wangyum",
+      "html_url": "https://github.com/wangyum",
+      "followers_url": "https://api.github.com/users/wangyum/followers",
+      "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+      "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+      "organizations_url": "https://api.github.com/users/wangyum/orgs",
+      "repos_url": "https://api.github.com/users/wangyum/repos",
+      "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/wangyum/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-14T23:55:54Z",
+    "updated_at": "2023-03-14T23:55:54Z",
+    "author_association": "MEMBER",
+    "body": "cc @cloud-fan ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1469019263/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

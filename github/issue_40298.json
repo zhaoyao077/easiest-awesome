@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40298",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40298/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40298/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40298/events",
+  "html_url": "https://github.com/apache/spark/pull/40298",
+  "id": 1611628556,
+  "node_id": "PR_kwDOAQXtWs5LYTjP",
+  "number": 40298,
+  "title": "[SPARK-42595][SQL] Support query inserted partitions after insert data into table when hive.exec.dynamic.partition=true",
+  "user": {
+    "login": "haoyanzhang",
+    "id": 42863974,
+    "node_id": "MDQ6VXNlcjQyODYzOTc0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/42863974?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/haoyanzhang",
+    "html_url": "https://github.com/haoyanzhang",
+    "followers_url": "https://api.github.com/users/haoyanzhang/followers",
+    "following_url": "https://api.github.com/users/haoyanzhang/following{/other_user}",
+    "gists_url": "https://api.github.com/users/haoyanzhang/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/haoyanzhang/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/haoyanzhang/subscriptions",
+    "organizations_url": "https://api.github.com/users/haoyanzhang/orgs",
+    "repos_url": "https://api.github.com/users/haoyanzhang/repos",
+    "events_url": "https://api.github.com/users/haoyanzhang/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/haoyanzhang/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-03-06T15:08:24Z",
+  "updated_at": "2023-03-06T15:08:39Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40298",
+    "html_url": "https://github.com/apache/spark/pull/40298",
+    "diff_url": "https://github.com/apache/spark/pull/40298.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40298.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nIntroduce spark.hive.exec.dynamic.partition.savePartitions=true (default false) spark.hive.exec.dynamic.partition.savePartitions.tableNamePrefix=hive_dynamic_inserted_partitions\r\nwhen spark.hive.exec.dynamic.partition.savePartitions=true we save the partitions to the \r\ntemporary view $spark.hive.exec.dynamic.partition.savePartitions.tableNamePrefix_$dbName_$tableName\r\n\r\n\r\n### Why are the changes needed?\r\n\r\nWhen hive.exec.dynamic.partition=true and hive.exec.dynamic.partition.mode=nonstrict, we can insert table by sql like 'insert overwrite table aaa partition(dt) select xxxx',  of course we can know the partitions inserted into the table by the sql itself,  but if we want do something for common use, we need some common way to get the inserted partitions,  for example:\r\n\r\n    spark.sql(\"insert overwrite table aaa partition(dt) select xxxx\")  //insert table\r\n    val partitions = getInsertedPartitions()   //need some way to get inserted partitions\r\n    monitorInsertedPartitions(partitions)    //do something for common use\r\nThis pull request will allow user to get inserted partitions in a common way\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nno\r\n\r\n\r\n### How was this patch tested?\r\nnew unit test\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40298/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40298/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40744",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40744/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40744/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40744/events",
+  "html_url": "https://github.com/apache/spark/pull/40744",
+  "id": 1662949157,
+  "node_id": "PR_kwDOAQXtWs5ODG62",
+  "number": 40744,
+  "title": "[SPARK-24497][SQL] Support recursive SQL",
+  "user": {
+    "login": "peter-toth",
+    "id": 7253827,
+    "node_id": "MDQ6VXNlcjcyNTM4Mjc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/7253827?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/peter-toth",
+    "html_url": "https://github.com/peter-toth",
+    "followers_url": "https://api.github.com/users/peter-toth/followers",
+    "following_url": "https://api.github.com/users/peter-toth/following{/other_user}",
+    "gists_url": "https://api.github.com/users/peter-toth/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/peter-toth/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/peter-toth/subscriptions",
+    "organizations_url": "https://api.github.com/users/peter-toth/orgs",
+    "repos_url": "https://api.github.com/users/peter-toth/repos",
+    "events_url": "https://api.github.com/users/peter-toth/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/peter-toth/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-04-11T17:39:07Z",
+  "updated_at": "2023-04-28T07:55:39Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40744",
+    "html_url": "https://github.com/apache/spark/pull/40744",
+    "diff_url": "https://github.com/apache/spark/pull/40744.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40744.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThis PR adds recursive query feature to Spark SQL.\r\n\r\nA recursive query is defined using the `WITH RECURSIVE` keywords and referring the name of the common table expression within the query.\r\nThe implementation complies with SQL standard and follows similar rules to other relational databases:\r\n- A query is made of an anchor followed by a recursive term.\r\n- The anchor terms doesn't contain self reference and it is used to initialize the query.\r\n- The recursive term contains a self reference and it is used to expand the current set of rows with new ones.\r\n- The anchor and recursive terms must be joined with each other by `UNION` or `UNION ALL` operators.\r\n- New rows can only be derived from the newly added rows of the previous iteration (or from the initial set of rows of anchor term). This limitation implies that recursive references can't be used with some of the joins, aggregations or subqueries.\r\n\r\nPlease see `cte-recursive.sql` for some examples.\r\n\r\nThe implemetation has the same limiation that [SPARK-36447](https://issues.apache.org/jira/browse/SPARK-36447) / https://github.com/apache/spark/pull/33671 has: \r\n\r\n> With-CTEs mixed with SQL commands or DMLs will still go through the old inline code path because of our non-standard language specs and not-unified command/DML interfaces.\r\n\r\nwhich means that recursive queries are not supported in SQL commands and DMLs.\r\n\r\n### Why are the changes needed?\r\nRecursive query is an ANSI SQL feature that is useful to process hierarchical data.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes, adds recursive query feature.\r\n\r\n### How was this patch tested?\r\nAdded new UTs and tests in `cte-recursion.sql`. \r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40744/reactions",
+    "total_count": 6,
+    "+1": 4,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 2,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40744/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

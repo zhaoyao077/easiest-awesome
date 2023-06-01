@@ -1,0 +1,108 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41033",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41033/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41033/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41033/events",
+  "html_url": "https://github.com/apache/spark/pull/41033",
+  "id": 1693998576,
+  "node_id": "PR_kwDOAQXtWs5Pq31u",
+  "number": 41033,
+  "title": "Update bufbuild plugin references",
+  "user": {
+    "login": "mfridman",
+    "id": 6278244,
+    "node_id": "MDQ6VXNlcjYyNzgyNDQ=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6278244?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/mfridman",
+    "html_url": "https://github.com/mfridman",
+    "followers_url": "https://api.github.com/users/mfridman/followers",
+    "following_url": "https://api.github.com/users/mfridman/following{/other_user}",
+    "gists_url": "https://api.github.com/users/mfridman/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/mfridman/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/mfridman/subscriptions",
+    "organizations_url": "https://api.github.com/users/mfridman/orgs",
+    "repos_url": "https://api.github.com/users/mfridman/repos",
+    "events_url": "https://api.github.com/users/mfridman/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/mfridman/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982260031,
+      "node_id": "MDU6TGFiZWwxOTgyMjYwMDMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/PYTHON",
+      "name": "PYTHON",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-03T12:39:44Z",
+  "updated_at": "2023-05-04T14:59:22Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41033",
+    "html_url": "https://github.com/apache/spark/pull/41033",
+    "diff_url": "https://github.com/apache/spark/pull/41033.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41033.patch",
+    "merged_at": null
+  },
+  "body": "Hey there, I noticed this project is referencing older Remote Plugins. There are upcoming [Remote Plugin changes](https://buf.build/blog/remote-packages-remote-plugins-approaching-v1) and this PR fixes the references to avoid any issues.\r\n\r\nOlder plugins on [buf.build](https://buf.build) will be removed in favor of Buf-managed plugins, which are managed by @bufbuild to ensure they work[^1] for the entire community.\r\n\r\nIn summary, the changes in this PR are as follows:\r\n\r\n- Update older plugins to reference the new plugins in `connector/connect/common/src/main/buf.gen.yaml`\r\n- Run `./dev/connect-gen-protos.sh` to generate the files\r\n\r\n[^1]: Buf has an open-source [bufbuild/plugins](https://github.com/bufbuild/plugins) repository that builds, tests, patches and automates publishing popular Protobuf plugins. All plugins in that repository are kept up-to-date and published to [buf.build/plugins](https://buf.build/plugins)",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41033/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41033/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

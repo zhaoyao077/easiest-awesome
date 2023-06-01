@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1467426007",
+    "html_url": "https://github.com/apache/spark/pull/40361#issuecomment-1467426007",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40361",
+    "id": 1467426007,
+    "node_id": "IC_kwDOAQXtWs5XdyTX",
+    "user": {
+      "login": "thousandhu",
+      "id": 5370302,
+      "node_id": "MDQ6VXNlcjUzNzAzMDI=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5370302?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/thousandhu",
+      "html_url": "https://github.com/thousandhu",
+      "followers_url": "https://api.github.com/users/thousandhu/followers",
+      "following_url": "https://api.github.com/users/thousandhu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/thousandhu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/thousandhu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/thousandhu/subscriptions",
+      "organizations_url": "https://api.github.com/users/thousandhu/orgs",
+      "repos_url": "https://api.github.com/users/thousandhu/repos",
+      "events_url": "https://api.github.com/users/thousandhu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/thousandhu/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-14T06:12:28Z",
+    "updated_at": "2023-03-14T06:12:28Z",
+    "author_association": "NONE",
+    "body": "In our product environment, the k8s cluster is managed by other system and the port of apiserver is different between clusters. In this case, the spark.kubernetes.driver.master  on spark client side can't set a port for all clusters.",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1467426007/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

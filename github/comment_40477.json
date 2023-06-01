@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1477819886",
+    "html_url": "https://github.com/apache/spark/pull/40477#issuecomment-1477819886",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40477",
+    "id": 1477819886,
+    "node_id": "IC_kwDOAQXtWs5YFb3u",
+    "user": {
+      "login": "zzzzming95",
+      "id": 13965087,
+      "node_id": "MDQ6VXNlcjEzOTY1MDg3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13965087?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zzzzming95",
+      "html_url": "https://github.com/zzzzming95",
+      "followers_url": "https://api.github.com/users/zzzzming95/followers",
+      "following_url": "https://api.github.com/users/zzzzming95/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zzzzming95/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zzzzming95/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zzzzming95/subscriptions",
+      "organizations_url": "https://api.github.com/users/zzzzming95/orgs",
+      "repos_url": "https://api.github.com/users/zzzzming95/repos",
+      "events_url": "https://api.github.com/users/zzzzming95/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zzzzming95/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-21T13:15:33Z",
+    "updated_at": "2023-04-03T15:59:33Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "@HyukjinKwon @LuciferYang @MaxGekk  @cloud-fan  cc",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1477819886/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

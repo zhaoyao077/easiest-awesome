@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41105",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41105/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41105/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41105/events",
+  "html_url": "https://github.com/apache/spark/pull/41105",
+  "id": 1702312044,
+  "node_id": "PR_kwDOAQXtWs5QG89Q",
+  "number": 41105,
+  "title": "[SPARK-43403][UI] Ensure old SparkUI in HistoryServer has been detached before loading new one",
+  "user": {
+    "login": "zhouyifan279",
+    "id": 88070094,
+    "node_id": "MDQ6VXNlcjg4MDcwMDk0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/88070094?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zhouyifan279",
+    "html_url": "https://github.com/zhouyifan279",
+    "followers_url": "https://api.github.com/users/zhouyifan279/followers",
+    "following_url": "https://api.github.com/users/zhouyifan279/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zhouyifan279/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zhouyifan279/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zhouyifan279/subscriptions",
+    "organizations_url": "https://api.github.com/users/zhouyifan279/orgs",
+    "repos_url": "https://api.github.com/users/zhouyifan279/repos",
+    "events_url": "https://api.github.com/users/zhouyifan279/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zhouyifan279/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 9,
+  "created_at": "2023-05-09T15:53:30Z",
+  "updated_at": "2023-05-16T06:06:10Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41105",
+    "html_url": "https://github.com/apache/spark/pull/41105",
+    "diff_url": "https://github.com/apache/spark/pull/41105.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41105.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nEnsure old SparkUI in HistoryServer has been detached before loading new one.\r\n\r\n\r\n### Why are the changes needed?\r\nThe error described in SPARK-43403 happened quite often when user opened SparkUIs of in-progress Apps frequently.\r\n\r\nIt happened when `FsHistoryProvider#onUIDetached` run (in thread-a) right after a new SparkUI with the same appId and attemptId was loaded (in thread-b).\r\n\r\nTo avoid this, we let loading of the new SparkUI wait until old SparkUI is detached.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\nAdd test `Load new SparkUI during old one is detaching` in `ApplicationCacheSuite`\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41105/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41105/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

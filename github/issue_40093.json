@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40093",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40093/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40093/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40093/events",
+  "html_url": "https://github.com/apache/spark/pull/40093",
+  "id": 1591635422,
+  "node_id": "PR_kwDOAQXtWs5KVWaM",
+  "number": 40093,
+  "title": "[SPARK-42500][SQL] ConstantPropagation supports more cases",
+  "user": {
+    "login": "wangyum",
+    "id": 5399861,
+    "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wangyum",
+    "html_url": "https://github.com/wangyum",
+    "followers_url": "https://api.github.com/users/wangyum/followers",
+    "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+    "organizations_url": "https://api.github.com/users/wangyum/orgs",
+    "repos_url": "https://api.github.com/users/wangyum/repos",
+    "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wangyum/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-02-20T11:10:51Z",
+  "updated_at": "2023-03-29T08:25:22Z",
+  "closed_at": null,
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40093",
+    "html_url": "https://github.com/apache/spark/pull/40093",
+    "diff_url": "https://github.com/apache/spark/pull/40093.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40093.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR enhances `ConstantPropagation` to support more cases. \r\n1. Propagated through other binary comparisons.\r\n2. Propagated across equality comparisons. This can be further optimized to `false`.\r\n\r\nFor example:\r\n```sql\r\na = 1 and b > a + 2 ==> a = 1 && b > 3\r\na = 1 and a = 2 ==> 2 = 1 and 1 = 2 ==> false\r\n```\r\n\r\n### Why are the changes needed?\r\n\r\nImprove query performance. [Denodo](https://community.denodo.com/docs/html/browse/latest/en/vdp/administration/optimizing_queries/automatic_simplification_of_queries/removing_redundant_branches_of_queries_partitioned_unions) also has a similar optimization. For example:\r\n```sql\r\nCREATE TABLE t1(a int, b int) using parquet;\r\nCREATE TABLE t2(x int, y int) using parquet;\r\n\r\nCREATE TEMP VIEW v1 AS                                        \r\nSELECT * FROM t1 JOIN t2 WHERE a = x AND a = 0                \r\nUNION ALL                                                     \r\nSELECT * FROM t1 JOIN t2 WHERE a = x AND (a IS NULL OR a <> 0);\r\n\r\nSELECT * FROM v1 WHERE x > 1;\r\n```\r\n\r\nBefore this PR:\r\n```\r\n== Optimized Logical Plan ==\r\nUnion false, false\r\n:- Project [a#0 AS a#12, b#1 AS b#13, x#2 AS x#14, y#3 AS y#15]\r\n:  +- Join Inner\r\n:     :- Filter (isnotnull(a#0) AND (a#0 = 0))\r\n:     :  +- Relation spark_catalog.default.t1[a#0,b#1] parquet\r\n:     +- Filter (isnotnull(x#2) AND ((0 = x#2) AND (x#2 > 1)))\r\n:        +- Relation spark_catalog.default.t2[x#2,y#3] parquet\r\n+- Join Inner, (a#16 = x#18)\r\n   :- Filter ((isnull(a#16) OR NOT (a#16 = 0)) AND ((a#16 > 1) AND isnotnull(a#16)))\r\n   :  +- Relation spark_catalog.default.t1[a#16,b#17] parquet\r\n   +- Filter ((isnotnull(x#18) AND (x#18 > 1)) AND (isnull(x#18) OR NOT (x#18 = 0)))\r\n      +- Relation spark_catalog.default.t2[x#18,y#19] parquet\r\n```\r\n\r\nAfter this PR:\r\n```\r\n== Optimized Logical Plan ==\r\nJoin Inner, (a#16 = x#18)\r\n:- Filter ((isnull(a#16) OR NOT (a#16 = 0)) AND ((a#16 > 1) AND isnotnull(a#16)))\r\n:  +- Relation spark_catalog.default.t1[a#16,b#17] parquet\r\n+- Filter ((isnotnull(x#18) AND (x#18 > 1)) AND (isnull(x#18) OR NOT (x#18 = 0)))\r\n   +- Relation spark_catalog.default.t2[x#18,y#19] parquet\r\n```\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nUnit test.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40093/reactions",
+    "total_count": 1,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 1,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40093/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41072",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41072/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41072/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41072/events",
+  "html_url": "https://github.com/apache/spark/pull/41072",
+  "id": 1698413212,
+  "node_id": "PR_kwDOAQXtWs5P58U4",
+  "number": 41072,
+  "title": "[SPARK-43393][SQL] Address sequence expression overflow bug.",
+  "user": {
+    "login": "thepinetree",
+    "id": 25930859,
+    "node_id": "MDQ6VXNlcjI1OTMwODU5",
+    "avatar_url": "https://avatars.githubusercontent.com/u/25930859?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/thepinetree",
+    "html_url": "https://github.com/thepinetree",
+    "followers_url": "https://api.github.com/users/thepinetree/followers",
+    "following_url": "https://api.github.com/users/thepinetree/following{/other_user}",
+    "gists_url": "https://api.github.com/users/thepinetree/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/thepinetree/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/thepinetree/subscriptions",
+    "organizations_url": "https://api.github.com/users/thepinetree/orgs",
+    "repos_url": "https://api.github.com/users/thepinetree/repos",
+    "events_url": "https://api.github.com/users/thepinetree/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/thepinetree/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-06T03:49:30Z",
+  "updated_at": "2023-05-16T13:11:33Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41072",
+    "html_url": "https://github.com/apache/spark/pull/41072",
+    "diff_url": "https://github.com/apache/spark/pull/41072.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41072.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nSpark has a (long-standing) overflow bug in the `sequence` expression.\r\n\r\nConsider the following operations:\r\n```\r\nspark.sql(\"CREATE TABLE foo (l LONG);\")\r\nspark.sql(s\"INSERT INTO foo VALUES (${Long.MaxValue});\")\r\nspark.sql(\"SELECT sequence(0, l) FROM foo;\").collect()\r\n```\r\n\r\nThe result of these operations will be:\r\n```\r\nArray[org.apache.spark.sql.Row] = Array([WrappedArray()])\r\n```\r\nan unintended consequence of overflow.\r\n\r\nThe sequence is applied to values `0` and `Long.MaxValue` with a step size of `1` which uses a length computation defined [here](https://github.com/apache/spark/blob/16411188c7ba6cb19c46a2bd512b2485a4c03e2c/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/expressions/collectionOperations.scala#L3451). In this calculation, with `start = 0`, `stop = Long.MaxValue`, and `step = 1`, the calculated `len` overflows to `Long.MinValue`. The computation, in binary looks like:\r\n\r\n```\r\n  0111111111111111111111111111111111111111111111111111111111111111\r\n- 0000000000000000000000000000000000000000000000000000000000000000 \r\n------------------------------------------------------------------\r\n  0111111111111111111111111111111111111111111111111111111111111111\r\n/ 0000000000000000000000000000000000000000000000000000000000000001\r\n------------------------------------------------------------------\r\n  0111111111111111111111111111111111111111111111111111111111111111\r\n+ 0000000000000000000000000000000000000000000000000000000000000001\r\n------------------------------------------------------------------\r\n  1000000000000000000000000000000000000000000000000000000000000000\r\n```\r\n\r\nThe following [check](https://github.com/apache/spark/blob/16411188c7ba6cb19c46a2bd512b2485a4c03e2c/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/expressions/collectionOperations.scala#L3454) passes as the negative `Long.MinValue` is still `<= MAX_ROUNDED_ARRAY_LENGTH`. The following cast to `toInt` uses this representation and [truncates the upper bits](https://github.com/apache/spark/blob/16411188c7ba6cb19c46a2bd512b2485a4c03e2c/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/expressions/collectionOperations.scala#L3457) resulting in an empty length of `0`.\r\n\r\nOther overflows are similarly problematic.\r\n\r\nThis PR addresses the issue by checking numeric operations in the length computation for overflow.\r\n\r\n### Why are the changes needed?\r\nThere is a correctness bug from overflow in the `sequence` expression.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nTests added in `CollectionExpressionsSuite.scala`.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41072/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41072/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

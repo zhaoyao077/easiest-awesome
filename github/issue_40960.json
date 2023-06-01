@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40960",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40960/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40960/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40960/events",
+  "html_url": "https://github.com/apache/spark/pull/40960",
+  "id": 1684920902,
+  "node_id": "PR_kwDOAQXtWs5PMfkR",
+  "number": 40960,
+  "title": "[SPARK-43180][PYTHON-INFRA]: Upgrade mypy and pytest-mypypplugins packages",
+  "user": {
+    "login": "aimtsou",
+    "id": 2598924,
+    "node_id": "MDQ6VXNlcjI1OTg5MjQ=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2598924?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/aimtsou",
+    "html_url": "https://github.com/aimtsou",
+    "followers_url": "https://api.github.com/users/aimtsou/followers",
+    "following_url": "https://api.github.com/users/aimtsou/following{/other_user}",
+    "gists_url": "https://api.github.com/users/aimtsou/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/aimtsou/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/aimtsou/subscriptions",
+    "organizations_url": "https://api.github.com/users/aimtsou/orgs",
+    "repos_url": "https://api.github.com/users/aimtsou/repos",
+    "events_url": "https://api.github.com/users/aimtsou/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/aimtsou/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-26T12:19:26Z",
+  "updated_at": "2023-04-26T12:41:59Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40960",
+    "html_url": "https://github.com/apache/spark/pull/40960",
+    "diff_url": "https://github.com/apache/spark/pull/40960.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40960.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThis pull request addresses the upgrade of some python packages to their latest version.\r\n\r\n\r\n### Why are the changes needed?\r\nI was debugging [this](https://github.com/apache/spark/pull/40819), I opened a support ticket with mypy and they suggested upgrading to the latest version of the package. \r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo \r\n\r\n\r\n### How was this patch tested?\r\nThis patch was tested with the current set of patches after you commit to your branch.\r\n\r\n### Extra\r\nMaybe it would be even better not to hardcode the versions?",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40960/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40960/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

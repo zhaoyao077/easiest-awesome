@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40790",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40790/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40790/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40790/events",
+  "html_url": "https://github.com/apache/spark/pull/40790",
+  "id": 1667945203,
+  "node_id": "PR_kwDOAQXtWs5OT6wz",
+  "number": 40790,
+  "title": "[SPARK-43116][SQL] Fix Cast.forceNullable",
+  "user": {
+    "login": "jackylee-ch",
+    "id": 10897625,
+    "node_id": "MDQ6VXNlcjEwODk3NjI1",
+    "avatar_url": "https://avatars.githubusercontent.com/u/10897625?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/jackylee-ch",
+    "html_url": "https://github.com/jackylee-ch",
+    "followers_url": "https://api.github.com/users/jackylee-ch/followers",
+    "following_url": "https://api.github.com/users/jackylee-ch/following{/other_user}",
+    "gists_url": "https://api.github.com/users/jackylee-ch/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/jackylee-ch/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/jackylee-ch/subscriptions",
+    "organizations_url": "https://api.github.com/users/jackylee-ch/orgs",
+    "repos_url": "https://api.github.com/users/jackylee-ch/repos",
+    "events_url": "https://api.github.com/users/jackylee-ch/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/jackylee-ch/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-14T10:01:13Z",
+  "updated_at": "2023-04-21T06:42:25Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40790",
+    "html_url": "https://github.com/apache/spark/pull/40790",
+    "diff_url": "https://github.com/apache/spark/pull/40790.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40790.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n1. It should include TimestampNTZType,AnsiIntervalType.\r\n2. ArrayType/MapType/StructType to other data type seems should be true.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nSome updated tests\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40790/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40790/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

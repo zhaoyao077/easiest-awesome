@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40567",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40567/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40567/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40567/events",
+  "html_url": "https://github.com/apache/spark/pull/40567",
+  "id": 1642156915,
+  "node_id": "PR_kwDOAQXtWs5M-Ycb",
+  "number": 40567,
+  "title": "[SPARK-42935] [SQL] Add union required distribution push down",
+  "user": {
+    "login": "zhmin",
+    "id": 10149923,
+    "node_id": "MDQ6VXNlcjEwMTQ5OTIz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/10149923?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zhmin",
+    "html_url": "https://github.com/zhmin",
+    "followers_url": "https://api.github.com/users/zhmin/followers",
+    "following_url": "https://api.github.com/users/zhmin/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zhmin/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zhmin/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zhmin/subscriptions",
+    "organizations_url": "https://api.github.com/users/zhmin/orgs",
+    "repos_url": "https://api.github.com/users/zhmin/repos",
+    "events_url": "https://api.github.com/users/zhmin/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zhmin/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-03-27T14:05:59Z",
+  "updated_at": "2023-04-03T07:05:33Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40567",
+    "html_url": "https://github.com/apache/spark/pull/40567",
+    "diff_url": "https://github.com/apache/spark/pull/40567.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40567.patch",
+    "merged_at": null
+  },
+  "body": "<!--\r\nThanks for sending a pull request!  Here are some tips for you:\r\n  1. If this is your first time, please read our contributor guidelines: https://spark.apache.org/contributing.html\r\n  2. Ensure you have added or run the appropriate tests for your PR: https://spark.apache.org/developer-tools.html\r\n  3. If the PR is unfinished, add '[WIP]' in your PR title, e.g., '[WIP][SPARK-XXXX] Your PR title ...'.\r\n  4. Be sure to keep the PR description updated to reflect all changes.\r\n  5. Please write your PR title to summarize what this PR proposes.\r\n  6. If possible, provide a concise example to reproduce the issue for a faster review.\r\n  7. If you want to add a new configuration, please read the guideline first for naming configurations in\r\n     'core/src/main/scala/org/apache/spark/internal/config/ConfigEntry.scala'.\r\n  8. If you want to add or modify an error type or message, please read the guideline first in\r\n     'core/src/main/resources/error/README.md'.\r\n-->\r\n\r\n### What changes were proposed in this pull request?\r\nWe  indroduce a new idea to optimize exchange plan when union spark plan output partitoning can't match parent plan's required distribution.\r\n\r\n1. First introduce a new RDD, it consists of parent rdds that has the same partition size. The ith parttition corresponds to ith partition of each parent rdd.\r\n2. Then push the required distribution to union plan's children. If any child output partitioning matches the required distribution , we can reduce this child shuffle operation.\r\n\r\n\r\n### Why are the changes needed?\r\nUnion plan does not take full advantage of children plan output partitionings when output partitoning can't match parent plan's required distribution.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\norg.apache.spark.sql.execution.PlannerSuite\r\norg.apache.spark.sql.execution.exchange.UnionZipRDDSuite\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40567/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40567/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

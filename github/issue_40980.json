@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40980",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40980/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40980/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40980/events",
+  "html_url": "https://github.com/apache/spark/pull/40980",
+  "id": 1687391494,
+  "node_id": "PR_kwDOAQXtWs5PU1wW",
+  "number": 40980,
+  "title": "[SPARK-43136][CONNECT][Followup] Adding tests for KeyAs",
+  "user": {
+    "login": "zhenlineo",
+    "id": 4190164,
+    "node_id": "MDQ6VXNlcjQxOTAxNjQ=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/4190164?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zhenlineo",
+    "html_url": "https://github.com/zhenlineo",
+    "followers_url": "https://api.github.com/users/zhenlineo/followers",
+    "following_url": "https://api.github.com/users/zhenlineo/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zhenlineo/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zhenlineo/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zhenlineo/subscriptions",
+    "organizations_url": "https://api.github.com/users/zhenlineo/orgs",
+    "repos_url": "https://api.github.com/users/zhenlineo/repos",
+    "events_url": "https://api.github.com/users/zhenlineo/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zhenlineo/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-27T18:52:43Z",
+  "updated_at": "2023-04-28T00:32:49Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40980",
+    "html_url": "https://github.com/apache/spark/pull/40980",
+    "diff_url": "https://github.com/apache/spark/pull/40980.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40980.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThe current impl of KeyAs for the Scala client is a purely client side encoder operation. Thus we could end up with duplicates in keys. \r\n\r\nAdded the tests both for the Scala Client and for Spark dataset API. It showed the behavior is the same for server and client at this moment.\r\n\r\n### Why are the changes needed?\r\nMore tests to verify the client and server behavior.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nTests",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40980/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40980/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

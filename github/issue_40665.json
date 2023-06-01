@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40665",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40665/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40665/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40665/events",
+  "html_url": "https://github.com/apache/spark/pull/40665",
+  "id": 1654228861,
+  "node_id": "PR_kwDOAQXtWs5NmofM",
+  "number": 40665,
+  "title": "[SPARK-42621][PS] Add inclusive parameter for pd.date_range",
+  "user": {
+    "login": "dzhigimont",
+    "id": 20475650,
+    "node_id": "MDQ6VXNlcjIwNDc1NjUw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/20475650?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dzhigimont",
+    "html_url": "https://github.com/dzhigimont",
+    "followers_url": "https://api.github.com/users/dzhigimont/followers",
+    "following_url": "https://api.github.com/users/dzhigimont/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dzhigimont/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dzhigimont/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dzhigimont/subscriptions",
+    "organizations_url": "https://api.github.com/users/dzhigimont/orgs",
+    "repos_url": "https://api.github.com/users/dzhigimont/repos",
+    "events_url": "https://api.github.com/users/dzhigimont/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dzhigimont/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1982260031,
+      "node_id": "MDU6TGFiZWwxOTgyMjYwMDMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/PYTHON",
+      "name": "PYTHON",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4138679613,
+      "node_id": "LA_kwDOAQXtWs72rz09",
+      "url": "https://api.github.com/repos/apache/spark/labels/PANDAS%20API%20ON%20SPARK",
+      "name": "PANDAS API ON SPARK",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-04-04T16:46:37Z",
+  "updated_at": "2023-04-25T06:54:58Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40665",
+    "html_url": "https://github.com/apache/spark/pull/40665",
+    "diff_url": "https://github.com/apache/spark/pull/40665.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40665.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nAdd inclusive parameter for pd.date_range to support the pandas 2.0.0\r\n\r\n### Why are the changes needed?\r\nWhen pandas 2.0.0 is released, we should match the behavior in pandas API on Spark.\r\n\r\n### Does this PR introduce any user-facing change?\r\nyes, the API changes\r\n\r\nBefore:\r\nps.date_range(start='2017-01-01', end='2017-01-04', closed=None)\r\n\r\nAfter:\r\nps.date_range(start='2017-01-01', end='2017-01-04', inclusive=\"both\")\r\n\r\n### How was this patch tested?\r\nUnit tests were updated",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40665/reactions",
+    "total_count": 1,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 1,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40665/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

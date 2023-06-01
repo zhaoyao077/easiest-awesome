@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40182",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40182/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40182/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40182/events",
+  "html_url": "https://github.com/apache/spark/pull/40182",
+  "id": 1600358254,
+  "node_id": "PR_kwDOAQXtWs5Kycj0",
+  "number": 40182,
+  "title": "[SPARK-42588][SQL] Collapse two adjacent windows with the equivalent partition/order expressions in two withColumn()",
+  "user": {
+    "login": "zml1206",
+    "id": 5275075,
+    "node_id": "MDQ6VXNlcjUyNzUwNzU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5275075?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zml1206",
+    "html_url": "https://github.com/zml1206",
+    "followers_url": "https://api.github.com/users/zml1206/followers",
+    "following_url": "https://api.github.com/users/zml1206/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zml1206/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zml1206/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zml1206/subscriptions",
+    "organizations_url": "https://api.github.com/users/zml1206/orgs",
+    "repos_url": "https://api.github.com/users/zml1206/repos",
+    "events_url": "https://api.github.com/users/zml1206/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zml1206/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2023-02-27T02:48:03Z",
+  "updated_at": "2023-03-29T03:46:16Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40182",
+    "html_url": "https://github.com/apache/spark/pull/40182",
+    "diff_url": "https://github.com/apache/spark/pull/40182.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40182.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nExtend the CollapseWindow rule to collapse Window nodes with the equivalent partition/order expressions in two withColumn() \r\n\r\n\r\n### Why are the changes needed?\r\n```\r\nSeq((1, 1), (2, 2)).toDF(\"a\", \"b\")\r\n      .withColumn(\"max_b\", expr(\"max(b) OVER (PARTITION BY abs(a))\"))\r\n      .withColumn(\"min_b\", expr(\"min(b) OVER (PARTITION BY abs(a))\"))\r\n\r\n== Optimized Logical Plan ==\r\nbefore\r\nProject [a#7, b#8, max_b#11, min_b#17]\r\n+- Window [min(b#8) windowspecdefinition(_w0#19, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS min_b#17], [_w0#19]\r\n   +- Project [a#7, b#8, max_b#11, abs(a#7) AS _w0#19]\r\n      +- Window [max(b#8) windowspecdefinition(_w0#13, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS max_b#11], [_w0#13]\r\n         +- Project [_1#2 AS a#7, _2#3 AS b#8, abs(_1#2) AS _w0#13]\r\n            +- LocalRelation [_1#2, _2#3]\r\nafter\r\nProject [a#7, b#8, max_b#11, min_b#17]\r\n+- Window [max(b#8) windowspecdefinition(_w0#13, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS max_b#11, min(b#8) windowspecdefinition(_w0#13, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS min_b#17], [_w0#13]\r\n   +- Project [_1#2 AS a#7, _2#3 AS b#8, abs(_1#2) AS _w0#13]\r\n      +- LocalRelation [_1#2, _2#3]\r\n```\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\nUT\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40182/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40182/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

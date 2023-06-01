@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40419",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40419/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40419/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40419/events",
+  "html_url": "https://github.com/apache/spark/pull/40419",
+  "id": 1623659695,
+  "node_id": "PR_kwDOAQXtWs5MAhJN",
+  "number": 40419,
+  "title": "[SPARK-42789][SQL] Rewrite multiple GetJsonObjects to a JsonTuple if their json expressions are the same",
+  "user": {
+    "login": "wangyum",
+    "id": 5399861,
+    "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wangyum",
+    "html_url": "https://github.com/wangyum",
+    "followers_url": "https://api.github.com/users/wangyum/followers",
+    "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+    "organizations_url": "https://api.github.com/users/wangyum/orgs",
+    "repos_url": "https://api.github.com/users/wangyum/repos",
+    "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wangyum/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-03-14T14:58:07Z",
+  "updated_at": "2023-03-14T23:55:55Z",
+  "closed_at": null,
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40419",
+    "html_url": "https://github.com/apache/spark/pull/40419",
+    "diff_url": "https://github.com/apache/spark/pull/40419.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40419.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR adds a new rule to rewrite multiple `GetJsonObjects` to one `JsonTuple` if their json expressions are the same and the path is `.name`. For example:\r\n```\r\n=== Applying Rule org.apache.spark.sql.catalyst.optimizer.RewriteGetJsonObject ===\r\n!Project [get_json_object(a#0, $.c1) AS c1#3, get_json_object(a#0, $.c2) AS c2#4, get_json_object(b#1, $.c1) AS c3#5, get_json_object(b#1, $.c2) AS c4#6, get_json_object(c#2, $.c1) AS c5#7]   Project [c1#13 AS c1#3, c2#14 AS c2#4, c1#15 AS c3#5, c2#16 AS c4#6, get_json_object(c#2, $.c1) AS c5#7]\r\n!+- LocalRelation <empty>, [a#0, b#1, c#2]                                                                                                                                                      +- Generate json_tuple(b#1, c1, c2), false, b, [c1#15, c2#16]\r\n!                                                                                                                                                                                                  +- Generate json_tuple(a#0, c1, c2), false, a, [c1#13, c2#14]\r\n!                                                                                                                                                                                                     +- LocalRelation <empty>, [a#0, b#1, c#2]\r\n```\r\n\r\nPlease note that it needs to rewrite the path, otherwise it will not get the correct value. For example:\r\n```sql\r\nspark-sql (default)> SELECT get_json_object('{\"name\": \"alice\", \"age\": 5}', '$.name') AS name;\r\nalice\r\nspark-sql (default)> SELECT name lateral view json_tuple('{\"name\": \"alice\", \"age\": 5}', '$.name') a AS name;\r\nNULL\r\nspark-sql (default)> select name lateral view json_tuple('{\"name\": \"alice\", \"age\": 5}', 'name') a AS name;\r\nalice\r\n```\r\n\r\n\r\n### Why are the changes needed?\r\n\r\nImprove query performance.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nUnit test and benchmark test.\r\n\r\nBenchmark result:\r\n\r\nNo. of   GetJsonObjects | Default(ms) | Rewrite to JsonTuple(ms) | Relative\r\n-- | -- | -- | --\r\n2 | 37914 | 24887 | 1.5X\r\n3 | 52862 | 26752 | 2.0X\r\n4 | 71680 | 28452 | 2.5X\r\n5 | 108479 | 36830 | 2.9X\r\n10 | 153952 | 32436 | 4.7X\r\n15 | 224950 | 34806 | 6.5X\r\n20 | 293155 | 38148 | 7.7X\r\n25 | 366037 | 45725 | 8.0X\r\n30 | 439567 | 52949 | 8.3X\r\n35 | 526481 | 60586 | 8.7X\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40419/reactions",
+    "total_count": 1,
+    "+1": 1,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40419/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

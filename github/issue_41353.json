@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41353",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41353/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41353/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41353/events",
+  "html_url": "https://github.com/apache/spark/pull/41353",
+  "id": 1729749131,
+  "node_id": "PR_kwDOAQXtWs5RjYCb",
+  "number": 41353,
+  "title": "[SPARK-43841][SQL] Handle candidate attributes with no prefix in `StringUtils#orderSuggestedIdentifiersBySimilarity`",
+  "user": {
+    "login": "bersprockets",
+    "id": 21131848,
+    "node_id": "MDQ6VXNlcjIxMTMxODQ4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/21131848?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/bersprockets",
+    "html_url": "https://github.com/bersprockets",
+    "followers_url": "https://api.github.com/users/bersprockets/followers",
+    "following_url": "https://api.github.com/users/bersprockets/following{/other_user}",
+    "gists_url": "https://api.github.com/users/bersprockets/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/bersprockets/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/bersprockets/subscriptions",
+    "organizations_url": "https://api.github.com/users/bersprockets/orgs",
+    "repos_url": "https://api.github.com/users/bersprockets/repos",
+    "events_url": "https://api.github.com/users/bersprockets/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/bersprockets/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-28T23:37:20Z",
+  "updated_at": "2023-05-29T04:05:14Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41353",
+    "html_url": "https://github.com/apache/spark/pull/41353",
+    "diff_url": "https://github.com/apache/spark/pull/41353.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41353.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nIn `StringUtils#orderSuggestedIdentifiersBySimilarity`, handle the case where the candidate attributes have a mix of empty and non-empty prefixes.\r\n\r\n### Why are the changes needed?\r\n\r\nThe following query throws a `StringIndexOutOfBoundsException`:\r\n```\r\nwith v1 as (\r\n select * from values (1, 2) as (c1, c2)\r\n),\r\nv2 as (\r\n  select * from values (2, 3) as (c1, c2)\r\n)\r\nselect v1.c1, v1.c2, v2.c1, v2.c2, b\r\nfrom v1\r\nfull outer join v2\r\nusing (c1);\r\n```\r\nThe query should fail anyway, since `b` refers to a non-existent column. But it should fail with a helpful error message, not with a `StringIndexOutOfBoundsException`.\r\n\r\n`StringUtils#orderSuggestedIdentifiersBySimilarity` assumes that a list of suggested attributes with a mix of prefixes will never have an attribute name with an empty prefix. But in this case it does (`c1` from the `coalesce` has no prefix, since it is not associated with any relation or subquery):\r\n```\r\n+- 'Project [c1#5, c2#6, c1#7, c2#8, 'b]\r\n   +- Project [coalesce(c1#5, c1#7) AS c1#9, c2#6, c2#8] <== c1#9 has no prefix, unlike c2#6 (v1.c2) or c2#8 (v2.c2)\r\n      +- Join FullOuter, (c1#5 = c1#7)\r\n         :- SubqueryAlias v1\r\n         :  +- CTERelationRef 0, true, [c1#5, c2#6]\r\n         +- SubqueryAlias v2\r\n            +- CTERelationRef 1, true, [c1#7, c2#8]\r\n```\r\nBecause of this, `orderSuggestedIdentifiersBySimilarity` returns a sorted list of suggestions like this:\r\n```\r\nArrayBuffer(.c1, v1.c2, v2.c2)\r\n```\r\n`UnresolvedAttribute.parseAttributeName` chokes on an attribute name that starts with a '.'.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nNew unit tests.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41353/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41353/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

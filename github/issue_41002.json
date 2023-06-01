@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41002",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41002/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41002/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41002/events",
+  "html_url": "https://github.com/apache/spark/pull/41002",
+  "id": 1690324390,
+  "node_id": "PR_kwDOAQXtWs5Ped9B",
+  "number": 41002,
+  "title": "Update ExecutorAllocationManager.scala",
+  "user": {
+    "login": "vuritysamuel",
+    "id": 51482145,
+    "node_id": "MDQ6VXNlcjUxNDgyMTQ1",
+    "avatar_url": "https://avatars.githubusercontent.com/u/51482145?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/vuritysamuel",
+    "html_url": "https://github.com/vuritysamuel",
+    "followers_url": "https://api.github.com/users/vuritysamuel/followers",
+    "following_url": "https://api.github.com/users/vuritysamuel/following{/other_user}",
+    "gists_url": "https://api.github.com/users/vuritysamuel/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/vuritysamuel/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/vuritysamuel/subscriptions",
+    "organizations_url": "https://api.github.com/users/vuritysamuel/orgs",
+    "repos_url": "https://api.github.com/users/vuritysamuel/repos",
+    "events_url": "https://api.github.com/users/vuritysamuel/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/vuritysamuel/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1984378631,
+      "node_id": "MDU6TGFiZWwxOTg0Mzc4NjMx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DSTREAM",
+      "name": "DSTREAM",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-01T03:48:54Z",
+  "updated_at": "2023-05-01T04:00:36Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41002",
+    "html_url": "https://github.com/apache/spark/pull/41002",
+    "diff_url": "https://github.com/apache/spark/pull/41002.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41002.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nFixed minor issues & added a simple statement to ensure the program doesn't allow killing all executors. \r\n\r\n\r\n\r\n### Why are the changes needed?\r\n\r\nThe dynamic alloc config hangs when the minexec count is 0 \r\n\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nIt does, but it does not affect the user in any way, just shows a warning message. \r\n\r\n\r\n\r\n### How was this patch tested?\r\n\r\nThis was done on a test cluster. The cluster does run without problems but I feel there are additional safety methods we could add. I'm working on finding a way to calculate and run on an optimal number of clusters so this problem is not repeated. \r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41002/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41002/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

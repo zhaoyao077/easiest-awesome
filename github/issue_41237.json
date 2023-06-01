@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41237",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41237/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41237/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41237/events",
+  "html_url": "https://github.com/apache/spark/pull/41237",
+  "id": 1717358551,
+  "node_id": "PR_kwDOAQXtWs5Q5fs8",
+  "number": 41237,
+  "title": "[WIP][SPARK-43593][SQL] Support the minimum number of range shuffle partitions",
+  "user": {
+    "login": "wankunde",
+    "id": 3626747,
+    "node_id": "MDQ6VXNlcjM2MjY3NDc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3626747?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wankunde",
+    "html_url": "https://github.com/wankunde",
+    "followers_url": "https://api.github.com/users/wankunde/followers",
+    "following_url": "https://api.github.com/users/wankunde/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wankunde/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wankunde/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wankunde/subscriptions",
+    "organizations_url": "https://api.github.com/users/wankunde/orgs",
+    "repos_url": "https://api.github.com/users/wankunde/repos",
+    "events_url": "https://api.github.com/users/wankunde/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wankunde/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-05-19T14:35:19Z",
+  "updated_at": "2023-05-23T02:46:12Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41237",
+    "html_url": "https://github.com/apache/spark/pull/41237",
+    "diff_url": "https://github.com/apache/spark/pull/41237.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41237.patch",
+    "merged_at": null
+  },
+  "body": "<!--\r\nThanks for sending a pull request!  Here are some tips for you:\r\n  1. If this is your first time, please read our contributor guidelines: https://spark.apache.org/contributing.html\r\n  2. Ensure you have added or run the appropriate tests for your PR: https://spark.apache.org/developer-tools.html\r\n  3. If the PR is unfinished, add '[WIP]' in your PR title, e.g., '[WIP][SPARK-XXXX] Your PR title ...'.\r\n  4. Be sure to keep the PR description updated to reflect all changes.\r\n  5. Please write your PR title to summarize what this PR proposes.\r\n  6. If possible, provide a concise example to reproduce the issue for a faster review.\r\n  7. If you want to add a new configuration, please read the guideline first for naming configurations in\r\n     'core/src/main/scala/org/apache/spark/internal/config/ConfigEntry.scala'.\r\n  8. If you want to add or modify an error type or message, please read the guideline first in\r\n     'core/src/main/resources/error/README.md'.\r\n-->\r\n\r\n### What changes were proposed in this pull request?\r\n\r\nIf there are few distinct values in the RangePartitioner, there will be very few partitions that could be very large. We can append a random expression to increase the number of partitions.\r\n\r\n### Why are the changes needed?\r\n\r\nTo optimize RangePartitioner, for example, the following query can be optimized from 2.9 hours to 3.2 mins.\r\n\r\n![range_partitioner](https://github.com/apache/spark/assets/3626747/a99f7092-d38f-43e4-8881-96ee6d6ed75d)\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo\r\n\r\n### How was this patch tested?\r\n\r\nAdded UT",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41237/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41237/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

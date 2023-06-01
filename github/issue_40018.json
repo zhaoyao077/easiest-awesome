@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40018",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40018/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40018/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40018/events",
+  "html_url": "https://github.com/apache/spark/pull/40018",
+  "id": 1584536046,
+  "node_id": "PR_kwDOAQXtWs5J9uqw",
+  "number": 40018,
+  "title": "[SPARK-42439][SQL] In v2 writes, make createJobDescription in FileWrite.toBatch not lazy",
+  "user": {
+    "login": "LorenzoMartini",
+    "id": 18014953,
+    "node_id": "MDQ6VXNlcjE4MDE0OTUz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/18014953?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/LorenzoMartini",
+    "html_url": "https://github.com/LorenzoMartini",
+    "followers_url": "https://api.github.com/users/LorenzoMartini/followers",
+    "following_url": "https://api.github.com/users/LorenzoMartini/following{/other_user}",
+    "gists_url": "https://api.github.com/users/LorenzoMartini/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/LorenzoMartini/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/LorenzoMartini/subscriptions",
+    "organizations_url": "https://api.github.com/users/LorenzoMartini/orgs",
+    "repos_url": "https://api.github.com/users/LorenzoMartini/repos",
+    "events_url": "https://api.github.com/users/LorenzoMartini/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/LorenzoMartini/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-02-14T17:12:04Z",
+  "updated_at": "2023-04-14T13:48:56Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40018",
+    "html_url": "https://github.com/apache/spark/pull/40018",
+    "diff_url": "https://github.com/apache/spark/pull/40018.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40018.patch",
+    "merged_at": null
+  },
+  "body": "<!--\r\nThanks for sending a pull request!  Here are some tips for you:\r\n  1. If this is your first time, please read our contributor guidelines: https://spark.apache.org/contributing.html\r\n  2. Ensure you have added or run the appropriate tests for your PR: https://spark.apache.org/developer-tools.html\r\n  3. If the PR is unfinished, add '[WIP]' in your PR title, e.g., '[WIP][SPARK-XXXX] Your PR title ...'.\r\n  4. Be sure to keep the PR description updated to reflect all changes.\r\n  5. Please write your PR title to summarize what this PR proposes.\r\n  6. If possible, provide a concise example to reproduce the issue for a faster review.\r\n  7. If you want to add a new configuration, please read the guideline first for naming configurations in\r\n     'core/src/main/scala/org/apache/spark/internal/config/ConfigEntry.scala'.\r\n  8. If you want to add or modify an error type or message, please read the guideline first in\r\n     'core/src/main/resources/error/README.md'.\r\n-->\r\n\r\n### What changes were proposed in this pull request?\r\n<!--\r\nPlease clarify what changes you are proposing. The purpose of this section is to outline the changes and how this PR fixes the issue. \r\nIf possible, please consider writing useful notes for better and faster reviews in your PR. See the examples below.\r\n  1. If you refactor some codes with changing classes, showing the class hierarchy will help reviewers.\r\n  2. If you fix some SQL features, you can provide some references of other DBMSes.\r\n  3. If there is design documentation, please add the link.\r\n  4. If there is a discussion in the mailing list, please add the link.\r\n-->\r\nIn v2 writes, make createJobDescription in FileWrite.toBatch not lazy\r\n\r\n\r\n### Why are the changes needed?\r\n<!--\r\nPlease clarify why the changes are needed. For instance,\r\n  1. If you propose a new API, clarify the use case for a new API.\r\n  2. If you fix a bug, you can clarify why it is a bug.\r\n-->\r\nThere is a difference in behavior between v1 writes and v2 writes in the order of events happening when configuring the file writer and the committer.\r\n\r\nv1:\r\n\r\nwriter.prepareWrite()\r\ncommitter.setupJob()\r\nv2:\r\n\r\ncommitter.setupJob()\r\nwriter.prepareWrite()\r\n \r\n\r\nThis is because the `prepareWrite()` call (that is the one performing the call `\r\njob.setOutputFormatClass(classOf[ParquetOutputFormat[Row]])`)\r\nhappens as part of the `createWriteJobDescription` which is `lazy val` in the `toBatch` call and therefore is evaluated after the `committer.setupJob` at the end of the `toBatch`\r\n\r\nThis causes issues when evaluating the committer as some elements might be missing, for example the aforementioned output format class not being set, causing the committer being set up as generic write instead of parquet write.\r\n\r\n \r\n\r\nThe fix is very simple and it is to make the `createJobDescription` call non-lazy\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n<!--\r\nNote that it means *any* user-facing change including all aspects such as the documentation fix.\r\nIf yes, please clarify the previous behavior and the change this PR proposes - provide the console output, description and/or an example to show the behavior difference if possible.\r\nIf possible, please also clarify if this is a user-facing change compared to the released Spark versions or within the unreleased branches such as master.\r\nIf no, write 'No'.\r\n-->\r\nNo\r\n\r\n\r\n### How was this patch tested?\r\n<!--\r\nIf tests were added, say they were added here. Please make sure to add some test cases that check the changes thoroughly including negative and positive cases if possible.\r\nIf it was tested in a way different from regular unit tests, please clarify how you tested step by step, ideally copy and paste-able, so that other reviewers can test and check, and descendants can verify in the future.\r\nIf tests were not added, please describe why they were not added and/or why it was difficult to add.\r\nIf benchmark tests were added, please run the benchmarks in GitHub Actions for the consistent environment, and the instructions could accord to: https://spark.apache.org/developer-tools.html#github-workflow-benchmarks.\r\n-->\r\nExisting test.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40018/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40018/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

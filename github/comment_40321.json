@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1459045889",
+    "html_url": "https://github.com/apache/spark/pull/40321#issuecomment-1459045889",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40321",
+    "id": 1459045889,
+    "node_id": "IC_kwDOAQXtWs5W90YB",
+    "user": {
+      "login": "ryan-johnson-databricks",
+      "id": 79601771,
+      "node_id": "MDQ6VXNlcjc5NjAxNzcx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79601771?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ryan-johnson-databricks",
+      "html_url": "https://github.com/ryan-johnson-databricks",
+      "followers_url": "https://api.github.com/users/ryan-johnson-databricks/followers",
+      "following_url": "https://api.github.com/users/ryan-johnson-databricks/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ryan-johnson-databricks/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ryan-johnson-databricks/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ryan-johnson-databricks/subscriptions",
+      "organizations_url": "https://api.github.com/users/ryan-johnson-databricks/orgs",
+      "repos_url": "https://api.github.com/users/ryan-johnson-databricks/repos",
+      "events_url": "https://api.github.com/users/ryan-johnson-databricks/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ryan-johnson-databricks/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-03-07T23:50:28Z",
+    "updated_at": "2023-03-07T23:50:28Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "Something went wrong with [Run spark on kubernetes integration test](https://github.com/ryan-johnson-databricks/spark/actions/runs/4358877500/jobs/7620022040):\r\n```\r\n[info] *** Test still running after 2 minutes, 57 seconds: suite name: KubernetesSuite, test name: Test decommissioning with dynamic allocation & shuffle cleanups. \r\n[info] - Test decommissioning with dynamic allocation & shuffle cleanups (3 minutes, 3 seconds)\r\n[info] - Test decommissioning timeouts (1 minute)\r\n[info] - SPARK-37576: Rolling decommissioning (1 minute, 11 seconds)\r\n[info] org.apache.spark.deploy.k8s.integrationtest.KubernetesSuite *** ABORTED *** (25 minutes, 32 seconds)\r\n[info]   io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: POST at: https://192.168.49.2:8443/api/v1/namespaces. Message: object is being deleted: namespaces \"spark-6bff7607e9884740a4bac53b1fb655ae\" already exists. Received status: Status(apiVersion=v1, code=409, details=StatusDetails(causes=[], group=null, kind=namespaces, name=spark-6bff7607e9884740a4bac53b1fb655ae, retryAfterSeconds=null, uid=null, additionalProperties={}), kind=Status, message=object is being deleted: namespaces \"spark-6bff7607e9884740a4bac53b1fb655ae\" already exists, metadata=ListMeta(_continue=null, remainingItemCount=null, resourceVersion=null, selfLink=null, additionalProperties={}), reason=AlreadyExists, status=Failure, additionalProperties={}).\r\n[info]   at io.fabric8.kubernetes.client.KubernetesClientException.copyAsCause(KubernetesClientException.java:238)\r\n[info]   at io.fabric8.kubernetes.client.dsl.internal.OperationSupport.waitForResult(OperationSupport.java:538)\r\n   ...\r\n[info]   at io.fabric8.kubernetes.client.dsl.internal.CreateOnlyResourceOperation.create(CreateOnlyResourceOperation.java:42)\r\n[info]   at org.apache.spark.deploy.k8s.integrationtest.KubernetesTestComponents.createNamespace(KubernetesTestComponents.scala:51)\r\n[info]   at org.apache.spark.deploy.k8s.integrationtest.KubernetesSuite.setUpTest(KubernetesSuite.scala:202)\r\n   ...\r\n[info]   at org.apache.spark.deploy.k8s.integrationtest.KubernetesSuite.runTest(KubernetesSuite.scala:45)\r\n   ...\r\n[info]   Cause: io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: POST at: https://192.168.49.2:8443/api/v1/namespaces. Message: object is being deleted: namespaces \"spark-6bff7607e9884740a4bac53b1fb655ae\" already exists. Received status: Status(apiVersion=v1, code=409, details=StatusDetails(causes=[], group=null, kind=namespaces, name=spark-6bff7607e9884740a4bac53b1fb655ae, retryAfterSeconds=null, uid=null, additionalProperties={}), kind=Status, message=object is being deleted: namespaces \"spark-6bff7607e9884740a4bac53b1fb655ae\" already exists, metadata=ListMeta(_continue=null, remainingItemCount=null, resourceVersion=null, selfLink=null, additionalProperties={}), reason=AlreadyExists, status=Failure, additionalProperties={}).\r\n```\r\n(not sure how that could be related to this PR?)",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1459045889/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

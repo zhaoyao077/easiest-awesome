@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1447351035",
+    "html_url": "https://github.com/apache/spark/pull/40194#issuecomment-1447351035",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/40194",
+    "id": 1447351035,
+    "node_id": "IC_kwDOAQXtWs5WRNL7",
+    "user": {
+      "login": "bozhang2820",
+      "id": 44179472,
+      "node_id": "MDQ6VXNlcjQ0MTc5NDcy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44179472?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/bozhang2820",
+      "html_url": "https://github.com/bozhang2820",
+      "followers_url": "https://api.github.com/users/bozhang2820/followers",
+      "following_url": "https://api.github.com/users/bozhang2820/following{/other_user}",
+      "gists_url": "https://api.github.com/users/bozhang2820/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/bozhang2820/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/bozhang2820/subscriptions",
+      "organizations_url": "https://api.github.com/users/bozhang2820/orgs",
+      "repos_url": "https://api.github.com/users/bozhang2820/repos",
+      "events_url": "https://api.github.com/users/bozhang2820/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/bozhang2820/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-02-28T00:41:52Z",
+    "updated_at": "2023-02-28T00:41:52Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "@cloud-fan, @jiangxb1987, could you review this? ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1447351035/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

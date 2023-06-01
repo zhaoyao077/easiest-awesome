@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40221",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40221/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40221/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40221/events",
+  "html_url": "https://github.com/apache/spark/pull/40221",
+  "id": 1603372754,
+  "node_id": "PR_kwDOAQXtWs5K8nNi",
+  "number": 40221,
+  "title": "[SPARK-41551][SQL] Dynamic/absolute path support in PathOutputCommitters",
+  "user": {
+    "login": "steveloughran",
+    "id": 162090,
+    "node_id": "MDQ6VXNlcjE2MjA5MA==",
+    "avatar_url": "https://avatars.githubusercontent.com/u/162090?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/steveloughran",
+    "html_url": "https://github.com/steveloughran",
+    "followers_url": "https://api.github.com/users/steveloughran/followers",
+    "following_url": "https://api.github.com/users/steveloughran/following{/other_user}",
+    "gists_url": "https://api.github.com/users/steveloughran/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/steveloughran/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/steveloughran/subscriptions",
+    "organizations_url": "https://api.github.com/users/steveloughran/orgs",
+    "repos_url": "https://api.github.com/users/steveloughran/repos",
+    "events_url": "https://api.github.com/users/steveloughran/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/steveloughran/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-02-28T16:13:34Z",
+  "updated_at": "2023-02-28T17:21:39Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": true,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40221",
+    "html_url": "https://github.com/apache/spark/pull/40221",
+    "diff_url": "https://github.com/apache/spark/pull/40221.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40221.patch",
+    "merged_at": null
+  },
+  "body": "\r\n### What changes were proposed in this pull request?\r\n\r\nFollow on to SPARK-40034, Dynamic/absolute path support in PathOutputCommitters\r\n\r\nDynamic partitioning though the PathOutputCommitProtocol needs to add the target directories to the superclass's partition list else the partition delete doesn't\r\ntake place -the job extends the dataset, rather than replaces it.\r\n\r\nFix:\r\n* add an `addPartition()` method subclasses can use\r\n* add a `getPartitions` method to return an immutable\r\n  copy of the list for testing.\r\n* add the test.\r\n* Also fix `newTaskTempFileAbsPath(`) to return a path, irrespective of committer type.\r\n\r\nIn dynamic mode, because the parent dir of an absolute path is deleted, there's a safety check to reject any requests for a file in a parent dir. This\r\nis something which could be pulled up to HadoopMapReduceCommitProtocol -it needs the same check, if the risk is considered realistic.\r\n\r\nThe patch now downgrades from failing on dynamic partitioning if the committer doesn't declare it supports it to printing a warning. Why this? well, it\r\n*does* work through the s3a committers, it's just `O(data)`. If someone does want to do `INSERT OVERWRITE` then they can be allowed to, just warned about\r\nit. The outcome will be correct except in the case of: \"if the driver fails partway through dir rename, only some of the files will be there\"\r\n\r\nFinally, it update the protocol spec in `HadoopMapReduceCommitProtocol` to cover the dynamic partition job commit in more detail.\r\n\r\n### Why are the changes needed?\r\n\r\n\r\n* The code in SPARK-40034 was incomplete. The new tests show that it works now.\r\n* dynamic partition jobs aren't actually incorrect through the s3 committers, just slow, so if someone really wants it they should be free to.\r\n* The `newFileAbsPath()` code is required of all committers, despite its near-total lack of use.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nUpdates the cloud docs to say that dynamic partition overwrite does work everywhere, just may be really slow.\r\n\r\n\r\n### How was this patch tested?\r\n\r\nNew unit tests in `CommitterBindingSuite`; `\r\n\r\nNew test suite `PathOutputPartitionedWriteSuite extends PartitionedWriteSuite` which runs the `PartitionedWriteSuite` through\r\nthe PathOutputCommitter and with, on hadoop 3.3.5+ the manifest committer chosen.\r\n\r\nexecuted with\r\n* hadoop 3.3.4\r\n* RC2 of hadoop 3.3.5 through `-Dhadoop.version=3.3.5 -Psnapshots-and-staging\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40221/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40221/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

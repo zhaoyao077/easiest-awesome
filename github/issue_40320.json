@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40320",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40320/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40320/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40320/events",
+  "html_url": "https://github.com/apache/spark/pull/40320",
+  "id": 1613691971,
+  "node_id": "PR_kwDOAQXtWs5LfRxK",
+  "number": 40320,
+  "title": "Update code example formatting for protobuf parsing readme",
+  "user": {
+    "login": "justaparth",
+    "id": 1002986,
+    "node_id": "MDQ6VXNlcjEwMDI5ODY=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1002986?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/justaparth",
+    "html_url": "https://github.com/justaparth",
+    "followers_url": "https://api.github.com/users/justaparth/followers",
+    "following_url": "https://api.github.com/users/justaparth/following{/other_user}",
+    "gists_url": "https://api.github.com/users/justaparth/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/justaparth/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/justaparth/subscriptions",
+    "organizations_url": "https://api.github.com/users/justaparth/orgs",
+    "repos_url": "https://api.github.com/users/justaparth/repos",
+    "events_url": "https://api.github.com/users/justaparth/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/justaparth/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-03-07T15:30:07Z",
+  "updated_at": "2023-03-07T18:41:46Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40320",
+    "html_url": "https://github.com/apache/spark/pull/40320",
+    "diff_url": "https://github.com/apache/spark/pull/40320.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40320.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nI was reviewing this markdown document about proto parsing, and found that the formatting of code blocks looked incorrect:\r\n\r\nsome examples:\r\n<img width=\"1238\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1002986/223468227-8fdd1db0-51ef-4c69-adaf-bca5f8ba92ce.png\">\r\n<img width=\"1124\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1002986/223468420-a0813fe8-4546-48ce-b847-2ddac46bee07.png\">\r\n\r\nIn this commit I changed the formatting to use github's markdown syntax for code blocks, \" ``` \", and added syntax highlighting for each of them based on the language that it looked like.\r\n\r\nThey now look a bit more like this:\r\n<img width=\"855\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1002986/223469481-4b1e2cfc-1591-40f6-aec4-05eb0d5a463b.png\">\r\n\r\n\r\n### Why are the changes needed?\r\nTo help improve the readability of the documentation.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes, it updates user-facing documentation.\r\n\r\n### How was this patch tested?\r\nI inspected the github markdown preview to test that the changes looked correct.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40320/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40320/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

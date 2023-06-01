@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40805",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40805/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40805/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40805/events",
+  "html_url": "https://github.com/apache/spark/pull/40805",
+  "id": 1669425533,
+  "node_id": "PR_kwDOAQXtWs5OY0hJ",
+  "number": 40805,
+  "title": "[SPARK-40609][SQL] Unwrap cast in the join condition to unlock bucketed read",
+  "user": {
+    "login": "wangyum",
+    "id": 5399861,
+    "node_id": "MDQ6VXNlcjUzOTk4NjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5399861?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/wangyum",
+    "html_url": "https://github.com/wangyum",
+    "followers_url": "https://api.github.com/users/wangyum/followers",
+    "following_url": "https://api.github.com/users/wangyum/following{/other_user}",
+    "gists_url": "https://api.github.com/users/wangyum/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/wangyum/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/wangyum/subscriptions",
+    "organizations_url": "https://api.github.com/users/wangyum/orgs",
+    "repos_url": "https://api.github.com/users/wangyum/repos",
+    "events_url": "https://api.github.com/users/wangyum/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/wangyum/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 6,
+  "created_at": "2023-04-15T14:25:22Z",
+  "updated_at": "2023-04-18T06:26:11Z",
+  "closed_at": null,
+  "author_association": "MEMBER",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40805",
+    "html_url": "https://github.com/apache/spark/pull/40805",
+    "diff_url": "https://github.com/apache/spark/pull/40805.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40805.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nIt will invalidate the bucketed read if add a cast on bucket keys:\r\n```sql\r\nset spark.sql.autoBroadcastJoinThreshold=-1;\r\nCREATE TABLE t2 USING parquet CLUSTERED BY (i) INTO 8 buckets AS\r\nSELECT CAST(v AS bigint) AS i FROM values(1), (9223372036854775807) AS data(v);\r\n\r\nCREATE TABLE t3 USING parquet CLUSTERED BY (i) INTO 4 buckets AS\r\nSELECT CAST(v AS decimal(18, 0)) AS i FROM values(1), (999999999999999999) AS data(v);\r\n\r\nEXPLAIN SELECT * FROM t2 JOIN t3 ON t2.i = t3.i;\r\n```\r\n\r\n```\r\n== Physical Plan ==\r\nAdaptiveSparkPlan isFinalPlan=false\r\n+- SortMergeJoin [cast(i#6L as decimal(20,0))], [cast(i#19 as decimal(20,0))], Inner\r\n   :- Sort [cast(i#6L as decimal(20,0)) ASC NULLS FIRST], false, 0\r\n   :  +- Exchange hashpartitioning(cast(i#6L as decimal(20,0)), 5), ENSURE_REQUIREMENTS, [plan_id=128]\r\n   :     +- Filter isnotnull(i#6L)\r\n   :        +- FileScan parquet spark_catalog.default.t2[i#6L] Batched: true, Bucketed: false (disabled by query planner)\r\n   +- Sort [cast(i#19 as decimal(20,0)) ASC NULLS FIRST], false, 0\r\n      +- Exchange hashpartitioning(cast(i#19 as decimal(20,0)), 5), ENSURE_REQUIREMENTS, [plan_id=132]\r\n         +- Filter isnotnull(i#19)\r\n            +- FileScan parquet spark_catalog.default.t3[i#19] Batched: true, Bucketed: false (disabled by query planner)\r\n```\r\n\r\nThis PR adds a new rule(`UnwrapCastInJoinCondition`) before `EnsureRequirements` to unwrap cast in join condition to unlock bucketed read if they are integral types. The key idea here is that casting to either of these two types will not affect the result of join for integral types join keys. For example: `a.intCol = try_cast(b.bigIntCol AS int)`, if the value of `bigIntCol` exceeds the range of int, the result of `try_cast(b.bigIntCol AS int)` is `null`, and the result of  `a.intCol = try_cast(b.bigIntCol AS int)` in the join condition is `false`. The result is consistent with `cast(a.intCol AS bigint) = b.bigIntCol`.\r\n\r\nAfter This PR:\r\n```\r\n== Physical Plan ==\r\nAdaptiveSparkPlan isFinalPlan=false\r\n+- SortMergeJoin [i#6L], [try_cast(i#29 as bigint)], Inner\r\n   :- Sort [i#6L ASC NULLS FIRST], false, 0\r\n   :  +- Filter isnotnull(i#6L)\r\n   :     +- FileScan parquet spark_catalog.default.t2[i#6L] Batched: true, Bucketed: true, SelectedBucketsCount: 8 out of 8\r\n   +- Sort [try_cast(i#29 as bigint) ASC NULLS FIRST], false, 0\r\n      +- Exchange hashpartitioning(try_cast(i#29 as bigint), 8), ENSURE_REQUIREMENTS, [plan_id=132]\r\n         +- Filter isnotnull(i#29)\r\n            +- FileScan parquet spark_catalog.default.t3[i#29] Batched: true, Bucketed: false (disabled by query planner)\r\n```\r\n\r\n### Why are the changes needed?\r\n\r\nReduce shuffle to improve query performance.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nNo.\r\n\r\n### How was this patch tested?\r\n\r\nUnit test.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40805/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40805/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40912",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40912/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40912/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40912/events",
+  "html_url": "https://github.com/apache/spark/pull/40912",
+  "id": 1679647934,
+  "node_id": "PR_kwDOAQXtWs5O66rJ",
+  "number": 40912,
+  "title": "[SPARK-43238][CORE] Support only decommission idle workers in standalone",
+  "user": {
+    "login": "warrenzhu25",
+    "id": 1633312,
+    "node_id": "MDQ6VXNlcjE2MzMzMTI=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1633312?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/warrenzhu25",
+    "html_url": "https://github.com/warrenzhu25",
+    "followers_url": "https://api.github.com/users/warrenzhu25/followers",
+    "following_url": "https://api.github.com/users/warrenzhu25/following{/other_user}",
+    "gists_url": "https://api.github.com/users/warrenzhu25/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/warrenzhu25/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/warrenzhu25/subscriptions",
+    "organizations_url": "https://api.github.com/users/warrenzhu25/orgs",
+    "repos_url": "https://api.github.com/users/warrenzhu25/repos",
+    "events_url": "https://api.github.com/users/warrenzhu25/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/warrenzhu25/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406605079,
+      "node_id": "MDU6TGFiZWwxNDA2NjA1MDc5",
+      "url": "https://api.github.com/repos/apache/spark/labels/WEB%20UI",
+      "name": "WEB UI",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-22T18:27:50Z",
+  "updated_at": "2023-04-23T03:26:59Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40912",
+    "html_url": "https://github.com/apache/spark/pull/40912",
+    "diff_url": "https://github.com/apache/spark/pull/40912.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40912.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nSupport only decommission idle workers in standalone\r\n\r\n### Why are the changes needed?\r\nCurrently, standalone master web ui supports kill/decommission workers. But when graceful decommission is enabled, running task, shuffle and rdd migration could take long time. While waiting for running task, shuffle and rdd migration, decommissioned workers can't run new executors and decommissioned executors can't run new tasks. This caused lot of resource waste.\r\n\r\nIf only idle workers to be decommissioned, these workers could be shutdown and removed to save cost without waiting long decommissioning process.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes. \r\n\r\nPOST http://masterWebUI:port/workers/kill/idleOnly=true\r\nDefault: false\r\n\r\n### How was this patch tested?\r\nAdded test in MasterSuite\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40912/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40912/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

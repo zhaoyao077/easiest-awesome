@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41016",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41016/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41016/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41016/events",
+  "html_url": "https://github.com/apache/spark/pull/41016",
+  "id": 1692640433,
+  "node_id": "PR_kwDOAQXtWs5PmSIl",
+  "number": 41016,
+  "title": "[SPARK-43341][SQL] Patch StructType.toDDL not picking up on non-nullability of nested column",
+  "user": {
+    "login": "BramBoog",
+    "id": 93602108,
+    "node_id": "U_kgDOBZRBPA",
+    "avatar_url": "https://avatars.githubusercontent.com/u/93602108?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/BramBoog",
+    "html_url": "https://github.com/BramBoog",
+    "followers_url": "https://api.github.com/users/BramBoog/followers",
+    "following_url": "https://api.github.com/users/BramBoog/following{/other_user}",
+    "gists_url": "https://api.github.com/users/BramBoog/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/BramBoog/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/BramBoog/subscriptions",
+    "organizations_url": "https://api.github.com/users/BramBoog/orgs",
+    "repos_url": "https://api.github.com/users/BramBoog/repos",
+    "events_url": "https://api.github.com/users/BramBoog/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/BramBoog/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-05-02T15:31:06Z",
+  "updated_at": "2023-05-08T01:52:49Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41016",
+    "html_url": "https://github.com/apache/spark/pull/41016",
+    "diff_url": "https://github.com/apache/spark/pull/41016.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41016.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nWhen converting a StructType instance containing a nested StructType column which in turn contains a column for which `nullable = false` to a DDL string using `.toDDL`, the resulting DDL string does not include this non-nullability. For example:\r\n```\r\nval testSchema = StructType(List(\r\n  StructField(\"key\", IntegerType, false),\r\n  StructField(\"value\", StringType, true),\r\n  StructField(\"nestedCols\", StructType(List(\r\n    StructField(\"nestedKey\", IntegerType, false),\r\n    StructField(\"nestedValue\", StringType, true)\r\n  )), false)\r\n))\r\n\r\nprintln(testSchema.toDDL)\r\nprintln(StructType.fromDDL(testschema.toDDL))\r\n```\r\ngives\r\n```\r\nkey INT NOT NULL,value STRING,nestedCols STRUCT<nestedKey: INT, nestedValue: STRING> NOT NULL\r\n\r\nStructType(\r\n  StructField(key,IntegerType,false),\r\n  StructField(value,StringType,true),\r\n  StructField(nestedCols,StructType(\r\n    StructField(nestedKey,IntegerType,true),\r\n    StructField(nestedValue,StringType,true)\r\n  ),false)\r\n)\r\n```\r\n\r\nThis is due to the fact that `StructType.toDDL` calls `StructField.toDDL` for its fields, which in turn calls `.sql` for its `dataType`. If `dataType` is a StructType, the call to `.sql` in turn calls `.sql` for all the nested fields, and this last method does not include the nullability of the field in its output. The proposed solution is therefore to have `StructField.toDDL` call `dataType.toDDL` for a StructType, since this will include information about nullability of nested columns.\r\n\r\nTo work around the different DDL formats of nested and non-nested structs (the former is wrapped in `\"STRUCT ...>\"` and uses `colName: dataType` for its fields instead of `colName dataType`), package-private nested-specific versions of `.toDDL` have been added for StructType and StructField.\r\n\r\n### Why are the changes needed?\r\nCurrently, converting a StructType schema to a DDL string does not pass information about nullability of nested columns. This leads to a loss of information, and means converting to DDL and then back could alter the StructType schema. \r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes, given the example above, the output will become:\r\n```\r\nkey INT NOT NULL,value STRING,nestedCols STRUCT<nestedKey: INT NOT NULL, nestedValue: STRING> NOT NULL\r\n\r\nStructType(\r\n  StructField(key,IntegerType,false),\r\n  StructField(value,StringType,true),\r\n  StructField(nestedCols,StructType(\r\n    StructField(nestedKey,IntegerType,false),\r\n    StructField(nestedValue,StringType,true)\r\n  ),false)\r\n)\r\n```\r\n\r\n### How was this patch tested?\r\nIn `StructTypeSuite`, the `nestedStruct` testing value has been modified to include a non-nullable nested column. The relevant unit tests have been changed accordingly.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41016/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41016/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

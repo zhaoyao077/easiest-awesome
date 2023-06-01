@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1538109470",
+    "html_url": "https://github.com/apache/spark/pull/41043#issuecomment-1538109470",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/41043",
+    "id": 1538109470,
+    "node_id": "IC_kwDOAQXtWs5brbAe",
+    "user": {
+      "login": "yaooqinn",
+      "id": 8326978,
+      "node_id": "MDQ6VXNlcjgzMjY5Nzg=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8326978?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/yaooqinn",
+      "html_url": "https://github.com/yaooqinn",
+      "followers_url": "https://api.github.com/users/yaooqinn/followers",
+      "following_url": "https://api.github.com/users/yaooqinn/following{/other_user}",
+      "gists_url": "https://api.github.com/users/yaooqinn/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/yaooqinn/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/yaooqinn/subscriptions",
+      "organizations_url": "https://api.github.com/users/yaooqinn/orgs",
+      "repos_url": "https://api.github.com/users/yaooqinn/repos",
+      "events_url": "https://api.github.com/users/yaooqinn/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/yaooqinn/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-05-08T10:04:44Z",
+    "updated_at": "2023-05-08T10:04:44Z",
+    "author_association": "MEMBER",
+    "body": "thanks @dongjoon-hyun ",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1538109470/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

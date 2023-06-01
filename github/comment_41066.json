@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/apache/spark/issues/comments/1538282346",
+    "html_url": "https://github.com/apache/spark/pull/41066#issuecomment-1538282346",
+    "issue_url": "https://api.github.com/repos/apache/spark/issues/41066",
+    "id": 1538282346,
+    "node_id": "IC_kwDOAQXtWs5bsFNq",
+    "user": {
+      "login": "Yikf",
+      "id": 51110188,
+      "node_id": "MDQ6VXNlcjUxMTEwMTg4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51110188?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Yikf",
+      "html_url": "https://github.com/Yikf",
+      "followers_url": "https://api.github.com/users/Yikf/followers",
+      "following_url": "https://api.github.com/users/Yikf/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Yikf/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Yikf/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Yikf/subscriptions",
+      "organizations_url": "https://api.github.com/users/Yikf/orgs",
+      "repos_url": "https://api.github.com/users/Yikf/repos",
+      "events_url": "https://api.github.com/users/Yikf/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Yikf/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2023-05-08T12:30:59Z",
+    "updated_at": "2023-05-08T12:30:59Z",
+    "author_association": "CONTRIBUTOR",
+    "body": "Kindly ping @cloud-fan , Could you please take a look if you find a time :-)",
+    "reactions": {
+      "url": "https://api.github.com/repos/apache/spark/issues/comments/1538282346/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

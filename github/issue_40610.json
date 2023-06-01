@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40610",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40610/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40610/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40610/events",
+  "html_url": "https://github.com/apache/spark/pull/40610",
+  "id": 1647891239,
+  "node_id": "PR_kwDOAQXtWs5NRryB",
+  "number": 40610,
+  "title": "[SPARK-42626][CONNECT] Add Destructive Iterator for SparkResult",
+  "user": {
+    "login": "ivoson",
+    "id": 15122230,
+    "node_id": "MDQ6VXNlcjE1MTIyMjMw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/15122230?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/ivoson",
+    "html_url": "https://github.com/ivoson",
+    "followers_url": "https://api.github.com/users/ivoson/followers",
+    "following_url": "https://api.github.com/users/ivoson/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ivoson/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/ivoson/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ivoson/subscriptions",
+    "organizations_url": "https://api.github.com/users/ivoson/orgs",
+    "repos_url": "https://api.github.com/users/ivoson/repos",
+    "events_url": "https://api.github.com/users/ivoson/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/ivoson/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 8,
+  "created_at": "2023-03-30T15:53:06Z",
+  "updated_at": "2023-05-23T04:54:03Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40610",
+    "html_url": "https://github.com/apache/spark/pull/40610",
+    "diff_url": "https://github.com/apache/spark/pull/40610.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40610.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nAdd a destructive iterator to SparkResult and change `Dataset.toLocalIterator` to use the desctructive iterator.\r\nWith the desctructive iterator, we will:\r\n1. Close the `ColumarBatch` once its data got consumed;\r\n2. Remove the `ColumarBatch` from `SparkResult.batches`;\r\n\r\n### Why are the changes needed?\r\nInstead of keeping everything in memory for the life time of SparkResult object, clean it up as soon as we know we are done with it. \r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo\r\n\r\n### How was this patch tested?\r\nUT added.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40610/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40610/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41263",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41263/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41263/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41263/events",
+  "html_url": "https://github.com/apache/spark/pull/41263",
+  "id": 1720156512,
+  "node_id": "PR_kwDOAQXtWs5RCtnI",
+  "number": 41263,
+  "title": "[SPARK-43333][SQL] Allow Avro to convert union type to SQL with field name stable with type",
+  "user": {
+    "login": "siying",
+    "id": 5334567,
+    "node_id": "MDQ6VXNlcjUzMzQ1Njc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/5334567?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/siying",
+    "html_url": "https://github.com/siying",
+    "followers_url": "https://api.github.com/users/siying/followers",
+    "following_url": "https://api.github.com/users/siying/following{/other_user}",
+    "gists_url": "https://api.github.com/users/siying/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/siying/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/siying/subscriptions",
+    "organizations_url": "https://api.github.com/users/siying/orgs",
+    "repos_url": "https://api.github.com/users/siying/repos",
+    "events_url": "https://api.github.com/users/siying/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/siying/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981471081,
+      "node_id": "MDU6TGFiZWwxOTgxNDcxMDgx",
+      "url": "https://api.github.com/repos/apache/spark/labels/DOCS",
+      "name": "DOCS",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1988040187,
+      "node_id": "MDU6TGFiZWwxOTg4MDQwMTg3",
+      "url": "https://api.github.com/repos/apache/spark/labels/AVRO",
+      "name": "AVRO",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 7,
+  "created_at": "2023-05-22T17:53:22Z",
+  "updated_at": "2023-05-26T16:55:24Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41263",
+    "html_url": "https://github.com/apache/spark/pull/41263",
+    "diff_url": "https://github.com/apache/spark/pull/41263.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41263.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nIntroduce AvroOption \"enableStableIdentifiersForUnionType\". If it is set to true (default remains to be false), Avro's union is converted to SQL schema by naming field name \"member_\" + type name. This is to try to keep field name stable with type name.\r\n\r\n\r\n### Why are the changes needed?\r\nThe purpose of this is twofold:\r\n\r\nTo allow adding or removing types to the union without affecting the record names of other member types. If the new or removed type is not ordered last, then existing queries referencing \"member2\" may need to be rewritten to reference \"member1\" or \"member3\".\r\nReferencing the type name in the query is more readable than referencing \"member0\".\r\nFor example, our system produces an avro schema from a Java type structure where subtyping maps to union types whose members are ordered lexicographically. Adding a subtype can therefore easily result in all references to \"member2\" needing to be updated to \"member3\".\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nAdd a unit test that covers all types supported in union, as well as some potential name conflict cases.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41263/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41263/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

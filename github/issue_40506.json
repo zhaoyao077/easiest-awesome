@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40506",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40506/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40506/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40506/events",
+  "html_url": "https://github.com/apache/spark/pull/40506",
+  "id": 1633389334,
+  "node_id": "PR_kwDOAQXtWs5MhKui",
+  "number": 40506,
+  "title": "[SPARK-42881][SQL] Codegen Support for get_json_object",
+  "user": {
+    "login": "panbingkun",
+    "id": 15246973,
+    "node_id": "MDQ6VXNlcjE1MjQ2OTcz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/15246973?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/panbingkun",
+    "html_url": "https://github.com/panbingkun",
+    "followers_url": "https://api.github.com/users/panbingkun/followers",
+    "following_url": "https://api.github.com/users/panbingkun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/panbingkun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/panbingkun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/panbingkun/subscriptions",
+    "organizations_url": "https://api.github.com/users/panbingkun/orgs",
+    "repos_url": "https://api.github.com/users/panbingkun/repos",
+    "events_url": "https://api.github.com/users/panbingkun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/panbingkun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 8,
+  "created_at": "2023-03-21T07:56:51Z",
+  "updated_at": "2023-05-26T00:54:04Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40506",
+    "html_url": "https://github.com/apache/spark/pull/40506",
+    "diff_url": "https://github.com/apache/spark/pull/40506.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40506.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThe PR adds Codegen Support for get_json_object.\r\n\r\n### Why are the changes needed?\r\nImprove codegen coverage and performance.\r\nGithub benchmark data(https://github.com/panbingkun/spark/actions/runs/4497396473/jobs/7912952710):\r\n<img width=\"879\" alt=\"image\" src=\"https://user-images.githubusercontent.com/15246973/227117793-bab38c42-dcc1-46de-a689-25a87b8f3561.png\">\r\n\r\nLocal benchmark data:\r\n<img width=\"895\" alt=\"image\" src=\"https://user-images.githubusercontent.com/15246973/227098745-9b360e60-fe84-4419-8b7d-073a0530816a.png\">\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nAdd new UT.\r\nPass GA.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40506/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40506/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

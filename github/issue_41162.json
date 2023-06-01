@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41162",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41162/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41162/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41162/events",
+  "html_url": "https://github.com/apache/spark/pull/41162",
+  "id": 1708525133,
+  "node_id": "PR_kwDOAQXtWs5Qb1MK",
+  "number": 41162,
+  "title": "[SPARK-43491][SQL] In expression should act as same as EqualTo when elements in IN expression have same DataType.",
+  "user": {
+    "login": "liukuijian8040",
+    "id": 132866841,
+    "node_id": "U_kgDOB-tjGQ",
+    "avatar_url": "https://avatars.githubusercontent.com/u/132866841?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/liukuijian8040",
+    "html_url": "https://github.com/liukuijian8040",
+    "followers_url": "https://api.github.com/users/liukuijian8040/followers",
+    "following_url": "https://api.github.com/users/liukuijian8040/following{/other_user}",
+    "gists_url": "https://api.github.com/users/liukuijian8040/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/liukuijian8040/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/liukuijian8040/subscriptions",
+    "organizations_url": "https://api.github.com/users/liukuijian8040/orgs",
+    "repos_url": "https://api.github.com/users/liukuijian8040/repos",
+    "events_url": "https://api.github.com/users/liukuijian8040/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/liukuijian8040/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 6,
+  "created_at": "2023-05-13T09:01:29Z",
+  "updated_at": "2023-05-19T02:31:51Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41162",
+    "html_url": "https://github.com/apache/spark/pull/41162",
+    "diff_url": "https://github.com/apache/spark/pull/41162.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41162.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nSee [SPARK-43491](https://issues.apache.org/jira/browse/SPARK-43491).\r\nThe query results of `in ('00')` and `= '00'`  are inconsistent. \r\n![image](https://github.com/apache/spark/assets/132866841/007cc156-625a-4d0d-a0d4-6a0442cfc8f6)\r\n\r\nWe do this work to ensure when dataTypes of elements in `In` expression are the same, it will behaviour as same as BinaryComparison expression like `EqualTo` when the switch is open(`spark.sql.legacy.inExpressionCompatibleWithEqualTo.enabled=true`).\r\n```scala\r\n// test data and content: \r\n// test.json\r\n// {\"name\":\"Michael\",\"age\":0}\r\nspark.read().json(\"examples/src/main/resources/test.json\").createOrReplaceTempView(\"t\");\r\n```\r\n**Before change (see Filter node in Analyzed Logical Plan)**\r\n```\r\nspark.sql(\"select * from t where age in ('00')\").explain(true);\r\n== Parsed Logical Plan ==\r\n'Project [*]\r\n+- 'Filter 'age IN (00)\r\n   +- 'UnresolvedRelation [t], [], false\r\n\r\n== Analyzed Logical Plan ==\r\nage: bigint, name: string\r\nProject [age#7L, name#8]\r\n+- Filter cast(age#7L as string) IN (cast(00 as string))\r\n   +- SubqueryAlias t\r\n\t  +- Relation[age#7L,name#8] json\r\n\r\n== Optimized Logical Plan ==\r\nFilter (isnotnull(age#7L) AND (cast(age#7L as string) = 00))\r\n+- Relation[age#7L,name#8] json\r\n\r\n== Physical Plan ==\r\n*(1) Filter (isnotnull(age#7L) AND (cast(age#7L as string) = 00))\r\n+- FileScan json [age#7L,name#8] Batched: false, DataFilters: [isnotnull(age#7L), (cast(age#7L as string) = 00)], Format: JSON, Location: InMemoryFileIndex[file:/D:/code/spark/examples/src/main/resources/test.json], PartitionFilters: [], PushedFilters: [IsNotNull(age)], ReadSchema: struct<age:bigint,name:string>\r\n\r\n+---+----+\r\n|age|name|\r\n+---+----+\r\n+---+----+\r\n\r\n```\r\n**After change (see Filter node in Analyzed Logical Plan)**\r\n```\r\nspark.sql(\"select * from t where age in ('00')\").explain(true);\r\n== Parsed Logical Plan ==\r\n'Project [*]\r\n+- 'Filter 'age IN (00)\r\n   +- 'UnresolvedRelation [t], [], false\r\n\r\n== Analyzed Logical Plan ==\r\nage: bigint, name: string\r\nProject [age#7L, name#8]\r\n+- Filter cast(age#7L as bigint) IN (cast(00 as bigint))\r\n   +- SubqueryAlias t\r\n\t  +- Relation[age#7L,name#8] json\r\n\r\n== Optimized Logical Plan ==\r\nFilter (isnotnull(age#7L) AND (age#7L = 0))\r\n+- Relation[age#7L,name#8] json\r\n\r\n== Physical Plan ==\r\n*(1) Filter (isnotnull(age#7L) AND (age#7L = 0))\r\n+- FileScan json [age#7L,name#8] Batched: false, DataFilters: [isnotnull(age#7L), (age#7L = 0)], Format: JSON, Location: InMemoryFileIndex[file:/D:/code/spark/examples/src/main/resources/test.json], PartitionFilters: [], PushedFilters: [IsNotNull(age), EqualTo(age,0)], ReadSchema: struct<age:bigint,name:string>\r\n\r\n+---+-------+\r\n|age|   name|\r\n+---+-------+\r\n|  0|Michael|\r\n+---+-------+\r\n```\r\n\r\n### Why are the changes needed?\r\nThe query results of Spark SQL and Hive SQL are inconsistent with same sql. Spark SQL calculates `0 in ('00') ` as false in 3.1.1, which act different from `=` keyword, but Hive calculates true in 3.1.0 and false in 2.3.3. Hive has fixed the `in` keyword in 3.1.0, but SparkSQL does not.\r\nfor example, this two query sql should have same result, how ever, the query result is different:\r\n```\r\nscala> spark.sql(\"select 1 as test where 0 in ('00')\").show;\r\n+----+\r\n|test|\r\n+----+\r\n+----+\r\n\r\n\r\nscala> spark.sql(\"select 1 as test where 0 = '00'\").show;\r\n+----+                                                                          \r\n|test|\r\n+----+\r\n|   1|\r\n+----+\r\n\r\n```\r\n\r\nhive 2.3.3\r\n![image](https://github.com/apache/spark/assets/132866841/417768c8-3dda-49a4-9629-aba5fca39e3e)\r\n\r\nhive 3.1.0\r\n![image](https://github.com/apache/spark/assets/132866841/65edf7fd-0c1c-457b-97f3-c2fb399156b3)\r\n\r\n\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nWe add a switch to support `In` expression compatible with `EqualTo` expression with false as default value, to make sure it will not change default behavior of Spark SQL.\r\n\r\n### How was this patch tested?\r\nBy set spark.sql.legacy.inExpressionCompatibleWithEqualTo.enabled=true/false, to check whether the analyzed logical plan will cast expression as expected. For true, it will generate same Cast logical plan as EqualTo, and false will keep the old Cast logical plan solution.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41162/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41162/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

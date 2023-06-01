@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40667",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40667/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40667/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40667/events",
+  "html_url": "https://github.com/apache/spark/pull/40667",
+  "id": 1654433916,
+  "node_id": "PR_kwDOAQXtWs5NnVPh",
+  "number": 40667,
+  "title": "Improve IDE build experience against jdk11",
+  "user": {
+    "login": "ksumit",
+    "id": 96373,
+    "node_id": "MDQ6VXNlcjk2Mzcz",
+    "avatar_url": "https://avatars.githubusercontent.com/u/96373?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/ksumit",
+    "html_url": "https://github.com/ksumit",
+    "followers_url": "https://api.github.com/users/ksumit/followers",
+    "following_url": "https://api.github.com/users/ksumit/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ksumit/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/ksumit/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ksumit/subscriptions",
+    "organizations_url": "https://api.github.com/users/ksumit/orgs",
+    "repos_url": "https://api.github.com/users/ksumit/repos",
+    "events_url": "https://api.github.com/users/ksumit/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/ksumit/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1406627200,
+      "node_id": "MDU6TGFiZWwxNDA2NjI3MjAw",
+      "url": "https://api.github.com/repos/apache/spark/labels/BUILD",
+      "name": "BUILD",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2023-04-04T19:12:06Z",
+  "updated_at": "2023-04-04T19:12:19Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40667",
+    "html_url": "https://github.com/apache/spark/pull/40667",
+    "diff_url": "https://github.com/apache/spark/pull/40667.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40667.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nBuilding the project against jdk11 on IDE shows errors because `Platform.java` depends on `sun.misc` which is in `jdk.unsupported` module in jdk11. The problem goes away when we pass `java.version` as `11` to maven as system D parameters.\r\n\r\nThis PR set `java.version` to `11` by detecting jdk version automatically and improves build experience.\r\n\r\n### Why are the changes needed?\r\nIt makes build experience on IDE against jdk11 smoother.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nUsers won't have to specify java.version in maven parameters any more since the profile gets activated automagically based on the jdk version.\r\n\r\n\r\n### How was this patch tested?\r\nThis patch was tested by building locally.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40667/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40667/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

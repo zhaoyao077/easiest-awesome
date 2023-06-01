@@ -1,0 +1,90 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41264",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41264/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41264/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41264/events",
+  "html_url": "https://github.com/apache/spark/pull/41264",
+  "id": 1720362202,
+  "node_id": "PR_kwDOAQXtWs5RDbnX",
+  "number": 41264,
+  "title": "[SPARK-43717][CONNECT] Scala client reduce agg cannot handle null partitions for scala primitive inputs",
+  "user": {
+    "login": "zhenlineo",
+    "id": 4190164,
+    "node_id": "MDQ6VXNlcjQxOTAxNjQ=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/4190164?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zhenlineo",
+    "html_url": "https://github.com/zhenlineo",
+    "followers_url": "https://api.github.com/users/zhenlineo/followers",
+    "following_url": "https://api.github.com/users/zhenlineo/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zhenlineo/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zhenlineo/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zhenlineo/subscriptions",
+    "organizations_url": "https://api.github.com/users/zhenlineo/orgs",
+    "repos_url": "https://api.github.com/users/zhenlineo/repos",
+    "events_url": "https://api.github.com/users/zhenlineo/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zhenlineo/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 4556440342,
+      "node_id": "LA_kwDOAQXtWs8AAAABD5XDFg",
+      "url": "https://api.github.com/repos/apache/spark/labels/CONNECT",
+      "name": "CONNECT",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-05-22T19:41:36Z",
+  "updated_at": "2023-05-25T14:59:28Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41264",
+    "html_url": "https://github.com/apache/spark/pull/41264",
+    "diff_url": "https://github.com/apache/spark/pull/41264.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41264.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nScala client fails with NPE when running the following reduce agg:\r\n```\r\nspark.range(0, 5, 1, 10).as[Long].reduce(_ + _) == 10\r\n```\r\nThe reason is because the `range` will produce null partitions and the Reduce encoder will not be able to set the default value correctly for partitions that contains Scala primitives. In the example, we expect 0 but receive null. This causes the codegen wrongly assumes the input is nullable and generates wrong code.\r\n\r\n### Why are the changes needed?\r\nBug fix\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nNo.\r\n\r\n### How was this patch tested?\r\nUnit and Scala Client E2E tests.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41264/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41264/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

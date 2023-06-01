@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40429",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40429/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40429/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40429/events",
+  "html_url": "https://github.com/apache/spark/pull/40429",
+  "id": 1624556824,
+  "node_id": "PR_kwDOAQXtWs5MDisI",
+  "number": 40429,
+  "title": "[SPARK-42775][SQL] Throw exception when ApproximatePercentile result doesn't fit into output decimal type.",
+  "user": {
+    "login": "chenhao-db",
+    "id": 122326661,
+    "node_id": "U_kgDOB0qOhQ",
+    "avatar_url": "https://avatars.githubusercontent.com/u/122326661?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/chenhao-db",
+    "html_url": "https://github.com/chenhao-db",
+    "followers_url": "https://api.github.com/users/chenhao-db/followers",
+    "following_url": "https://api.github.com/users/chenhao-db/following{/other_user}",
+    "gists_url": "https://api.github.com/users/chenhao-db/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/chenhao-db/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/chenhao-db/subscriptions",
+    "organizations_url": "https://api.github.com/users/chenhao-db/orgs",
+    "repos_url": "https://api.github.com/users/chenhao-db/repos",
+    "events_url": "https://api.github.com/users/chenhao-db/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/chenhao-db/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-03-15T01:20:55Z",
+  "updated_at": "2023-04-05T10:03:18Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40429",
+    "html_url": "https://github.com/apache/spark/pull/40429",
+    "diff_url": "https://github.com/apache/spark/pull/40429.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40429.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nThis PR fixed the counter-intuitive behaviors of the `ApproximatePercentile` expression mentioned in https://issues.apache.org/jira/browse/SPARK-42775. See the following *user-facing* changes for details.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nYes. When working on decimals, this expression has the same output type as the input type. When the result that doesn't fit into output decimal type, it silently produces the result since the `Decimal` object is capable of representing decimals of arbitrary precision and scale. However, this can lead to weird behaviors because the value doesn't fit into its type. We should throw an exception immediately.\r\n\r\nOld results:\r\n\r\n```sql\r\n-- ApproximatePercentile will first cast decimal value 9999999999999999999 into double, which results in 1E20, and cast 1E20 back into decimal, which doesn't fit the type decimal(19, 0).\r\n-- Here it is producing \"NULL\" because the value doesn't fit into its type, but it is actually not NULL.\r\nspark-sql> select approx_percentile(col, 0.5) from values (9999999999999999999) as tab(col);\r\nNULL\r\nspark-sql> select approx_percentile(col, 0.5) is null from values (9999999999999999999) as tab(col);\r\nfalse\r\nspark-sql> select cast(approx_percentile(col, 0.5) as string) from values (9999999999999999999) as tab(col);\r\n10000000000000000000\r\n```\r\n\r\nNew results:\r\n\r\n```sql\r\nspark-sql> select approx_percentile(col, 0.5) from values (9999999999999999999) as tab(col);\r\nthrows SparkArithmeticException\r\n```\r\n\r\n### How was this patch tested?\r\n\r\nPass existing tests and some new tests.\r\n\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40429/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40429/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

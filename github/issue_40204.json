@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/40204",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/40204/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/40204/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/40204/events",
+  "html_url": "https://github.com/apache/spark/pull/40204",
+  "id": 1602244656,
+  "node_id": "PR_kwDOAQXtWs5K4zKA",
+  "number": 40204,
+  "title": "[SPARK-42601][SQL] New physical type Decimal128 for DecimalType",
+  "user": {
+    "login": "beliefer",
+    "id": 8486025,
+    "node_id": "MDQ6VXNlcjg0ODYwMjU=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8486025?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/beliefer",
+    "html_url": "https://github.com/beliefer",
+    "followers_url": "https://api.github.com/users/beliefer/followers",
+    "following_url": "https://api.github.com/users/beliefer/following{/other_user}",
+    "gists_url": "https://api.github.com/users/beliefer/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/beliefer/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/beliefer/subscriptions",
+    "organizations_url": "https://api.github.com/users/beliefer/orgs",
+    "repos_url": "https://api.github.com/users/beliefer/repos",
+    "events_url": "https://api.github.com/users/beliefer/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/beliefer/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 1,
+  "created_at": "2023-02-28T02:03:42Z",
+  "updated_at": "2023-05-04T08:08:31Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/40204",
+    "html_url": "https://github.com/apache/spark/pull/40204",
+    "diff_url": "https://github.com/apache/spark/pull/40204.diff",
+    "patch_url": "https://github.com/apache/spark/pull/40204.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nIntroduce a new physical type `Decimal128` for `DecimalType`.\r\n\r\n\r\n### Why are the changes needed?\r\nSpark SQL today supports the `Decimal` data type. The implementation of Spark `Decimal` holds a `BigDecimal` or `Long` value. Spark `Decimal` provides some operators like `+`, `-`, `*`, `/`, `%` and so on. These operators rely heavily on the computational power of `BigDecimal` or `Long` itself. For ease of understanding, take the `+` as an example. The implementation shows below.\r\n```\r\n  def + (that: Decimal): Decimal = {\r\n    if (decimalVal.eq(null) && that.decimalVal.eq(null) && scale == that.scale) {\r\n      Decimal(longVal + that.longVal, Math.max(precision, that.precision) + 1, scale)\r\n    } else {\r\n      Decimal(toBigDecimal.bigDecimal.add(that.toBigDecimal.bigDecimal))\r\n    }\r\n  }\r\n```\r\nWe can see add the two `Long` value if Spark `Decimal` holds a `Long` value. Otherwise,  add the two `BigDecimal` if Spark `Decimal` holds a `BigDecimal` value. The other operators of Spark `Decimal` adopt the similar way. Furthermore, the code shown above calls `Decimal.apply` to construct a new instance of Spark `Decimal`.  As we know, the add operator of `BigDecimal` constructed a new instance of `BigDecimal`. In short, Spark `Decimal` is an immutable physical type. Through rough analysis, we know the calculation operators of Spark `Decimal` create a lot of new instances of `Decimal` and may create a lot of new instances of `BigDecimal`.If a large table has a field called 'colA whose type is Spark `Decimal`, the execution of SUM('colA) will involve the creation of a large number of Spark `Decimal` instances and `BigDecimal` instances. These Spark `Decimal` instances and `BigDecimal` instances will lead to garbage collection frequently.\r\n\r\n`Int128` is a high-performance data type about 1X~6X more efficient than `BigDecimal` for typical operations. It uses a finite (128 bit) precision and can handle up to decimal(38, X). The implementation of `Int128` just uses two `Long` values to represent the high and low bits of 128 bits respectively. `Int128` is lighter than `BigDecimal`, reduces the cost of new() and garbage collection.\r\n\r\nSpark could support a new physical type to represent the `DecimalType` with `Int128`, it would improve the performance for calculation operators.\r\nNow, let's call the new physical type `Decimal128`.\r\n\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n'No'.\r\nNew feature.\r\n\r\n\r\n### How was this patch tested?\r\nNew test cases.\r\n\r\nManual test benchmark\r\n\r\n```\r\nCompare decimal addition:                 Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nDecimal: s1 + s2                                      6              7           2         17.7          56.4       1.0X\r\nDecimal128: s1 + s2                                   2              2           0         43.1          23.2       2.4X\r\nDecimal: s1 + s2 + s3 + s4                           14             15           1          7.1         140.6       0.4X\r\nDecimal128: s1 + s2 + s3 + s4                         6              8           1         15.6          64.2       0.9X\r\nDecimal: l1 + l2                                     13             14           1          7.6         130.7       0.4X\r\nDecimal128: l1 + l2                                   4              5           0         23.2          43.2       1.3X\r\nDecimal: l1 + l2 + l3 + l4                           34             35           1          2.9         342.3       0.2X\r\nDecimal128: l1 + l2 + l3 + l4                        14             15           0          7.2         138.7       0.4X\r\nDecimal: s2 + l3 + l1 + s4                           40             41           1          2.5         395.7       0.1X\r\nDecimal128: s2 + l3 + l1 + s4                        25             26           1          3.9         253.7       0.2X\r\nDecimal: lz1 + lz2                                   13             14           1          7.7         129.5       0.4X\r\nDecimal128: lz1 + lz2                                 4              4           0         26.6          37.6       1.5X\r\nDecimal: lz1 + lz2 + lz3 + lz4                       37             38           1          2.7         368.4       0.2X\r\nDecimal128: lz1 + lz2 + lz3 + lz4                    11             12           0          8.8         113.5       0.5X\r\nDecimal: s2 + lz3 + lz1 + s4                         38             39           1          2.6         381.3       0.1X\r\nDecimal128: s2 + lz3 + lz1 + s4                      19             20           1          5.2         194.2       0.3X\r\n```\r\n\r\n```\r\nCompare decimal multiply:                 Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nDecimal: s1 * s2                                      5              5           0         19.5          51.3       1.0X\r\nDecimal128: s1 * s2                                   2              2           0         44.1          22.7       2.3X\r\nDecimal: s1 * s2 * s5 * s6                           13             15           1          7.5         132.6       0.4X\r\nDecimal128: s1 * s2 * s5 * s6                         5              5           0         20.5          48.7       1.1X\r\nDecimal: s3 * s4                                      9              9           1         11.4          87.9       0.6X\r\nDecimal128: s3 * s4                                   3              3           0         32.5          30.7       1.7X\r\nDecimal: l2 * s2                                      9             10           1         11.2          89.2       0.6X\r\nDecimal128: l2 * s2                                   3              3           0         30.2          33.1       1.6X\r\nDecimal: l2 * s2 * s5 * s6                           23             25           3          4.3         234.9       0.2X\r\nDecimal128: l2 * s2 * s5 * s6                        12             12           0          8.6         115.8       0.4X\r\nDecimal: s1 * l2                                      9             10           0         10.6          94.1       0.5X\r\nDecimal128: s1 * l2                                   3              3           0         31.8          31.5       1.6X\r\nDecimal: l1 * l2                                     10             10           0         10.2          97.7       0.5X\r\nDecimal128: l1 * l2                                   3              3           0         31.9          31.4       1.6X\r\n```\r\n\r\n```\r\nCompare decimal division:                 Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nDecimal: s1 / s2                                     18             18           1          5.7         175.7       1.0X\r\nDecimal128: s1 / s2                                   5              5           0         21.1          47.5       3.7X\r\nDecimal: s1 / s2 / s2 / s2                           47             49           1          2.1         473.9       0.4X\r\nDecimal128: s1 / s2 / s2 / s2                         9              9           0         11.1          90.3       1.9X\r\nDecimal: s1 / s3                                     27             28           1          3.7         270.2       0.7X\r\nDecimal128: s1 / s3                                   4              4           0         25.0          40.1       4.4X\r\nDecimal: s2 / l1                                     25             25           1          4.1         245.8       0.7X\r\nDecimal128: s2 / l1                                   4              4           0         23.7          42.3       4.2X\r\nDecimal: l1 / s2                                     20             21           1          5.1         197.5       0.9X\r\nDecimal128: l1 / s2                                   4              4           0         24.0          41.7       4.2X\r\nDecimal: s3 / l1                                     28             29           1          3.5         282.1       0.6X\r\nDecimal128: s3 / l1                                   4              4           0         24.1          41.4       4.2X\r\nDecimal: l2 / l3                                     34             35           1          2.9         340.1       0.5X\r\nDecimal128: l2 / l3                                  21             22           1          4.7         213.9       0.8X\r\nDecimal: l2 / l4 / l4 / l4                           68             71           2          1.5         681.1       0.3X\r\nDecimal128: l2 / l4 / l4 / l4                        23             24           1          4.3         230.7       0.8X\r\nDecimal: l2 / s4 / s4 / s4                           58             60           1          1.7         576.0       0.3X\r\nDecimal128: l2 / s4 / s4 / s4                        40             42           1          2.5         399.2       0.4X\r\n```\r\n\r\n```\r\nCompare decimal modulo:                   Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative\r\n------------------------------------------------------------------------------------------------------------------------\r\nDecimal: s1 % s2                                     36             37           1          2.8         356.6       1.0X\r\nDecimal128: s1 % s2                                  18             19           1          5.6         178.6       2.0X\r\nDecimal: s1 % s2 % s2 % s2                           50             52           1          2.0         501.1       0.7X\r\nDecimal128: s1 % s2 % s2 % s2                        50             51           1          2.0         496.4       0.7X\r\nDecimal: s2 % l2                                      8              9           1         12.9          77.6       4.6X\r\nDecimal128: s2 % l2                                  17             17           1          6.1         165.2       2.2X\r\nDecimal: l3 % s3                                     50             52           1          2.0         503.1       0.7X\r\nDecimal128: l3 % s3                                  16             16           1          6.4         155.4       2.3X\r\nDecimal: s4 % l3                                      8              9           2         12.8          77.9       4.6X\r\nDecimal128: s4 % l3                                  13             14           0          7.4         134.8       2.6X\r\nDecimal: l2 % l3                                     14             15           0          6.9         144.2       2.5X\r\nDecimal128: l2 % l3                                  16             17           1          6.2         162.5       2.2X\r\nDecimal: l2 % l3 % l4 % l1                           85             88           2          1.2         854.1       0.4X\r\nDecimal128: l2 % l3 % l4 % l1                        51             54           2          1.9         513.4       0.7X\r\n```\r\n\r\nIn some cases, division will have performance regression",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/40204/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/40204/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

@@ -1,0 +1,99 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41191",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41191/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41191/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41191/events",
+  "html_url": "https://github.com/apache/spark/pull/41191",
+  "id": 1712820133,
+  "node_id": "PR_kwDOAQXtWs5QqF2y",
+  "number": 41191,
+  "title": "[SPARK-43529][SQL] Support general constant expressions as CREATE/REPLACE TABLE OPTIONS values",
+  "user": {
+    "login": "dtenedor",
+    "id": 99207096,
+    "node_id": "U_kgDOBenHuA",
+    "avatar_url": "https://avatars.githubusercontent.com/u/99207096?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dtenedor",
+    "html_url": "https://github.com/dtenedor",
+    "followers_url": "https://api.github.com/users/dtenedor/followers",
+    "following_url": "https://api.github.com/users/dtenedor/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dtenedor/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dtenedor/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dtenedor/subscriptions",
+    "organizations_url": "https://api.github.com/users/dtenedor/orgs",
+    "repos_url": "https://api.github.com/users/dtenedor/repos",
+    "events_url": "https://api.github.com/users/dtenedor/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dtenedor/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1406587328,
+      "node_id": "MDU6TGFiZWwxNDA2NTg3MzI4",
+      "url": "https://api.github.com/repos/apache/spark/labels/STRUCTURED%20STREAMING",
+      "name": "STRUCTURED STREAMING",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    },
+    {
+      "id": 1981527456,
+      "node_id": "MDU6TGFiZWwxOTgxNTI3NDU2",
+      "url": "https://api.github.com/repos/apache/spark/labels/CORE",
+      "name": "CORE",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 3,
+  "created_at": "2023-05-16T22:29:04Z",
+  "updated_at": "2023-05-27T03:17:35Z",
+  "closed_at": null,
+  "author_association": "CONTRIBUTOR",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41191",
+    "html_url": "https://github.com/apache/spark/pull/41191",
+    "diff_url": "https://github.com/apache/spark/pull/41191.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41191.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\n\r\nThis PR updates the SQL compiler to support general constnat expressions in the syntax for CREATE/REPLACE TABLE OPTIONS values, rather than restricting to a few types of literals only.\r\n\r\n* The analyzer now checks that the provided expressions are in fact `foldable`, and throws an error message otherwise.\r\n* This error message that users encounter in these cases improves from a general \"syntax error at or near <location>\" to instead indicate that the syntax is valid, but only constant expressions are supported in these contexts.\r\n\r\n### Why are the changes needed?\r\n\r\nThis makes it easier to provide OPTIONS lists in SQL, supporting use cases like concatenating strings with `||`.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\n\r\nYes, the SQL syntax changes.\r\n\r\n### How was this patch tested?\r\n\r\nThis PR adds new unit test coverage.",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41191/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41191/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}

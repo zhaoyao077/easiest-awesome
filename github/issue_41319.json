@@ -1,0 +1,81 @@
+{
+  "url": "https://api.github.com/repos/apache/spark/issues/41319",
+  "repository_url": "https://api.github.com/repos/apache/spark",
+  "labels_url": "https://api.github.com/repos/apache/spark/issues/41319/labels{/name}",
+  "comments_url": "https://api.github.com/repos/apache/spark/issues/41319/comments",
+  "events_url": "https://api.github.com/repos/apache/spark/issues/41319/events",
+  "html_url": "https://github.com/apache/spark/pull/41319",
+  "id": 1726593783,
+  "node_id": "PR_kwDOAQXtWs5RYtK3",
+  "number": 41319,
+  "title": "[SPARK-43815][SQL] Add `to_varchar` alias for `to_char`",
+  "user": {
+    "login": "learningchess2003",
+    "id": 134337791,
+    "node_id": "U_kgDOCAHU_w",
+    "avatar_url": "https://avatars.githubusercontent.com/u/134337791?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/learningchess2003",
+    "html_url": "https://github.com/learningchess2003",
+    "followers_url": "https://api.github.com/users/learningchess2003/followers",
+    "following_url": "https://api.github.com/users/learningchess2003/following{/other_user}",
+    "gists_url": "https://api.github.com/users/learningchess2003/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/learningchess2003/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/learningchess2003/subscriptions",
+    "organizations_url": "https://api.github.com/users/learningchess2003/orgs",
+    "repos_url": "https://api.github.com/users/learningchess2003/repos",
+    "events_url": "https://api.github.com/users/learningchess2003/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/learningchess2003/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 1405794576,
+      "node_id": "MDU6TGFiZWwxNDA1Nzk0NTc2",
+      "url": "https://api.github.com/repos/apache/spark/labels/SQL",
+      "name": "SQL",
+      "color": "ededed",
+      "default": false,
+      "description": null
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 5,
+  "created_at": "2023-05-25T23:05:51Z",
+  "updated_at": "2023-05-28T13:23:33Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "draft": false,
+  "pull_request": {
+    "url": "https://api.github.com/repos/apache/spark/pulls/41319",
+    "html_url": "https://github.com/apache/spark/pull/41319",
+    "diff_url": "https://github.com/apache/spark/pull/41319.diff",
+    "patch_url": "https://github.com/apache/spark/pull/41319.patch",
+    "merged_at": null
+  },
+  "body": "### What changes were proposed in this pull request?\r\nAdd the ```to_varchar``` alias for ```to_char``` to support additional SQL functions.\r\n\r\n### Why are the changes needed?\r\nTo minimize code changes for people using Spark SQL who are used to other engines that support ```to_varchar```.\r\n\r\n### Does this PR introduce _any_ user-facing change?\r\nYes. The user can now invoke ```to_varchar``` instead of ```to_char``` in their SQL applications.\r\n\r\n### How was this patch tested?\r\n```to_varchar``` was added in ```numeric.sql``` and a new Golden file was generated to check that the query output was correct.\r\n",
+  "closed_by": null,
+  "reactions": {
+    "url": "https://api.github.com/repos/apache/spark/issues/41319/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/apache/spark/issues/41319/timeline",
+  "performed_via_github_app": null,
+  "state_reason": null
+}
