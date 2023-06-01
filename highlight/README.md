@@ -12,5 +12,6 @@
 ├── head.html # head.md导出的html
 ├── head.md # 标注完的前200行，用于前端展示
 ├── hightlight.py # 标注脚本
-└── output.html # 标注完的所有文本
+├── output.html # 标注完的文本高亮为html格式
+└── output.txt # 标注完的所有文本
 ```
