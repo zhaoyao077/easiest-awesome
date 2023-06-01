@@ -1,9 +1,10 @@
 # 目录文件说明
 
-```
+```shell
 .
 ├── 1.py # 统计data.csv中各个版本的文本中积极、消极、中立情绪的占比
 ├── 6477701.txt # userid为6477701的用户评论的SentiStrength分值
+├── aspect.txt # 手动标注的各个版本的aspect
 ├── README.md
 ├── body_OK.txt # 去重后的comments的body文本
 ├── body_OK0_out.txt # body_OK.txt的SentiStrength分析结果
