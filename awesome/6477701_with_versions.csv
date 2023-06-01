@@ -1,0 +1,606 @@
+user,created_at,version,body,score,positive,negative,sum
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/2/14,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,cc @gengliangwang FYI,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Sorry for late responses. We should better have this feature parity. But I need to check w/ the concern about storage level (raised internally). I will ping the guy to comment here.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Let's do this kind of cleaning when we touch the codes around here next time.,"2,-1    ",2,-1,1
+6477701,2023/2/15,v3.3.2,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,"FYI, bunch of Scala 2.13 tests fail (https://github.com/apache/spark/actions/runs/4187249065/jobs/7256849374#step:9:19944) should be fixed before cutting RC cc @xinrong-meng ","1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/15,v3.3.2,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/2/16,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/2/16,v3.3.2,I remember Guava upgrade is also blocked by Hive .. IIRC .. ,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,cc @cloud-fan ,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,cc @juliuszsompolski @cloud-fan FYI,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,Thanks for fixing this. Merged to master and branch-3.4.,"1,-3    ",1,-3,-2
+6477701,2023/2/16,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,im fine w/ that,"1,-1    ",1,-1,0
+6477701,2023/2/16,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/17,v3.3.2,"Yeah, let's close. I don't think this is an issue.","1,-1    ",1,-1,0
+6477701,2023/2/17,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/17,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/18,v3.3.2,Merged to master and branch-3.4.,"3,-1    ",3,-1,2
+6477701,2023/2/20,v3.3.2,I think we should better file a JIRA.,"1,-1    ",1,-1,0
+6477701,2023/2/20,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/20,v3.3.2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/21,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/21,v3.4.0-rc1,Let's probably don't add it to branch-3.4 ...,"1,-1    ",1,-1,0
+6477701,2023/2/21,v3.4.0-rc1,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,+1 to raise a discussion thread in mailing list,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,"Per the discussion in https://lists.apache.org/thread/1p8s09ysrh4jqsfd47qdtrl7rm4rrs05, I will merge this in with few days if there's no objection.","1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,cc @gengliangwang ,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,"Or we can remove all `@since *` and just add one `@since 3.4.0` at the top level of the connect. And then, let the new (master branch only) APIs to have `@since 3.5.0` in the next release.","1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,Or just grip and replace `@since *` to `@since 3.4.0` ...,"1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,"This seems duplicating a lot of the existing quickstart.
+Should we maybe just mention in the original quickstart, and have a separate quickstart for connect?
+We should demonstrate the idea of being separate client and server Ideally.","1,-2    ",1,-2,-1
+6477701,2023/2/22,v3.4.0-rc1,"note for myself, I checked this PR by https://mybinder.org/v2/gh/itholic/spark.git/SPARK-42475?filepath=python%2Fdocs%2Fsource%2Fgetting_started%2Fquickstart_connect.ipynb","1,-1    ",1,-1,0
+6477701,2023/2/22,v3.4.0-rc1,"> Can we replace ""SparkSession.builder.master(""local[*]"").getOrCreate().stop()""
+> with just spark.stop() ?
+
+This was actually my suggestion to explicitly show the diff between SparkSession.builder.master vs SparkSession.builder.remote ;-).","2,-1    ",2,-1,1
+6477701,2023/2/22,v3.4.0-rc1,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/2/23,v3.4.0-rc1,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,"Merged to master, branch-3.4, branch-3.3 and branch-3.2.","2,-1    ",2,-1,1
+6477701,2023/2/23,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,let me take a quick look,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,okay .. finally found out why .. let me create a PR ..,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/23,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/24,v3.4.0-rc1,"cc @gengliangwang, sorry I missed two more tests.","1,-1    ",1,-1,0
+6477701,2023/2/24,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/24,v3.4.0-rc1,"qq,
+
+> this is a breaking change to this experimental API.
+
+What's breaking? would be good to keep the PR desc template (https://github.com/apache/spark/blob/master/.github/PULL_REQUEST_TEMPLATE)","1,-1    ",1,-1,0
+6477701,2023/2/24,v3.4.0-rc1,cc @ueshin ,"1,-1    ",1,-1,0
+6477701,2023/2/26,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/2/27,v3.4.0-rc1,cc @rednaxelafx FYI,"1,-1    ",1,-1,0
+6477701,2023/2/27,v3.4.0-rc1,"Seems like the tests didn't pass .. I am reverting this as it causes a lot of test failures. e.g.)
+- https://github.com/apache/spark/runs/11644563592
+- https://github.com/apache/spark/actions/runs/4288729207/jobs/7471072831
+","1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-3    ",1,-3,-2
+6477701,2023/2/28,v3.4.0-rc1,cc @rithwik-db @xinrong-meng ,"1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,cc @WeichenXu123 I think we should test other python versions too before the actual release.,"1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,"yeah, I think we should set a scheduled job ... cc @dongjoon-hyun @Yikun too FYI","1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,"Yup, this is actually rather a followup of https://github.com/apache/spark/commit/d5b08f8d99b14efa14ad706f9118762a2e570b34","1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,"Although I had to manually skip a couple of tests (due to my env issue), I tested Python 3.7, 3.8, 3.9 (by CI), 3.10 and the tests pass.","2,-1    ",2,-1,1
+6477701,2023/2/28,v3.4.0-rc1,I used `pip install -r dev/requirements.txt`.,"3,-1    ",3,-1,2
+6477701,2023/2/28,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/2/28,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/2/28,v3.4.0-rc1,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/3/1,v3.4.0-rc1,cc @allanf-db FYI as we would put this Python example first too in your PR ,"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,cc @Yikun FYI,"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,cc @hvanhovell too FYI,"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,@jzhuge let's fix the PR description. This technically does not revert https://github.com/apache/spark/pull/38699 but fixes a mistake that removed the code (that author and reviewers thought it's a duplicate).,"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,nit but mind fixing up the PR description? want to merge it now :-),"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,"Merged to master, branch-3.4, branch-3.3, and branch-3.2.","1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/1,v3.4.0-rc1,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/2,v3.4.0-rc2,cc @gengliangwang sorry for many followups ..  I don't know why I missed this ... this is the last followup.,"1,-1    ",1,-1,0
+6477701,2023/3/2,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/2,v3.4.0-rc2,Will merge this one in few days if there aren't any objection.,"1,-1    ",1,-1,0
+6477701,2023/3/2,v3.4.0-rc2,Merged to master,"2,-1    ",2,-1,1
+6477701,2023/3/2,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/3,v3.4.0-rc2,Sounds good. Mind filing a JIRA please? ,"1,-1    ",1,-1,0
+6477701,2023/3/3,v3.4.0-rc2,"
+> - Shall we fix the data types also in tests?
+
+Yeah, if the test failures look related, let's fix them.
+
+> - For the moment, I have looked only for np.bool, np.object ans np.object0 but not the rest. Shall i try to find if there is something else?
+
+If there are not a lot, it would be great to fix them together. If the occurrences are a lot, feel free to create a separate PR.
+
+> - I have a workflow error,  Workflow run detection failed, i enabled github actions on my forked repo, how can i re run the tests?
+
+If you rebase or merge the upstream, the test will be triggered, and the GitHub check status will be updated.
+","1,-1    ",1,-1,0
+6477701,2023/3/3,v3.4.0-rc2,"Maybe let's create a JIRA .. 
+
+> I will create the JIRA still waiting on an answer from the mailing list.
+
+BTW, what's the title of your email?","1,-1    ",1,-1,0
+6477701,2023/3/3,v3.4.0-rc2,Seems like linter fails (https://github.com/aimtsou/spark/actions/runs/4304579333/jobs/7506798202).,"2,-1    ",2,-1,1
+6477701,2023/3/3,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/4,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/5,v3.4.0-rc2,test: https://github.com/hvanhovell/spark/actions/runs/4318951397,"1,-1    ",1,-1,0
+6477701,2023/3/5,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/3/5,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/3/6,v3.4.0-rc2,WDYT @hvanhovell ?,"1,-1    ",1,-1,0
+6477701,2023/3/6,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/6,v3.4.0-rc2,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/6,v3.4.0-rc2,"All related tests passed.
+
+Merged to master and branch-3.4.","1,-1    ",1,-1,0
+6477701,2023/3/6,v3.4.0-rc2,"Seems like tests did not pass, and it fails in the master branch (https://github.com/apache/spark/actions/runs/4319488463/jobs/7538760733).
+
+Let me quickly revert this for now.","1,-1    ",1,-1,0
+6477701,2023/3/6,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/7,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/7,v3.4.0-rc2,cc @hvanhovell ,"2,-1    ",2,-1,1
+6477701,2023/3/7,v3.4.0-rc2,Thanks! Let me merge after https://github.com/HyukjinKwon/spark/actions/runs/4323411173/jobs/7547000388. Should take less then 20 mins.,"1,-1    ",1,-1,0
+6477701,2023/3/7,v3.4.0-rc2,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/8,v3.4.0-rc2,cc @MaxGekk and @srielau ,"1,-1    ",1,-1,0
+6477701,2023/3/8,v3.4.0-rc2,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/8,v3.4.0-rc2,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/9,v3.4.0-rc3,Merged to master and branch-3.4.,"3,-2    ",3,-2,1
+6477701,2023/3/9,v3.4.0-rc3,Mind retriggering https://github.com/alkis/spark/runs/11797022157?,"1,-1    ",1,-1,0
+6477701,2023/3/10,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/10,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/10,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/10,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,cc @zhengruifeng @ueshin @grundprinzip FYI,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,@xinrong-meng mind rebasing this? Otherwise should be good to go,"2,-1    ",2,-1,1
+6477701,2023/3/12,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/12,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/3/13,v3.4.0-rc4,Seems like the compliation didn't pass. Let me just quickly revert this and reopen.,"2,-1    ",2,-1,1
+6477701,2023/3/13,v3.4.0-rc4,"Apache Spark has a custom implementation that leverages the build (and resources) from forked repository. Mind checking if the workload is enabled in your fork (https://github.com/MaicoTimmerman/spark/actions/workflows/build_and_test.yml), and rebase this?","1,-1    ",1,-1,0
+6477701,2023/3/13,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/13,v3.4.0-rc4,cc @zero323 in case you have some feedback on this.,"1,-1    ",1,-1,0
+6477701,2023/3/13,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/13,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/14,v3.4.0-rc4,"The test failure seems unrelated.
+
+Merged to master and branch-3.4.","1,-1    ",1,-1,0
+6477701,2023/3/14,v3.4.0-rc4,@WeichenXu123 mind fixing the PR title? This PR doesn't add the getActiveSession method,"1,-1    ",1,-1,0
+6477701,2023/3/14,v3.4.0-rc4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/3/14,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/14,v3.4.0-rc4,cc @itholic ,"1,-1    ",1,-1,0
+6477701,2023/3/14,v3.4.0-rc4,cc @itholic @zhengruifeng @xinrong-meng if you find some time to review.,"1,-1    ",1,-1,0
+6477701,2023/3/15,v3.4.0-rc4,Merged to master and branch-3.4.,"3,-1    ",3,-1,2
+6477701,2023/3/15,v3.4.0-rc4,"and, `pyspark.sql.connect.*` isn't also supposed to be called directly by users. so this PR is just more about internal refactoring.","1,-1    ",1,-1,0
+6477701,2023/3/15,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/15,v3.4.0-rc4,cc @grundprinzip and @hvanhovell FYI,"1,-1    ",1,-1,0
+6477701,2023/3/15,v3.4.0-rc4,"BTW, mind fxing https://github.com/apache/spark/pull/40389#discussion_r1136914961 though","1,-1    ",1,-1,0
+6477701,2023/3/16,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/17,v3.4.0-rc4,Merged to master and branch-3.4.,"2,-2    ",2,-2,0
+6477701,2023/3/17,v3.4.0-rc4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/3/17,v3.4.0-rc4,It has a conflict with 3.4. mind creating a PR to backport this?,"1,-2    ",1,-2,-1
+6477701,2023/3/20,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,cc @itholic ,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,Cc @Yikun too if you find some time to review.,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,cc @itholic @zhengruifeng @xinrong-meng if you find some time to review.,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,FYI: https://github.com/rithwik-db/spark/runs/12002967878,"3,-1    ",3,-1,2
+6477701,2023/3/20,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,👌 ,"1,-3    ",1,-3,-2
+6477701,2023/3/20,v3.4.0-rc4,cc @HeartSaVioR ,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/20,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-3    ",1,-3,-2
+6477701,2023/3/21,v3.4.0-rc4,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/3/21,v3.4.0-rc4,cc @itholic and @Yikun if you find some time to review.,"1,-1    ",1,-1,0
+6477701,2023/3/21,v3.4.0-rc4,cc @itholic @zhengruifeng @xinrong-meng if you find some time to review.,"3,-1    ",3,-1,2
+6477701,2023/3/21,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/21,v3.4.0-rc4,"BTW, @hvanhovell please take another look for a posthoc review. I just took a look to make sure the impl is matched with PySpark side so I might have missed few things.","1,-1    ",1,-1,0
+6477701,2023/3/21,v3.4.0-rc4,Merged to master.,"2,-3    ",2,-3,-1
+6477701,2023/3/21,v3.4.0-rc4,"All tests passed.
+
+Merged to master and branch-3.4.","1,-1    ",1,-1,0
+6477701,2023/3/22,v3.4.0-rc4,AppVeyor failure (`continuous-integration/appveyor/pr`) should be fine to ignore for now.,"1,-1    ",1,-1,0
+6477701,2023/3/22,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/22,v3.4.0-rc4,cc @cloud-fan @hvanhovell FYI,"2,-2    ",2,-2,0
+6477701,2023/3/22,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/22,v3.4.0-rc4,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/3/22,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/3/23,v3.4.0-rc4,Mind filing a JIRA please? cc @MaxGekk @itholic FYI,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Mind filling the PR description as well?,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Merged to master and branch-3.4.,"3,-1    ",3,-1,2
+6477701,2023/3/23,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/23,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,Thanks for filing a separate JIRA.,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,Yeah so I just reverted it from master and 3.4 ;-).,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,cc @zhengruifeng FYI,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/24,v3.4.0-rc4,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/3/24,v3.4.0-rc4,Merged to master.,"3,-1    ",3,-1,2
+6477701,2023/3/24,v3.4.0-rc4,Merged to branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/25,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/25,v3.4.0-rc4,It has a conflict w/ branch-3.4. mind creating a backport PR please?,"2,-1    ",2,-1,1
+6477701,2023/3/25,v3.4.0-rc4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/3/27,v3.4.0-rc4,Mind double checking? Seems they are not running https://github.com/sudoliyang/spark/actions,"1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,LGTM if tests pass,"1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,"I think ANSI test fails after this PR:
+
+```
+[info] - timestampNTZ/datetime-special.sql_analyzer_test *** FAILED *** (31 milliseconds)
+[info]   timestampNTZ/datetime-special.sql_analyzer_test
+[info]   Expected ""...date(999999, 3, 18, [false) AS make_date(999999, 3, 18)#x, make_date(-1, 1, 28, fals]e) AS make_date(-1, ..."", but got ""...date(999999, 3, 18, [true) AS make_date(999999, 3, 18)#x, make_date(-1, 1, 28, tru]e) AS make_date(-1, ..."" Result did not match for query #1
+[info]   select make_date(999999, 3, 18), make_date(-1, 1, 28) (SQLQueryTestSuite.scala:777)
+[info]   org.scalatest.exceptions.TestFailedException:
+[info]   at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
+[info]   at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
+[info]   at org.scalatest.funsuite.AnyFunSuite.newAssertionFailedException(AnyFunSuite.scala:1564)
+[info]   at org.scalatest.Assertions.assertResult(Assertions.scala:847)
+[info]   at org.scalatest.Assertions.assertResult$(Assertions.scala:842)
+[info]   at org.scalatest.funsuite.AnyFunSuite.assertResult(AnyFunSuite.scala:1564)
+[info]   at org.apache.spark.sql.SQLQueryTestSuite.$anonfun$readGoldenFileAndCompareResults$3(SQLQueryTestSuite.scala:777)
+[info]   at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+```
+
+https://github.com/apache/spark/actions/runs/4496107425/jobs/7910457741
+
+@dtenedor mind taking a look please? cc @gengliangwang ","1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/27,v3.4.0-rc4,cc @viirya FYI,"1,-2    ",1,-2,-1
+6477701,2023/3/28,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/3/28,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,Merged to branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,"Predicate pushdown is just an example. e.g., you might want to combine adjacent `MapInPandas`s but it would need a special handling if `is_barrier` flag is added. ","1,-1    ",1,-1,0
+6477701,2023/3/28,v3.4.0-rc4,"I am saying that real power of Catalyst optimizer is to optimize/reorder these logical plans, and I believe that's the reason why barrier execution wasn't introduced in SQL. The barrier has to be created exactly when the call is invoked, in which basically it requires something like https://github.com/apache/spark/pull/19873 to have a sound implementation.
+
+However, I am fine with having this as an exception if you guys are fine with this.","1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,Those are actually not real JIRAs or TODOs. These are the pointers of the original fix or ticket (that contains examples or code change). So I guess it's fine as is.,"1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,LGTM if tests pass,"1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/3/29,v3.4.0-rc4,The problem is that you don't use Spark Connect but it complains that it needs `grpcio`,"2,-1    ",2,-1,1
+6477701,2023/3/29,v3.4.0-rc4,"For example, you can't just import `from pyspark.sql.connect.column import Column as ConnectColumn` at `pyspark/pandas/_typing.py`. Even you don't use Spark connect, it will check the dependency. Can we avoid this?","1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,"> Is it so had to add the dependency for grpc when using the pandas API?
+
+It's not super hard. But it's a bit odd to add this alone to pandas API on Spark. We should probably think about adding grpcio as a hard dependency for whole PySpark project, but definitely not alone for pandas API on Spark.
+
+> What are we achieving with this? GRPC is a stable protocol and not a random library. It's available throughout all platforms.
+> What's the benefit of trying this pure approach?
+
+So for the current status, we're trying to add the dependencies that the module need so users won't need to install the unnecessary dependency. In addition, adding the dependency breaks existing applications when they migrate from 3.4 to 3.5. It matters when PySpark is installed without `pip` (which is actually the official release channel of Apache Spark).
+
+","1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,So my proposal is to keep it consistent for now (that dose not require `grpcio` when we don't use Spark Connect). And separately discuss if we should switch them to a hard required dependency.,"1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/29,v3.4.0-rc4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/3/29,v3.4.0-rc4,Merged to master and branch-3.4.,"3,-1    ",3,-1,2
+6477701,2023/3/30,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,Merged to master.,"3,-1    ",3,-1,2
+6477701,2023/3/30,v3.4.0-rc5,It has a conflict with branch-3.4. mind creating a backport please?,"2,-1    ",2,-1,1
+6477701,2023/3/30,v3.4.0-rc5,Sure that's fine.,"3,-2    ",3,-2,1
+6477701,2023/3/30,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,@ueshin it has a conflict w/ branch-3.4. would you mind creating a backport PR?,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,cc @zhengruifeng ,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,@itholic it has a conflict against branch-3.4. Mind creating a backport PR please,"1,-1    ",1,-1,0
+6477701,2023/3/30,v3.4.0-rc5,Merged to branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/3/30,v3.4.0-rc5,Merged to master and branch-3.4.,"2,-2    ",2,-2,0
+6477701,2023/3/31,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/3/31,v3.4.0-rc5,Oh im sorry. Actually we don't need this for 3.4 since pandas API in spark will be in 3.5 only,"1,-1    ",1,-1,0
+6477701,2023/4/3,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/3,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/3,v3.4.0-rc5,cc @allisonwang-db ,"1,-1    ",1,-1,0
+6477701,2023/4/4,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/4,v3.4.0-rc5,cc @WeichenXu123 and @ueshin ,"1,-2    ",1,-2,-1
+6477701,2023/4/4,v3.4.0-rc5,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/4/4,v3.4.0-rc5,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/4/4,v3.4.0-rc5,Nice!,"1,-1    ",1,-1,0
+6477701,2023/4/4,v3.4.0-rc5,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/4/4,v3.4.0-rc5,Reverting this out for now.,"1,-1    ",1,-1,0
+6477701,2023/4/4,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/4,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/5,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/5,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/5,v3.4.0-rc5,It has a conflict with branch-3.4. Would you mind creating a backport please?,"1,-1    ",1,-1,0
+6477701,2023/4/5,v3.4.0-rc5,Merged to branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/5,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/5,v3.4.0-rc5,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/6,v3.4.0-rc5,Actually it would also have a security concern as it exposes the local data as is.,"1,-1    ",1,-1,0
+6477701,2023/4/6,v3.4.0-rc5,Let me make a PR to redact it for now at least.,"1,-1    ",1,-1,0
+6477701,2023/4/6,v3.4.0-rc5,@LuciferYang is it good to go?,"1,-1    ",1,-1,0
+6477701,2023/4/6,v3.4.0-rc5,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/7,v3.4.0,cc @SandishKumarHN and @rangadi,"1,-1    ",1,-1,0
+6477701,2023/4/7,v3.4.0,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/4/7,v3.4.0,Merged to master.,"3,-1    ",3,-1,2
+6477701,2023/4/7,v3.4.0,"Hey, I think all these typo PRs should have a test if this is an actual issue.","2,-1    ",2,-1,1
+6477701,2023/4/7,v3.4.0,"And please file a JIRA if this is an issue, see also https://spark.apache.org/contributing.html","1,-1    ",1,-1,0
+6477701,2023/4/7,v3.4.0,cc @tgravescs ,"1,-3    ",1,-3,-2
+6477701,2023/4/7,v3.4.0,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/7,v3.4.0,cc @xinrong-meng ,"4,-1    ",4,-1,3
+6477701,2023/4/7,v3.4.0,cc @gengliangwang too,"1,-1    ",1,-1,0
+6477701,2023/4/8,v3.4.0,">  But generating optimised logical plan sometimes takes more time.
+
+Why don't you just print out `df.queryExecution.analyzed`? This sounds not very common case to have a separate user-facing API for this.","2,-1    ",2,-1,1
+6477701,2023/4/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/10,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/10,v3.2.4,cc @rangadi fyi,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,cc @itholic @zhengruifeng @xinrong-meng @Yikun if you find some time to review.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Merged to branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/11,v3.2.4,cc @zhengruifeng @ueshin FYI,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,cc @allanf-db @zhengruifeng @ueshin FYI,"1,-2    ",1,-2,-1
+6477701,2023/4/11,v3.2.4,Merged to master and bracnh-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/11,v3.2.4,Nice. cc @itholic ,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Will merge this in few days. Please let me know if there's any concern.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,"Seems working fine.
+
+Merged to master.","1,-1    ",1,-1,0
+6477701,2023/4/11,v3.2.4,Is this just being flaky? All GA jobs share the same thing (that you fixed),"1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,@LuciferYang which GitHub job failed? The link seems stale now so I can't see. It is a scheduled build?,"1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,"Ah, i think it just happened because of unsynced fork. It should be fixed if their fork is synced to the lastest master branch.","1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,"> Hmm... GA should merge the current pr to the latest master before testing, right?
+
+Yes except the workflow file. For the changes in workflow, they have to manually update to the latest master branch.","1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,Hm .. this only got into the master branch but the original fix wend down to branch-3.4. (https://github.com/apache/spark/pull/40257). Would probably need a separate JIRA in such case next time ;-).,"1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,"Yeah, merging it to master only is fine. The point I was making was to have a different JIRA so we know which version the fix has landed to (so as to make it easier when we revert, etc.)","1,-3    ",1,-3,-2
+6477701,2023/4/12,v3.2.4,let me just directly revert.,"1,-1    ",1,-1,0
+6477701,2023/4/12,v3.2.4,I am fine. but I would defer to @hvanhovell to merge.,"1,-2    ",1,-2,-1
+6477701,2023/4/13,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/13,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/13,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/13,v3.2.4,cc @zhengruifeng ,"1,-2    ",1,-2,-1
+6477701,2023/4/13,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/13,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,Mind retriggering https://github.com/caican00/spark/runs/12587259773?,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/14,v3.2.4,cc @Ngone51 @jiangxb1987 too FYI,"1,-2    ",1,-2,-1
+6477701,2023/4/16,v3.2.4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/17,v3.2.4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/17,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/17,v3.2.4,@itholic can you double check this https://github.com/apache/spark/pull/40722#discussion_r1170976266?,"2,-2    ",2,-2,0
+6477701,2023/4/17,v3.2.4,cc @ueshin FYI,"1,-2    ",1,-2,-1
+6477701,2023/4/17,v3.2.4,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/4/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/17,v3.2.4,"Hm, for some reasons, it shows @LuciferYang as a primary author. I manually changed it to @dongjoon-hyun.","1,-1    ",1,-1,0
+6477701,2023/4/17,v3.2.4,I have been wondering if it's better to allow `spark.task.cpus` to set a floating number like `0.2` so I/O intensive tasks can benefit from that as well as the case like this.,"1,-2    ",1,-2,-1
+6477701,2023/4/17,v3.2.4,cc @tgravescs too FYI,"1,-1    ",1,-1,0
+6477701,2023/4/18,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/18,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/18,v3.2.4,Merged to master.,"2,-3    ",2,-3,-1
+6477701,2023/4/18,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/18,v3.2.4,cc @MaxGekk ,"3,-2    ",3,-2,1
+6477701,2023/4/18,v3.2.4,cc @ueshin ,"2,-1    ",2,-1,1
+6477701,2023/4/18,v3.2.4,"qq:
+
+> because the unwrapped expression contains a UDF
+
+Where is the UDF, and how it's related to UDF?","1,-1    ",1,-1,0
+6477701,2023/4/18,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,I think it works probably we build with JDK 8 and run with JDK 17. I guess this is only reproducible when it's both built and runs with JDK 17.,"2,-1    ",2,-1,1
+6477701,2023/4/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,Can you rerun? it should be fixed now,"2,-2    ",2,-2,0
+6477701,2023/4/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,cc @LuciferYang FYI,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,cc @rednaxelafx FYI,"2,-2    ",2,-2,0
+6477701,2023/4/19,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/19,v3.2.4,It has some minor conflicts against branch-3.3. @bersprockets wanna make a pr for it?,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,We don't have. We have `utils.eventually`  but I think it cannot be used in this case. Would need to implement it separately.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,@WweiL mind rebasing this one please?,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,@hvanhovell or @grundprinzip actually mind taking a look please when you find some time?,"1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,"I see .. sorry for a bit of back and forth:
+
+```
+python/pyspark/sql/connect/streaming/query.py:72: error: Missing return statement  [return]
+python/pyspark/sql/connect/streaming/query.py:108: error: Missing return statement  [return]
+python/pyspark/sql/connect/streaming/query.py:140: error: Missing return statement  [return]
+```
+
+Let's add them back :-) ..","1,-1    ",1,-1,0
+6477701,2023/4/20,v3.2.4,Merged to master.,"2,-4    ",2,-4,-2
+6477701,2023/4/20,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,"Not sure how CI passes, or if this only happens in my local. But I think we should exclude them in any event.
+
+cc @LuciferYang ","1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Yeah .. let me merge this in first and fix them to be consistent separately .. ,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Let me merge this one first.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,actually yeah. let's put this in branch-3.4 too.,"2,-1    ",2,-1,1
+6477701,2023/4/21,v3.2.4,Merged to branch-3.4 too.,"2,-2    ",2,-2,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/4/21,v3.2.4,@DerekTBrown Mind creating a JIRA and add it to the PR title please? See also https://spark.apache.org/contributing.html,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,I haven't seen this before. but I think loosing the version restrictions looks fine.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,cc @Ngone51 @jiangxb1987 FYI,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master and branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/4/21,v3.2.4,Merged to branch-3.3 too.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/4/21,v3.2.4,Sorry for a forth and back. We don't actually need this - it was my mistake. reverted.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/21,v3.2.4,Merged to master.,"2,-2    ",2,-2,0
+6477701,2023/4/21,v3.2.4,cc @cloud-fan @MaxGekk and @gengliangwang FYI,"3,-1    ",3,-1,2
+6477701,2023/4/22,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/23,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/23,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/24,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/4/24,v3.2.4,@bogao007 what's your JIRA id? I need to assign you in the JIRA ticket.,"1,-1    ",1,-1,0
+6477701,2023/4/24,v3.2.4,"All related tests passed.
+
+Merged to master.","1,-1    ",1,-1,0
+6477701,2023/4/24,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/24,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/24,v3.2.4,cc @sunchao ,"2,-1    ",2,-1,1
+6477701,2023/4/25,v3.2.4,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/4/25,v3.2.4,"Merged to master.
+
+(since the last change is basically no-op)","1,-1    ",1,-1,0
+6477701,2023/4/25,v3.2.4,Thanks for the PR. Let's wait and see.,"1,-1    ",1,-1,0
+6477701,2023/4/25,v3.2.4,Hmmmm .... ,"1,-1    ",1,-1,0
+6477701,2023/4/25,v3.2.4,Seems like it was because of https://github.com/apache/spark/commit/09a43531d30346bb7c8d213822513dc35c70f82e. Let's close this :-). Thanks for your effort though.,"1,-1    ",1,-1,0
+6477701,2023/4/25,v3.2.4,Its 7GB / 2cores IIRC (https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources),"1,-2    ",1,-2,-1
+6477701,2023/4/25,v3.2.4,"Actually MiMa check seems fine, and doesn;t seem failing.","1,-1    ",1,-1,0
+6477701,2023/4/25,v3.2.4,cc @haiyangsun-db FYI,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,@itholic mind rebasing this please?,"1,-2    ",1,-2,-1
+6477701,2023/4/26,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,Actually ... we need a JIRA since this change is in 3.4.1 but the original change remains in 3.4.0 .. so difficult to set the fixed JRIA version.,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,will leave it to @cloud-fan though.,"1,-1    ",1,-1,0
+6477701,2023/4/26,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/27,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/27,v3.2.4,cc @HeartSaVioR ,"1,-1    ",1,-1,0
+6477701,2023/4/27,v3.2.4,Not sure why we want to keep `barrier` as a standalone API if this cannot work together with other similar API. Why don't we just add a param to `mapInPandas` and `mapInArrow`?,"1,-1    ",1,-1,0
+6477701,2023/4/27,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/28,v3.2.4,Mind filing a JIRA please?,"1,-1    ",1,-1,0
+6477701,2023/4/28,v3.2.4,Please file a JIRA in ASF JIRA (at here https://issues.apache.org/jira/projects/SPARK/issues). See also https://spark.apache.org/contributing.html,"1,-1    ",1,-1,0
+6477701,2023/4/28,v3.2.4,Looks fine to me.,"1,-1    ",1,-1,0
+6477701,2023/4/28,v3.2.4,cc @viirya @ueshin @holdenk ,"2,-3    ",2,-3,-1
+6477701,2023/4/28,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/4/28,v3.2.4,Made a followup to implement this in Spark Connect: https://github.com/apache/spark/pull/41009,"1,-1    ",1,-1,0
+6477701,2023/4/29,v3.2.4,"Hey, I think we shouldn't just keep fixing it without knowing the cause. When does this happen?","1,-1    ",1,-1,0
+6477701,2023/4/30,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/1,v3.2.4,"Oh, you're fixing branch-3.2. It reached EOL, and there won't be more releases in 3.2.x.","1,-1    ",1,-1,0
+6477701,2023/5/1,v3.2.4,I am fine if we can land this to branch-3.3 alone but would need to fix the JIRA's affected version.,"1,-1    ",1,-1,0
+6477701,2023/5/1,v3.2.4,Merged to branch-3.3.,"1,-2    ",1,-2,-1
+6477701,2023/5/3,v3.2.4,LGTM2,"1,-1    ",1,-1,0
+6477701,2023/5/3,v3.2.4,cc @HeartSaVioR too,"2,-1    ",2,-1,1
+6477701,2023/5/3,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/5/4,v3.2.4,Thanks @zhengruifeng ,"2,-1    ",2,-1,1
+6477701,2023/5/4,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/5,v3.2.4,Mind taking a look at https://github.com/apache/spark/pull/40967/checks?check_run_id=13051337101?,"1,-1    ",1,-1,0
+6477701,2023/5/5,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/5,v3.2.4,"oops, I missed that the linter failed. Reverting, and reopening the PR.","2,-1    ",2,-1,1
+6477701,2023/5/6,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/7,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/7,v3.2.4,@nfx Mind filing a JIRA please? See also https://spark.apache.org/contributing.html,"1,-1    ",1,-1,0
+6477701,2023/5/7,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/7,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,Merged to master,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,cc @amaliujia @cloud-fan @hvanhovell FYI,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/5/8,v3.2.4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/5/8,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,creating a followup now,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,https://github.com/apache/spark/pull/41206,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/8,v3.2.4,cc @MaxGekk FYI,"2,-1    ",2,-1,1
+6477701,2023/5/8,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/9,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/9,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/9,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/10,v3.2.4,Build link :https://github.com/hiboyang/spark/actions/runs/4933558573/jobs/8817627400,"1,-1    ",1,-1,0
+6477701,2023/5/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/10,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/5/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/10,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/10,v3.2.4,cc @HeartSaVioR and @xuanyuanking FYI,"1,-1    ",1,-1,0
+6477701,2023/5/11,v3.2.4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/5/11,v3.2.4,cc @AngersZhuuuu ,"1,-1    ",1,-1,0
+6477701,2023/5/11,v3.2.4,cc @sadikovi FYI,"2,-4    ",2,-4,-2
+6477701,2023/5/11,v3.2.4,Mind filing a JIRA? See also https://spark.apache.org/contributing.html,"1,-1    ",1,-1,0
+6477701,2023/5/11,v3.2.4,cc @gengliangwang FYI,"2,-1    ",2,-1,1
+6477701,2023/5/12,v3.2.4,@rangadi is it good to go?,"1,-1    ",1,-1,0
+6477701,2023/5/12,v3.2.4,Merged to master.,"2,-3    ",2,-3,-1
+6477701,2023/5/12,v3.2.4,cc @sadikovi too,"1,-1    ",1,-1,0
+6477701,2023/5/14,v3.2.4,"@hauntsaninja mind creating a JIRA, and keeping the PR description template (https://github.com/apache/spark/blob/master/.github/PULL_REQUEST_TEMPLATE)? See also https://spark.apache.org/contributing.html","1,-1    ",1,-1,0
+6477701,2023/5/14,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/5/14,v3.2.4,cc @dongjoon-hyun ,"1,-1    ",1,-1,0
+6477701,2023/5/14,v3.2.4,^ That should be fixed by https://github.com/apache/spark/pull/41086.,"1,-1    ",1,-1,0
+6477701,2023/5/14,v3.2.4,But let me retrigger anyway .. seems another test got stuck ..,"1,-1    ",1,-1,0
+6477701,2023/5/14,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+6477701,2023/5/15,v3.2.4,Not sure why this fails from a cursory look. MyPy version looks the same. Should be caused by either Python version or dependency of MyPy.,"3,-1    ",3,-1,2
+6477701,2023/5/15,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/15,v3.2.4,"> If a bucket scan has no interesting partition or contains shuffle exchange, then we would disable it
+
+qq: what should we disable?","1,-1    ",1,-1,0
+6477701,2023/5/15,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/15,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/15,v3.2.4,cc @gengliangwang and @sarutak too FYI,"2,-1    ",2,-1,1
+6477701,2023/5/15,v3.2.4,cc @gengliangwang ,"1,-1    ",1,-1,0
+6477701,2023/5/16,v3.2.4,Merged to branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/5/16,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/16,v3.2.4,cc @rednaxelafx ,"1,-1    ",1,-1,0
+6477701,2023/5/16,v3.2.4,and @peter-toth ,"1,-1    ",1,-1,0
+6477701,2023/5/16,v3.2.4,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/5/16,v3.2.4,Merged to master.,"3,-2    ",3,-2,1
+6477701,2023/5/16,v3.2.4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/5/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/17,v3.2.4,@zzzzming95 do you know in which PR fixed the issue in master branch?,"2,-2    ",2,-2,0
+6477701,2023/5/17,v3.2.4,cc @gengliangwang FYI,"1,-1    ",1,-1,0
+6477701,2023/5/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/17,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/17,v3.2.4,Merged to master.,"1,-3    ",1,-3,-2
+6477701,2023/5/18,v3.2.4,"quick question, do you have any reference of this expression in other DBMSes?","1,-1    ",1,-1,0
+6477701,2023/5/18,v3.2.4,cc @sadikovi and @ueshin for a look.,"3,-1    ",3,-1,2
+6477701,2023/5/18,v3.2.4,Merged to master and branch-3.4.,"1,-1    ",1,-1,0
+6477701,2023/5/19,v3.2.4,Can we fix https://github.com/apache/spark/blob/master/scalastyle-config.xml to enforce this?,"2,-1    ",2,-1,1
+6477701,2023/5/19,v3.2.4,"@LuciferYang would you mind trying to merge this into `master` branch by `./dev/merge_spark_pr.py` when the tests pass? It would require you to set several environment variables like `JIRA_USERNAME`, and set the `remote` (please also read `./dev/merge_spark_pr.py` script). You should also install `pip install jira` (https://pypi.org/project/jira/) before running that script.
+
+For example, this is my remote:
+
+```
+git remote -v
+...
+apache	https://github.com/apache/spark.git (fetch)
+apache	https://github.com/apache/spark.git (push)
+apache-github	https://github.com/apache/spark.git (fetch)
+apache-github	https://github.com/apache/spark.git (push)
+...
+origin	https://github.com/HyukjinKwon/spark.git (fetch)
+origin	https://github.com/HyukjinKwon/spark.git (push)
+...
+upstream	https://github.com/apache/spark.git (fetch)
+upstream	https://github.com/apache/spark.git (push)
+...
+```","1,-1    ",1,-1,0
+6477701,2023/5/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/19,v3.2.4,Merged to master and branch-3.4.,"2,-1    ",2,-1,1
+6477701,2023/5/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/20,v3.2.4,Merged to master.,"3,-4    ",3,-4,-1
+6477701,2023/5/22,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/22,v3.2.4,Merged to branch-3.4.,"1,-2    ",1,-2,-1
+6477701,2023/5/22,v3.2.4,Merged to branch-3.4.,"2,-2    ",2,-2,0
+6477701,2023/5/22,v3.2.4,Hmm .. does that mean Hadoop 3.2.0 won't work with this?,"1,-1    ",1,-1,0
+6477701,2023/5/22,v3.2.4,"Hm, we currently build Spark w/ Hadoop 3.3.0 by default it might be fine but I would also ask some more looks e.g., @srowen @mridulm @tgravescs @dongjoon-hyun ","1,-1    ",1,-1,0
+6477701,2023/5/22,v3.2.4,Thanks for clarification. Lgtm2,"1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,"@panbingkun how did you find them?
+
+FWIW, I thought we added a compilation feature to disallow unused variables IIRC, @LuciferYang .","1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,cc @wangyum @cloud-fan ,"1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,@Fokko no biggie but would be great to fill the PR description.,"1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,@zhengruifeng @MaxGekk @vicennial @hvanhovell PTAL,"1,-1    ",1,-1,0
+6477701,2023/5/23,v3.2.4,Merged to master.,"1,-2    ",1,-2,-1
+6477701,2023/5/23,v3.2.4,"> we would document the migration sc.addArchive to session.addArchive somewhere
+
+I will document them in the next PR","1,-1    ",1,-1,0
+6477701,2023/5/24,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/24,v3.2.4,cc @rednaxelafx @cloud-fan FYI,"1,-3    ",1,-3,-2
+6477701,2023/5/25,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701,2023/5/26,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+6477701, we can always default it to `1`.,v3.2.4,Merged to master.,"1,-1    ",1,-1,0

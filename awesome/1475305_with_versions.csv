@@ -1,0 +1,2535 @@
+user,created_at,version,body,score,positive,negative,sum
+1475305,2023/2/16,v3.3.2,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/2/16,v3.3.2,"Let me close this one, thanks @hvanhovell @zhenlineo ","1,-1    ",1,-1,0
+1475305,2023/2/16,v3.3.2,Thanks @wangyum @dongjoon-hyun ,"1,-2    ",1,-2,-1
+1475305,2023/2/17,v3.3.2,"https://github.com/apache/spark/blob/7ee8a32077b09cb847b6ac41cdc5067cf7bd83e9/connector/connect/client/jvm/src/test/scala/org/apache/spark/sql/connect/client/util/RemoteSparkSession.scala#L155-L159
+
+should we remove this `try catch`? This may cover up some problems, but this may be another pr
+
+","1,-1    ",1,-1,0
+1475305,2023/2/17,v3.3.2,"> According to your comment, is it okay for me to merge, @LuciferYang ?
+
+ok to merge ~","1,-1    ",1,-1,0
+1475305,2023/2/17,v3.3.2,cc @wangyum @srowen FYI,"1,-1    ",1,-1,0
+1475305,2023/2/17,v3.3.2,"> Could you test against hadoop-2?
+
+Do same check with -Phadoop-2
+
+**Maven** 
+
+```
+build/mvn clean
+build/mvn clean install -DskipTestes -pl resource-managers/yarn -am -Pyarn -Phadoop-2
+build/mvn -Dtest=none -DwildcardSuites=org.apache.spark.deploy.yarn.YarnClusterSuite -pl resource-managers/yarn test -Pyarn -Phadoop-2
+build/mvn test -pl resource-managers/yarn -Pyarn -Dtest.exclude.tags=org.apache.spark.tags.ExtendedLevelDBTest  -Phadoop-2
+```
+
+**SBT**
+
+```
+build/sbt clean yarn/test -Pyarn -Dtest.exclude.tags=org.apache.spark.tags.ExtendedLevelDBTest -Phadoop-2
+```
+
+
+All tests passed.
+
+","1,-1    ",1,-1,0
+1475305,2023/2/17,v3.3.2,Thanks @huaxingao @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/2/19,v3.3.2,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,cc @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"I make another one build with maven 3.8.7 + cyclonedx-maven-plugin  2.7.4 https://github.com/LuciferYang/spark/actions/runs/4205904014/jobs/7298678641
+
+<img width=""1074"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/219719321-dc1e6aa3-1a21-4e93-92ce-60cee921493b.png"">
+","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"Yes, we use CycloneDX 2.7.3. So I should not explain that 2.7.4 has such issue in the pr description, because it does not affect Spark now, am I right?","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"Please let me explain my intention more:
+
+1. First of all, I want to update maven to 3.9.0(keep use CycloneDX 2.7.3), then I found the following error:
+
+```
+[ERROR] An error occurred attempting to read POM
+org.codehaus.plexus.util.xml.pull.XmlPullParserException: UTF-8 BOM plus xml decl of ISO-8859-1 is incompatible (position: START_DOCUMENT seen <?xml version=""1.0"" encoding=""ISO-8859-1""... @1:42) 
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDeclWithVersion (MXParser.java:3423)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDecl (MXParser.java:3345)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parsePI (MXParser.java:3197)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseProlog (MXParser.java:1828)
+    at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl (MXParser.java:1757)
+    at org.codehaus.plexus.util.xml.pull.MXParser.next (MXParser.java:1375)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:3940)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:612)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:627)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:759)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:746)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.retrieveParentProject (BaseCycloneDxMojo.java:694)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.getClosestMetadata (BaseCycloneDxMojo.java:524)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.convert (BaseCycloneDxMojo.java:481)
+    at org.cyclonedx.maven.CycloneDxMojo.execute (CycloneDxMojo.java:70)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:330)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:213)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:175)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:76)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:163)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:160)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:260)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:172)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:100)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:821)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:270)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:498)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+```
+
+I think We should see similar errors here: https://github.com/LuciferYang/spark/actions/runs/4206035140/jobs/7299042843 later
+
+2. then I want to test maven 3.9.0 + CycloneDX 2.7.4 couple of days ago, but there an error same as  `maven 3.8.7 + cyclonedx-maven-plugin 2.7.4`,  I think we should see it here: https://github.com/LuciferYang/spark/runs/11424487074 later
+
+3. then I test maven 3.9.0 + CycloneDX 2.7.5 today, there is no above issues(we can check https://github.com/LuciferYang/spark/runs/11424568023 later).
+
+So If I want to upgrade Spark to use maven 3.9.0, I must upgrade cyclonedx-maven-plugin to 2.7.5, I should upgrade them in one or two pr? 
+","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"Yeah, Spark 3.4.0 does not need this pr.
+
+","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"@dongjoon-hyun found a new issue related to 2.7.5: https://github.com/CycloneDX/cyclonedx-maven-plugin/issues/284
+
+
+","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"I think we should wait for 2.7.6 or higher to test usability, then we can reuse this jira. I will close this pr first, thanks @dongjoon-hyun ","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,wait https://github.com/apache/spark/pull/40065,"1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"Need to wait for a stable CycloneDX version, close this first
+","1,-1    ",1,-1,0
+1475305,2023/2/20,v3.3.2,"Move `SaveMode` to catalyst module is a break change, need add `ProblemFilters` to `MimaExcludes`","1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,"> > Move `SaveMode` to catalyst module is a break change, need add `ProblemFilters` to `MimaExcludes`
+> 
+> I think we shouldn't make such breaking change?
+
+best to avoid","1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,cc @srowen ,"1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,Thanks @srowen @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,test first,"1,-2    ",1,-2,-1
+1475305,2023/2/21,v3.4.0-rc1,Thanks @dongjoon-hyun @srowen ,"1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,"From the release notes, I think nothing is losing.
+
+`OpenSsl20XNativeJna`,  which is not mentioned in release notes, is a new support in version 1.2.0(Because jna is excluded, it cannot be used in Spark).
+
+","3,-1    ",3,-1,2
+1475305,2023/2/21,v3.4.0-rc1,"Thanks @dongjoon-hyun, it's my bad, I hit same issue, let me revert this one, I will remember check this part next time.
+
+","1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,"ok, thanks @dongjoon-hyun ","1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,test first,"1,-1    ",1,-1,0
+1475305,2023/2/21,v3.4.0-rc1,"Updated pr description, listing bug fix and possibly useful improvements","1,-1    ",1,-1,0
+1475305,2023/2/22,v3.4.0-rc1,"Personally, I think it is a little strange to change `@since `. For example,  the following function is changed to `@since 3.4.0`, but `deprecated` since 2.1.0 ....
+
+https://github.com/apache/spark/blob/1688a8768fb34060548f8790e77f645027f65db2/connector/connect/client/jvm/src/main/scala/org/apache/spark/sql/functions.scala#L221-L226","2,-1    ",2,-1,1
+1475305,2023/2/22,v3.4.0-rc1,"+1, Agree `avoiding this propagation of deprecated methods`","1,-1    ",1,-1,0
+1475305,2023/2/22,v3.4.0-rc1,"banch-3.3/3.2 use parquet 1.12.2, if this fix is accepted, would you mind submitting pr for these two branches? @pan3793 
+
+","3,-1    ",3,-1,2
+1475305,2023/2/22,v3.4.0-rc1,@sunchao also need merge to branch-3.4 ...,"1,-1    ",1,-1,0
+1475305,2023/2/23,v3.4.0-rc1,"Adding test cases
+
+","1,-1    ",1,-1,0
+1475305,2023/2/23,v3.4.0-rc1,"or catch `TestFailedException` then check another set of parameters ?
+
+","1,-1    ",1,-1,0
+1475305,2023/2/23,v3.4.0-rc1,cc @HyukjinKwon @hvanhovell @dongjoon-hyun FYI,"2,-1    ",2,-1,1
+1475305,2023/2/23,v3.4.0-rc1,"@hvanhovell The original plan is `Collection functions`. However, I have encountered some problems in `LambdaFunction` that I haven't solved it yet.  So you can submit new prs freely. If possible, please let me help to review, thanks ~
+
+
+","1,-1    ",1,-1,0
+1475305,2023/2/23,v3.4.0-rc1,"Good work, late LGTM","1,-1    ",1,-1,0
+1475305,2023/2/24,v3.4.0-rc1,Thanks @hvanhovell ,"1,-2    ",1,-2,-1
+1475305,2023/2/25,v3.4.0-rc1,"Checked the new test with Scala 2.13, all passed","1,-1    ",1,-1,0
+1475305,2023/2/26,v3.4.0-rc1,cc @hvanhovell ,"1,-2    ",1,-2,-1
+1475305,2023/2/26,v3.4.0-rc1,"Is the fix feasible?
+
+","1,-1    ",1,-1,0
+1475305,2023/2/26,v3.4.0-rc1,Thanks @zhenlineo friendly ping @HyukjinKwon @hvanhovell ,"1,-1    ",1,-1,0
+1475305,2023/2/26,v3.4.0-rc1,"A Ga task failed, let me re-trigger it","1,-2    ",1,-2,-1
+1475305,2023/2/26,v3.4.0-rc1,Thanks @HyukjinKwon @hvanhovell @zhenlineo ,"1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,"Some other things to do, will continue tomorrow","1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,"I refer 
+
+https://github.com/apache/spark/blob/87e3d5625e76bb734b8dd753bfb25002822c8585/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/expressions/literals.scala#L64-L102
+
+the missing is `case a: Array[_]`","1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,"hmm... If I understand correctly, the current Literal does not support any collection type? Do we need to add some message types to support them?
+
+https://github.com/apache/spark/blob/87e3d5625e76bb734b8dd753bfb25002822c8585/connector/connect/common/src/main/protobuf/spark/connect/expressions.proto#L149-L175","1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,OK,"1,-2    ",1,-2,-1
+1475305,2023/2/27,v3.4.0-rc1,"> Oh and if it becomes too large I am fine with merging this first, and doing array in a follow-up.
+
+I hope we can merge this pr first if no other need to change. In addition, I need to go to bed as soon as possible. It's 1:00 in my time zone :)
+
+","1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,@hvanhovell Is there anything else can help Scala Client? @panbingkun told me that he also wanted to take some work related to connect.,"1,-1    ",1,-1,0
+1475305,2023/2/27,v3.4.0-rc1,Is there anything else need change this pr?,"1,-1    ",1,-1,0
+1475305,2023/3/1,v3.4.0-rc1,"This pr often conflicts....
+
+","1,-1    ",1,-1,0
+1475305,2023/3/1,v3.4.0-rc1,"> @LuciferYang can we close this one in favor of #40213?
+
+OK, let me close this one and focus on https://github.com/apache/spark/pull/40213
+
+","1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,"> How would we deal with `CompatibilitySuite`
+> Ah I see now that we still need to update the excluding rules.
+
+Yes, just check in a different way :)
+
+","1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,"<img width=""948"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/222325279-7ef9ec94-3e79-44c3-864c-19b2b0737c4b.png"">
+
+The new change of `org.apache.spark.sql.Dataset#plan` in SPARK-42631 is checked as incompatible. ","2,-1    ",2,-1,1
+1475305,2023/3/2,v3.4.0-rc2,Thanks @hvanhovell @amaliujia @zhenlineo ,"1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,GA passed,"1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,cc @hvanhovell @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,"Some other things to do, will update later","1,-1    ",1,-1,0
+1475305,2023/3/2,v3.4.0-rc2,Thanks @hvanhovell ,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"Hi ~ @dongjoon-hyun , could you please help check the results of local execution of 
+
+```
+build/sbt clean ""connect-client-jvm/test"" -Dspark.debug.sc.jvm.client=true
+```
+?
+I found the following errors:
+```
+[info] ClientE2ETestSuite:
+Starting the Spark Connect Server...
+Using jar: /Users/yangjie01/SourceCode/git/spark-mine-sbt/connector/connect/server/target/scala-2.12/spark-connect-assembly-3.5.0-SNAPSHOT.jar
+Ready for client connections.
+java.lang.RuntimeException: Failed to start the test server on port 15971.
+  | => cat org.apache.spark.sql.connect.client.util.RemoteSparkSession.beforeAll(RemoteSparkSession.scala:129)
+	at org.apache.spark.sql.connect.client.util.RemoteSparkSession.beforeAll$(RemoteSparkSession.scala:120)
+	at org.apache.spark.sql.ClientE2ETestSuite.beforeAll(ClientE2ETestSuite.scala:36)
+	at org.scalatest.BeforeAndAfterAll.liftedTree1$1(BeforeAndAfterAll.scala:212)
+	at org.scalatest.BeforeAndAfterAll.run(BeforeAndAfterAll.scala:210)
+	at org.scalatest.BeforeAndAfterAll.run$(BeforeAndAfterAll.scala:208)
+	at org.apache.spark.sql.ClientE2ETestSuite.run(ClientE2ETestSuite.scala:36)
+	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:321)
+	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:517)
+	at sbt.ForkMain$Run.lambda$runTest$1(ForkMain.java:413)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+....
+
+Suppressed: io.grpc.StatusRuntimeException: INTERNAL: Error while instantiating 'org.apache.spark.sql.hive.HiveSessionStateBuilder':
+		at io.grpc.Status.asRuntimeException(Status.java:535)
+		at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+		at scala.collection.convert.Wrappers$JIteratorWrapper.hasNext(Wrappers.scala:45)
+		at scala.collection.Iterator.find(Iterator.scala:993)
+		at scala.collection.Iterator.find$(Iterator.scala:992)
+		at scala.collection.AbstractIterator.find(Iterator.scala:1431)
+		at org.apache.spark.sql.SparkSession.$anonfun$sql$1(SparkSession.scala:133)
+		at org.apache.spark.sql.SparkSession.$anonfun$sql$1$adapted(SparkSession.scala:125)
+		at org.apache.spark.sql.SparkSession.newDataset(SparkSession.scala:258)
+		at org.apache.spark.sql.SparkSession.newDataFrame(SparkSession.scala:252)
+		at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:125)
+		at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:109)
+		at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:147)
+		at org.apache.spark.sql.connect.client.util.RemoteSparkSession.beforeAll(RemoteSparkSession.scala:135)
+		... 13 more
+```
+
+Seems also related to [SPARK-41725](https://issues.apache.org/jira/browse/SPARK-41725)? Thanks ~","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"> Yes, you need `-Phive` after [SPARK-41725](https://issues.apache.org/jira/browse/SPARK-41725). I already checked that. I made this PR because of that, @LuciferYang .
+
+Thanks ~","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,https://github.com/apache/spark/pull/40065#issuecomment-1435520529,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,Thanks @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"friendly ping @dongjoon-hyun , I found the following error message in Java11&17 maven build log
+
+```
+Error: [ERROR] An error occurred attempting to read POM
+org.codehaus.plexus.util.xml.pull.XmlPullParserException: UTF-8 BOM plus xml decl of ISO-8859-1 is incompatible (position: START_DOCUMENT seen <?xml version=""1.0"" encoding=""ISO-8859-1""... @1:42) 
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDeclWithVersion (MXParser.java:3423)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDecl (MXParser.java:3345)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parsePI (MXParser.java:3197)
+    at org.codehaus.plexus.util.xml.pull.MXParser.parseProlog (MXParser.java:1828)
+    at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl (MXParser.java:1757)
+    at org.codehaus.plexus.util.xml.pull.MXParser.next (MXParser.java:1375)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:3940)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:612)
+    at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:627)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:759)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:746)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.retrieveParentProject (BaseCycloneDxMojo.java:694)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.getClosestMetadata (BaseCycloneDxMojo.java:524)
+    at org.cyclonedx.maven.BaseCycloneDxMojo.convert (BaseCycloneDxMojo.java:481)
+    at org.cyclonedx.maven.CycloneDxMojo.execute (CycloneDxMojo.java:70)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:330)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:213)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:175)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:76)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:163)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:160)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:260)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:172)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:100)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:821)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:270)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:77)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:568)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+```
+
+- https://github.com/apache/spark/actions/runs/4324211751/jobs/7548768567
+- https://github.com/apache/spark/actions/runs/4323972537/jobs/7548220619
+- https://github.com/LuciferYang/spark/actions/runs/4315955520/jobs/7542233374
+
+Will this cause errors in the build of bom?
+
+","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"Recently, I often encounter Maven build failed  of Java 11&17 GA build task due to timeout ... a little strange","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"> friendly ping @dongjoon-hyun , I found the following error message in Java11&17 maven build log
+> 
+> ```
+> Error: [ERROR] An error occurred attempting to read POM
+> org.codehaus.plexus.util.xml.pull.XmlPullParserException: UTF-8 BOM plus xml decl of ISO-8859-1 is incompatible (position: START_DOCUMENT seen <?xml version=""1.0"" encoding=""ISO-8859-1""... @1:42) 
+>     at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDeclWithVersion (MXParser.java:3423)
+>     at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDecl (MXParser.java:3345)
+>     at org.codehaus.plexus.util.xml.pull.MXParser.parsePI (MXParser.java:3197)
+>     at org.codehaus.plexus.util.xml.pull.MXParser.parseProlog (MXParser.java:1828)
+>     at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl (MXParser.java:1757)
+>     at org.codehaus.plexus.util.xml.pull.MXParser.next (MXParser.java:1375)
+>     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:3940)
+>     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:612)
+>     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:627)
+>     at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:759)
+>     at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:746)
+>     at org.cyclonedx.maven.BaseCycloneDxMojo.retrieveParentProject (BaseCycloneDxMojo.java:694)
+>     at org.cyclonedx.maven.BaseCycloneDxMojo.getClosestMetadata (BaseCycloneDxMojo.java:524)
+>     at org.cyclonedx.maven.BaseCycloneDxMojo.convert (BaseCycloneDxMojo.java:481)
+>     at org.cyclonedx.maven.CycloneDxMojo.execute (CycloneDxMojo.java:70)
+>     at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:330)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:213)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:175)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:76)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:163)
+>     at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+>     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:160)
+>     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+>     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+>     at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+>     at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+>     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:260)
+>     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:172)
+>     at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:100)
+>     at org.apache.maven.cli.MavenCli.execute (MavenCli.java:821)
+>     at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:270)
+>     at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+>     at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+>     at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:77)
+>     at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+>     at java.lang.reflect.Method.invoke (Method.java:568)
+>     at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+>     at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+>     at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+>     at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+> ```
+> 
+> * https://github.com/apache/spark/actions/runs/4324211751/jobs/7548768567
+> * https://github.com/apache/spark/actions/runs/4323972537/jobs/7548220619
+> * https://github.com/LuciferYang/spark/actions/runs/4315955520/jobs/7542233374
+> 
+> Will this cause errors in the build of bom?
+
+I know, GA already use maven 3.9.0 to build, this is a well know issue
+
+<img width=""961"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/222873867-bdcd885f-96bf-4abc-8106-6859ed97d25d.png"">
+","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"@srowen  this one ready, all test passed","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"> > friendly ping @dongjoon-hyun , I found the following error message in Java11&17 maven build log
+> > ```
+> > Error: [ERROR] An error occurred attempting to read POM
+> > org.codehaus.plexus.util.xml.pull.XmlPullParserException: UTF-8 BOM plus xml decl of ISO-8859-1 is incompatible (position: START_DOCUMENT seen <?xml version=""1.0"" encoding=""ISO-8859-1""... @1:42) 
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDeclWithVersion (MXParser.java:3423)
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.parseXmlDecl (MXParser.java:3345)
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.parsePI (MXParser.java:3197)
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.parseProlog (MXParser.java:1828)
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl (MXParser.java:1757)
+> >     at org.codehaus.plexus.util.xml.pull.MXParser.next (MXParser.java:1375)
+> >     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:3940)
+> >     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:612)
+> >     at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read (MavenXpp3Reader.java:627)
+> >     at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:759)
+> >     at org.cyclonedx.maven.BaseCycloneDxMojo.readPom (BaseCycloneDxMojo.java:746)
+> >     at org.cyclonedx.maven.BaseCycloneDxMojo.retrieveParentProject (BaseCycloneDxMojo.java:694)
+> >     at org.cyclonedx.maven.BaseCycloneDxMojo.getClosestMetadata (BaseCycloneDxMojo.java:524)
+> >     at org.cyclonedx.maven.BaseCycloneDxMojo.convert (BaseCycloneDxMojo.java:481)
+> >     at org.cyclonedx.maven.CycloneDxMojo.execute (CycloneDxMojo.java:70)
+> >     at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:330)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:213)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:175)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:76)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:163)
+> >     at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+> >     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:160)
+> >     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+> >     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+> >     at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+> >     at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+> >     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:260)
+> >     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:172)
+> >     at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:100)
+> >     at org.apache.maven.cli.MavenCli.execute (MavenCli.java:821)
+> >     at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:270)
+> >     at org.apache.maven.cli.MavenCli.main (MavenCli.java:192)
+> >     at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+> >     at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:77)
+> >     at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+> >     at java.lang.reflect.Method.invoke (Method.java:568)
+> >     at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+> >     at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+> >     at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+> >     at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+> > ```
+> > 
+> > 
+> >     
+> >       
+> >     
+> > 
+> >       
+> >     
+> > 
+> >     
+> >   
+> > 
+> > * https://github.com/apache/spark/actions/runs/4324211751/jobs/7548768567
+> > * https://github.com/apache/spark/actions/runs/4323972537/jobs/7548220619
+> > * https://github.com/LuciferYang/spark/actions/runs/4315955520/jobs/7542233374
+> > 
+> > Will this cause errors in the build of bom?
+> 
+> I know, GA already use maven 3.9.0 to build, this is a well know issue
+> 
+> <img alt=""image"" width=""961"" src=""https://user-images.githubusercontent.com/1475305/222873867-bdcd885f-96bf-4abc-8106-6859ed97d25d.png"">
+
+This is not related to current pr. Let me see how to solve this problem later
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,friendly ping @srowen ,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,"> @LuciferYang can you update the binary compatibility tests?
+
+done","1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,Now all paased,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,GA passed,"1,-1    ",1,-1,0
+1475305,2023/3/6,v3.4.0-rc2,Thanks @hvanhovell @HyukjinKwon @zhengruifeng @amaliujia ,"1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"Thanks for your work @zhenlineo 
+If you don't mind, please give me more time to think about this pr ÔºöÔºâ
+
+","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"In the pr description, `build/mvn compile -pl connector/connect/client/jvm` should be `build/mvn compile -pl connector/connect/client/jvm -am` ?
+
+","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"On the whole, it is good for me. There is only one question. Spark still uses maven for version release and deploy. But after this pr, the E2E test change to use sbt assembly server jar instead of maven shaded server jar for testing, which may weaken the maven test. We may need other ways to ensure the correctness of maven shaded server jar.
+
+In the future, we may use sbt to completely replace maven(should not be in Spark 3.4.0), including version release, deploy and other help tools, which will no longer be a problem at that time.
+
+
+","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"There is another problem that needs to be confirmed, which may not related to current pr: if other Suites inherit `RemoteSparkSession`, they will share the same connect server, right? (`SparkConnectServerUtils` is an object, so `SparkConnect` will only submit once)
+
+","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"seems `SimpleSparkConnectService` startup failed, the error message is 
+
+```
+Error: Missing application resource.
+
+Usage: spark-submit [options] <app jar | python file | R file> [app arguments]
+Usage: spark-submit --kill [submission ID] --master [spark://...]
+Usage: spark-submit --status [submission ID] --master [spark://...]
+Usage: spark-submit run-example [options] example-class [example args]
+
+Options:
+  --master MASTER_URL         spark://host:port, mesos://host:port, yarn,
+                              k8s://https://host:port, or local (Default: local[*]).
+  --deploy-mode DEPLOY_MODE   Whether to launch the driver program locally (""client"") or
+                              on one of the worker machines inside the cluster (""cluster"")
+                              (Default: client).
+  --class CLASS_NAME          Your application's main class (for Java / Scala apps).
+  --name NAME                 A name of your application.
+  --jars JARS                 Comma-separated list of jars to include on the driver
+...
+```","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"for example:
+
+- https://github.com/apache/spark/actions/runs/4329598884/jobs/7560252913
+- https://github.com/apache/spark/actions/runs/4329598884/jobs/7560252970
+- https://github.com/apache/spark/actions/runs/4329004998/jobs/7559232726
+- https://github.com/apache/spark/actions/runs/4329004998/jobs/7559232794
+
+<img width=""1241"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/222950677-95c48561-924d-45c7-a59b-23f66a997af3.png"">
+","1,-2    ",1,-2,-1
+1475305,2023/3/8,v3.4.0-rc2,"For check, I add a `./build/mvn -version` before in `java-11-17` GA task without this pr:
+
+<img width=""1682"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/222950915-3dcbf4f1-6f00-4e34-a003-936197cdef57.png"">
+
+And it print as follows:
+
+https://github.com/LuciferYang/spark/actions/runs/4328951282/jobs/7559134224
+
+
+<img width=""1196"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/222950899-11ca9796-11b4-400f-9a89-5f22b9367b2b.png"">
+","1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"no error message with this pr 
+
+- https://github.com/LuciferYang/spark/actions/runs/4335123778/jobs/7569484003
+- https://github.com/LuciferYang/spark/actions/runs/4335123778/jobs/7569484044","1,-3    ",1,-3,-2
+1475305,2023/3/8,v3.4.0-rc2,cc @dongjoon-hyun ,"1,-2    ",1,-2,-1
+1475305,2023/3/8,v3.4.0-rc2,also cc @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/3/8,v3.4.0-rc2,"> https://issues.apache.org/jira/browse/MNG-7697
+
+OK, let me test 3.9.1-SNAPSHOT later. @pan3793 Do you have any other issues besides those in GA task?
+
+","2,-1    ",2,-1,1
+1475305,2023/3/8,v3.4.0-rc2,"> oh, I did not see that Spark was still using cyclonedx-maven-plugin old 2.7.3, thank you @gnodet: @LuciferYang @pan3793 you should upgrade to 2.7.5, which has completely changed the implementation and should not have the issue
+
+Thanks for you suggestion, in https://github.com/apache/spark/pull/40065 I discussed with @dongjoon-hyun , I know 2.7.5 fixed these issues, but 2.7.5 has other issues like https://github.com/CycloneDX/cyclonedx-maven-plugin/issues/284 and https://github.com/CycloneDX/cyclonedx-maven-plugin/issues/289,   so we hope wait until at least 2.7.6 to upgrade `cyclonedx-maven-plugin`","1,-2    ",1,-2,-1
+1475305,2023/3/8,v3.4.0-rc2,"Thanks @dongjoon-hyun @pan3793 ~
+Also thanks @gnodet @hboutemy ","1,-1    ",1,-1,0
+1475305,2023/3/9,v3.4.0-rc3,Thanks @wangyum ,"1,-1    ",1,-1,0
+1475305,2023/3/10,v3.4.0-rc4,"cc @HyukjinKwon , can we merge this first before new RC? otherwise, the maven test will still fail
+
+","1,-1    ",1,-1,0
+1475305,2023/3/10,v3.4.0-rc4,Thanks @HyukjinKwon :),"1,-1    ",1,-1,0
+1475305,2023/3/11,v3.4.0-rc4,"cc @HyukjinKwon fix a maven test failed of connect server module due to dependency loss
+
+","1,-1    ",1,-1,0
+1475305,2023/3/11,v3.4.0-rc4,"> this is the 101st we have broken the maven build in the last month alone. We don't test with it, but we do feel comfortable to release with it. Are we sure the dual build setup is still a thing we want to pursue? Isn't it time to start thinking about greener pastures...
+
+Personally, I think we should consider migrating the build to sbt only in Spark 3.5.0, also cc @pan3793 
+
+","1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,re-triggered GA,"1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,Thanks @HyukjinKwon @hvanhovell @dongjoon-hyun @srowen @beliefer ,"1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,Thanks @hvanhovell @amaliujia ,"1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,"Is there a similar case on Scala connect client Ôø?
+
+","1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,"Is there a chance to add a similar case in `ClientE2ETestSuite`?
+
+","1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,"> @LuciferYang This PR fix it in the connect planner, so should also works for the Scala Client.
+
+OK, got it","1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,"> why not using `from_json` and `from_csv` to do this?
+
+How to get the schema?
+
+","1,-1    ",1,-1,0
+1475305,2023/3/12,v3.4.0-rc4,"> probably not related to this PR:
+> 
+> https://github.com/apache/spark/blob/39a55121888d2543a6056be65e0c74126a9d3bdf/connector/connect/client/jvm/src/main/scala/org/apache/spark/sql/DataFrameReader.scala#L63-L76
+> 
+> ```
+>   def schema(schemaString: String): DataFrameReader = {
+>     schema(StructType.fromDDL(schemaString))
+>   }
+> ```
+> 
+> when the user provide a DDL string, it invoke the parser. Here I think we should keep both StructType and DDL string, and pass them to the server side.
+
+message `Read` seems also need to consider thisÔºüI think we can further discuss this problem in a separate pr?
+","1,-1    ",1,-1,0
+1475305,2023/3/13,v3.4.0-rc4,Thanks @zhengruifeng @hvanhovell @HyukjinKwon  ~,"1,-1    ",1,-1,0
+1475305,2023/3/13,v3.4.0-rc4,Need run `./build/mvn -Pscala-2.12 scalafmt:format -Dscalafmt.skip=false -Dscalafmt.validateOnly=false -Dscalafmt.changedOnly=false -pl connector/connect/common -pl connector/connect/server -pl connector/connect/client/jvm` to format the code in connect modules,"1,-1    ",1,-1,0
+1475305,2023/3/13,v3.4.0-rc4,"fine to me, cc @zhenlineo @amaliujia @hvanhovell FYI","1,-1    ",1,-1,0
+1475305,2023/3/14,v3.4.0-rc4,"In the last commit, make `BloomFilterAggregate` explicitly supported `IntegerType/ShortType/ByteType` and added corresponding updaters, then removed pass `dataType`  and `adding cast nodes` 
+
+","1,-1    ",1,-1,0
+1475305,2023/3/14,v3.4.0-rc4,"GA failure is not related to the current PR
+","1,-1    ",1,-1,0
+1475305,2023/3/14,v3.4.0-rc4,"Thanks for your work. I'll take a closer look tomorrow
+
+","1,-2    ",1,-2,-1
+1475305,2023/3/14,v3.4.0-rc4,friendly ping @HyukjinKwon @hvanhovell @zhengruifeng ,"1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,"Also cc @beliefer , who is adding new function for `LiteralValueProtoConverter` to support `typedLit`
+
+","1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,install_app already check target,"1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,"Thanks for your fix @dongjoon-hyun 
+
+","1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,"Will update pr description later
+
+","1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,Should we push forward this one? @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/3/15,v3.4.0-rc4,"> > Should we push forward this one? @HyukjinKwon
+> 
+> Should, I run test on local, can't passed because I build without hive. And the 2.4.0 release can't build passed without hive. This is mail list which others find problem. https://lists.apache.org/thread/11kdt36n6ytx87klcp2gd678lddqoknd
+
+Yes,  it will be slightly friendly to developers with this pr
+
+","2,-1    ",2,-1,1
+1475305,2023/3/16,v3.4.0-rc4,Thanks @HyukjinKwon and @Hisoka-X ,"1,-1    ",1,-1,0
+1475305,2023/3/16,v3.4.0-rc4,"> @LuciferYang Thank you. Should we update https://github.com/apache/spark/blob/master/docs/building-spark.md with this info?
+
+If needed, it may be more appropriate to update in https://github.com/apache/spark/blob/master/connector/connect/README.md","2,-2    ",2,-2,0
+1475305,2023/3/17,v3.4.0-rc4,"Java 17 GA failed: https://github.com/apache/spark/actions/runs/4318647315/jobs/7537203682
+
+```
+[info] - test implicit encoder resolution *** FAILED *** (1 second, 329 milliseconds)
+4429[info]   2023-03-02T23:00:20.404434 did not equal 2023-03-02T23:00:20.404434875 (SQLImplicitsTestSuite.scala:63)
+4430[info]   org.scalatest.exceptions.TestFailedException:
+4431[info]   at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
+4432[info]   at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
+4433[info]   at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
+4434[info]   at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
+4435[info]   at org.apache.spark.sql.SQLImplicitsTestSuite.testImplicit$1(SQLImplicitsTestSuite.scala:63)
+4436[info]   at org.apache.spark.sql.SQLImplicitsTestSuite.$anonfun$new$2(SQLImplicitsTestSuite.scala:133)
+4437[info]   at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+4438[info]   at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+4439[info]   at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
+4440[info]   at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
+4441[info]   at org.scalatest.Transformer.apply(Transformer.scala:22)
+4442[info]   at org.scalatest.Transformer.apply(Transformer.scala:20)
+4443[info]   at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:226)
+4444[info]   at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
+4445[info]   at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
+4446[info]   at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1564)
+4447[info]   at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:224)
+4448[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:236)
+4449[info]   at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
+4450[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:236)
+4451[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:218)
+4452[info]   at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1564)
+4453[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:269)
+4454[info]   at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
+4455[info]   at scala.collection.immutable.List.foreach(List.scala:431)
+4456[info]   at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
+4457[info]   at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
+4458[info]   at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
+4459[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:269)
+4460[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:268)
+4461[info]   at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1564)
+4462[info]   at org.scalatest.Suite.run(Suite.scala:1114)
+4463[info]   at org.scalatest.Suite.run$(Suite.scala:1096)
+4464[info]   at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1564)
+4465[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:273)
+4466[info]   at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
+4467[info]   at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:273)
+4468[info]   at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:272)
+4469[info]   at org.apache.spark.sql.SQLImplicitsTestSuite.org$scalatest$BeforeAndAfterAll$$super$run(SQLImplicitsTestSuite.scala:34)
+4470[info]   at org.scalatest.BeforeAndAfterAll.liftedTree1$1(BeforeAndAfterAll.scala:213)
+4471[info]   at org.scalatest.BeforeAndAfterAll.run(BeforeAndAfterAll.scala:210)
+4472[info]   at org.scalatest.BeforeAndAfterAll.run$(BeforeAndAfterAll.scala:208)
+4473[info]   at org.apache.spark.sql.SQLImplicitsTestSuite.run(SQLImplicitsTestSuite.scala:34)
+4474[info]   at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:321)
+4475[info]   at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:517)
+4476[info]   at sbt.ForkMain$Run.lambda$runTest$1(ForkMain.java:413)
+4477[info]   at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+4478[info]   at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+4479[info]   at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+4480[info]   at java.base/java.lang.Thread.run(Thread.java:833) 
+```","1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,"cc @HyukjinKwon 
+also cc @bjornjorgensen who reported this issue in dev mail list
+
+","1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,friendly ping @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,"https://github.com/LuciferYang/spark/actions/runs/4412451542/jobs/7732979313
+
+<img width=""1148"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/224938008-bab8acde-7a62-46bb-b3a4-57dfb83bb12a.png"">
+
+GA passed, status not update","1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,Thanks @dongjoon-hyun @HyukjinKwon @bjornjorgensen ,"1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,"https://github.com/apache/spark/actions/runs/4420600519
+
+<img width=""1191"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/225388240-9f85593f-f6d6-47dd-be07-9ab906bf53a8.png"">
+
+The latest Java 17 daily test passed. Thanks all ~
+
+","1,-1    ",1,-1,0
+1475305,2023/3/17,v3.4.0-rc4,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/3/20,v3.4.0-rc4,I think we should file a jira to tracking this ,"1,-1    ",1,-1,0
+1475305,2023/3/20,v3.4.0-rc4,The pr title should be `[SPARK-42803][CORE][SQL][ML] Use ... `,"1,-1    ",1,-1,0
+1475305,2023/3/20,v3.4.0-rc4,"@NarekDW Are there any more similar cases?
+
+cc @srowen FYI
+","1,-3    ",1,-3,-2
+1475305,2023/3/20,v3.4.0-rc4,"rebased and re-run tests, let's wait ci","1,-1    ",1,-1,0
+1475305,2023/3/20,v3.4.0-rc4,All test passed,"2,-2    ",2,-2,0
+1475305,2023/3/20,v3.4.0-rc4,Thanks @srowen ,"2,-1    ",2,-1,1
+1475305,2023/3/20,v3.4.0-rc4,https://github.com/apache/spark/pull/40452 : I added a comment in `pom.xml` to prevent us from forgetting this,"1,-1    ",1,-1,0
+1475305,2023/3/21,v3.4.0-rc4,Thanks @amaliujia ,"2,-2    ",2,-2,0
+1475305,2023/3/21,v3.4.0-rc4,friendly ping @HyukjinKwon @hvanhovell ,"3,-1    ",3,-1,2
+1475305,2023/3/21,v3.4.0-rc4,rebased,"2,-1    ",2,-1,1
+1475305,2023/3/21,v3.4.0-rc4,Thanks @HyukjinKwon @hvanhovell @amaliujia ,"2,-1    ",2,-1,1
+1475305,2023/3/21,v3.4.0-rc4,4.8.1 fixed a [compilation issue](https://github.com/davidB/scala-maven-plugin/issues/673) with Scala 3.x after 4.7.2,"3,-1    ",3,-1,2
+1475305,2023/3/21,v3.4.0-rc4,"hmm... I run `./build/mvn -DskipTests clean package` three times with `4.8.1` on my Mac, they all executed successfully ... I can't reproduce your issue ... 
+
+So, in what environment did you fail to compile? @bjornjorgensen ","1,-1    ",1,-1,0
+1475305,2023/3/21,v3.4.0-rc4,"When use Java 17.0.6 with 4.8.1, I can reproduce this issue
+
+```
+[INFO] --- scala-maven-plugin:4.8.1:compile (scala-compile-first) @ spark-core_2.12 ---
+[INFO] Compiler bridge file: /Users/yangjie01/.sbt/1.0/zinc/org.scala-sbt/org.scala-sbt-compiler-bridge_2.12-1.8.0-bin_2.12.17__61.0-1.8.0_20221110T195421.jar
+[INFO] compiler plugin: BasicArtifact(com.github.ghik,silencer-plugin_2.12.17,1.7.10,null)
+[INFO] compiling 597 Scala sources and 103 Java sources to /Users/yangjie01/SourceCode/git/spark-mine-12/core/target/scala-2.12/classes ...
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/serializer/SerializationDebugger.scala:71: not found: value sun
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:26: not found: object sun
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:27: not found: object sun
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:206: not found: type DirectBuffer
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:210: not found: type Unsafe
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:212: not found: type Unsafe
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:213: not found: type DirectBuffer
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:216: not found: type DirectBuffer
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/storage/StorageUtils.scala:236: not found: type DirectBuffer
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/ClosureCleaner.scala:452: not found: value sun
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:26: not found: object sun
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:99: not found: type SignalHandler
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:99: not found: type Signal
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:83: not found: type Signal
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:108: not found: type SignalHandler
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:108: not found: value Signal
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:114: not found: type Signal
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:116: not found: value Signal
+[ERROR] [Error] /Users/yangjie01/SourceCode/git/spark-mine-12/core/src/main/scala/org/apache/spark/util/SignalUtils.scala:128: not found: value Signal
+[ERROR] 19 errors found
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spark Project Parent POM 3.5.0-SNAPSHOT:
+[INFO] 
+[INFO] Spark Project Parent POM ........................... SUCCESS [  1.591 s]
+[INFO] Spark Project Tags ................................. SUCCESS [  3.560 s]
+[INFO] Spark Project Sketch ............................... SUCCESS [  4.014 s]
+[INFO] Spark Project Local DB ............................. SUCCESS [  4.817 s]
+[INFO] Spark Project Networking ........................... SUCCESS [  6.146 s]
+[INFO] Spark Project Shuffle Streaming Service ............ SUCCESS [  5.401 s]
+[INFO] Spark Project Unsafe ............................... SUCCESS [  5.420 s]
+[INFO] Spark Project Launcher ............................. SUCCESS [  3.365 s]
+[INFO] Spark Project Core ................................. FAILURE [  9.098 s]
+```
+
+also cc @HyukjinKwon @panbingkun ","1,-3    ",1,-3,-2
+1475305,2023/3/21,v3.4.0-rc4,"I think GA can pass due to `-Djava.version=${JAVA_VERSION/-ea}`, I run `./build/mvn -DskipTests -Djava.version=17 package` with Java 17 can build pass @bjornjorgensen ","1,-2    ",1,-2,-1
+1475305,2023/3/21,v3.4.0-rc4,"```
+[INFO] Compiler bridge file: /home/bjorn/.sbt/1.0/zinc/org.scala-sbt/org.scala-sbt-compiler-bridge_2.12-1.8.0-bin_2.12.17__55.0-1.8.0_20221110T195421.jar
+```
+
+@bjornjorgensen You need to make sure that the Java you're using is really 17(should be 2.12.17__61.0-1.8.0, not 55.0)","2,-2    ",2,-2,0
+1475305,2023/3/21,v3.4.0-rc4,"> I open a ticket for this at [davidB/scala-maven-plugin#684](https://github.com/davidB/scala-maven-plugin/issues/684)
+
+Next week, I will try to find a minimum case to reproducer problem. `Spark` is too complex for others :)
+
+
+","1,-1    ",1,-1,0
+1475305,2023/3/21,v3.4.0-rc4,"<img width=""1118"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/226252485-27d82655-fdda-48dd-9611-dce44de69d66.png"">
+
+
+@HyukjinKwon @bjornjorgensen @panbingkun In addition to the issues @bjornjorgensen  mentioned, when compiling using Java 8+Scala 2.13, I saw compilation errors as shown in the figure: `[ERROR] -release is only supported on Java 9 and higher
+`, It seems that 4.8.1 and Java 8 are not compatible well, although it does not cause compilation failures
+
+
+More, I saw https://github.com/davidB/scala-maven-plugin/issues/686, So I think we should revert this pr @HyukjinKwon 
+
+","1,-1    ",1,-1,0
+1475305,2023/3/21,v3.4.0-rc4,https://github.com/apache/spark/pull/40482 I give a pr to revert this one,"1,-1    ",1,-1,0
+1475305,2023/3/22,v3.4.0-rc4,Thanks @dongjoon-hyun ,"2,-2    ",2,-2,0
+1475305,2023/3/22,v3.4.0-rc4,"Seems GA break after this one:
+
+- https://github.com/apache/spark/actions/runs/4467843445/jobs/7847830877
+- https://github.com/apache/spark/actions/runs/4468075788/jobs/7848369978
+- https://github.com/apache/spark/actions/runs/4468868780/jobs/7850199229
+
+<img width=""874"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/226384714-ee30f2c5-495c-4709-8a82-78361e1d35b3.png"">
+","2,-1    ",2,-1,1
+1475305,2023/3/22,v3.4.0-rc4,"Seems would be ok to regenerate the golden files
+
+","1,-1    ",1,-1,0
+1475305,2023/3/22,v3.4.0-rc4,https://github.com/apache/spark/pull/40492,"1,-1    ",1,-1,0
+1475305,2023/3/22,v3.4.0-rc4,Thanks @dongjoon-hyun @yaooqinn ,"1,-1    ",1,-1,0
+1475305,2023/3/22,v3.4.0-rc4,"This function a bit special, It was discussed a long time ago ...
+https://github.com/apache/spark/pull/37862#issuecomment-1249419779","1,-1    ",1,-1,0
+1475305,2023/3/22,v3.4.0-rc4,"Personally, I think it's definitely possible to change it in Spark 4.0, but I wasn't sure before.
+
+","1,-1    ",1,-1,0
+1475305,2023/3/23,v3.4.0-rc4,"> I am trying to get to your PRs in the next couple of days. My apologies for the delay.
+
+No problem, thanks ~","1,-1    ",1,-1,0
+1475305,2023/3/23,v3.4.0-rc4,Thanks @hvanhovell @amaliujia ,"1,-1    ",1,-1,0
+1475305,2023/3/23,v3.4.0-rc4,"SQLQueryTestSuite failed, need re-generate the golden files","1,-1    ",1,-1,0
+1475305,2023/3/24,v3.4.0-rc4,All passed,"1,-1    ",1,-1,0
+1475305,2023/3/24,v3.4.0-rc4,Thanks @zhengruifeng @HyukjinKwon ,"2,-1    ",2,-1,1
+1475305,2023/3/24,v3.4.0-rc4,cc @HyukjinKwon @panbingkun @bjornjorgensen FYI,"1,-1    ",1,-1,0
+1475305,2023/3/24,v3.4.0-rc4,Thanks @yaooqinn @HyukjinKwon @bjornjorgensen @panbingkun ,"3,-1    ",3,-1,2
+1475305,2023/3/24,v3.4.0-rc4,"also cc @beliefer , https://github.com/apache/spark/pull/40355 maybe need rebase after this one","1,-1    ",1,-1,0
+1475305,2023/3/25,v3.4.0-rc4,late LGTM,"2,-1    ",2,-1,1
+1475305,2023/3/25,v3.4.0-rc4,"done, let's wait CI","1,-1    ",1,-1,0
+1475305,2023/3/25,v3.4.0-rc4,Thanks @srowen @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/3/27,v3.4.0-rc4,Thanks @srowen @HyukjinKwon ,"1,-3    ",1,-3,-2
+1475305,2023/3/27,v3.4.0-rc4,Thanks @dongjoon-hyun @viirya ~,"1,-1    ",1,-1,0
+1475305,2023/3/27,v3.4.0-rc4,cc @cloud-fan @gengliangwang @dtenedor ,"1,-1    ",1,-1,0
+1475305,2023/3/27,v3.4.0-rc4,GA passed,"2,-1    ",2,-1,1
+1475305,2023/3/27,v3.4.0-rc4,Thanks All ~,"1,-1    ",1,-1,0
+1475305,2023/3/27,v3.4.0-rc4,@dtenedor Wait a few minutes for me to check with Scala 2.13 manually,"2,-2    ",2,-2,0
+1475305,2023/3/27,v3.4.0-rc4,"> @dtenedor Wait a few minutes for me to check with Scala 2.13 manually
+
+done, should be ok ~","1,-1    ",1,-1,0
+1475305,2023/3/27,v3.4.0-rc4,"```
+[info] - timestampNTZ/datetime-special.sql_analyzer_test *** FAILED *** (11 milliseconds)
+[info]   timestampNTZ/datetime-special.sql_analyzer_test
+[info]   Expected ""...date(999999, 3, 18, [false) AS make_date(999999, 3, 18)#x, make_date(-1, 1, 28, fals]e) AS make_date(-1, ..."", but got ""...date(999999, 3, 18, [true) AS make_date(999999, 3, 18)#x, make_date(-1, 1, 28, tru]e) AS make_date(-1, ..."" Result did not match for query #1
+[info]   select make_date(999999, 3, 18), make_date(-1, 1, 28) (SQLQueryTestSuite.scala:777)
+[info]   org.scalatest.exceptions.TestFailedException:
+```
+
+@dtenedor
+
+Seems not fixed,  run 
+
+`SPARK_ANSI_SQL_MODE=true build/sbt ""sql/testOnly org.apache.spark.sql.SQLQueryTestSuite""`
+
+can reproduce the failure","1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,cc @wangyum @cloud-fan FYI,"1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,hmm... I think we should refactor `JsonBenchmark` to make get_json_object run w/ and w/o  code gen in one,"1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,"@panbingkun I think we should also update `JsonBenchmark-jdk11-results.txt`, `JsonBenchmark-jdk17-results.txt` and `JsonBenchmark-results.txt` in this pr due to `JsonBenchmark` updated ","1,-3    ",1,-3,-2
+1475305,2023/3/28,v3.4.0-rc4,"Interesting!
+
+","1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,cc @HyukjinKwon @hvanhovell FYI,"1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,Thanks @dongjoon-hyun @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,rebase due to https://github.com/apache/spark/pull/40516 merged,"1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,"> @LuciferYang nit: you need to update the PR description. There is an old file name `storage_level.proto`.
+
+Thanks ~ fixed","1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,"> @LuciferYang . This looks worthy of having a new JIRA. Please create a new JIRA for this PR and use it. This PR is a good contribution of yours. üòÑ
+
+@dongjoon-hyun Thanks for your suggestion ~ I created SPARK-42901 and updated the pr title üòÑ","1,-1    ",1,-1,0
+1475305,2023/3/28,v3.4.0-rc4,GA passed ~,"1,-2    ",1,-2,-1
+1475305,2023/3/28,v3.4.0-rc4,Thanks @HyukjinKwon @dongjoon-hyun @ueshin ,"1,-1    ",1,-1,0
+1475305,2023/3/30,v3.4.0-rc5,cc @dtenedor @HyukjinKwon FYI,"3,-1    ",3,-1,2
+1475305,2023/3/31,v3.4.0-rc5,Thanks @HyukjinKwon @dtenedor ,"1,-1    ",1,-1,0
+1475305,2023/4/1,v3.4.0-rc5,Thanks @mridulm @srowen ,"1,-2    ",1,-2,-1
+1475305,2023/4/1,v3.4.0-rc5,Thanks @dongjoon-hyun @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/1,v3.4.0-rc5,Thanks @gengliangwang ~,"1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,The pr title should be `[SPARK-42519][CONNECT][TESTS] ...`,"1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,"@zhenlineo Thanks for ping me ~ Let me do some manual checks
+","1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,"```
+### How was this patch tested?
+Yes
+```
+
+I think You can say `Add new tests`
+","1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,cc @hvanhovell @HyukjinKwon @zhengruifeng FYI,"1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,"cc @dongjoon-hyun FYI
+
+If you have time, please help verify this change. I am not sure if only my environment can reproduce this issue. Thanks ~
+
+","1,-1    ",1,-1,0
+1475305,2023/4/3,v3.4.0-rc5,Thanks very much @dongjoon-hyun üòÑ,"3,-1    ",3,-1,2
+1475305,2023/4/3,v3.4.0-rc5,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/4/4,v3.4.0-rc5,"Was this file originally copied from hive? Is there a corresponding fix in the hive?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/4,v3.4.0-rc5,"> Was this file originally copied from hive? Is there a corresponding fix in the hive?
+
+difficult to synchronize, this file has changed too much in hive
+
+","3,-1    ",3,-1,2
+1475305,2023/4/4,v3.4.0-rc5,"```
+TODO: Need to fix the test for maven.
+```
+
+Should we make this one 3.5.0 only? I think Maven test failure will become a blocker for 3.4.0 release
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/4,v3.4.0-rc5,cc @HyukjinKwon @hvanhovell ,"1,-1    ",1,-1,0
+1475305,2023/4/4,v3.4.0-rc5,"`avro/functions` not in sql module, so `CheckConnectJvmClientCompatibility` cannot perform mima check between `client.jar` and `avro.jar`, created SPARK-42958 to tracking this
+
+","1,-1    ",1,-1,0
+1475305,2023/4/4,v3.4.0-rc5,GA passed,"3,-1    ",3,-1,2
+1475305,2023/4/4,v3.4.0-rc5,Thanks @HyukjinKwon @yaooqinn ,"1,-1    ",1,-1,0
+1475305,2023/4/5,v3.4.0-rc5,cc @HyukjinKwon @sadikovi ,"1,-1    ",1,-1,0
+1475305,2023/4/5,v3.4.0-rc5,Thanks @HyukjinKwon @sadikovi ,"1,-1    ",1,-1,0
+1475305,2023/4/5,v3.4.0-rc5,cc @sadikovi @srowen @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,GA passed,"1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"@HyukjinKwon @hvanhovell @yaooqinn Can this on move forward?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"> @LuciferYang is it good to go?
+
+Yes, I think so","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"```
+2023-03-30T16:09:39.9363333Z [0m[[0m[0minfo[0m] [0m[0m[31m- Dataset result destructive iterator *** FAILED *** (84 milliseconds)[0m[0m
+2023-03-30T16:09:39.9382605Z [0m[[0m[0minfo[0m] [0m[0m[31m  org.apache.spark.sql.vectorized.ColumnarBatch@3f5ed920 equaled org.apache.spark.sql.vectorized.ColumnarBatch@3f5ed920 (ClientE2ETestSuite.scala:819)[0m[0m
+2023-03-30T16:09:39.9383550Z [0m[[0m[0minfo[0m] [0m[0m[31m  org.scalatest.exceptions.TestFailedException:[0m[0m
+2023-03-30T16:09:39.9384640Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)[0m[0m
+2023-03-30T16:09:39.9385936Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)[0m[0m
+2023-03-30T16:09:39.9387002Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)[0m[0m
+2023-03-30T16:09:39.9388072Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)[0m[0m
+2023-03-30T16:09:39.9389136Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.apache.spark.sql.ClientE2ETestSuite.$anonfun$new$106(ClientE2ETestSuite.scala:819)[0m[0m
+2023-03-30T16:09:39.9390070Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
+2023-03-30T16:09:39.9391014Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
+2023-03-30T16:09:39.9392246Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+2023-03-30T16:09:39.9393644Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
+2023-03-30T16:09:39.9394518Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
+2023-03-30T16:09:39.9395634Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:226)[0m[0m
+2023-03-30T16:09:39.9396587Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)[0m[0m
+2023-03-30T16:09:39.9397490Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)[0m[0m
+2023-03-30T16:09:39.9398540Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1564)[0m[0m
+2023-03-30T16:09:39.9399811Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:224)[0m[0m
+2023-03-30T16:09:39.9400900Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:236)[0m[0m
+2023-03-30T16:09:39.9401857Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)[0m[0m
+2023-03-30T16:09:39.9402904Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:236)[0m[0m
+2023-03-30T16:09:39.9403910Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:218)[0m[0m
+2023-03-30T16:09:39.9405036Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1564)[0m[0m
+2023-03-30T16:09:39.9406066Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:269)[0m[0m
+2023-03-30T16:09:39.9407048Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)[0m[0m
+2023-03-30T16:09:39.9407986Z [0m[[0m[0minfo[0m] [0m[0m[31m  at scala.collection.immutable.List.foreach(List.scala:431)[0m[0m
+2023-03-30T16:09:39.9409109Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)[0m[0m
+2023-03-30T16:09:39.9410244Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)[0m[0m
+2023-03-30T16:09:39.9411594Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)[0m[0m
+2023-03-30T16:09:39.9412839Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:269)[0m[0m
+2023-03-30T16:09:39.9414688Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:268)[0m[0m
+2023-03-30T16:09:39.9416225Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1564)[0m[0m
+2023-03-30T16:09:39.9416768Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Suite.run(Suite.scala:1114)[0m[0m
+2023-03-30T16:09:39.9417907Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Suite.run$(Suite.scala:1096)[0m[0m
+2023-03-30T16:09:39.9419535Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1564)[0m[0m
+2023-03-30T16:09:39.9420225Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:273)[0m[0m
+2023-03-30T16:09:39.9421710Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.SuperEngine.runImpl(Engine.scala:535)[0m[0m
+2023-03-30T16:09:39.9422826Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:273)[0m[0m
+2023-03-30T16:09:39.9423713Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:272)[0m[0m
+2023-03-30T16:09:39.9436163Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.apache.spark.sql.ClientE2ETestSuite.org$scalatest$BeforeAndAfterAll$$super$run(ClientE2ETestSuite.scala:41)[0m[0m
+2023-03-30T16:09:39.9437232Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.BeforeAndAfterAll.liftedTree1$1(BeforeAndAfterAll.scala:213)[0m[0m
+2023-03-30T16:09:39.9455327Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.BeforeAndAfterAll.run(BeforeAndAfterAll.scala:210)[0m[0m
+2023-03-30T16:09:39.9456678Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.BeforeAndAfterAll.run$(BeforeAndAfterAll.scala:208)[0m[0m
+2023-03-30T16:09:39.9457909Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.apache.spark.sql.ClientE2ETestSuite.run(ClientE2ETestSuite.scala:41)[0m[0m
+2023-03-30T16:09:39.9459138Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:321)[0m[0m
+2023-03-30T16:09:39.9460291Z [0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:517)[0m[0m
+2023-03-30T16:09:39.9461481Z [0m[[0m[0minfo[0m] [0m[0m[31m  at sbt.ForkMain$Run.lambda$runTest$1(ForkMain.java:413)[0m[0m
+2023-03-30T16:09:39.9462543Z [0m[[0m[0minfo[0m] [0m[0m[31m  at java.util.concurrent.FutureTask.run(FutureTask.java:266)[0m[0m
+2023-03-30T16:09:39.9463721Z [0m[[0m[0minfo[0m] [0m[0m[31m  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)[0m[0m
+2023-03-30T16:09:39.9464883Z [0m[[0m[0minfo[0m] [0m[0m[31m  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)[0m[0m
+2023-03-30T16:09:39.9465861Z [0m[[0m[0minfo[0m] [0m[0m[31m  at java.lang.Thread.run(Thread.java:750)[0m[0m
+```
+@ivoson The new test failed","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,@ivoson any update of this one ?,"1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"It is not related to the current PR. It seems that the `SparkResult ` instance is not thread-safe, do we need to consider this? @hvanhovell 
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"friendly ping @hvanhovell , is this one ok?","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"@ivoson Can you resolve the conflict?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,friendly ping @srowen @sadikovi ,"1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"Can we push forward this one ? @srowen @sadikovi 
+","1,-1    ",1,-1,0
+1475305,2023/4/6,v3.4.0-rc5,"@srowen Does this not need to be merged into branch-3.4?
+
+","2,-1    ",2,-1,1
+1475305,2023/4/6,v3.4.0-rc5,"@srowen I think there are two reasons:
+1. branch-3.3 and the master both use `spark.util.ShutdownHookManager`, but 3.4 not, I think they should keep the same.
+2. @sadikovi mentioned earlier(https://github.com/apache/spark/pull/36529#discussion_r1152687590) `DeleteOnExit functionality can cause performance issues due memory leaks under heavy load in certain JDK versions because while the temporary files are deleted, the entries in the map are never cleared.`
+
+So I think branch-3.4 may be worth having this one
+
+WDYT  @sadikovi ?","1,-1    ",1,-1,0
+1475305,2023/4/9,v3.4.0,"Thanks @dongjoon-hyun 
+OK~ let's wait for some more days","1,-1    ",1,-1,0
+1475305,2023/4/9,v3.4.0,"> Thank you, @HeartSaVioR . To @LuciferYang , could you address the above comment?
+
+OK, Let me update the results of `StateStoreBasicOperationsBenchmark ` in a follow-up
+
+","1,-1    ",1,-1,0
+1475305,2023/4/9,v3.4.0,"Need to update later because
+
+<img width=""1200"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/230563757-cf26102c-3f87-43a9-95f3-84f8a65b530c.png"">
+","1,-2    ",1,-2,-1
+1475305,2023/4/10,v3.2.4,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,cc @wangyum FYI,"3,-1    ",3,-1,2
+1475305,2023/4/10,v3.2.4,"> Add configuration spark.sql.parquet.vector512.read.enabled, If true and CPU contains avx512vbmi & avx512_vbmi2 instruction set, parquet decodes using Java Vector API. For Intel CPU, Ice Lake or newer contains the required instruction set.
+
+hmm... what happens if machines that support AVX 512 are prohibited from using AVX 512?","1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,"```
+[error] /home/runner/work/spark/spark/sql/catalyst/src/main/scala/org/apache/spark/sql/internal/SQLConf.scala:4512:7: method parquetAggregatePushDown is defined twice;
+[error]   the conflicting method parquetAggregatePushDown was defined at line 4510:7
+[error]   def parquetAggregatePushDown: Boolean = getConf(PARQUET_VECTOR512_READ_ENABLED)
+[error]       ^
+[error] one error found
+```
+
+compile failed","1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,cc @srowen @sadikovi backport to 3.4,"2,-1    ",2,-1,1
+1475305,2023/4/10,v3.2.4,thanks @dongjoon-hyun @sadikovi ,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,Thanks @HyukjinKwon @hvanhovell ,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,"I suggest placing the design doc on Google doc and initiating discussions in the dev mail list for more people to participate. 
+
+Additionally, Spark Connect is not limited to Scala clients, so Python clients should also be considered.
+
+Meanwhile, there is still a lot of unfinished work on Spark Connect (in order to maintain the same behavior as the native Spark API),  so I am not sure if everyone has the energy to discuss this new feature at the moment.
+
+","1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,Wait https://github.com/apache/spark/pull/40605 to add mima check,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,Wait https://github.com/apache/spark/pull/40605 to add mima check,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,hmm... `SparkConnectPlanner ` has had another conflict... I will fix it and merge this pr as soon as possible,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,Merged to master. Thanks @hvanhovell @HyukjinKwon @rangadi ,"1,-1    ",1,-1,0
+1475305,2023/4/10,v3.2.4,This one just for Spark 3.5.0,"1,-1    ",1,-1,0
+1475305,2023/4/11,v3.2.4,"It's ok to me to further discussion in this one 
+","1,-1    ",1,-1,0
+1475305,2023/4/11,v3.2.4,"I found that before Scala 2.13.6(include) seems no this issue and the new test will failed after 2.13.7.  
+
+@eejbyfeldt I am not sure if this is caused by change of https://github.com/scala/scala/pull/9258, as it has been added to Scala 2.13.4.
+
+also cc @srowen @mridulm and @xinrong-meng 
+","1,-1    ",1,-1,0
+1475305,2023/4/11,v3.2.4,"@eejbyfeldt `unused-imports` check failed, please fix it
+
+```
+[error] /home/runner/work/spark/spark/core/src/test/scala/org/apache/spark/executor/ExecutorSuite.scala:48:41: Unused import
+[error] import org.apache.spark.internal.config.Network
+[error]                                         ^
+[error] one error found
+```","1,-2    ",1,-2,-1
+1475305,2023/4/11,v3.2.4,"> I found that before Scala 2.13.6(include) seems no this issue and the new test will failed after 2.13.7.
+> 
+> @eejbyfeldt I am not sure if this is caused by change of [scala/scala#9258](https://github.com/scala/scala/pull/9258), as it has been added to Scala 2.13.4.
+> 
+> also cc @srowen @mridulm and @xinrong-meng
+
+also cc @dongjoon-hyun due to Spark 3.2.x also use Scala 2.13.8 and maybe Spark 3.2.4 should include this one","1,-1    ",1,-1,0
+1475305,2023/4/11,v3.2.4,"@HyukjinKwon branch-3.3 and branch-3.2 may also require this one, they also use Scala 2.13.8, need @eejbyfeldt  to submit an independent PRs?","1,-2    ",1,-2,-1
+1475305,2023/4/11,v3.2.4,@dongjoon-hyun Scala 2.13.5 does not require this fix. I apologize for providing incorrect information earlier,"1,-2    ",1,-2,-1
+1475305,2023/4/11,v3.2.4,"Find an error related to ReplE2ESuite on [GA test task](https://pipelines.actions.githubusercontent.com/serviceHosts/c184045e-b556-4e78-b8ef-fb37b2eda9a3/_apis/pipelines/1/runs/69161/signedlogcontent/23?urlExpires=2023-04-18T10%3A18%3A24.5673026Z&urlSigningMethod=HMACV1&urlSignature=IZ4kWbB8mtkvxvyxojX3%2FxIz43j%2FVRKl7Ghp2Y52nnE%3D):
+
+```
+023-04-18T03:29:20.8938544Z [0m[[0m[0minfo[0m] [0m[0m[32mReplE2ESuite:[0m[0m
+2023-04-18T03:29:24.5685770Z sh: 1: cannot open /dev/tty: No such device or address
+...
+2023-04-18T03:29:25.5551653Z sh: 1: cannot open /dev/tty: No such device or address
+2023-04-18T03:29:25.5631256Z sh: 1: cannot create /dev/tty: No such device or address
+...
+2023-04-18T03:29:43.5473148Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.lang.RuntimeException: REPL Timed out while running command: [0m[0m
+2023-04-18T03:29:43.5473697Z [0m[[0m[0minfo[0m] [0m[0m[31mclass A(x: Int) { def get = x * 5 + 19 }[0m[0m
+2023-04-18T03:29:43.5474147Z [0m[[0m[0minfo[0m] [0m[0m[31mdef dummyUdf(x: Int): Int = new A(x).get[0m[0m
+2023-04-18T03:29:43.5474578Z [0m[[0m[0minfo[0m] [0m[0m[31mval myUdf = udf(dummyUdf _)[0m[0m
+2023-04-18T03:29:43.5480701Z [0m[[0m[0minfo[0m] [0m[0m[31mspark.range(5).select(myUdf(col(""id""))).as[Int].collect()[0m[0m
+2023-04-18T03:29:43.5481161Z [0m[[0m[0minfo[0m] [0m[0m[31m      [0m[0m
+2023-04-18T03:29:43.5481539Z [0m[[0m[0minfo[0m] [0m[0m[31mConsole output: [0m[0m
+2023-04-18T03:29:43.5482081Z [0m[[0m[0minfo[0m] [0m[0m[31mSpark session available as 'spark'.[0m[0m
+2023-04-18T03:29:43.5484862Z [0m[[0m[0minfo[0m] [0m[0m[31m   _____                  __      ______                            __[0m[0m
+2023-04-18T03:29:43.5488022Z [0m[[0m[0minfo[0m] [0m[0m[31m  / ___/____  ____ ______/ /__   / ____/___  ____  ____  ___  _____/ /_[0m[0m
+2023-04-18T03:29:43.5491144Z [0m[[0m[0minfo[0m] [0m[0m[31m  \__ \/ __ \/ __ `/ ___/ //_/  / /   / __ \/ __ \/ __ \/ _ \/ ___/ __/[0m[0m
+2023-04-18T03:29:43.5494244Z [0m[[0m[0minfo[0m] [0m[0m[31m ___/ / /_/ / /_/ / /  / ,<    / /___/ /_/ / / / / / / /  __/ /__/ /_[0m[0m
+2023-04-18T03:29:43.5497421Z [0m[[0m[0minfo[0m] [0m[0m[31m/____/ .___/\__,_/_/  /_/|_|   \____/\____/_/ /_/_/ /_/\___/\___/\__/[0m[0m
+2023-04-18T03:29:43.5500566Z [0m[[0m[0minfo[0m] [0m[0m[31m    /_/[0m[0m
+2023-04-18T03:29:43.5502973Z sh: 1: cannot open /dev/tty: No such device or address
+...
+2023-04-18T03:29:43.7154910Z [0m[[0m[0minfo[0m] [0m[0m[31mError output: Compiling (synthetic)/ammonite/predef/ArgsPredef.sc[0m[0m
+2023-04-18T03:29:43.7155688Z [0m[[0m[0minfo[0m] [0m[0m[31mCompiling /home/runner/work/spark/spark/connector/connect/client/jvm/(console)[0m[0m
+2023-04-18T03:29:43.7156273Z [0m[[0m[0minfo[0m] [0m[0m[31mjava.lang.RuntimeException: Nonzero exit value: 2[0m[0m
+2023-04-18T03:29:43.7156688Z [0m[[0m[0minfo[0m] [0m[0m[31m  scala.sys.package$.error(package.scala:30)[0m[0m
+2023-04-18T03:29:43.7157121Z [0m[[0m[0minfo[0m] [0m[0m[31m  scala.sys.process.ProcessBuilderImpl$AbstractBuilder.slurp(ProcessBuilderImpl.scala:138)[0m[0m
+2023-04-18T03:29:43.7157538Z [0m[[0m[0minfo[0m] [0m[0m[31m  scala.sys.process.ProcessBuilderImpl$AbstractBuilder.$bang$bang(ProcessBuilderImpl.scala:108)[0m[0m
+2023-04-18T03:29:43.7158104Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.terminal.TTY$.stty(Utils.scala:103)[0m[0m
+2023-04-18T03:29:43.7158794Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.terminal.TTY$.withSttyOverride(Utils.scala:114)[0m[0m
+2023-04-18T03:29:43.7160239Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.terminal.Terminal$.readLine(Terminal.scala:41)[0m[0m
+2023-04-18T03:29:43.7162012Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.AmmoniteFrontEnd.readLine(AmmoniteFrontEnd.scala:133)[0m[0m
+2023-04-18T03:29:43.7163249Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.AmmoniteFrontEnd.action(AmmoniteFrontEnd.scala:28)[0m[0m
+2023-04-18T03:29:43.7163556Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Repl.$anonfun$action$4(Repl.scala:194)[0m[0m
+2023-04-18T03:29:43.7163863Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Scoped.$anonfun$flatMap$1(Signaller.scala:45)[0m[0m
+2023-04-18T03:29:43.7164158Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Signaller.apply(Signaller.scala:28)[0m[0m
+2023-04-18T03:29:43.7171303Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Scoped.flatMap(Signaller.scala:45)[0m[0m
+2023-04-18T03:29:43.7172151Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Scoped.flatMap$(Signaller.scala:45)[0m[0m
+2023-04-18T03:29:43.7172894Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Signaller.flatMap(Signaller.scala:16)[0m[0m
+2023-04-18T03:29:43.7174248Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Repl.$anonfun$action$2(Repl.scala:178)[0m[0m
+2023-04-18T03:29:43.7176993Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.util.Catching.flatMap(Res.scala:115)[0m[0m
+2023-04-18T03:29:43.7177811Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Repl.action(Repl.scala:170)[0m[0m
+2023-04-18T03:29:43.7178715Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Repl.loop$1(Repl.scala:212)[0m[0m
+2023-04-18T03:29:43.7179009Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.repl.Repl.run(Repl.scala:227)[0m[0m
+2023-04-18T03:29:43.7179272Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.Main.$anonfun$run$1(Main.scala:236)[0m[0m
+2023-04-18T03:29:43.7179543Z [0m[[0m[0minfo[0m] [0m[0m[31m  scala.Option.getOrElse(Option.scala:189)[0m[0m
+2023-04-18T03:29:43.7179795Z [0m[[0m[0minfo[0m] [0m[0m[31m  ammonite.Main.run(Main.scala:224)[0m[0m
+2023-04-18T03:29:43.7184102Z [0m[[0m[0minfo[0m] [0m[0m[31m  org.apache.spark.sql.application.ConnectRepl$.doMain(ConnectRepl.scala:100)[0m[0m
+2023-04-18T03:29:43.7185205Z [0m[[0m[0minfo[0m] [0m[0m[31m  org.apache.spark.sql.application.ReplE2ESuite$$anon$1.run(ReplE2ESuite.scala:59)[0m[0m
+2023-04-18T03:29:43.7185569Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)[0m[0m
+2023-04-18T03:29:43.7185885Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.util.concurrent.FutureTask.run(FutureTask.java:266)[0m[0m
+2023-04-18T03:29:43.7191750Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)[0m[0m
+2023-04-18T03:29:43.7192249Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)[0m[0m
+2023-04-18T03:29:43.7192662Z [0m[[0m[0minfo[0m] [0m[0m[31m  java.lang.Thread.run(Thread.java:750)[0m[0m
+```
+
+I am currently unsure why this error occurred
+
+","1,-1    ",1,-1,0
+1475305,2023/4/12,v3.2.4,"> @LuciferYang which GitHub job failed? The link seems stale now so I can't see. It is a scheduled build?
+
+I found this issue from GA task of user pr
+
+The last failed build on https://github.com/apache/spark/pull/40783  also had this issue, I don't know if @rangadi  can provide a new link","1,-1    ",1,-1,0
+1475305,2023/4/12,v3.2.4,@HyukjinKwon https://github.com/rangadi/spark/actions/runs/4737137341/jobs/8409588363 this one,"1,-1    ",1,-1,0
+1475305,2023/4/12,v3.2.4,"Hmm... GA should merge the current pr to the latest master before testing, right? 
+
+It's okay, Let's wait and see if there are any new cases happening.
+
+","1,-1    ",1,-1,0
+1475305,2023/4/12,v3.2.4,"> > Hmm... GA should merge the current pr to the latest master before testing, right?
+> 
+> Yes except the workflow file. For the changes in workflow, they have to manually update to the latest master branch.
+
+Got it ~","1,-2    ",1,-2,-1
+1475305,2023/4/12,v3.2.4,"@vicennial I found `ReplE2ESuite` always failed in Java 17 GA daily test:
+
+- https://github.com/apache/spark/actions/runs/4726264540/jobs/8385681548
+- https://github.com/apache/spark/actions/runs/4737365554/jobs/8410097712
+- https://github.com/apache/spark/actions/runs/4748319019/jobs/8434392414
+- https://github.com/apache/spark/actions/runs/4759278349/jobs/8458399201
+
+<img width=""1307"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/233674106-5cf0c4cf-ed4f-4d75-be42-3b7c39dc2936.png"">
+","1,-1    ",1,-1,0
+1475305,2023/4/14,v3.2.4,@Yikf Can you re-trigger GA?,"1,-1    ",1,-1,0
+1475305,2023/4/14,v3.2.4,"> The change LGTM. Can we also check other systems like Preso/Trino/Impala and see how they display null values?
+
+@Yikf Can you help check  Preso/Trino ? Also check PostgreSQL?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/14,v3.2.4,late LGTM,"2,-1    ",2,-1,1
+1475305,2023/4/14,v3.2.4,"> This is introduced from 3.4 hence ideal to land the fix to 3.4, but the possibility to trigger the bug is relatively very low, hence probably not urgent.
+
+So this is not a blocker released in 3.4, is it?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/16,v3.2.4,cc @dongjoon-hyun @HeartSaVioR FYI,"1,-1    ",1,-1,0
+1475305,2023/4/17,v3.2.4,Thanks @HeartSaVioR @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/4/17,v3.2.4,"Please wait for me to check and update the benchmark results of `ZStandardBenchmark`
+
+","1,-2    ",1,-2,-1
+1475305,2023/4/17,v3.2.4,"> New results look reasonable.
+
+I have been in a team meeting this morning.
+
+It seems that the results of `ZStandardBenchmark` are somewhat related to the CPU model.","1,-1    ",1,-1,0
+1475305,2023/4/17,v3.2.4,"The CPU model used in micro-bench is the same as before, and the results have not changed much now
+
+","2,-2    ",2,-2,0
+1475305,2023/4/17,v3.2.4,Thanks @dongjoon-hyun ,"2,-2    ",2,-2,0
+1475305,2023/4/17,v3.2.4,"> Could you file a JIRA for this, @LuciferYang ? This contribution looks enough to have a JIRA issue.
+
+@dongjoon-hyun thanks for your suggestion ~ created SPARK-43090","1,-1    ",1,-1,0
+1475305,2023/4/17,v3.2.4,late LGTM ~ Thanks @dongjoon-hyun and all ~,"1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"This is a minor issue, let me close this one, thanks @zhengruifeng @amaliujia 
+
+","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,Thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"The property `aether.connector.connectTimeout` seems not working, and there are still maven compilation performance issues, need more investigation ...
+
+","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"<img width=""1293"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/231329527-32cb53b8-6724-4461-8e26-5411ff81f000.png"">
+
+The last build took 1 hour and 7 meters, let me re-run GA more times
+
+","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"@dongjoon-hyun @steveloughran Adding `-Dmaven.resolver.transport=wagon` seems useful, as recent Java 11&17 Maven build have all finished within 1 hour and there have been no more timeouts.  Let me check for two more days
+
+
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"Long time no see @srowen , thanks for your review ~
+
+I am not sure if the native http client will change the default timeout value to be same with wagon in the future. But I don't object to letting us wait and see if there will be any changes of the new version of Apache Maven :)","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"@steveloughran Do you have any other questions? I am planning to close this PR and test Apache Maven 3.9.2+ in the future to check if it is possible not to add `-Dmaven.resolver.transport=wagon`. Apache Spark can continue to use 3.8.7 now.
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/18,v3.2.4,"Thanks for your attention to this pr @bowenliang123 @dongjoon-hyun @srowen @steveloughran, close first ~
+","2,-1    ",2,-1,1
+1475305,2023/4/19,v3.2.4,"> I can reproduce this on java17 with spark-shell locally. Can we add a test for anonymous UDFs?
+
++1 for add a test for anonymous UDFs","1,-1    ",1,-1,0
+1475305,2023/4/19,v3.2.4,Thanks @zhengruifeng ,"1,-1    ",1,-1,0
+1475305,2023/4/19,v3.2.4,"cc @rangadi due to initially he set `shadeTestJar` of protobuf module to true
+
+also cc @HyukjinKwon 
+
+","1,-1    ",1,-1,0
+1475305,2023/4/19,v3.2.4,Yeah ~ all test passed,"1,-1    ",1,-1,0
+1475305,2023/4/19,v3.2.4,Thanks @sunchao @dongjoon-hyun @HyukjinKwon @rangadi ,"1,-1    ",1,-1,0
+1475305,2023/4/19,v3.2.4,"Some changes seems unrelated to the current pr, and not ready to review yet? @zhenlineo ","2,-1    ",2,-1,1
+1475305,2023/4/20,v3.2.4,Thanks @sunchao @dongjoon-hyun ,"2,-2    ",2,-2,0
+1475305,2023/4/20,v3.2.4,"Could you add a test case for this scenario?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,"hmm.. there is no `[SERVER]` tag, we should remove if from pr title","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,"Good work ~ @rangadi please add new mima check to `CheckConnectJvmClientCompatibility`, thanks ","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,https://github.com/apache/spark/pull/40757/files already re-chmod `connector/connect/bin/spark-connect-scala-client-classpath`,"2,-1    ",2,-1,1
+1475305,2023/4/20,v3.2.4,"```
+ERROR: Comparing client jar: /__w/spark/spark/connector/connect/client/jvm/target/scala-2.12/spark-connect-client-jvm-assembly-3.5.0-SNAPSHOT.jar and and sql jar: /__w/spark/spark/sql/core/target/scala-2.12/spark-sql_2.12-3.5.0-SNAPSHOT.jar 
+problems: 
+method logName()java.lang.String in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method log()org.slf4j.Logger in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logInfo(scala.Function0)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logDebug(scala.Function0)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logTrace(scala.Function0)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logWarning(scala.Function0)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logError(scala.Function0)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logInfo(scala.Function0,java.lang.Throwable)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logDebug(scala.Function0,java.lang.Throwable)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logTrace(scala.Function0,java.lang.Throwable)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logWarning(scala.Function0,java.lang.Throwable)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method logError(scala.Function0,java.lang.Throwable)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method isTraceEnabled()Boolean in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method initializeLogIfNecessary(Boolean)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method initializeLogIfNecessary(Boolean,Boolean)Boolean in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+synthetic method initializeLogIfNecessary$default$2()Boolean in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+method initializeForcefully(Boolean,Boolean)Unit in class org.apache.spark.sql.streaming.DataStreamReader does not have a correspondent in client version
+static method SOURCES_ALLOW_ONE_TIME_QUERY()scala.collection.Seq in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_NOOP()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_TABLE()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_CONSOLE()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_FOREACH_BATCH()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_FOREACH()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+static method SOURCE_NAME_MEMORY()java.lang.String in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+method toTable(java.lang.String)org.apache.spark.sql.streaming.StreamingQuery in class org.apache.spark.sql.streaming.DataStreamWriter does not have a correspondent in client version
+Exceptions to binary compatibility can be added in 'CheckConnectJvmClientCompatibility#checkMiMaCompatibility'
+```
+
+Some compatibility issues need to be fixed
+
+","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,"> I will fix the ReplE2ESuite failure (not yet sure if that is related to this PR).
+
+This should be not related to the current PR. I told @vicennial  yesterday
+
+https://github.com/apache/spark/pull/40675#issuecomment-1512936430
+https://github.com/apache/spark/pull/40675#issuecomment-1513102087
+
+@rangadi you can try to re-trigger the failed GA task again
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,"Test first,  need wait until 3.4 release at least 
+
+","2,-4    ",2,-4,-2
+1475305,2023/4/20,v3.2.4,"> > Test first, need wait until 3.4 release at least
+> 
+> 3.4.0 is uploaded to mirrors.
+
+
+I know, but let's wait for the official website update
+
+","1,-1    ",1,-1,0
+1475305,2023/4/20,v3.2.4,friendly ping @dongjoon-hyun @sunchao ,"1,-1    ",1,-1,0
+1475305,2023/4/21,v3.2.4,Thanks @sunchao @dongjoon-hyun @bjornjorgensen ~,"2,-1    ",2,-1,1
+1475305,2023/4/21,v3.2.4,"Manually run `dev/sbt-checkstyle` can reproduce, but it seems that `dev/sbt-checkstyle` does not always execute.
+
+https://github.com/apache/spark/blob/4c938d62d791742b9f0c6a77b66fc06a90d7c0ad/dev/run-tests.py#L611-L618
+
+https://github.com/apache/spark/blob/4c938d62d791742b9f0c6a77b66fc06a90d7c0ad/dev/run-tests.py#L641-L647
+
+`lint-java` use mvn checkstyle, It did not checked this error.
+
+So should we let `lint-java` use  `sbt-checkstyle` to unify behavior?
+
+Additionally, it seems that the generated proto java files of the connect-common module have not been checked? it is a little strange.
+
+","1,-1    ",1,-1,0
+1475305,2023/4/21,v3.2.4,"hmm...branch-3.4 not require this fix?
+
+","2,-1    ",2,-1,1
+1475305,2023/4/21,v3.2.4,"> Yeah .. let me merge this in first and fix them to be consistent separately ..
+
+`sbt-checkstyle-plugin` will not print wrong fmt issue to the console,  we can only check the problem from `target/checkstyle-output.xml`  and they are in different module directories. On the other hand, `sbt-checkstyle-plugin`  has not been updated for a long time, It seems that no one is maintaining it ...
+
+`maven-checkstyle-plugin` will print out the problem to the console, which is more intuitive.
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/21,v3.2.4,"https://github.com/apache/spark/actions/runs/4765094614/jobs/8470442826
+
+<img width=""1278"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/233662686-1bfb0633-bbd6-4c4a-a9b9-ecdd8e2f0ffc.png"">
+
+
+@cloud-fan many test failed after this one, should we revert this one first?","2,-1    ",2,-1,1
+1475305,2023/4/21,v3.2.4,"> https://github.com/apache/spark/actions/runs/4765094614/jobs/8470442826
+> 
+> <img alt=""image"" width=""1278"" src=""https://user-images.githubusercontent.com/1475305/233662686-1bfb0633-bbd6-4c4a-a9b9-ecdd8e2f0ffc.png"">
+> 
+> @cloud-fan many test failed after this one, should we revert this one first?
+
+also ping @HyukjinKwon ","2,-2    ",2,-2,0
+1475305,2023/4/21,v3.2.4,"> Make some special sql can be parsed. Like SELECT 1 UNION SELECT 1.
+
+cc @wangyum FYI","1,-1    ",1,-1,0
+1475305,2023/4/23,v3.2.4,cc @dongjoon-hyun @HyukjinKwon FYI,"1,-1    ",1,-1,0
+1475305,2023/4/23,v3.2.4,Thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,Thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,cc @HyukjinKwon FYI,"1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,Thanks @zhengruifeng @HyukjinKwon ,"2,-1    ",2,-1,1
+1475305,2023/4/24,v3.2.4,"> ~Does it mean we drop support for building against vanilla Hadoop3 client?~
+> 
+> https://github.com/apache/spark/blob/09a43531d30346bb7c8d213822513dc35c70f82e/sql/hive/src/main/scala/org/apache/spark/sql/hive/client/IsolatedClientLoader.scala#L118-L124
+> 
+> Update: leave it, #33160 didn't get in, Spark does not support for building against vanilla Hadoop3 client
+
+friendly ping @sunchao ","1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,"@xkrogen @sunchao @pan3793 I would like to clarify, actually, no longer using Hadoop 3.0/3.1 support for build ant test is not the original intention of this PR.
+
+So if there is an way to build and test Hadoop 3.0/3.1 successfully before this pr, but it loses after this pr,  I think we should stop this work because Apache Spark has not previously stated on any occasion that it no longer supports Hadoop 3.0/3.1, right ?
+
+
+@xkrogen @sunchao @pan3793 Can you give a command that can be used for build & test with Hadoop 3.0/3.1? I want to manually check it, thanks ~
+","1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,"> > So if there is an way to build and test Hadoop 3.0/3.1 successfully before this pr, but it loses after this pr, I think we should stop this work because Apache Spark has not previously stated on any occasion that it no longer supports Hadoop 3.0/3.1, right ?
+> 
+> Yes, I think that's probably a sensible thing to do.
+> 
+> > @xkrogen @sunchao @pan3793 Can you give a command that can be used for build & test with Hadoop 3.0/3.1? I want to manually check it, thanks ~
+> 
+> You can check this JIRA for the command to build: https://issues.apache.org/jira/browse/SPARK-37994
+
+I encountered the following error while compiling `hadoop-cloud` module during build with hadoop 3.1.x:
+
+```
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:34: value hasPathCapability is not a member of org.apache.hadoop.fs.FileContext
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:34: not found: value CommonPathCapabilities
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:52: value abort is not a member of org.apache.hadoop.fs.FSDataOutputStream
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:66: value abort is not a member of org.apache.hadoop.fs.FSDataOutputStream
+```
+
+Due to the fixed version of HADOOP-15691 being `
+3.3.0, 3.2.2, 3.2.3` and the fixed version of HADOOP-16906 being `3.3.1`, so it is definitely not possible to build hadoop-cloud` module using Hadoop 3.1. x. I would like to remove this module to continue my experiment
+
+","1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,convert to draft to avoid accidental merging,"1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,"@xkrogen @sunchao @pan3793 Synchronize my experimental results
+
+1. Before building, we need to add the following content to `resource-managers/yarn/pom.xml` refer to https://github.com/apache/spark/pull/33160/files: 
+
+```
+    <profile>
+      <id>no-shaded-hadoop-client</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-api</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-common</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-server-web-proxy</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-client</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-server-resourcemanager</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-yarn-server-tests</artifactId>
+          <classifier>tests</classifier>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+```
+
+otherwise, the following compilation error will occurred with `-Pyarn`:
+
+```
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/BaseYarnClusterSuite.scala:30: object MiniYARNCluster is not a member of package org.apache.hadoop.yarn.server
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/BaseYarnClusterSuite.scala:65: not found: type MiniYARNCluster
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/BaseYarnClusterSuite.scala:111: not found: type MiniYARNCluster
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:38: object resourcemanager is not a member of package org.apache.hadoop.yarn.server
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:39: object resourcemanager is not a member of package org.apache.hadoop.yarn.server
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:40: object resourcemanager is not a member of package org.apache.hadoop.yarn.server
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:41: object resourcemanager is not a member of package org.apache.hadoop.yarn.server
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:249: not found: type RMContext
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:251: not found: type RMApp
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:260: not found: type RMApplicationHistoryWriter
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:262: not found: type SystemMetricsPublisher
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:266: not found: type RMAppManager
+[ERROR] [Error] /${spark-source-dir}/resource-managers/yarn/src/test/scala/org/apache/spark/deploy/yarn/ClientSuite.scala:271: not found: type ClientRMService
+```
+
+2. With the above changeÔø?master can build success with hadoop 3.1.x as following
+
+```
+build/mvn clean install -Dhadoop.version=3.1.4 -Dhadoop-client-api.artifact=hadoop-client -Dhadoop-client-runtime.artifact=hadoop-yarn-api -Dhadoop-client-minicluster.artifact=hadoop-client -DskipTests -Pno-shaded-hadoop-client -Pmesos -Pyarn -Pkinesis-asl -Phive-thriftserver -Pspark-ganglia-lgpl -Pkubernetes -Phive
+
+```
+
+Otherwise, cannot build `yarn` module with hadoop 3.1.x.
+
+
+3. `hadoop-cloud` can't build with hadoop 3.1.x due to https://github.com/apache/spark/pull/40847#issuecomment-1518931685
+
+
+**Overall, the current master cannot compile `yarn` and `hadoop-cloud` modules using hadoop 3.1.x without any changes, and all other modules are ok**
+
+","1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,"More
+1. The conclusion using hadoop 3.0.x and hadoop 3.1.x is the same
+2. Use hadoop 3.2.x can't build `hadoop-cloud` module too
+```
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:34: value ABORTABLE_STREAM is not a member of object org.apache.hadoop.fs.CommonPathCapabilities
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:52: value abort is not a member of org.apache.hadoop.fs.FSDataOutputStream
+[ERROR] [Error] /${spark-source-dir}/hadoop-cloud/src/hadoop-3/main/scala/org/apache/spark/internal/io/cloud/AbortableStreamBasedCheckpointFileManager.scala:66: value abort is not a member of org.apache.hadoop.fs.FSDataOutputStream
+[ERROR] three errors found
+```
+
+3. Currently, only hadoop 3.3.x can build all modules","3,-3    ",3,-3,0
+1475305,2023/4/24,v3.2.4,"> Interesting, thanks for the detailed analysis @LuciferYang !
+> 
+> > Use hadoop 3.2.x can't build hadoop-cloud module too
+> 
+> This is Hadoop 3.2.2 ? I remember at some point we started to enable `hadoop-cloud` in Spark release, so I wonder why this didn't cause any error back in the time ..
+
+I test with hadoop 3.2.4. `AbortableStreamBasedCheckpointFileManager` was introduced in SPARK-40039, and it uses APIs that are only available in Hadoop 3.3.1+([HADOOP-16906](https://issues.apache.org/jira/browse/HADOOP-16906)  `FSDataOutputStream#abort()`)
+
+","1,-1    ",1,-1,0
+1475305,2023/4/24,v3.2.4,"@pan3793 I found an interesting thing, after this one merged, when I run the following commands:
+
+```
+build/mvn clean install -DskipTests
+build/mvn test -pl connector/connect/client/jvm -Dtest=none -DwildcardSuites=org.apache.spark.sql.ClientE2ETestSuite
+```
+
+there are 4 test failed as following:
+
+```
+- read and write *** FAILED ***
+  io.grpc.StatusRuntimeException: INTERNAL: org.apache.spark.sql.sources.DataSourceRegister: Provider org.apache.spark.sql.hive.execution.HiveFileFormat could not be instantiated
+  at io.grpc.Status.asRuntimeException(Status.java:535)
+  at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+  at scala.collection.convert.Wrappers$JIteratorWrapper.hasNext(Wrappers.scala:45)
+  at scala.collection.Iterator.foreach(Iterator.scala:943)
+  at scala.collection.Iterator.foreach$(Iterator.scala:943)
+  at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+  at org.apache.spark.sql.SparkSession.execute(SparkSession.scala:458)
+  at org.apache.spark.sql.DataFrameWriter.executeWriteOperation(DataFrameWriter.scala:257)
+  at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:221)
+  at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:210)
+  ...
+- textFile *** FAILED ***
+  io.grpc.StatusRuntimeException: INTERNAL: org.apache.spark.sql.sources.DataSourceRegister: Provider org.apache.spark.sql.hive.execution.HiveFileFormat could not be instantiated
+  at io.grpc.Status.asRuntimeException(Status.java:535)
+  at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+  at org.apache.spark.sql.connect.client.SparkResult.org$apache$spark$sql$connect$client$SparkResult$$processResponses(SparkResult.scala:62)
+  at org.apache.spark.sql.connect.client.SparkResult.length(SparkResult.scala:114)
+  at org.apache.spark.sql.connect.client.SparkResult.toArray(SparkResult.scala:131)
+  at org.apache.spark.sql.Dataset.$anonfun$collect$1(Dataset.scala:2688)
+  at org.apache.spark.sql.Dataset.withResult(Dataset.scala:3128)
+  at org.apache.spark.sql.Dataset.collect(Dataset.scala:2687)
+  at org.apache.spark.sql.ClientE2ETestSuite.$anonfun$new$12(ClientE2ETestSuite.scala:169)
+  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+  ...
+- write table *** FAILED ***
+  io.grpc.StatusRuntimeException: INTERNAL: org.apache.spark.sql.sources.DataSourceRegister: Provider org.apache.spark.sql.hive.execution.HiveFileFormat could not be instantiated
+  at io.grpc.Status.asRuntimeException(Status.java:535)
+  at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+  at scala.collection.convert.Wrappers$JIteratorWrapper.hasNext(Wrappers.scala:45)
+  at scala.collection.Iterator.toStream(Iterator.scala:1417)
+  at scala.collection.Iterator.toStream$(Iterator.scala:1416)
+  at scala.collection.AbstractIterator.toStream(Iterator.scala:1431)
+  at scala.collection.TraversableOnce.toSeq(TraversableOnce.scala:354)
+  at scala.collection.TraversableOnce.toSeq$(TraversableOnce.scala:354)
+  at scala.collection.AbstractIterator.toSeq(Iterator.scala:1431)
+  at org.apache.spark.sql.SparkSession.execute(SparkSession.scala:471)
+  ...
+- write without table or path *** FAILED ***
+  io.grpc.StatusRuntimeException: INTERNAL: org.apache.spark.sql.sources.DataSourceRegister: Provider org.apache.spark.sql.hive.execution.HiveFileFormat could not be instantiated
+  at io.grpc.Status.asRuntimeException(Status.java:535)
+  at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+  at scala.collection.convert.Wrappers$JIteratorWrapper.hasNext(Wrappers.scala:45)
+  at scala.collection.Iterator.toStream(Iterator.scala:1417)
+  at scala.collection.Iterator.toStream$(Iterator.scala:1416)
+  at scala.collection.AbstractIterator.toStream(Iterator.scala:1431)
+  at scala.collection.TraversableOnce.toSeq(TraversableOnce.scala:354)
+  at scala.collection.TraversableOnce.toSeq$(TraversableOnce.scala:354)
+  at scala.collection.AbstractIterator.toSeq(Iterator.scala:1431)
+  at org.apache.spark.sql.SparkSession.execute(SparkSession.scala:471)
+  ...
+```
+
+but  if I revert this one, the the failure will disappear. `CatalogSuite` and `StreamingQuerySuite` also has some problems.Already created [SPARK-43647](https://issues.apache.org/jira/browse/SPARK-43647) to tracking this, Do you have time to investigate togethe?
+
+ ","1,-2    ",1,-2,-1
+1475305,2023/4/24,v3.2.4,"> Tests pass if enable `-Phive`
+> 
+> ```
+> build/mvn clean install -DskipTests -Phive
+> build/mvn test -pl connector/connect/client/jvm -Dtest=none -DwildcardSuites=org.apache.spark.sql.ClientE2ETestSuite
+> ```
+> 
+> Seems reasonable
+
+No, these test can passed without -Phive without this pr","1,-2    ",1,-2,-1
+1475305,2023/4/24,v3.2.4,"The error stack in server side as follows:
+
+```
+java.util.ServiceConfigurationError: org.apache.spark.sql.sources.DataSourceRegister: Provider org.apache.spark.sql.hive.execution.HiveFileFormat could not be instantiated
+	at java.util.ServiceLoader.fail(ServiceLoader.java:232)
+	at java.util.ServiceLoader.access$100(ServiceLoader.java:185)
+	at java.util.ServiceLoader$LazyIterator.nextService(ServiceLoader.java:384)
+	at java.util.ServiceLoader$LazyIterator.next(ServiceLoader.java:404)
+	at java.util.ServiceLoader$1.next(ServiceLoader.java:480)
+	at scala.collection.convert.Wrappers$JIteratorWrapper.next(Wrappers.scala:46)
+	at scala.collection.Iterator.foreach(Iterator.scala:943)
+	at scala.collection.Iterator.foreach$(Iterator.scala:943)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+	at scala.collection.IterableLike.foreach(IterableLike.scala:74)
+	at scala.collection.IterableLike.foreach$(IterableLike.scala:73)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:56)
+	at scala.collection.TraversableLike.filterImpl(TraversableLike.scala:303)
+	at scala.collection.TraversableLike.filterImpl$(TraversableLike.scala:297)
+	at scala.collection.AbstractTraversable.filterImpl(Traversable.scala:108)
+	at scala.collection.TraversableLike.filter(TraversableLike.scala:395)
+	at scala.collection.TraversableLike.filter$(TraversableLike.scala:395)
+	at scala.collection.AbstractTraversable.filter(Traversable.scala:108)
+	at org.apache.spark.sql.execution.datasources.DataSource$.lookupDataSource(DataSource.scala:629)
+	at org.apache.spark.sql.execution.datasources.DataSource$.lookupDataSourceV2(DataSource.scala:697)
+	at org.apache.spark.sql.DataFrameWriter.lookupV2Provider(DataFrameWriter.scala:860)
+	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:256)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:239)
+	at org.apache.spark.sql.connect.planner.SparkConnectPlanner.handleWriteOperation(SparkConnectPlanner.scala:2321)
+	at org.apache.spark.sql.connect.planner.SparkConnectPlanner.process(SparkConnectPlanner.scala:2091)
+	at org.apache.spark.sql.connect.service.SparkConnectStreamHandler.handleCommand(SparkConnectStreamHandler.scala:120)
+	at org.apache.spark.sql.connect.service.SparkConnectStreamHandler.$anonfun$handle$2(SparkConnectStreamHandler.scala:86)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:825)
+	at org.apache.spark.sql.connect.service.SparkConnectStreamHandler.$anonfun$handle$1(SparkConnectStreamHandler.scala:53)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.Utils$.withContextClassLoader(Utils.scala:209)
+	at org.apache.spark.sql.connect.artifact.SparkConnectArtifactManager$.withArtifactClassLoader(SparkConnectArtifactManager.scala:178)
+	at org.apache.spark.sql.connect.service.SparkConnectStreamHandler.handle(SparkConnectStreamHandler.scala:48)
+	at org.apache.spark.sql.connect.service.SparkConnectService.executePlan(SparkConnectService.scala:166)
+	at org.apache.spark.connect.proto.SparkConnectServiceGrpc$MethodHandlers.invoke(SparkConnectServiceGrpc.java:611)
+	at org.sparkproject.connect.grpc.stub.ServerCalls$UnaryServerCallHandler$UnaryServerCallListener.onHalfClose(ServerCalls.java:182)
+	at org.sparkproject.connect.grpc.internal.ServerCallImpl$ServerStreamListenerImpl.halfClosed(ServerCallImpl.java:352)
+	at org.sparkproject.connect.grpc.internal.ServerImpl$JumpToApplicationThreadServerStreamListener$1HalfClosed.runInContext(ServerImpl.java:866)
+	at org.sparkproject.connect.grpc.internal.ContextRunnable.run(ContextRunnable.java:37)
+	at org.sparkproject.connect.grpc.internal.SerializingExecutor.run(SerializingExecutor.java:133)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.NoClassDefFoundError: org/apache/hadoop/hive/ql/plan/FileSinkDesc
+	at java.lang.Class.getDeclaredConstructors0(Native Method)
+	at java.lang.Class.privateGetDeclaredConstructors(Class.java:2671)
+	at java.lang.Class.getConstructor0(Class.java:3075)
+	at java.lang.Class.newInstance(Class.java:412)
+	at java.util.ServiceLoader$LazyIterator.nextService(ServiceLoader.java:380)
+	... 41 more
+Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.hive.ql.plan.FileSinkDesc
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:419)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:352)
+	... 46 more
+```","1,-2    ",1,-2,-1
+1475305,2023/4/25,v3.2.4,cc @sunchao @pan3793 ,"2,-1    ",2,-1,1
+1475305,2023/4/25,v3.2.4,Thanks @sunchao ,"1,-3    ",1,-3,-2
+1475305,2023/4/25,v3.2.4,@pan3793 jira id should be [SPARK-43202](https://issues.apache.org/jira/browse/SPARK-43202),"1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"> Thanks for the PR. Let's wait and see.
+
+ok","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"```
+[info] *** 4 TESTS FAILED ***
+[error] Failed tests:
+[error] 	org.apache.spark.sql.UserDefinedFunctionE2ETestSuite
+[error] (connect-client-jvm / Test / test) sbt.TestsFailedException: Tests unsuccessful
+[error] Total time: 114 s (01:54), completed Apr 20, 2023 4:32:20 AM
+```
+
+https://github.com/LuciferYang/spark/actions/runs/4749019479/jobs/8438173582
+
+Rerunning these four cases still failed ....","1,-3    ",1,-3,-2
+1475305,2023/4/25,v3.2.4,"@HyukjinKwon It seems inevitable to fail, not random... 
+
+local run `build/sbt ""connect-client-jvm/test` 3 times, all four cases have failed.
+
+I'll go have lunch first and  investigate in the afternoon ...
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"@HyukjinKwon Do you know the maximum memory that GA instances can use? 
+
+I checked the logs and found that with the same memory configuration, logs similar to `In the last 10 seconds, 5.524 (55.8%) were spent in GC` are printed more times in GA than locally
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"hmm... I suggest add more memory. I have seen new `GC overhead limit exceeded.` on GA today. If 7G is available, we can directly make the mima check use 5G
+
+","1,-2    ",1,-2,-1
+1475305,2023/4/25,v3.2.4,Can you help me to re open this one ? @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"@pan3793 I remember you provided an OOM case this morning. Can you provide a link?
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"OK, Let's open this pr for a few days. If the master has  mima check OOM, there is no need to resubmit
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"> OOM too. https://github.com/Hisoka-X/spark/actions/runs/4751425402/jobs/8441304002
+
+with 5g?","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"> > > OOM too. https://github.com/Hisoka-X/spark/actions/runs/4751425402/jobs/8441304002
+> > 
+> > 
+> > with 5g?
+> 
+> No, I didn't change anything, so it will be 4G?
+
+4196m now, It seems that 4196m is not stable enough now
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"Test once more
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"From the GA task logs, it can be seen that using 5g only 1 ~ 2 `for better performance` related logs during mima check(w/o this pr, it will print 30+ times and still a possibility of `GC overhead limit exceeded`)
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"> Its 7GB / 2cores IIRC (https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)
+
+After multiple verifications, I suggest change -Xmx to 5120. From the logs, it will significantly reduce the number of GCs and the amount of time consumed, and there will be no `GC overhead limit exceeded` issue again","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,"@HyukjinKwon 
+
+https://github.com/LuciferYang/spark/actions/runs/4776155966/jobs/8491000795
+
+See `GC overhead limit exceeded` again
+
+","1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,Let's merge this one to avoid oom :),"1,-1    ",1,-1,0
+1475305,2023/4/25,v3.2.4,Thanks @zhengruifeng @HyukjinKwon @pan3793 @Hisoka-X ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,Good catch,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,"dup with https://github.com/apache/spark/pull/40860, closed","1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,cc @dongjoon-hyun @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,friendly ping @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,Thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,late LGTM ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,"Test first, will update pr  description later","1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,wait https://github.com/apache/spark/pull/40870,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,cc @sunchao @pan3793 ,"1,-1    ",1,-1,0
+1475305,2023/4/26,v3.2.4,Thanks @HyukjinKwon @zhengruifeng @pan3793 ,"1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,"If this is not consistent with the initial idea of this ticket, please let me know
+
+","1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,rebased and resolved conflicts,"1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,friendly ping @HyukjinKwon can we merge this one?,"1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,"> I'll leave this to you for self-merging, so that you can test your new permission. Congrats again :)
+
+Thanks @HeartSaVioR :)","1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,"Thanks @HeartSaVioR @HyukjinKwon @rangadi ~ 
+
+I have already tested my new permissions in other pr :)
+
+","1,-1    ",1,-1,0
+1475305,2023/4/27,v3.2.4,cc @pan3793 @sunchao @HyukjinKwon ,"1,-2    ",1,-2,-1
+1475305,2023/4/27,v3.2.4,thanks @HyukjinKwon ,"1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"+1, late LGTM","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"```
+Error: Exception in thread ""main"" java.lang.IllegalArgumentException: Unsupported class file major version 61
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:195)
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:176)
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:162)
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:283)
+	at org.clapper.classutil.asm.ClassFile$.load(ClassFinderImpl.scala:222)
+	at org.clapper.classutil.ClassFinder.classData(ClassFinder.scala:404)
+	at org.clapper.classutil.ClassFinder.$anonfun$processOpenZip$2(ClassFinder.scala:359)
+	at scala.collection.Iterator$$anon$10.next(Iterator.scala:461)
+	at scala.collection.Iterator$$anon$11.nextCur(Iterator.scala:486)
+	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:492)
+	at scala.collection.Iterator.toStream(Iterator.scala:1417)
+	at scala.collection.Iterator.toStream$(Iterator.scala:1416)
+	at scala.collection.AbstractIterator.toStream(Iterator.scala:1431)
+	at scala.collection.Iterator.$anonfun$toStream$1(Iterator.scala:1417)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.immutable.Stream.$anonfun$$plus$plus$1(Stream.scala:372)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.immutable.Stream.$anonfun$$plus$plus$1(Stream.scala:372)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.immutable.Stream.$anonfun$map$1(Stream.scala:418)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.immutable.Stream.filterImpl(Stream.scala:506)
+	at scala.collection.immutable.Stream$.$anonfun$filteredTail$1(Stream.scala:1260)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.immutable.Stream$.$anonfun$filteredTail$1(Stream.scala:1260)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+	at scala.collection.generic.Growable.loop$1(Growable.scala:57)
+	at scala.collection.generic.Growable.$plus$plus$eq(Growable.scala:61)
+	at scala.collection.generic.Growable.$plus$plus$eq$(Growable.scala:53)
+	at scala.collection.immutable.Set$SetBuilderImpl.$plus$plus$eq(Set.scala:381)
+	at scala.collection.immutable.Set$SetBuilderImpl.$plus$plus$eq(Set.scala:329)
+	at scala.collection.TraversableLike.to(TraversableLike.scala:786)
+	at scala.collection.TraversableLike.to$(TraversableLike.scala:783)
+	at scala.collection.AbstractTraversable.to(Traversable.scala:108)
+	at scala.collection.TraversableOnce.toSet(TraversableOnce.scala:360)
+	at scala.collection.TraversableOnce.toSet$(TraversableOnce.scala:360)
+	at scala.collection.AbstractTraversable.toSet(Traversable.scala:108)
+	at org.apache.spark.tools.GenerateMIMAIgnore$.getClasses(GenerateMIMAIgnore.scala:[15](https://github.com/LuciferYang/spark/actions/runs/4998621687/jobs/8954833741#step:14:16)6)
+	at org.apache.spark.tools.GenerateMIMAIgnore$.privateWithin(GenerateMIMAIgnore.scala:57)
+	at org.apache.spark.tools.GenerateMIMAIgnore$.main(GenerateMIMAIgnore.scala:1[22](https://github.com/LuciferYang/spark/actions/runs/4998621687/jobs/8954833741#step:14:23))
+	at org.apache.spark.tools.GenerateMIMAIgnore.main(GenerateMIMAIgnore.scala)
+Error: Process completed with exit code 1.
+```
+
+After rebase the code, the `connect-jvm-client-mima-check` will run failed as above, it seems that master branch has a dependency compiled by Java 17, let me investigate first.
+
+","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"> ```
+> Error: Exception in thread ""main"" java.lang.IllegalArgumentException: Unsupported class file major version 61
+> 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:195)
+> 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:176)
+> 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:162)
+> 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:283)
+> 	at org.clapper.classutil.asm.ClassFile$.load(ClassFinderImpl.scala:222)
+> 	at org.clapper.classutil.ClassFinder.classData(ClassFinder.scala:404)
+> 	at org.clapper.classutil.ClassFinder.$anonfun$processOpenZip$2(ClassFinder.scala:359)
+> 	at scala.collection.Iterator$$anon$10.next(Iterator.scala:461)
+> 	at scala.collection.Iterator$$anon$11.nextCur(Iterator.scala:486)
+> 	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:492)
+> 	at scala.collection.Iterator.toStream(Iterator.scala:1417)
+> 	at scala.collection.Iterator.toStream$(Iterator.scala:1416)
+> 	at scala.collection.AbstractIterator.toStream(Iterator.scala:1431)
+> 	at scala.collection.Iterator.$anonfun$toStream$1(Iterator.scala:1417)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.immutable.Stream.$anonfun$$plus$plus$1(Stream.scala:372)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.immutable.Stream.$anonfun$$plus$plus$1(Stream.scala:372)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.immutable.Stream.$anonfun$map$1(Stream.scala:418)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.immutable.Stream.filterImpl(Stream.scala:506)
+> 	at scala.collection.immutable.Stream$.$anonfun$filteredTail$1(Stream.scala:1260)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.immutable.Stream$.$anonfun$filteredTail$1(Stream.scala:1260)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1173)
+> 	at scala.collection.immutable.Stream$Cons.tail(Stream.scala:1163)
+> 	at scala.collection.generic.Growable.loop$1(Growable.scala:57)
+> 	at scala.collection.generic.Growable.$plus$plus$eq(Growable.scala:61)
+> 	at scala.collection.generic.Growable.$plus$plus$eq$(Growable.scala:53)
+> 	at scala.collection.immutable.Set$SetBuilderImpl.$plus$plus$eq(Set.scala:381)
+> 	at scala.collection.immutable.Set$SetBuilderImpl.$plus$plus$eq(Set.scala:329)
+> 	at scala.collection.TraversableLike.to(TraversableLike.scala:786)
+> 	at scala.collection.TraversableLike.to$(TraversableLike.scala:783)
+> 	at scala.collection.AbstractTraversable.to(Traversable.scala:108)
+> 	at scala.collection.TraversableOnce.toSet(TraversableOnce.scala:360)
+> 	at scala.collection.TraversableOnce.toSet$(TraversableOnce.scala:360)
+> 	at scala.collection.AbstractTraversable.toSet(Traversable.scala:108)
+> 	at org.apache.spark.tools.GenerateMIMAIgnore$.getClasses(GenerateMIMAIgnore.scala:[15](https://github.com/LuciferYang/spark/actions/runs/4998621687/jobs/8954833741#step:14:16)6)
+> 	at org.apache.spark.tools.GenerateMIMAIgnore$.privateWithin(GenerateMIMAIgnore.scala:57)
+> 	at org.apache.spark.tools.GenerateMIMAIgnore$.main(GenerateMIMAIgnore.scala:1[22](https://github.com/LuciferYang/spark/actions/runs/4998621687/jobs/8954833741#step:14:23))
+> 	at org.apache.spark.tools.GenerateMIMAIgnore.main(GenerateMIMAIgnore.scala)
+> Error: Process completed with exit code 1.
+> ```
+> 
+> After rebase the code, the `connect-jvm-client-mima-check` will run failed as above, it seems that master branch has a dependency compiled by Java 17, let me investigate first.
+
+change of [9620361](https://github.com/apache/spark/pull/40925/commits/9620361a677013725befabaa262603f7a450ff32) will fix this issue, I will make a separate pr to upgrade the asm version of tools module, this submitted just to verify that `connect-jvm-client-mima-check` can execute successfully with this one
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"> Can you make sure we don't exclude too many cases?
+
+Will double check this later","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"@majdyz Can you enable GA first refer to 
+<img width=""1347"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/234031906-ad7fa49e-209b-4369-888a-e81a1299943d.png"">
+https://github.com/apache/spark/pull/40929/checks?check_run_id=12977948949","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,Looking,"1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"@amaliujia @cloud-fan 
+
+https://github.com/apache/spark/blob/b461cdea92ea08ce39bb3c9d733f0af7c56abf8d/project/SparkBuild.scala#L404-L407
+
+should add `commonUtils` to this Seq now due to 3.4.0 no `common-utils` module:
+
+```
+[error] sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-common-utils_2.12:3.4.0
+[error]   Not found
+[error]   Not found
+[error]   not found: /Users/yangjie01/.ivy2/local/org.apache.spark/spark-common-utils_2.12/3.4.0/ivys/ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-common-utils_2.12/3.4.0/spark-common-utils_2.12-3.4.0.pom
+[error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:344)
+[error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$38(CoursierDependencyResolution.scala:313)
+[error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
+[error] 	at lmcoursier.CoursierDependencyResolution.update(CoursierDependencyResolution.scala:313)
+[error] 	at sbt.librarymanagement.DependencyResolution.update(DependencyResolution.scala:60)
+[error] 	at sbt.internal.LibraryManagement$.resolve$1(LibraryManagement.scala:59)
+[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$12(LibraryManagement.scala:133)
+[error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:73)
+[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$20(LibraryManagement.scala:146)
+[error] 	at scala.util.control.Exception$Catch.apply(Exception.scala:228)
+[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11(LibraryManagement.scala:146)
+[error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11$adapted(LibraryManagement.scala:127)
+[error] 	at sbt.util.Tracked$.$anonfun$inputChangedW$1(Tracked.scala:219)
+[error] 	at sbt.internal.LibraryManagement$.cachedUpdate(LibraryManagement.scala:160)
+[error] 	at sbt.Classpaths$.$anonfun$updateTask0$1(Defaults.scala:3687)
+[error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+[error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)
+[error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:68)
+[error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:282)
+[error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:23)
+[error] 	at sbt.Execute.work(Execute.scala:291)
+[error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:282)
+[error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
+[error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:64)
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[error] 	at java.lang.Thread.run(Thread.java:750)
+[error] (oldDeps / update) sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-common-utils_2.12:3.4.0
+[error]   Not found
+[error]   Not found
+[error]   not found: /Users/yangjie01/.ivy2/local/org.apache.spark/spark-common-utils_2.12/3.4.0/ivys/ivy.xml
+[error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-common-utils_2.12/3.4.0/spark-common-utils_2.12-3.4.0.pom
+```","1,-1    ",1,-1,0
+1475305,2023/5/2,v3.2.4,"> @amaliujia @cloud-fan
+> 
+> https://github.com/apache/spark/blob/b461cdea92ea08ce39bb3c9d733f0af7c56abf8d/project/SparkBuild.scala#L404-L407
+> 
+> should add `commonUtils` to this Seq now due to 3.4.0 no `common-utils` module:
+> 
+> ```
+> [error] sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-common-utils_2.12:3.4.0
+> [error]   Not found
+> [error]   Not found
+> [error]   not found: /Users/yangjie01/.ivy2/local/org.apache.spark/spark-common-utils_2.12/3.4.0/ivys/ivy.xml
+> [error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-common-utils_2.12/3.4.0/spark-common-utils_2.12-3.4.0.pom
+> [error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:344)
+> [error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$38(CoursierDependencyResolution.scala:313)
+> [error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
+> [error] 	at lmcoursier.CoursierDependencyResolution.update(CoursierDependencyResolution.scala:313)
+> [error] 	at sbt.librarymanagement.DependencyResolution.update(DependencyResolution.scala:60)
+> [error] 	at sbt.internal.LibraryManagement$.resolve$1(LibraryManagement.scala:59)
+> [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$12(LibraryManagement.scala:133)
+> [error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:73)
+> [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$20(LibraryManagement.scala:146)
+> [error] 	at scala.util.control.Exception$Catch.apply(Exception.scala:228)
+> [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11(LibraryManagement.scala:146)
+> [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11$adapted(LibraryManagement.scala:127)
+> [error] 	at sbt.util.Tracked$.$anonfun$inputChangedW$1(Tracked.scala:219)
+> [error] 	at sbt.internal.LibraryManagement$.cachedUpdate(LibraryManagement.scala:160)
+> [error] 	at sbt.Classpaths$.$anonfun$updateTask0$1(Defaults.scala:3687)
+> [error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+> [error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)
+> [error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:68)
+> [error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:282)
+> [error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:23)
+> [error] 	at sbt.Execute.work(Execute.scala:291)
+> [error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:282)
+> [error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
+> [error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:64)
+> [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+> [error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+> [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+> [error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+> [error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+> [error] 	at java.lang.Thread.run(Thread.java:750)
+> [error] (oldDeps / update) sbt.librarymanagement.ResolveException: Error downloading org.apache.spark:spark-common-utils_2.12:3.4.0
+> [error]   Not found
+> [error]   Not found
+> [error]   not found: /Users/yangjie01/.ivy2/local/org.apache.spark/spark-common-utils_2.12/3.4.0/ivys/ivy.xml
+> [error]   not found: https://repo1.maven.org/maven2/org/apache/spark/spark-common-utils_2.12/3.4.0/spark-common-utils_2.12-3.4.0.pom
+> ```
+
+with this change and rebase the code, then run the mima check:
+
+
+```
+[warn] multiple main classes detected: run 'show discoveredMainClasses' to see the list
+[info] spark-examples: mimaPreviousArtifacts not set, not analyzing binary compatibility
+[error] spark-core: Failed binary compatibility check against org.apache.spark:spark-core_2.12:3.4.0! Found 4 potential problems (filtered 4035)
+[error]  * interface org.apache.spark.QueryContext does not have a correspondent in current version
+[error]    filter with: ProblemFilters.exclude[MissingClassProblem](""org.apache.spark.QueryContext"")
+[error]  * class org.apache.spark.SparkException does not have a correspondent in current version
+[error]    filter with: ProblemFilters.exclude[MissingClassProblem](""org.apache.spark.SparkException"")
+[error]  * object org.apache.spark.SparkException does not have a correspondent in current version
+[error]    filter with: ProblemFilters.exclude[MissingClassProblem](""org.apache.spark.SparkException$"")
+[error]  * interface org.apache.spark.SparkThrowable does not have a correspondent in current version
+[error]    filter with: ProblemFilters.exclude[MissingClassProblem](""org.apache.spark.SparkThrowable"")
+[error] java.lang.RuntimeException: Failed binary compatibility check against org.apache.spark:spark-core_2.12:3.4.0! Found 4 potential problems (filtered 4035)
+[error] 	at scala.sys.package$.error(package.scala:30)
+[error] 	at com.typesafe.tools.mima.plugin.SbtMima$.reportModuleErrors(SbtMima.scala:89)
+[error] 	at com.typesafe.tools.mima.plugin.MimaPlugin$.$anonfun$projectSettings$2(MimaPlugin.scala:36)
+[error] 	at com.typesafe.tools.mima.plugin.MimaPlugin$.$anonfun$projectSettings$2$adapted(MimaPlugin.scala:26)
+[error] 	at scala.collection.Iterator.foreach(Iterator.scala:943)
+[error] 	at scala.collection.Iterator.foreach$(Iterator.scala:943)
+[error] 	at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+[error] 	at com.typesafe.tools.mima.plugin.MimaPlugin$.$anonfun$projectSettings$1(MimaPlugin.scala:26)
+[error] 	at com.typesafe.tools.mima.plugin.MimaPlugin$.$anonfun$projectSettings$1$adapted(MimaPlugin.scala:25)
+[error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+[error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)
+[error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:68)
+[error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:282)
+[error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:23)
+[error] 	at sbt.Execute.work(Execute.scala:291)
+[error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:282)
+[error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
+[error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:64)
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+[error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[error] 	at java.lang.Thread.run(Thread.java:750)
+[error] (core / mimaReportBinaryIssues) Failed binary compatibility check against org.apache.spark:spark-core_2.12:3.4.0! Found 4 potential problems (filtered 4035)
+[error] Total time: 92 s (01:32), completed 2023-4-26 13:46:13
+
+```","1,-1    ",1,-1,0
+1475305,2023/5/3,v3.2.4,"<img width=""1060"" alt=""image"" src=""https://user-images.githubusercontent.com/1475305/234313784-5f6e54f0-5e2b-4725-a1c1-8f62e7cb6d41.png"">
+
+https://github.com/FasterXML/jackson-core/blob/a2c0bdcfb9aae8fca555240e63e57c1d9e6f8079/src/main/java/com/fasterxml/jackson/core/StreamReadConstraints.java#L30-L51
+
+It seems to have added 4 constraints, but `MAX_BIGINT_SCALE_MAGNITUDE ` is not configurable.
+
+May be we should add corresponding configurable items to `org.apache.spark.sql.catalyst.json.JSONOptions` and  inject them in `JSONOptions#buildJsonFactory` by `JsonFactoryBuilder#streamReadConstraints(StreamReadConstraints)`.
+
+This may handle most scenarios, but there are still some places in Spark that call `new ObjectMapper()`, these will using `StreamReadConstraints.defaults()`, but for them, using the default value may be OK(need to analyze it one by one). 
+
+If there is a problem with what I said, please correct me @pjfanning , thanks 
+
+
+
+
+","1,-1    ",1,-1,0
+1475305,2023/5/3,v3.2.4,"And will these new constraints make JSON parsing slower?
+
+","1,-2    ",1,-2,-1
+1475305,2023/5/3,v3.2.4,"Please fix the compilation error first @bjornjorgensen thanks
+
+","3,-1    ",3,-1,2
+1475305,2023/5/3,v3.2.4,"I found `Update jackson-module-scala to 2.15.0 in 2.12.x` in release plan of Scala 2.12.18:
+
+https://github.com/scala/scala/milestone/99","1,-1    ",1,-1,0
+1475305,2023/5/3,v3.2.4,"> Solution: This PR adds SparkConnectStreamingQueryCache that does not the following:
+
+does not the following?
+","1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,"Test first, will update pr description laster","1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,Thanks @sunchao @mridulm @pan3793 ,"1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,"Don't need to regenerate the golden file?
+
+","1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,Is there a way to reproduce the failure like GA? I always run successfully using Java 17 locally w/o this pr.,"1,-1    ",1,-1,0
+1475305,2023/5/4,v3.2.4,"> @LuciferYang To repro, I set `JAVA_HOME` to `/usr/lib/jvm/java-17-openjdk-amd64/` and made sure that sbt is picking this settings up (these lines should be in the log `Using /usr/lib/jvm/java-17-openjdk-amd64/ as default JAVA_HOME. Note, this will be overridden by -java-home if it is set.`) This was enough to trigger the failure: <img alt=""Screenshot 2023-04-25 at 21 42 59"" width=""1124"" src=""https://user-images.githubusercontent.com/21010250/234358778-5de172ae-d8fe-4d54-bf2e-8d76dff1555b.png"">
+
+Let me give it a try ~ thanks ~","1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,"SGTM,  Let GA test it first","1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,"@hvanhovell Is it better to keep `ExecutorClassLoader` in `org.apache.spark.repl` or move it to other package, like `org.apache.spark.executor`?
+
+
+
+","2,-1    ",2,-1,1
+1475305,2023/5/5,v3.2.4,"will update pr title and description later if all test pass
+
+","3,-1    ",3,-1,2
+1475305,2023/5/5,v3.2.4,"> @LuciferYang can you also get rid of the reflection in Executor.scala that used to be needed?
+
+I'll look this today, and I think there should be no need to use reflection anymore.
+
+","1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,I think this one is ok,"1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,Thanks @hvanhovell ~,"2,-1    ",2,-1,1
+1475305,2023/5/5,v3.2.4,"Thanks for your review @srowen. I am on vacation and will continue to complete these tasks after May 8th.
+
+________________________________
+Âèë‰ª∂Ôø? Sean Owen ***@***.***>
+ÂèëÈÄÅÊó∂Ôø? 2023Ôø?Ôø?Ôø?22:57:27
+Êî∂‰ª∂Ôø? apache/spark
+ÊäÑÔøΩ? yangjie01; Author
+‰∏ªÈ¢ò: Re: [apache/spark] [SPARK-43294][BUILD] Upgrade zstd-jni to 1.5.5-2 (PR #40962)
+
+
+@srowen approved this pull request.
+
+Looks OK, just add context about what the update does
+
+Ôø?
+Reply to this email directly, view it on GitHub<https://mailshield.baidu.com/check?q=4%2fgpZ9TUEilYD9%2fXl%2f%2fdZ08xybHnY39K5GNnRidojzsXOcQrY4G74%2ftGPWda%2f0bG4rBPHY0ERfSeAWNQe0IWpFuPmjDRr01b0B39Jw%3d%3d>, or unsubscribe<https://mailshield.baidu.com/check?q=TboBl7gBc9ssIw%2fYtfvVtyVmwybmo1xowOHIEtt99hxrTkRQwwlxhTAqm6PKe8JFikz38E%2brBzEwW4wnNg2bfgrGkPmhNQuOrjnb8SXet2ZBamJzhIHTAlf6q8NZ5jsCpAi%2f6Nn5zu0%3d>.
+You are receiving this because you authored the thread.Message ID: ***@***.***>
+","2,-2    ",2,-2,0
+1475305,2023/5/5,v3.2.4,"Thanks @dongjoon-hyun @srowen , I am checking the microbenchmark results and updating this pr later
+
+","1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,"> Please make a clean PR.
+
+OK, Let me make a new one.
+
+","1,-1    ",1,-1,0
+1475305,2023/5/5,v3.2.4,@dongjoon-hyun I open a new one : https://github.com/apache/spark/pull/41135,"1,-1    ",1,-1,0
+1475305,2023/5/15,v3.2.4,cc @sunchao FYI,"1,-1    ",1,-1,0
+1475305,2023/5/15,v3.2.4,"A late question: Should `error/error-classes.json` and `SparkThrowableHelper` be moved together to the `common-utils` module?
+
+","1,-1    ",1,-1,0
+1475305,2023/5/16,v3.2.4,will update result of `StateStoreBasicOperationsBenchmark` later,"2,-1    ",2,-1,1
+1475305,2023/5/16,v3.2.4,"When I tried this upgrade, I found that the result of 'StateStoreBasicOperationsBenchmark' was unexpected. For check if it was a new version(8.1.1.1) issue, I also ran the 'StateStoreBasicOperationsBenchmark' on the master branch(with 8.0.0), and there were significant differences between the test result and the previous records and 'StateStoreBasicOperationsBenchmark' also run timeoutÔºàmore than 6hours, It should have been completed in 3 hours beforeÔø?
+
+https://github.com/LuciferYang/spark/actions/runs/4949396450/jobs/8856766625
+
+```
+[success] Total time: 791 s (13:11), completed May 11, 2023 7:33:07 PM
+23/05/11 19:33:12 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Running org.apache.spark.sql.execution.benchmark.StateStoreBasicOperationsBenchmark:
+23/05/11 19:33:15 WARN SparkContext: The JAR file:/home/runner/work/spark/spark/core/target/scala-2.12/spark-core_2.12-3.5.0-SNAPSHOT-tests.jar at spark://localhost:44659/jars/spark-core_2.12-3.5.0-SNAPSHOT-tests.jar has been added already. Overwriting of added jar is not supported in the current version.
+Running benchmark: putting 10000 rows (10000 rows to overwrite - rate 100)
+  Running case: In-memory
+  Stopped after 10000 iterations, 82351 ms
+  Running case: RocksDB (trackTotalNumberOfRows: true)
+  Stopped after 10000 iterations, 599839 ms
+  Running case: RocksDB (trackTotalNumberOfRows: false)
+  Stopped after 10000 iterations, 210482 ms
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (10000 rows to overwrite - rate 100):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+---------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                            7              8           1          1.4         739.9       1.0X
+RocksDB (trackTotalNumberOfRows: true)                              58             60           1          0.2        5828.2       0.1X
+RocksDB (trackTotalNumberOfRows: false)                             20             21           0          0.5        2033.4       0.4X
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (7500 rows to overwrite - rate 75):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                          8              9           1          1.3         772.9       1.0X
+RocksDB (trackTotalNumberOfRows: true)                            56             58           1          0.2        5567.7       0.1X
+RocksDB (trackTotalNumberOfRows: false)                           21             23           4          0.5        2126.2       0.4X
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (5000 rows to overwrite - rate 50):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                          8              9           1          1.3         760.7       1.0X
+RocksDB (trackTotalNumberOfRows: true)                            51             53           1          0.2        5089.3       0.1X
+RocksDB (trackTotalNumberOfRows: false)                           21             22           1          0.5        2133.7       0.4X
+
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (2500 rows to overwrite - rate 25):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                          7              8           1          1.3         747.6       1.0X
+RocksDB (trackTotalNumberOfRows: true)                            46             47           1          0.2        4603.3       0.2X
+RocksDB (trackTotalNumberOfRows: false)                           21             22           1          0.5        2141.8       0.3X
+
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (1000 rows to overwrite - rate 10):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                          7              8           1          1.4         732.3       1.0X
+RocksDB (trackTotalNumberOfRows: true)                            43             44           1          0.2        4283.7       0.2X
+RocksDB (trackTotalNumberOfRows: false)                           21             22           1          0.5        2132.0       0.3X
+
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (500 rows to overwrite - rate 5):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-----------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                        7              8           1          1.4         732.3       1.0X
+RocksDB (trackTotalNumberOfRows: true)                          42             43           1          0.2        4169.4       0.2X
+RocksDB (trackTotalNumberOfRows: false)                         21             22           1          0.5        2124.4       0.3X
+
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+putting 10000 rows (0 rows to overwrite - rate 0):  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+---------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                      7              8           1          1.4         727.9       1.0X
+RocksDB (trackTotalNumberOfRows: true)                        40             42           1          0.2        4038.6       0.2X
+RocksDB (trackTotalNumberOfRows: false)                       21             22           1          0.5        2129.9       0.3X
+
+.......
+
+OpenJDK 64-Bit Server VM 1.8.0_362-b09 on Linux 5.15.0-1037-azure
+Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+evicting 1000 rows (maxTimestampToEvictInMillis: 999) from 10000 rows:  Best Time(ms)   Avg Time(ms)   Stdev(ms)    Rate(M/s)   Per Row(ns)   Relative
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+In-memory                                                                          5              5           0          2.2         458.3       1.0X
+RocksDB (trackTotalNumberOfRows: true)                                             9              9           0          1.1         871.2       0.5X
+RocksDB (trackTotalNumberOfRows: false)                                            5              6           0          1.9         518.3       0.9X
+
+Running benchmark: evicting 500 rows (maxTimestampToEvictInMillis: 499) from 10000 rows
+  Running case: In-memory
+  Stopped after 10000 iterations, 50617 ms
+  Running case: RocksDB (trackTotalNumberOfRows: true)
+Error: The operation was canceled.
+```
+
+I will try to investigate this issue, cc @dongjoon-hyun @HeartSaVioR FYI
+
+
+EDIT:  The `RocksDB (trackTotalNumberOfRows: false) ` scene looks twice as slow as before","3,-1    ",3,-1,2
+1475305,2023/5/16,v3.2.4,"If this is expected, optimizing benchmark testing should be more reasonable, as current benchmark testing will fail due to GA timeout
+
+","1,-1    ",1,-1,0
+1475305,2023/5/16,v3.2.4,"@anishshri-db I need to update the results of `StateStoreBasicOperationsBenchmark` when upgrade rocksdbjni, we can run `StateStoreBasicOperationsBenchmark` with GA as following:
+
+<img width=""355"" alt=""image"" src=""https://github.com/apache/spark/assets/1475305/b5ce0ad4-b3e8-48a1-bc52-3db3b0dfa5ad"">
+ 
+It did not fail and was killed by GA due to timeout. Previously, `StateStoreBasicOperationsBenchmark` was executed for 3 hours(The last time I updated the rocksdbjni version), but now it has been executed for more than 6 hours and has not been completed yet.
+","2,-1    ",2,-1,1
+1475305,2023/5/16,v3.2.4,Thanks @anishshri-db ,"1,-1    ",1,-1,0
+1475305,2023/5/16,v3.2.4,"cc @dongjoon-hyun @srowen FYI
+","1,-1    ",1,-1,0
+1475305,2023/5/16,v3.2.4,Thanks @dongjoon-hyun @srowen ,"1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,"I found some downloading log when run `dev/make-distribution.sh --tgz` with this pr
+
+<img width=""1481"" alt=""image"" src=""https://github.com/apache/spark/assets/1475305/7d12d1a0-fb62-41ee-a7a8-63efc5fac0ee"">
+
+<img width=""1535"" alt=""image"" src=""https://github.com/apache/spark/assets/1475305/5bc7ac2e-7f43-4a79-b770-637b66a2846c"">
+
+
+is this expected","1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,"@wangyum I think we should not skip building the test jar. I test the following commands with this pr:
+
+```
+build/mvn versions:set -DnewVersion=3.5.0.1
+dev/make-distribution.sh --tgz 
+```
+
+then the build will failed as follows:
+
+```
+[INFO] -----------------< org.apache.spark:spark-sketch_2.12 >-----------------
+[INFO] Building Spark Project Sketch 3.5.0.1                             [3/30]
+[INFO]   from common/sketch/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+Downloading from gcs-maven-central-mirror: https://maven-central.storage-download.googleapis.com/maven2/org/apache/spark/spark-tags_2.12/3.5.0.1/spark-tags_2.12-3.5.0.1-tests.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/spark/spark-tags_2.12/3.5.0.1/spark-tags_2.12-3.5.0.1-tests.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spark Project Parent POM 3.5.0.1:
+[INFO] 
+[INFO] Spark Project Parent POM ........................... SUCCESS [  3.746 s]
+[INFO] Spark Project Tags ................................. SUCCESS [  4.028 s]
+[INFO] Spark Project Sketch ............................... FAILURE [01:16 min]
+[INFO] Spark Project Local DB ............................. SKIPPED
+[INFO] Spark Project Networking ........................... SKIPPED
+[INFO] Spark Project Shuffle Streaming Service ............ SKIPPED
+[INFO] Spark Project Unsafe ............................... SKIPPED
+[INFO] Spark Project Common Utils ......................... SKIPPED
+[INFO] Spark Project Launcher ............................. SKIPPED
+[INFO] Spark Project Core ................................. SKIPPED
+[INFO] Spark Project ML Local Library ..................... SKIPPED
+[INFO] Spark Project GraphX ............................... SKIPPED
+[INFO] Spark Project Streaming ............................ SKIPPED
+[INFO] Spark Project Catalyst ............................. SKIPPED
+[INFO] Spark Project SQL .................................. SKIPPED
+[INFO] Spark Project ML Library ........................... SKIPPED
+[INFO] Spark Project Tools ................................ SKIPPED
+[INFO] Spark Project Hive ................................. SKIPPED
+[INFO] Spark Project REPL ................................. SKIPPED
+[INFO] Spark Project Assembly ............................. SKIPPED
+[INFO] Kafka 0.10+ Token Provider for Streaming ........... SKIPPED
+[INFO] Spark Integration for Kafka 0.10 ................... SKIPPED
+[INFO] Kafka 0.10+ Source for Structured Streaming ........ SKIPPED
+[INFO] Spark Project Examples ............................. SKIPPED
+[INFO] Spark Integration for Kafka 0.10 Assembly .......... SKIPPED
+[INFO] Spark Avro ......................................... SKIPPED
+[INFO] Spark Project Connect Common ....................... SKIPPED
+[INFO] Spark Project Connect Server ....................... SKIPPED
+[INFO] Spark Project Connect Client ....................... SKIPPED
+[INFO] Spark Protobuf ..................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:24 min
+[INFO] Finished at: 2023-05-12T00:15:34+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project spark-sketch_2.12: Could not resolve dependencies for project org.apache.spark:spark-sketch_2.12:jar:3.5.0.1: Could not transfer artifact org.apache.spark:spark-tags_2.12:jar:tests:3.5.0.1 from/to central (https://repo.maven.apache.org/maven2): transfer failed for https://repo.maven.apache.org/maven2/org/apache/spark/spark-tags_2.12/3.5.0.1/spark-tags_2.12-3.5.0.1-tests.jar: Connect to repo.maven.apache.org:443 [repo.maven.apache.org/151.101.76.215, repo.maven.apache.org/2a04:4e42:12:0:0:0:0:215] failed: No route to host (connect failed) -> [Help 1]
+```
+
+the test jar `spark-tags_2.12-3.5.0.1-tests.jar` cannot be downloaded
+
+","1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,Thanks @wangyum @dongjoon-hyun @pan3793 . Merged to master.,"1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,"https://github.com/apache/spark/blob/46332d985e52f76887c139f67d1471b82e85d5ca/connector/kafka-0-10-assembly/pom.xml#L62-L66
+
+This one should be `2.5.0` before, I think we should manually specify its version to keep the behavior unchanged ?
+
+","1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,"> Thank you for doing this with nice analysis. Ya, definitely, this was the goal. BTW, could you send an email to dev@spark because this is an important removal of dependency, @pan3793 ?
+
++1, Agree","1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,cc @sunchao @mridulm @pan3793 FYI,"1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,Thanks @sunchao @dongjoon-hyun @pan3793 ,"1,-1    ",1,-1,0
+1475305,2023/5/17,v3.2.4,Will update bench result and pr description later,"1,-1    ",1,-1,0
+1475305,2023/5/18,v3.2.4,Thanks @srowen ,"1,-1    ",1,-1,0
+1475305,2023/5/18,v3.2.4,"<img width=""1007"" alt=""image"" src=""https://github.com/apache/spark/assets/1475305/342d7c37-95cb-4760-9829-5cdc4a4ebfc9"">
+
+It seems that presto does not recommend using this function, and it may be removed in future presto version, so is it really necessary for Spark to support it?
+
+","1,-2    ",1,-2,-1
+1475305,2023/5/18,v3.2.4,"Maybe we should keep connect client synchronized with this change, or at least add an `exclude` entry in `CheckConnectJvmClientCompatibility`","1,-2    ",1,-2,-1
+1475305,2023/5/18,v3.2.4,"@panbingkun run `ProtoToParsedPlanTestSuite:` with this pr, `function_levenshtein` failed as follows:
+```
+[info] - function_levenshtein *** FAILED *** (4 milliseconds)
+[info]   Expected and actual plans do not match:
+[info]   
+[info]   === Expected Plan ===
+[info]   Project [levenshtein(g#0, bob) AS levenshtein(g, bob)#0]
+[info]   +- LocalRelation <empty>, [id#0L, a#0, b#0, d#0, e#0, f#0, g#0]
+[info]   
+[info]   
+[info]   === Actual Plan ===
+[info]   Project [levenshtein(g#0, bob, None) AS levenshtein(g, bob)#0]
+[info]   +- LocalRelation <empty>, [id#0L, a#0, b#0, d#0, e#0, f#0, g#0] (ProtoToParsedPlanTestSuite.scala:177)
+```
+
+We should re-generate the golden files.","2,-2    ",2,-2,0
+1475305,2023/5/18,v3.2.4,also cc @wangyum @beliefer FYI,"1,-1    ",1,-1,0
+1475305,2023/5/18,v3.2.4,"Are there any other similar cases
+
+","1,-1    ",1,-1,0
+1475305,2023/5/18,v3.2.4,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,Merged to master.,"2,-1    ",2,-1,1
+1475305,2023/5/19,v3.2.4,"> @LuciferYang would you mind trying to merge this into `master` branch by `./dev/merge_spark_pr.py` when the tests pass? It would require you to set several environment variables like `JIRA_USERNAME`, and set the `remote` (please also read `./dev/merge_spark_pr.py` script). You should also install `pip install jira` (https://pypi.org/project/jira/) before running that script.
+> 
+> For example, this is my remote:
+> 
+> ```
+> git remote -v
+> ...
+> apache	https://github.com/apache/spark.git (fetch)
+> apache	https://github.com/apache/spark.git (push)
+> apache-github	https://github.com/apache/spark.git (fetch)
+> apache-github	https://github.com/apache/spark.git (push)
+> ...
+> origin	https://github.com/HyukjinKwon/spark.git (fetch)
+> origin	https://github.com/HyukjinKwon/spark.git (push)
+> ...
+> upstream	https://github.com/apache/spark.git (fetch)
+> upstream	https://github.com/apache/spark.git (push)
+> ...
+> ```
+
+OK","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"> I hope to be qualified to do this one day in the future. Let me continue to strive for it! Congratulations again to @LuciferYang! haha
+
+Thanks @panbingkun :)","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"In fact, Spark does not perform checks on the import order of Java code
+
+","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"@panbingkun Checking the import order of Java code involves a lot of code changes, which may cause conflicts with previous versions. I think this is not worth because it is just `import order`.
+
+If we could define a rule that checks the import group without checking the order within the group, it might be easier to accept
+
+","2,-2    ",2,-2,0
+1475305,2023/5/19,v3.2.4,"Oh, I think you can give it a try","2,-1    ",2,-1,1
+1475305,2023/5/19,v3.2.4,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"@pengzhon-db Are you still interested in this? Do you have time to resolve the conflict?
+
+","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"@rangadi 
+
+<img width=""1150"" alt=""image"" src=""https://github.com/apache/spark/assets/1475305/70d708cf-a019-4ff6-a22f-4d7fea72aa02"">
+","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"Let me take a look again
+
+","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,"@rangadi Please fix the compilation error first. For the rest, I only have this one question: https://github.com/apache/spark/pull/41192#discussion_r1206557463
+
+","1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,Merged to master. Thanks @rangadi ,"1,-1    ",1,-1,0
+1475305,2023/5/19,v3.2.4,late LGTM,"3,-1    ",3,-1,2
+1475305,2023/5/20,v3.2.4,"cc @dongjoon-hyun @HyukjinKwon @srowen @hvanhovell FYI
+
+I want to use `GenerateMIMAIgnore` to generate default exclude filters file base on master branch to solve SPARK-43246 for connect module and encountered this problem. 
+
+In the long run, we may also encounter this issue when we need run dev/mima with `previousSparkVersion = 3.5.0`
+ ","1,-1    ",1,-1,0
+1475305,2023/5/21,v3.2.4,"Yes, this is not related to MiMa check itself.
+
+1. I hope to reuse `GenerateMIMAIgnore` base on master to generate `.generated-mima-class-excludes` and `.generated-mima-member-excludes` during  `dev/connect-jvm-client-mima-check` check process(https://github.com/apache/spark/pull/40925), then I encountered this problem.
+
+2. In the long run, when we need to performing mima check between Spark 3.6.0 and Spark 3.5.0, we will also need to solve this problem if jackson-core always with Java 11/19 code(due to the `OLD_DEPS_CLASSPATH` will also contain jackson-core 2.15.0+), but this can indeed be fixed when things happen
+
+
+
+I have give an independent pr to solve this issue. If this is not appropriate, I can directly place this change in https://github.com/apache/spark/pull/40925 for workaround
+
+
+","1,-1    ",1,-1,0
+1475305,2023/5/21,v3.2.4,And I think the key issue solved by this PR is that the classpath processed by GenerateMIMAIgnore cannot contain Java 17 compiled code now due to the ASM version is too low,"2,-1    ",2,-1,1
+1475305,2023/5/21,v3.2.4,Updated the pr description. ,"2,-1    ",2,-1,1
+1475305,2023/5/22,v3.2.4,"If there are any issues, please revert and I will resubmit one :)
+
+","1,-1    ",1,-1,0
+1475305,2023/5/22,v3.2.4,Thanks @srowen @dongjoon-hyun ~,"3,-2    ",3,-2,1
+1475305,2023/5/22,v3.2.4,cc @attilapiros @viirya @sunchao @pan3793 FYI,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,"> IIRC
+
+Currently, we have only added compilation checks on `-Ywarn-unused:imports` for Scala 2.12 (the behavior of Scala 2.13 is slightly different). 
+
+https://github.com/apache/spark/blob/411bcd2f18b2275466edc752c8cdcdfcaab1cb9c/pom.xml#L2864
+
+For the current version of Scala 2.12, we can further try to add more checks, such as `patvars`, `privates`, and `locals`. For codes that cannot be changed, we can use `@nowarn` to suppress them.","1,-3    ",1,-3,-2
+1475305,2023/5/23,v3.2.4,"cc @zhenlineo I remember you mentioned a bug in mima 1.1.1: `the MiMa will not be able to check the class methods if the object is marked private`, so Spark have been using 1.1.0 before, do you have time to help confirm if 1.1.2 has fixed this issue?
+
+
+","1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,late LGTM,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,"Expected NPE occurred:
+
+```
+Warning: Unable to serialize throwable of type io.grpc.StatusRuntimeException for TestFailed(Ordinal(0, 271),INTERNAL: Job aborted due to stage failure: Task 0 in stage 150.0 failed 1 times, most recent failure: Lost task 0.0 in stage 150.0 (TID 316) (localhost executor driver): java.lang.NullPointerException
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$SpecificUnsafeProjection.apply(generated.java:53)
+	at org.apache.spark.sql.execution.aggregate.ComplexTypedAggregateExpression.serialize(TypedAggregateExpression.scala:267)
+	at org.apache.spark.sql.catalyst.expressions.aggregate.TypedImperativeAggregate.serializeAggregateBufferInPlace(interfaces.scala:620)
+	at org.apache.spark.sql.execution.aggregate.AggregationIterator.$anonfun$generateResultProjection$6(AggregationIterator.scala:280)
+	at org.apache.spark.sql.execution.aggregate.ObjectAggregationIterator.outputForEmptyGroupingKeyWithoutInput(ObjectAggregationIterator.scala:107)
+	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1(ObjectHashAggregateExec.scala:117)
+	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1$adapted(ObjectHashAggregateExec.scala:90)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2(RDD.scala:877)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2$adapted(RDD.scala:877)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:101)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:53)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:161)
+	at org.apache.spark.scheduler.Task.run(Task.sca...,UserDefinedFunctionE2ETestSuite,org.apache.spark.sql.UserDefinedFunctionE2ETestSuite,Some(org.apache.spark.sql.UserDefinedFunctionE2ETestSuite),Dataset reduce,Dataset reduce,Vector(),Vector(),Some(io.grpc.StatusRuntimeException: INTERNAL: Job aborted due to stage failure: Task 0 in stage 150.0 failed 1 times, most recent failure: Lost task 0.0 in stage 150.0 (TID 316) (localhost executor driver): java.lang.NullPointerException
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$SpecificUnsafeProjection.apply(generated.java:53)
+	at org.apache.spark.sql.execution.aggregate.ComplexTypedAggregateExpression.serialize(TypedAggregateExpression.scala:267)
+	at org.apache.spark.sql.catalyst.expressions.aggregate.TypedImperativeAggregate.serializeAggregateBufferInPlace(interfaces.scala:620)
+	at org.apache.spark.sql.execution.aggregate.AggregationIterator.$anonfun$generateResultProjection$6(AggregationIterator.scala:280)
+	at org.apache.spark.sql.execution.aggregate.ObjectAggregationIterator.outputForEmptyGroupingKeyWithoutInput(ObjectAggregationIterator.scala:107)
+	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1(ObjectHashAggregateExec.scala:117)
+	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1$adapted(ObjectHashAggregateExec.scala:90)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2(RDD.scala:877)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2$adapted(RDD.scala:877)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:101)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:53)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:161)
+	at org.apache.spark.scheduler.Task.run(Task.sca...),Some(290),Some(IndentedText(- Dataset reduce,Dataset reduce,0)),Some(SeeStackDepthException),Some(org.apache.spark.sql.UserDefinedFunctionE2ETestSuite),None,pool-1-thread-1-ScalaTest-running-UserDefinedFunctionE2ETestSuite,1684472246665), setting it as NotSerializableWrapperException.
+[info] - Dataset reduce *** FAILED *** (290 milliseconds)
+[info]   io.grpc.StatusRuntimeException: INTERNAL: Job aborted due to stage failure: Task 0 in stage 150.0 failed 1 times, most recent failure: Lost task 0.0 in stage 150.0 (TID 316) (localhost executor driver): java.lang.NullPointerException
+[info] 	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$SpecificUnsafeProjection.apply(generated.java:53)
+[info] 	at org.apache.spark.sql.execution.aggregate.ComplexTypedAggregateExpression.serialize(TypedAggregateExpression.scala:267)
+[info] 	at org.apache.spark.sql.catalyst.expressions.aggregate.TypedImperativeAggregate.serializeAggregateBufferInPlace(interfaces.scala:620)
+[info] 	at org.apache.spark.sql.execution.aggregate.AggregationIterator.$anonfun$generateResultProjection$6(AggregationIterator.scala:280)
+[info] 	at org.apache.spark.sql.execution.aggregate.ObjectAggregationIterator.outputForEmptyGroupingKeyWithoutInput(ObjectAggregationIterator.scala:107)
+[info] 	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1(ObjectHashAggregateExec.scala:117)
+[info] 	at org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec.$anonfun$doExecute$1$adapted(ObjectHashAggregateExec.scala:90)
+[info] 	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2(RDD.scala:877)
+[info] 	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsWithIndexInternal$2$adapted(RDD.scala:877)
+[info] 	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+[info] 	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+[info] 	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+[info] 	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+[info] 	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:364)
+[info] 	at org.apache.spark.rdd.RDD.iterator(RDD.scala:328)
+[info] 	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+[info] 	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:101)
+[info] 	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:53)
+[info] 	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:161)
+[info] 	at org.apache.spark.scheduler.Task.run(Task.sca...
+[info]   at io.grpc.Status.asRuntimeException(Status.java:535)
+[info]   at io.grpc.stub.ClientCalls$BlockingResponseStream.hasNext(ClientCalls.java:660)
+[info]   at org.apache.spark.sql.connect.client.SparkResult.org$apache$spark$sql$connect$client$SparkResult$$processResponses(SparkResult.scala:62)
+[info]   at org.apache.spark.sql.connect.client.SparkResult.length(SparkResult.scala:114)
+[info]   at org.apache.spark.sql.connect.client.SparkResult.toArray(SparkResult.scala:131)
+[info]   at org.apache.spark.sql.Dataset.$anonfun$collect$1(Dataset.scala:2744)
+[info]   at org.apache.spark.sql.Dataset.withResult(Dataset.scala:3184)
+[info]   at org.apache.spark.sql.Dataset.collect(Dataset.scala:2743)
+[info]   at org.apache.spark.sql.Dataset.reduce(Dataset.scala:1292)
+[info]   at org.apache.spark.sql.UserDefinedFunctionE2ETestSuite.$anonfun$new$34(UserDefinedFunctionE2ETestSuite.scala:212)
+[info]   at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+[info]   at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
+[info]   at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
+[info]   at org.scalatest.Transformer.apply(Transformer.scala:22)
+[info]   at org.scalatest.Transformer.apply(Transformer.scala:20)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike$$anon$1.apply(AnyFunSuiteLike.scala:226)
+[info]   at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
+[info]   at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
+[info]   at org.scalatest.funsuite.AnyFunSuite.withFixture(AnyFunSuite.scala:1564)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.invokeWithFixture$1(AnyFunSuiteLike.scala:224)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTest$1(AnyFunSuiteLike.scala:236)
+[info]   at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTest(AnyFunSuiteLike.scala:236)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTest$(AnyFunSuiteLike.scala:218)
+[info]   at org.scalatest.funsuite.AnyFunSuite.runTest(AnyFunSuite.scala:1564)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$runTests$1(AnyFunSuiteLike.scala:269)
+[info]   at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
+[info]   at scala.collection.immutable.List.foreach(List.scala:431)
+[info]   at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
+[info]   at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
+[info]   at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTests(AnyFunSuiteLike.scala:269)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.runTests$(AnyFunSuiteLike.scala:268)
+[info]   at org.scalatest.funsuite.AnyFunSuite.runTests(AnyFunSuite.scala:1564)
+[info]   at org.scalatest.Suite.run(Suite.scala:1114)
+[info]   at org.scalatest.Suite.run$(Suite.scala:1096)
+[info]   at org.scalatest.funsuite.AnyFunSuite.org$scalatest$funsuite$AnyFunSuiteLike$$super$run(AnyFunSuite.scala:1564)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.$anonfun$run$1(AnyFunSuiteLike.scala:273)
+[info]   at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.run(AnyFunSuiteLike.scala:273)
+[info]   at org.scalatest.funsuite.AnyFunSuiteLike.run$(AnyFunSuiteLike.scala:272)
+[info]   at org.apache.spark.sql.UserDefinedFunctionE2ETestSuite.org$scalatest$BeforeAndAfterAll$$super$run(UserDefinedFunctionE2ETestSuite.scala:35)
+[info]   at org.scalatest.BeforeAndAfterAll.liftedTree1$1(BeforeAndAfterAll.scala:213)
+[info]   at org.scalatest.BeforeAndAfterAll.run(BeforeAndAfterAll.scala:210)
+[info]   at org.scalatest.BeforeAndAfterAll.run$(BeforeAndAfterAll.scala:208)
+[info]   at org.apache.spark.sql.UserDefinedFunctionE2ETestSuite.run(UserDefinedFunctionE2ETestSuite.scala:35)
+[info]   at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:321)
+[info]   at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:517)
+[info]   at sbt.ForkMain$Run.lambda$runTest$1(ForkMain.java:413)
+[info]   at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[info]   at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[info]   at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[info]   at java.lang.Thread.run(Thread.java:750)
+```","1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,"> I feel it's better to always respect the user-specified num slice parameter. If the num slice is not specified, I agree that we can make it not larger than the num elements.
+
+This may require adding a status to record whether it is a user-specified slice or use default? Sounds like it will increase the complexity of the code. I don't think it's worth because this just a minor case, maybe keep it as it is is better
+","1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,Thanks @dongjoon-hyun @yaooqinn @panbingkun ,"1,-2    ",1,-2,-1
+1475305,2023/5/23,v3.2.4,cc @HyukjinKwon FYI,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,Thanks @HyukjinKwon ~ Merged to master,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,Thanks @HyukjinKwon ~ Merged to master.,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,"Test first, will update pr description later
+
+","1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,Thanks @HyukjinKwon ~ Merged to master.,"1,-1    ",1,-1,0
+1475305,2023/5/23,v3.2.4,Thanks @dongjoon-hyun ,"1,-1    ",1,-1,0
+1475305,2023/5/24,v3.2.4,"> It also isn't failing in CI, so seems specific to some environment...
+
+GA passed because it uses sbt for testing, and the connect server fork by sbt will with classpath of connect client, which will masks some issues","2,-1    ",2,-1,1
+1475305,2023/5/24,v3.2.4,"> Created https://issues.apache.org/jira/browse/SPARK-43744
+
+Actually I have created https://issues.apache.org/jira/browse/SPARK-43648 yesterday :)","1,-2    ",1,-2,-1
+1475305,2023/5/24,v3.2.4,@dongjoon-hyun No problem :),"1,-2    ",1,-2,-1
+1475305,2023/5/24,v3.2.4,"I tend to create a new jira and add some comments for this
+
+","1,-1    ",1,-1,0
+1475305,2023/5/24,v3.2.4,also cc @cloud-fan ,"1,-1    ",1,-1,0
+1475305,2023/5/24,v3.2.4,"What is the value that allows `numSlices` to be greater than `numElements`? I haven't figured it out yet
+
+","1,-1    ",1,-1,0
+1475305,2023/5/24,v3.2.4,"Thanks @amaliujia , I know this","1,-1    ",1,-1,0
+1475305,2023/5/24,v3.2.4,friendly ping @MaxGekk Do you have time to take a look at this one? Thanks ~,"1,-2    ",1,-2,-1
+1475305,2023/5/25,v3.2.4,"```
+2.Note: The error exception of the FileUtils.touch method has been changed from java.io.FileNotFoundException to java.nio.file.NoSuchFileException, changes from PR: [Add PathUtils.touch(Path)](https://github.com/apache/commons-io/commit/fd7c8182d2117d01f43ccc9fe939105f834ba672). The analysis process is as follows:
+```
+
+still need this part in description? @panbingkun ","1,-1    ",1,-1,0
+1475305,2023/5/25,v3.2.4,"@panbingkun why we need check `dev/sbt-checkstyle`, it is not using Maven, we should check `build/mvn checkstyle: checkstyle -P...`
+
+","1,-1    ",1,-1,0
+1475305,2023/5/25,v3.2.4,"Please update the pr description, it still `Manual testing by: sh dev/sbt-checkstyle
+`","1,-1    ",1,-1,0
+1475305,2023/5/25,v3.2.4,Merged to master. Thanks @HyukjinKwon and @panbingkun ~,"1,-1    ",1,-1,0
+1475305,2023/5/25,v3.2.4,"Let's update the release notes to https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.15.1
+
+And if upgrading to this version has benefits for Spark, it can also be listed in the PR description. @ronandoolan2 
+
+","1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,also cc @srowen FYI,"1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,Merged to master. Thanks @ronandoolan2 @srowen @bjornjorgensen  ~,"1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,"Test first, will add some comments and update pr description later
+
+ ","1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,"Thanks @dongjoon-hyun This is a problem that was exposed after https://github.com/apache/spark/pull/40848 was merged, I will explain why this change was made tomorrow, and we can discuss whether there is a better solution. 
+
+It's too late in my time zone, I'm going to bed. Good night ~
+
+","2,-1    ",2,-1,1
+1475305,2023/5/26,v3.2.4,"Sorry, needs to be postponed, some works that have to be completed first ...","2,-1    ",2,-1,1
+1475305,2023/5/26,v3.2.4,"@dongjoon-hyun I have updated the PR description, is it clear? Do you have any better suggestions?
+
+Of course, there are other ways to work around even without making any code changes:
+
+Maven: manual clean hive module before test
+
+```
+build/mvn clean install -DskipTests
+build/mvn clean -pl sql/hive
+build/mvn test -pl connector/connect/client/jvm
+```
+
+SBT: test `connect-client-jvm` module always with `clean`
+
+`build/sbt ""connect-client-jvm/test""`","1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,"Another possible way is to find a way to remove `$sparkHome/sql/hive/target/scala-2.12/classes/` from SimpleSparkConnectService classpath with test without `-Phive` profile, but this requires further investigation.
+
+","3,-2    ",3,-2,1
+1475305,2023/5/26,v3.2.4,Thanks @dongjoon-hyun ~,"1,-1    ",1,-1,0
+1475305,2023/5/26,v3.2.4,Merged to master.,"1,-1    ",1,-1,0
+1475305,,v3.2.4,"@panbingkun 
+Before submitting your change, please make sure to format your code using the following command:
+./build/mvn -Pscala-2.12 scalafmt:format -Dscalafmt.skip=false -Dscalafmt.validateOnly=false -Dscalafmt.changedOnly=false -pl connector/connect/common -pl connector/connect/server -pl connector/connect/client/jvm
+Error: Process completed with exit code 1.
+","1,-1    ",1,-1,0
+1475305,,v3.2.4,is this one ready to go? @panbingkun ,"1,-1    ",1,-1,0
+1475305,,v3.2.4,Merged to master. Thanks @dongjoon-hyun and @panbingkun ,"1,-1    ",1,-1,0
+1475305,,v3.2.4,cc @zhenlineo FYI ,"1,-1    ",1,-1,0
