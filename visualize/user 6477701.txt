@@ -1,0 +1,46 @@
+Group: v3.3.2
+sum：34
+Positive count: 7 (20.588235294117645%)
+Negative count: 2 (5.88235294117647%)
+Zero count: 25 (73.52941176470588%)
+
+Group: v3.4.0-rc1
+sum：47
+Positive count: 6 (12.76595744680851%)
+Negative count: 4 (8.51063829787234%)
+Zero count: 37 (78.72340425531915%)
+
+Group: v3.4.0-rc2
+sum：27
+Positive count: 3 (11.11111111111111%)
+Negative count: 2 (7.4074074074074066%)
+Zero count: 22 (81.48148148148148%)
+
+Group: v3.4.0-rc3
+sum：2
+Positive count: 1 (50.0%)
+Negative count: 0 (0.0%)
+Zero count: 1 (50.0%)
+
+Group: v3.4.0-rc4
+sum：100
+Positive count: 16 (16.0%)
+Negative count: 10 (10.0%)
+Zero count: 74 (74.0%)
+
+Group: v3.4.0-rc5
+Positive count: 4 (10.81081081081081%)
+Negative count: 6 (16.216216216216218%)
+Zero count: 27 (72.97297297297297%)
+
+Group: v3.4.0
+sum：10
+Positive count: 5 (50.0%)
+Negative count: 1 (10.0%)
+Zero count: 4 (40.0%)
+
+Group: v3.2.4
+sum：233
+Positive count: 24 (10.300429184549357%)
+Negative count: 32 (13.733905579399142%)
+Zero count: 177 (75.9656652360515%)
