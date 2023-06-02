@@ -39,4 +39,4 @@ else:
     with open(target_file_path+'new', 'w', encoding='utf-8') as target_file:
         target_file.writelines(merged_lines)
 
-    print("内容已成功合并到目标文件。") '''
+    print("内容已成功合并到目标文件。") 
