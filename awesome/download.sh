@@ -5,7 +5,7 @@
 for (( i=40000;i<=42000;i++ ))
 do
 
-curl --url "https://api.github.com/repos/apache/spark/issues/$i" --header "Authorization: Bearer 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" --header "X-GitHub-Api-Version: 2022-11-28" > "issue_$i.json"
+curl --url "https://api.github.com/repos/apache/spark/issues/$i" --header "Authorization: Bearer $GithubToken" --header "X-GitHub-Api-Version: 2022-11-28" > "issue_$i.json"
 echo "comment $i is done!\n"
 
 done
